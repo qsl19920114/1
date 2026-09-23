@@ -1,0 +1,128 @@
+{
+  "format": "qt-video-workbench.tasks@1",
+  "note": "状态只有四种：done 需附证据路径；partial 需写明未验证部分；blocked 需写明阻塞原因；pending 未开始。不得在前置门禁未过时把后续任务标为 done。",
+  "updatedAt": "2026-09-23",
+  "gates": {
+    "G0": {
+      "milestone": "M0",
+      "definition": "至少一份真实可解码 MP4、Qt 可显示预览；接口能力清楚",
+      "verdict": "PARTIAL",
+      "reason": "读取路径与四类失败语义已实测，但没有任何一次真实成功的属性写入。",
+      "evidence": "docs/ENVIRONMENT_REPORT.md, docs/API_CONTRACT.md, docs/evidence/m0/"
+    },
+    "G1": { "milestone": "M1", "verdict": "NOT_REACHED" },
+    "G2": { "milestone": "M2", "verdict": "NOT_REACHED" },
+    "G3": { "milestone": "M3", "verdict": "NOT_REACHED" },
+    "G4": { "milestone": "M4", "verdict": "NOT_REACHED" },
+    "G5": { "milestone": "M5", "verdict": "NOT_REACHED" },
+    "G6": { "milestone": "M6", "verdict": "NOT_REACHED" }
+  },
+  "tasks": [
+    {
+      "id": "T001",
+      "milestone": "M0",
+      "title": "探测本机 OS、编译器、CMake、Qt Kit、Node、pnpm、FFmpeg",
+      "status": "done",
+      "evidence": ["docs/ENVIRONMENT_REPORT.md#1-主机与工具链t001", "config/version-lock.json"],
+      "findings": [
+        "macOS 15.7.7 arm64 / clang 17 / CMake 4.4.3 / Qt 6.11.2 含 WebEngineWidgets / Node 22.22.1 / FFmpeg 9.0.2",
+        "本轮经授权安装 cmake 与 qt",
+        "pnpm 缺失，记为 M2 阻塞项而非本轮阻塞"
+      ]
+    },
+    {
+      "id": "T002",
+      "milestone": "M0",
+      "title": "固定实际使用的 Hypit 版本，读取源码与 --help",
+      "status": "done",
+      "evidence": ["config/version-lock.json", "docs/ENVIRONMENT_REPORT.md#2-hypit-版本固定t002"],
+      "findings": [
+        "实际版本 0.2.10，commit 1af179d3f58284c2d6d3c1f63052172a4fe1b5a6",
+        "修正上游线索：CODEX_START.md 的 0.2.12 与实际不符",
+        "CLI 命令面已从 --help 实测记录，未猜测参数"
+      ]
+    },
+    {
+      "id": "T003",
+      "milestone": "M0",
+      "title": "官方 chat 示例完成 check / plan / 真实 build / get",
+      "status": "done",
+      "evidence": [
+        "docs/evidence/m0/build.log",
+        "docs/evidence/m0/ffprobe_final.json",
+        "docs/ENVIRONMENT_REPORT.md#3-官方本地示例真实闭环t003"
+      ],
+      "findings": [
+        "四步全部退出码 0；Build ID bld_20260923T100423557Z_A07A70298A",
+        "plan 确认 3 个请求全为 local, no Provider charge，未接付费 Provider",
+        "成片 8s h264/aac 540x960 30fps，ffmpeg -f null 全片解码无错",
+        "关键约定：必须同时传 --workspace 与 --runtime，否则无法解析已安装包"
+      ]
+    },
+    {
+      "id": "T004",
+      "milestone": "M0",
+      "title": "验证 Studio 地址发现、GET session、可写属性 mutation、冲突与失败行为",
+      "status": "partial",
+      "evidence": ["docs/API_CONTRACT.md", "docs/evidence/m0/session.json", "docs/evidence/m0/http_probe.txt"],
+      "verified": [
+        "地址发现：--port 显式指定 + stdout URL 行解析",
+        "GET session 200，响应体即 Snapshot，无 data 信封（已断言 wrappedInData=false）",
+        "mutation 畸形 body 400 / 跨源 403 / 过期 revision 409 / 未知 entity 500",
+        "跨源门禁规则从 mutation-origin.ts 读取，Qt 原生请求可通过（返回 400 非 403）",
+        "两条写入路径失败语义不同：/__studio/mutation 编译失败会服务端回滚，PUT /__studio/source 无回滚分支"
+      ],
+      "notVerified": [
+        "一次真实成功的属性写入（HTTP 200 + revision 递增）"
+      ],
+      "reason": "chat 示例的唯一 clip inspector 为空数组，三个 editHandles 全部 enabled=false。按约束不伪造可写字段。",
+      "blocksGate": "G0"
+    },
+    {
+      "id": "T005",
+      "milestone": "M0",
+      "title": "Qt WebEngine 探针打开真实 Studio 并检查画面；测试媒体兼容与 Qt 原生 HTTP",
+      "status": "done",
+      "evidence": [
+        "probes/qt-webengine/",
+        "docs/evidence/m0/studio_shot.png",
+        "docs/evidence/m0/studio_probe.txt",
+        "docs/evidence/m0/media_probe.txt",
+        "docs/evidence/m0/http_probe.txt"
+      ],
+      "findings": [
+        "三个探针用 Qt 6.11.2 真实编译链接通过",
+        "studio_probe 退出码 0：非空白抓帧 2560x1730，人工确认为真实 Studio UI（源码面板/预览/属性/时间线）",
+        "media_probe 退出码 0：state=playing，canPlayType H264+AAC 返回 probably，即真实解码推进播放",
+        "http_probe 退出码 0：ALL PASS，5 项断言全中"
+      ]
+    },
+    {
+      "id": "T006",
+      "milestone": "M1",
+      "title": "安装 pnpm@10.33.0 并验证可重新编译 Author Package",
+      "status": "pending",
+      "dependsOn": ["T001"],
+      "acceptance": "pnpm --filter @example/chat-scene build 退出码 0",
+      "why": "不解开则无法自建 title-card 模板，挡 M2"
+    },
+    {
+      "id": "T007",
+      "milestone": "M1",
+      "title": "取得可写属性样本并验证一次真实成功的 parameter.adjust",
+      "status": "pending",
+      "dependsOn": ["T004", "T006"],
+      "acceptance": "POST /__studio/mutation 返回 HTTP 200 且 revision 递增，随后 GET session 可见新值",
+      "approach": "在 examples/minimal-author-package 基础上声明一个 writable: true 的文本 binding，编译后用 http_probe 验证",
+      "why": "完成即可将 G0 从 PARTIAL 提升为 PASS；属性面板的数据契约取决于真实可写字段形状，先做可避免 M3 返工"
+    },
+    {
+      "id": "T008",
+      "milestone": "M1",
+      "title": "Qt 主窗口骨架与 CMake 构建分层",
+      "status": "pending",
+      "dependsOn": ["T007"],
+      "note": "不建议在 T007 之前开工"
+    }
+  ]
+}

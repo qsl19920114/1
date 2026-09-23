@@ -1,0 +1,31 @@
+# Build artefacts
+build/
+build-*/
+cmake-build-*/
+*.o
+*.a
+*.dylib
+*.so
+
+# clangd / IDE
+.cache/
+compile_commands.json
+.vscode/
+.idea/
+*.user
+
+# macOS
+.DS_Store
+
+# Local machine config: copy config/local.example.json and keep yours out of git
+config/local.json
+
+# Workbench runtime state and exported media
+.workbench/
+*.mp4
+*.mov
+
+# Evidence screenshots are tracked deliberately; ad-hoc captures are not
+/shot.png
+/*.png
+!docs/evidence/**/*.png

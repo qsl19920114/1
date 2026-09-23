@@ -1,0 +1,86 @@
+{
+  "format": "qt-video-workbench.version-lock@1",
+  "note": "M0 实测固定的版本组合。每个条目都来自本机真实命令输出，取值命令记录在 verifiedBy。修改此文件必须同时更新 docs/ENVIRONMENT_REPORT.md。",
+  "lockedAt": "2026-09-23",
+  "platform": {
+    "os": "macOS",
+    "osVersion": "15.7.7",
+    "osBuild": "24G720",
+    "arch": "arm64",
+    "verifiedBy": "sw_vers; uname -m"
+  },
+  "toolchain": {
+    "compiler": "Apple clang 17.0.0 (clang-1700.0.13.5)",
+    "compilerTarget": "arm64-apple-darwin24.6.0",
+    "cxxStandard": 17,
+    "cmake": "4.4.3",
+    "cmakeMinimumRequired": "3.21",
+    "verifiedBy": "clang++ --version; cmake --version"
+  },
+  "qt": {
+    "version": "6.11.2",
+    "prefix": "/opt/homebrew/opt/qt",
+    "installedVia": "homebrew",
+    "requiredComponents": ["Core", "Gui", "Widgets", "Network", "Test", "WebEngineWidgets"],
+    "componentsVerified": true,
+    "webEngineProcessPresent": true,
+    "planMinimumTarget": "6.8",
+    "note": "计划设定的最低目标 6.8 由本机 6.11.2 满足。未验证 6.8-6.10 与同一 Studio 的行为一致性。",
+    "verifiedBy": "qmake6 -query QT_VERSION; ls /opt/homebrew/opt/qt/lib/cmake"
+  },
+  "hypit": {
+    "package": "@hypit/hypit",
+    "version": "0.2.10",
+    "gitCommit": "1af179d3f58284c2d6d3c1f63052172a4fe1b5a6",
+    "upstreamRemote": "https://github.com/hypit-ai/hypit.git",
+    "distributionPath": "../hypit",
+    "launcher": "bin/hypit.mjs",
+    "declaredNodeRequirement": ">=22.15.0",
+    "declaredPackageManager": "pnpm@10.33.0",
+    "note": "CODEX_START.md 提到的 0.2.12 与实际不符，实际固定为 0.2.10。",
+    "verifiedBy": "./hypit version --json; git rev-parse HEAD"
+  },
+  "node": {
+    "version": "22.22.1",
+    "satisfiesHypitRequirement": true,
+    "verifiedBy": "node -v"
+  },
+  "pnpm": {
+    "requiredVersion": "10.33.0",
+    "installed": false,
+    "blocks": ["M2"],
+    "note": "命令不在 PATH，corepack 亦不可用。不影响运行已检出的 hypit（node_modules 与 dist 已存在），但无法重新编译 Author Package。",
+    "verifiedBy": "pnpm -v (command not found)"
+  },
+  "media": {
+    "ffmpeg": "9.0.2",
+    "ffprobe": "9.0.2",
+    "ffmpegPath": "/opt/homebrew/bin/ffmpeg",
+    "verifiedBy": "ffmpeg -version; ffprobe -version"
+  },
+  "verifiedExport": {
+    "buildId": "bld_20260923T100423557Z_A07A70298A",
+    "sourceExample": "examples/semantic-composition",
+    "runFile": "chat.svrun",
+    "container": "mov,mp4,m4a,3gp,3g2,mj2",
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "width": 540,
+    "height": 960,
+    "frameRate": "30/1",
+    "sampleRate": 48000,
+    "channels": 2,
+    "durationSec": 8.0,
+    "bytes": 77622,
+    "fullDecodeClean": true,
+    "playsInQtWebEngine": true,
+    "note": "540x960 是该示例模板自身声明的竖屏画幅，不是 Hypit 默认值。本项目 title-card 模板需自行声明画幅。",
+    "verifiedBy": "ffprobe; ffmpeg -v error -f null -; probes/qt-webengine media_probe"
+  },
+  "studioInvocation": {
+    "requiresWorkspaceFlag": true,
+    "requiresRuntimeFlag": true,
+    "portDiscovery": "explicit --port, confirmed by parsing the URL line on stdout",
+    "note": "省略 --workspace 会因无法解析已安装包而失败。不存在默认端口约定。"
+  }
+}

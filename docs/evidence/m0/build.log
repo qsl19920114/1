@@ -1,0 +1,15 @@
+✓ Build submitted
+
+  Build   bld_20260923T100423557Z_A07A70298A
+  Target  final.video
+  Work    3 requests
+
+Following accepted work. Ctrl-C stops watching; the Build continues.
+  · Working · 0/3 steps complete · 1s
+  · Working · 1/3 steps complete · 1 starting browsers · 6s
+✓ Build complete
+
+  Build  bld_20260923T100423557Z_A07A70298A
+
+Inspect  hypit inspect bld_20260923T100423557Z_A07A70298A --workspace '/Users/bytedance/Downloads/国产资产作业/hypit/examples/semantic-composition'
+Export   hypit get bld_20260923T100423557Z_A07A70298A --output final.video --workspace '/Users/bytedance/Downloads/国产资产作业/hypit/examples/semantic-composition' --to <path>

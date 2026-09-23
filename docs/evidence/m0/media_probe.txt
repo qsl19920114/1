@@ -1,0 +1,4 @@
+loadFinished ok= true
+probe= {"state":"playing","detail":"","meta":"540x960 dur=8","canPlayMp4":"maybe","canPlayH264":"probably"}
+2026-09-23 18:10:41.159 media_probe[36249:11012011] error messaging the mach port for IMKCFRunLoopWakeUpReliable
+exitCode= 0
