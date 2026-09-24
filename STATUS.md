@@ -1,12 +1,12 @@
 # STATUS.md
 
-**最后更新：2026-09-23**
+**最后更新：2026-09-24**
 
 进度以本仓库状态与 `docs/evidence/` 下的证据文件为准，不以任何会话的口头声称为准。恢复工作前请先核对证据文件是否真的存在。
 
 ## 当前位置
 
-**M0 已执行完毕，G0 判定为 PARTIAL。尚未进入 M1。**
+**G0 = PASS。M0 全部完成，M1 的前置任务（T006、T007）也已完成。下一步是 T008 开始写 Qt 主窗口。**
 
 应用代码尚未开始编写：`app/` 目录目前为空骨架。已完成的是风险验证与契约固定，这是 PROJECT_PLAN §7 要求的前置条件（"先做 M0 的真实小闭环，不能在两周 UI 之后才第一次测试视频导出"）。
 
@@ -16,42 +16,68 @@
 |---|---|---|
 | 真实可解码 MP4 | PASS | `docs/evidence/m0/ffprobe_final.json`、`build.log` |
 | Qt 可显示预览 | PASS | `docs/evidence/m0/studio_shot.png`、`studio_probe.txt` |
-| 接口能力清楚 | PARTIAL | `docs/API_CONTRACT.md`、`session.json`、`http_probe.txt` |
+| 接口能力清楚 | PASS | `docs/API_CONTRACT.md`、`docs/evidence/m1/http_probe_write.txt` |
 
-**G0 不判 PASS 的唯一原因：没有任何一次真实成功的属性写入。**
+第三项在 M0 结束时是 PARTIAL，缺口是"没有任何一次真实成功的属性写入"。T007 已补上。
 
-读取路径和四类失败语义（400 / 403 / 409 / 500）都已实测确凿，但成功写入（HTTP 200 + revision 递增）这条路径是空白。chat 示例的唯一 clip 的 `inspector` 是空数组，没有可写字段可试。按项目约束不伪造字段来凑证据。
+## T007：写入路径打通的完整链条
+
+上游 chat 示例的 `inspector` 是空数组。根因是该组件**不带 Studio Companion**——缺的只是声明层，不是能力缺失。
+
+补一个 Companion facet 后（Surface 解码器、manifest、渲染器全不动），同一个 clip 的 `inspector` 从 0 个字段变成 2 个，都带 `edit`。随后 Qt 原生代码完成了真实写入：
+
+| 环节 | 实测结果 |
+|---|---|
+| HTTP 状态 | **200**，body `{"revision":8}` |
+| revision 推进 | 7 → 8 |
+| SVML 源文件 | 真被改写为 `title="Qt 写入验证"` |
+| 重编译后的快照 | 反映新值 |
+| 重新 build | 成功，`bld_20260924T023239809Z_59D03451EF` |
+| 导出 MP4 | ffprobe 通过，全片解码无错 |
+| 抽帧内容验收 | **画面标题真的变成了写入的中文文本** |
+
+最后一行是关键。按 AGENTS.md 第 3 条，HTTP 200 只是第一层；只有抽帧确认画面变化，才算真的写进去了。
+
+fixture 与复现步骤在 `tests/fixtures/writable-probe/`。
 
 ## 已确凿的事实
 
 这些不需要重新验证，直接用：
 
 - Hypit 固定在 **0.2.10**，commit `1af179d3f58284c2d6d3c1f63052172a4fe1b5a6`。CODEX_START.md 提到的 0.2.12 是错的。
-- 本机 Qt **6.11.2** 含 WebEngineWidgets，满足计划的 6.8 最低目标。CMake 4.4.3。
+- 本机 Qt **6.11.2** 含 WebEngineWidgets，满足计划的 6.8 最低目标。CMake 4.4.3。pnpm **10.33.0** 已装，可编译 Author Package。
 - Hypit 本地 Runtime 导出的 **H.264/AAC MP4 能在 Qt WebEngine 中真实解码播放**（不只是加载成功）。
 - 真实 Studio 能在 QWebEngineView 中完整渲染（源码面板 / 预览 / 属性 / 时间线俱全）。
 - **Qt 原生 `QNetworkAccessManager` 能通过 Studio 的跨源门禁**（返回 400 而非 403 即证明进入了 body 校验阶段）。这是原生写入路径可行的前提。
 - 调用任何 hypit 命令**必须同时传 `--workspace` 与 `--runtime`**。
 - `GET /__studio/session` 的响应体**就是** Snapshot，无 `{data:...}` 信封。
 
+### T007 新发现的三条约束
+
+这三条直接影响 Qt 实现，别踩：
+
+1. **字段可写的判定是 `inspector[].edit` 是否存在，不是 `control`。** 源码依据：`parameters.ts:417` 要求 `declaration.writable === true` 且属性非引用；`:495` 仅此时才输出 `edit` 键。
+2. **不能假设 `edit.source.range` 非空。** 被省略的属性给出空区间（实测 `{650,650}`），写入是向源文件**插入**而非替换。
+3. **端口以 stdout 实际打印为准。** 被占用时 Studio 自动递增（实测 5610→5611）。另外改动包代码或 activation 后**必须重启 Studio**，它不热加载包模块。
+
 ## 阻塞项
 
-| # | 阻塞项 | 严重度 | 挡住 |
-|---|---|---|---|
-| 1 | 无可写属性样本 | 高 | M3，且 G0 无法升 PASS |
-| 2 | pnpm 未安装（上游锁定 10.33.0） | 中 | M2 自建模板 |
+无。M0 遗留的两项均已解除：
 
-阻塞项 1 的细节：可写字段来自组件 Studio facet 中的 `{ name, writable: true }` 声明。仓库内有此声明的包已定位（`ranking-studio`、`media-track-studio`、`performance-studio`、`complex-explainer/packages/*` 等），但 `complex-explainer` 需另下载约 455 MiB 媒体归档才能打开，本轮未下载。
+| 原阻塞项 | 解除方式 |
+|---|---|
+| 无可写属性样本 | T007：补 Studio Companion facet，fixture 在 `tests/fixtures/writable-probe/` |
+| pnpm 未安装 | T006：`npm install -g pnpm@10.33.0`，两个 build 均退出码 0 |
 
 ## 下一轮做什么
 
-按顺序，不要跳：
+**T008：Qt 主窗口骷构与 CMake 构建分层。**
 
-1. **T006** 安装 pnpm@10.33.0，验证 `pnpm --filter @example/chat-scene build` 退出码 0。
-2. **T007** 取得可写属性样本，验证一次真实成功的 `parameter.adjust`。完成即可把 G0 升为 PASS。
-3. **T008** 之后才动 Qt 主窗口。
+按 PROJECT_PLAN §6 的依赖方向（UI → Controller → Domain/Backend/Service）搭 `app/`，Hypit 字段只出现在 adapter 层。属性面板的数据契约现在已经清楚：
 
-**不建议在 T007 之前开工 Qt 属性面板。** 属性控件的数据契约取决于真实可写字段的形状（`inspector[].edit` 里到底有什么），提前写会返工。
+- 控件可用性看 `edit` 是否存在；
+- 控件类型按 `control` 映射（`text` / `number` / `boolean` / `select` / `color`，另有 `list` / `record` 首版只读）；
+- 不可写字段显示服务端给的 `disabledReason` 原文，两种文案分别对应"引用绑定"与"组件声明只读"。
 
 ## 环境复现
 
@@ -68,9 +94,15 @@ cd ../../../hypit
   --runtime examples/semantic-composition/hypit.runtime.json \
   --port 5599
 
-# 回到本仓库跑探针
+# 回到本仓库跑探针（用 stdout 实际打印的端口）
 cd -
-./build/http_probe http://localhost:5599          # 期望 ALL PASS，退出码 0
-./build/studio_probe http://localhost:5599/ shot.png 45000   # 期望退出码 0
-./build/media_probe <path-to-exported.mp4> 30000            # 期望 state=playing
+./build/http_probe http://localhost:<port>                     # 契约断言，期望 ALL PASS
+./build/studio_probe http://localhost:<port>/ shot.png 45000    # 嵌入渲染，期望退出码 0
+./build/media_probe <exported.mp4> 30000                        # 解码，期望 state=playing
+```
+
+验证成功写入路径需要一个带可写字段的 Run，搭建步骤见 `tests/fixtures/writable-probe/README.md`，然后：
+
+```bash
+./build/http_probe http://localhost:<port> --write
 ```

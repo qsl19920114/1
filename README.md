@@ -2,7 +2,7 @@
 
 项目代号 Qt Video Workbench。Qt 交互软件课程大作业。
 
-**当前状态：M0 风险验证已完成，G0 = PARTIAL。应用代码尚未开始编写。** 详见 `STATUS.md`。
+**当前状态：G0 = PASS；T006/T007 的验证前置已完成；Qt 应用代码尚未开始。** 详见 `STATUS.md`。
 
 ## 这是什么
 
@@ -28,22 +28,27 @@ Hypit **不** vendor 进本仓库，通过 `config/version-lock.json` 的 `distr
 
 ## 已经验证过的事实
 
-M0 的五项探测都有真实证据，留档在 `docs/evidence/m0/`：
+M0 与 T007 证据分别留档在 `docs/evidence/m0/` 与 `docs/evidence/m1/`：
 
 - Hypit 固定在 **0.2.10** / commit `1af179d3`（CODEX_START.md 里的 0.2.12 与实际不符）
 - 官方 chat 示例完成真实 check → plan → build → get，导出 8 秒 **h264/aac 540×960 30fps** MP4，`ffmpeg -f null` 全片解码无错
 - 该 MP4 在 **Qt WebEngine 中真实解码播放**（`state=playing`，不只是加载成功）
 - 真实 Studio 在 QWebEngineView 中完整渲染（源码面板 / 预览 / 属性 / 时间线）
 - Studio 的四类失败语义实测：畸形 400 / 跨源 403 / 过期 revision 409 / 未知 entity 500
-- **Qt 原生 `QNetworkAccessManager` 能通过 Studio 跨源门禁**，原生写入路径可行
+- **Qt 原生 `QNetworkAccessManager` 能通过 Studio 跨源门禁，并完成真实成功写入**（HTTP 200、revision 7→8、SVML 源文件改写、重编译快照生效）
+- 写入后的工程可重新 build 并导出 MP4；抽帧人工确认标题真的变成 **“Qt 写入验证”**
 
 接口契约全文见 `docs/API_CONTRACT.md`，每条断言都标注了源码行号或实测状态码。
 
-## 还没验证的
+## 已经解除的原阻塞
 
-**没有任何一次真实成功的属性写入。** chat 示例的 clip `inspector` 是空数组，没有可写字段可试；按项目约束不伪造字段凑证据。这是 G0 判 PARTIAL 的唯一原因，也是下一轮的首要任务。
+- 成功属性写入路径：T007 通过 `tests/fixtures/writable-probe/` 补齐 Studio Companion 声明后完成；证据见 `docs/evidence/m1/`。
+- pnpm：已安装 10.33.0，并验证 `build:public-types` 与 `@example/chat-scene build` 退出码 0。
 
-另外 pnpm 未安装，暂时无法重新编译 Author Package，挡住 M2 自建模板。
+## 仍未完成
+
+- Qt 主应用尚未实现：`app/` 为空骨架；当前只有探针、fixture、契约和证据。
+- M1 的实际桌面任务 T006–T009 尚未开始；本地 tasks.json 中的 T006/T007 是补充前置验证编号，不代表原计划的 M1 已完成。
 
 ## 环境要求
 
@@ -55,7 +60,7 @@ M0 的五项探测都有真实证据，留档在 `docs/evidence/m0/`：
 | 编译器 | Apple clang 17，C++17 |
 | Node | 22.22.1（Hypit 要求 >=22.15） |
 | FFmpeg / ffprobe | 9.0.2 |
-| pnpm | 10.33.0（**未安装**） |
+| pnpm | 10.33.0（已安装并验证） |
 
 ## 跑 M0 探针
 
@@ -68,6 +73,7 @@ cmake --build build -j4
 三个探针，退出码即断言结果：
 
 - `http_probe <base-url>` — Studio 接口契约，期望 `ALL PASS`
+- `http_probe <base-url> --write` — 对可写字段执行真实写入；需先按 `tests/fixtures/writable-probe/README.md` 准备 Run
 - `studio_probe <url> <out.png> [timeoutMs]` — Studio 嵌入渲染，期望非空白抓帧
 - `media_probe <video-file> [timeoutMs]` — WebEngine 解码，期望 `state=playing`
 
@@ -91,7 +97,8 @@ cd ../hypit
 | `tasks.json` | 任务状态与门禁判定 |
 | `docs/API_CONTRACT.md` | Studio 接口契约（带源码行号与实测状态码） |
 | `docs/ENVIRONMENT_REPORT.md` | M0 环境报告与 G0 判定依据 |
-| `docs/evidence/m0/` | 原始证据：session 快照、探针输出、截图、ffprobe 结果 |
+| `docs/evidence/m0/` | M0 原始证据：session 快照、探针输出、截图、ffprobe 结果 |
+| `docs/evidence/m1/` | T006/T007 证据：写入输出、重编译 build、ffprobe、抽帧、pnpm 构建日志 |
 
 ## 第三方依赖说明
 

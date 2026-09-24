@@ -21,9 +21,16 @@ Studio 是本地进程，不是常驻服务。启动形式（实测可用）：
 
 `--workspace` 与 `--runtime` 对示例工程是**必需**的，省略会因无法解析已安装包而失败（实测错误：`cannot locate installed package @example/chat-scene`）。
 
-地址发现：**以 `--port` 显式指定为准**，并从进程 stdout 解析确认行。stdout 会打印 Project、Run、Runtime Profile、Runtime selection 与 `Local: http://localhost:<port>/`。
+地址发现：**必须从进程 stdout 解析实际 URL，不能假定 `--port` 生效。** stdout 会打印 Project、Run、Runtime Profile、Runtime selection 与 `Local: http://localhost:<port>/`。
 
-不存在"默认端口"约定。Qt 侧应自行选择空闲端口、显式传入，并以 stdout 的 URL 行作为就绪信号，不得轮询猜测端口。
+**实测：端口被占用时 Studio 会自动改用下一个端口并打印提示。** 传 `--port 5610` 而 5610 已被占时，输出为：
+
+```
+Port 5610 is in use, trying another one...
+  ➜  Local:   http://localhost:5611/
+```
+
+所以 Qt 侧如果把传入的端口当作最终地址，在端口冲突时会连错对象。也不存在"默认端口"约定，不得轮询猜测。
 
 ## 2. 端点清单
 
@@ -113,11 +120,28 @@ type StudioSnapshot = {
 
 时间轴字段是例外：其可写性来自 Runtime 权威而非组件 allowlist（`packages/studio/src/parameters.ts:503` 注释明确指出这点）。
 
-### 实测警告
+### 实测：默认情况下没有可写字段
 
-chat 示例的唯一 clip **`inspector` 为空数组**，三个 `editHandles`（move / trim-start / trim-end）全部 `enabled: false`，`disabledReason` 为"该时间表达未开放时间轴回写"。
+上游 chat 示例的唯一 clip **`inspector` 为空数组**，三个 `editHandles`（move / trim-start / trim-end）全部 `enabled: false`，`disabledReason` 为"该时间表达未开放时间轴回写"。
 
 所以"组件能渲染"与"字段可编辑"是两件事，这与 PROJECT_PLAN §4.3 的警告一致。**Qt 属性面板必须按 `edit` 是否存在决定控件可用性，对不可写字段展示只读，并优先显示 `disabledReason` 而不是自造提示文案。**
+
+`disabledReason` 由服务端生成，实测有两种文案（`parameters.ts:436`）：属性是 `{reference}` 绑定时为"引用由作者在 SVML 中绑定，面板不替换引用关系。"；Companion 未声明 `writable` 时为"该参数由组件声明为只读。"
+
+### 实测：补上 Companion 声明后字段变可写
+
+为上游 chat-scene 补一个 Studio Companion facet（**只加声明层**，Surface 解码器、manifest 与渲染器不动）后，同一个 clip 的 `inspector` 从 0 个变为 2 个，两个都带 `edit`：
+
+```
+FIELD title            control=text   value="Launch crew"  HAS_EDIT=true
+  edit.source.path=chat.svml  range={"start":755,"end":766}
+FIELD entrance-frames  control=number value="10"           HAS_EDIT=true
+  edit.source.path=chat.svml  range={"start":650,"end":650}
+```
+
+**`entrance-frames` 的 range 是空区间 `{650,650}`。** 该属性在 SVML 中被省略，当前值来自 Companion 的 `fallback`，写入时是向源文件**插入**新属性而非替换。**Qt 的写入实现不得假设 range 非空。**
+
+fixture 与完整复现步骤见 `tests/fixtures/writable-probe/`。
 
 ## 5. POST /__studio/mutation
 
@@ -146,7 +170,21 @@ curl 与 Qt `QNetworkAccessManager` 两条路径结果一致：
 | revision 过期 | 409 | `The Source changed outside Studio.` |
 | entity 不存在 | 500 | `Studio entity <id> no longer exists.` |
 
-**未验证：成功写入（HTTP 200）路径。** 原因是本轮找不到含可写字段的纯本地示例，且按项目约束不伪造字段。这是 G0 判 PARTIAL 的唯一原因。
+### 实测：成功写入路径
+
+用 Qt 原生 `QNetworkAccessManager` 向带 `edit` 的字段发起 `parameter.adjust`，证据在 `docs/evidence/m1/http_probe_write.txt`：
+
+| 断言 | 结果 |
+|---|---|
+| HTTP 状态 | **200**，body `{"revision":8}` |
+| revision 推进 | 7 → 8 |
+| 重编译后的快照反映新值 | `"校园社团介绍"` → `"Qt 写入验证"` |
+| SVML 源文件被改写 | `title="Qt 写入验证"` |
+| 重放已消费的 revision | **409** `The Source changed outside Studio.` |
+
+两类写入均已验证：替换已有属性（`title`），以及向源文件插入被省略的属性（`entrance-frames="20"` 写入到原本不带该属性的元素上）。
+
+**成功语义分层已完整贯通**（AGENTS.md 第 3 条）：HTTP 200 仅是第一层。后续实测确认：写入后的源文件能重新 `build` 成功（`bld_20260924T023239809Z_59D03451EF`），导出的 MP4 通过 ffprobe 与全片解码，**抽帧人工确认画面中的标题真的变成了写入的中文文本**（`docs/evidence/m1/mutated_frame.png`）。仅凭 HTTP 200 不足以声称写入成功。
 
 ### 服务端的失败回退语义
 
@@ -202,3 +240,6 @@ Qt 侧不得主动添加 `Origin` 头；一旦添加且不同源即被 403 拒�
 8. 不主动设置 `Origin` 头。
 9. 服务端串行写入，Qt 侧需自行排队，不可并发提交 mutation。
 10. `PUT /__studio/source` 成功码是 202，不是 200。
+11. **不得假设 `edit.source.range` 非空。** 省略的属性给出空区间（如 `{650,650}`），写入为插入而非替换。
+12. **端口以 stdout 实际打印为准**，占用时会自动递增。
+13. **改动包代码或 activation 后必须重启 Studio 进程**，它不热加载包模块（上游 `packages/studio/README.md` 与 `docs/guide/studio-companion-architecture.md` 均明确说明）。

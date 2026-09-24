@@ -1,0 +1,5 @@
+
+> @example/chat-scene@0.0.0-dev build /Users/bytedance/Downloads/国产资产作业/hypit/examples/semantic-composition/packages/chat-scene
+> tsc -p tsconfig.json
+
+SCENE_EXIT=0

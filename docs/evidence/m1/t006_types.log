@@ -1,0 +1,5 @@
+
+> @hypit/hypit@0.2.10 build:public-types /Users/bytedance/Downloads/国产资产作业/hypit
+> node scripts/build-public-types.mjs
+
+TYPES_EXIT=0

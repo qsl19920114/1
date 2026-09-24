@@ -5,10 +5,17 @@
 // headers do to the mutation gate in packages/studio/src/mutation-origin.ts,
 // instead of assuming curl behaviour transfers.
 //
-// Usage: http_probe <base-url>   e.g. http_probe http://localhost:5599
+// With --write it also exercises the success path: it finds the first inspector
+// field carrying an `edit` endpoint and adjusts it for real, which rewrites the
+// SVML source on disk. That requires a Run whose component ships a Studio
+// Companion declaring `writable: true`; see tests/fixtures/writable-probe.
+//
+// Usage: http_probe <base-url> [--write]
 
 #include <QCoreApplication>
+#include <QDateTime>
 #include <QEventLoop>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QNetworkAccessManager>
@@ -52,6 +59,37 @@ Outcome sendBlocking(QNetworkAccessManager &net, QNetworkRequest request,
     return outcome;
 }
 
+struct WritableField {
+    QString entityId;
+    QString parameterId;
+    QString control;
+    QJsonValue value;
+    bool found = false;
+};
+
+// Mirrors the only supported discovery route: walk tracks -> clips -> inspector
+// and accept a field solely because it carries `edit`. `control` never implies
+// writability (studio/src/parameters.ts:495).
+WritableField firstWritableField(const QJsonObject &snapshot) {
+    WritableField field;
+    for (const QJsonValue &track : snapshot.value(QStringLiteral("tracks")).toArray()) {
+        for (const QJsonValue &clipValue : track.toObject().value(QStringLiteral("clips")).toArray()) {
+            const QJsonObject clip = clipValue.toObject();
+            for (const QJsonValue &fieldValue : clip.value(QStringLiteral("inspector")).toArray()) {
+                const QJsonObject candidate = fieldValue.toObject();
+                if (!candidate.contains(QStringLiteral("edit"))) continue;
+                field.entityId = clip.value(QStringLiteral("id")).toString();
+                field.parameterId = candidate.value(QStringLiteral("id")).toString();
+                field.control = candidate.value(QStringLiteral("control")).toString();
+                field.value = candidate.value(QStringLiteral("value"));
+                field.found = true;
+                return field;
+            }
+        }
+    }
+    return field;
+}
+
 void report(const QString &name, int expected, const Outcome &outcome, bool &allOk) {
     const bool ok = outcome.transportError.isEmpty() && outcome.httpStatus == expected;
     if (!ok) allOk = false;
@@ -66,7 +104,13 @@ void report(const QString &name, int expected, const Outcome &outcome, bool &all
 
 int main(int argc, char **argv) {
     QCoreApplication app(argc, argv);
-    const QString base = argc > 1 ? QString::fromLocal8Bit(argv[1]) : QStringLiteral("http://localhost:5599");
+    QString base = QStringLiteral("http://localhost:5599");
+    bool exerciseWrite = false;
+    for (int i = 1; i < argc; ++i) {
+        const QString arg = QString::fromLocal8Bit(argv[i]);
+        if (arg == QStringLiteral("--write")) exerciseWrite = true;
+        else base = arg;
+    }
     QNetworkAccessManager net;
     bool allOk = true;
 
@@ -115,6 +159,58 @@ int main(int argc, char **argv) {
                500, postMutation(QJsonObject{
                    {"type", "parameter.adjust"}, {"revision", revision},
                    {"entityId", "missing"}, {"parameterId", "missing"}, {"value", "z"}}, {}), allOk);
+    }
+
+    const WritableField writable = firstWritableField(snapshot);
+    qInfo().noquote() << "INFO writable field discovered:" << (writable.found ? "yes" : "no")
+                      << (writable.found ? QStringLiteral("control=%1 parameterId=%2")
+                                               .arg(writable.control, writable.parameterId)
+                                         : QStringLiteral("(snapshot exposes no inspector field with an edit endpoint)"));
+
+    if (exerciseWrite) {
+        if (!writable.found) {
+            allOk = false;
+            qInfo().noquote() << "FAIL --write requested but no writable field exists in this Run";
+        } else {
+            // Re-read the revision: the failure assertions above may have advanced it.
+            const Outcome current = sendBlocking(net, sessionRequest, "GET", {});
+            const QJsonObject fresh = QJsonDocument::fromJson(current.body).object();
+            const int liveRevision = fresh.value(QStringLiteral("revision")).toInt();
+
+            // A no-op value can still return 200 without advancing the revision;
+            // choose a fresh value so success is observable.
+            const QJsonValue probeValue = writable.control == QStringLiteral("number")
+                ? QJsonValue(writable.value.toString().toInt() + 1)
+                : QJsonValue(QStringLiteral("Qt 写入验证 %1").arg(QDateTime::currentMSecsSinceEpoch()));
+
+            const Outcome write = postMutation(QJsonObject{
+                {"type", "parameter.adjust"}, {"revision", liveRevision},
+                {"entityId", writable.entityId}, {"parameterId", writable.parameterId},
+                {"value", probeValue}}, {});
+            report(QStringLiteral("POST mutation, real writable field -> 200 accepted"), 200, write, allOk);
+
+            const int newRevision = QJsonDocument::fromJson(write.body).object()
+                                        .value(QStringLiteral("revision")).toInt();
+            const bool advanced = newRevision > liveRevision;
+            if (!advanced) allOk = false;
+            qInfo().noquote() << (advanced ? "PASS" : "FAIL") << "revision advanced"
+                              << liveRevision << "->" << newRevision;
+
+            // The write is only real if the recompiled snapshot reports the new value.
+            const Outcome after = sendBlocking(net, sessionRequest, "GET", {});
+            const WritableField reread = firstWritableField(QJsonDocument::fromJson(after.body).object());
+            const bool persisted = reread.found && reread.value != writable.value;
+            if (!persisted) allOk = false;
+            qInfo().noquote() << (persisted ? "PASS" : "FAIL") << "value persisted in recompiled snapshot:"
+                              << QJsonDocument(QJsonObject{{"before", writable.value}, {"after", reread.value}})
+                                     .toJson(QJsonDocument::Compact);
+
+            report(QStringLiteral("POST mutation, replaying the consumed revision -> 409 conflict"),
+                   409, postMutation(QJsonObject{
+                       {"type", "parameter.adjust"}, {"revision", liveRevision},
+                       {"entityId", writable.entityId}, {"parameterId", writable.parameterId},
+                       {"value", probeValue}}, {}), allOk);
+        }
     }
 
     qInfo().noquote() << (allOk ? "ALL PASS" : "SOME FAILED");

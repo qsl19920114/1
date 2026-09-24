@@ -1,14 +1,16 @@
 {
   "format": "qt-video-workbench.tasks@1",
   "note": "状态只有四种：done 需附证据路径；partial 需写明未验证部分；blocked 需写明阻塞原因；pending 未开始。不得在前置门禁未过时把后续任务标为 done。",
-  "updatedAt": "2026-09-23",
+  "updatedAt": "2026-09-24",
   "gates": {
     "G0": {
       "milestone": "M0",
       "definition": "至少一份真实可解码 MP4、Qt 可显示预览；接口能力清楚",
-      "verdict": "PARTIAL",
-      "reason": "读取路径与四类失败语义已实测，但没有任何一次真实成功的属性写入。",
-      "evidence": "docs/ENVIRONMENT_REPORT.md, docs/API_CONTRACT.md, docs/evidence/m0/"
+      "verdict": "PASS",
+      "reason": "三项子门禁全部达成。原先欠缺的成功写入路径由 T007 补上：Qt 原生代码完成 parameter.adjust（HTTP 200、revision 7→8、SVML 改写、重编译后快照生效、导出成片抽帧确认画面变化）。",
+      "evidence": "docs/ENVIRONMENT_REPORT.md, docs/API_CONTRACT.md, docs/evidence/m0/, docs/evidence/m1/",
+      "promotedAt": "2026-09-24",
+      "promotedBy": "T007"
     },
     "G1": { "milestone": "M1", "verdict": "NOT_REACHED" },
     "G2": { "milestone": "M2", "verdict": "NOT_REACHED" },
@@ -63,20 +65,18 @@
       "id": "T004",
       "milestone": "M0",
       "title": "验证 Studio 地址发现、GET session、可写属性 mutation、冲突与失败行为",
-      "status": "partial",
-      "evidence": ["docs/API_CONTRACT.md", "docs/evidence/m0/session.json", "docs/evidence/m0/http_probe.txt"],
+      "status": "done",
+      "evidence": ["docs/API_CONTRACT.md", "docs/evidence/m0/session.json", "docs/evidence/m0/http_probe.txt", "docs/evidence/m1/http_probe_write.txt"],
       "verified": [
-        "地址发现：--port 显式指定 + stdout URL 行解析",
+        "地址发现：必须解析 stdout URL 行；端口被占时 Studio 自动递增（实测 5610→5611），不能假定 --port 生效",
         "GET session 200，响应体即 Snapshot，无 data 信封（已断言 wrappedInData=false）",
         "mutation 畸形 body 400 / 跨源 403 / 过期 revision 409 / 未知 entity 500",
         "跨源门禁规则从 mutation-origin.ts 读取，Qt 原生请求可通过（返回 400 非 403）",
         "两条写入路径失败语义不同：/__studio/mutation 编译失败会服务端回滚，PUT /__studio/source 无回滚分支"
       ],
-      "notVerified": [
-        "一次真实成功的属性写入（HTTP 200 + revision 递增）"
-      ],
-      "reason": "chat 示例的唯一 clip inspector 为空数组，三个 editHandles 全部 enabled=false。按约束不伪造可写字段。",
-      "blocksGate": "G0"
+      "notVerified": [],
+      "resolvedBy": "T007",
+      "note": "本任务在 M0 当时为 partial，唯一缺口是成功写入；T007 通过补齐 Studio Companion 声明解决后转 done。"
     },
     {
       "id": "T005",
@@ -101,20 +101,42 @@
       "id": "T006",
       "milestone": "M1",
       "title": "安装 pnpm@10.33.0 并验证可重新编译 Author Package",
-      "status": "pending",
+      "status": "done",
       "dependsOn": ["T001"],
-      "acceptance": "pnpm --filter @example/chat-scene build 退出码 0",
-      "why": "不解开则无法自建 title-card 模板，挡 M2"
+      "evidence": ["docs/evidence/m1/t006_types.log", "docs/evidence/m1/t006_scene.log"],
+      "findings": [
+        "经 npm install -g pnpm@10.33.0 安装，与上游 packageManager 声明的版本一致",
+        "pnpm build:public-types 退出码 0",
+        "pnpm --filter @example/chat-scene build 退出码 0（tsc -p tsconfig.json）",
+        "macOS 没有 timeout 命令，脚本不要依赖它",
+        "M2 的自建模板阻塞已解除"
+      ]
     },
     {
       "id": "T007",
       "milestone": "M1",
       "title": "取得可写属性样本并验证一次真实成功的 parameter.adjust",
-      "status": "pending",
+      "status": "done",
       "dependsOn": ["T004", "T006"],
-      "acceptance": "POST /__studio/mutation 返回 HTTP 200 且 revision 递增，随后 GET session 可见新值",
-      "approach": "在 examples/minimal-author-package 基础上声明一个 writable: true 的文本 binding，编译后用 http_probe 验证",
-      "why": "完成即可将 G0 从 PARTIAL 提升为 PASS；属性面板的数据契约取决于真实可写字段形状，先做可避免 M3 返工"
+      "evidence": [
+        "docs/evidence/m1/http_probe_write.txt",
+        "docs/evidence/m1/session_with_writable_fields.json",
+        "docs/evidence/m1/build_after_write.log",
+        "docs/evidence/m1/ffprobe_mutated.json",
+        "docs/evidence/m1/mutated_frame.png",
+        "tests/fixtures/writable-probe/"
+      ],
+      "findings": [
+        "可写判定已逐行源码核验：parameters.ts:417 要求 declaration.writable === true 且属性非引用；:495 仅此时输出 edit 键；:482 无 schema 且未给 control 会抛错而非静默丢弃",
+        "为上游 chat-scene 补一个 Studio Companion facet（只加声明层，不改 Surface 解码器/manifest/渲染器）后，inspector 从 0 个字段变 2 个，均带 edit",
+        "Qt 原生 QNetworkAccessManager 写入：HTTP 200，body {revision:8}，revision 7→8",
+        "SVML 源文件真被改写为 title=\"Qt 写入验证\"，重编译后快照反映新值",
+        "两类写入均验证：替换已有属性（title），以及向源文件插入被省略的属性（entrance-frames，range 为空区间 {650,650}）",
+        "重放已消费的 revision 被 409 拒绍",
+        "成功语义分层完整贯通：写入后重新 build 成功（bld_20260924T023239809Z_59D03451EF），导出 MP4 全片解码无错，抽帧人工确认画面标题真的变成写入的中文文本",
+        "新发现：端口被占时 Studio 自动递增并打印，Qt 必须解析 stdout",
+        "新发现：改动包代码或 activation 后必须重启 Studio 进程，不热加载"
+      ]
     },
     {
       "id": "T008",
@@ -122,7 +144,7 @@
       "title": "Qt 主窗口骨架与 CMake 构建分层",
       "status": "pending",
       "dependsOn": ["T007"],
-      "note": "不建议在 T007 之前开工"
+      "note": "前置已清，G0 已 PASS，可以开工。属性面板按 inspector[].edit 存在与否决定控件可用性，控件类型按 control 字段映射，不可写字段显示服务端的 disabledReason 原文"
     }
   ]
 }

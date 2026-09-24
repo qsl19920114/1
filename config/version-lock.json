@@ -47,10 +47,13 @@
   },
   "pnpm": {
     "requiredVersion": "10.33.0",
-    "installed": false,
-    "blocks": ["M2"],
-    "note": "命令不在 PATH，corepack 亦不可用。不影响运行已检出的 hypit（node_modules 与 dist 已存在），但无法重新编译 Author Package。",
-    "verifiedBy": "pnpm -v (command not found)"
+    "installedVersion": "10.33.0",
+    "installed": true,
+    "installedVia": "npm install -g pnpm@10.33.0",
+    "blocks": [],
+    "canBuildAuthorPackages": true,
+    "note": "T006 验证：build:public-types 与 @example/chat-scene build 均退出码 0。corepack 在本机 node 中不可用，故走 npm 全局安装。",
+    "verifiedBy": "pnpm -v; pnpm build:public-types; pnpm --filter @example/chat-scene build"
   },
   "media": {
     "ffmpeg": "9.0.2",
@@ -80,7 +83,23 @@
   "studioInvocation": {
     "requiresWorkspaceFlag": true,
     "requiresRuntimeFlag": true,
-    "portDiscovery": "explicit --port, confirmed by parsing the URL line on stdout",
-    "note": "省略 --workspace 会因无法解析已安装包而失败。不存在默认端口约定。"
+    "portDiscovery": "parse the URL line on stdout; --port is a request, not a guarantee",
+    "portFallsBackWhenBusy": true,
+    "requiresRestartAfterPackageChange": true,
+    "note": "省略 --workspace 会因无法解析已安装包而失败。端口被占用时 Studio 自动递增并在 stdout 打印（实测 5610→5611），故不能假定 --port 生效。改动包代码或 activation 后必须重启 Studio，它不热加载包模块。"
+  },
+  "verifiedWrite": {
+    "task": "T007",
+    "endpoint": "POST /__studio/mutation",
+    "mutationType": "parameter.adjust",
+    "client": "Qt QNetworkAccessManager",
+    "httpStatus": 200,
+    "revisionBefore": 7,
+    "revisionAfter": 8,
+    "sourceRewritten": true,
+    "rebuildAfterWrite": "bld_20260924T023239809Z_59D03451EF",
+    "frameContentConfirmed": true,
+    "note": "完整成功语义分层已贯通：HTTP 200 → 源文件改写 → 重编译快照生效 → 重新 build → 导出 MP4 全片解码 → 抽帧人工确认画面标题真的改变。仅 HTTP 200 不足以声称写入成功。",
+    "verifiedBy": "probes/qt-webengine/build/http_probe <url> --write; docs/evidence/m1/"
   }
 }
