@@ -1,0 +1,18 @@
+add_executable(infrastructure_test unit/InfrastructureTest.cpp)
+target_link_libraries(infrastructure_test PRIVATE qvw_infra Qt6::Test)
+add_test(NAME infrastructure COMMAND infrastructure_test)
+
+add_executable(studio_process_test unit/StudioProcessTest.cpp)
+target_link_libraries(studio_process_test PRIVATE qvw_backend Qt6::Test)
+add_test(NAME studio_process COMMAND studio_process_test)
+
+add_executable(studio_client_test unit/StudioClientTest.cpp)
+target_link_libraries(studio_client_test PRIVATE qvw_backend Qt6::Test)
+add_test(NAME studio_client COMMAND studio_client_test)
+add_executable(hypit_probe_test unit/HypitProbeTest.cpp)
+target_link_libraries(hypit_probe_test PRIVATE qvw_infra Qt6::Test)
+add_test(NAME hypit_probe COMMAND hypit_probe_test)
+add_executable(inspector_controls_test unit/InspectorControlsTest.cpp)
+target_link_libraries(inspector_controls_test PRIVATE qvw_ui Qt6::Test)
+add_test(NAME inspector_controls COMMAND inspector_controls_test)
+set_tests_properties(inspector_controls PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen")

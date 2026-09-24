@@ -12,12 +12,37 @@
       "promotedAt": "2026-09-24",
       "promotedBy": "T007"
     },
-    "G1": { "milestone": "M1", "verdict": "NOT_REACHED" },
-    "G2": { "milestone": "M2", "verdict": "NOT_REACHED" },
-    "G3": { "milestone": "M3", "verdict": "NOT_REACHED" },
-    "G4": { "milestone": "M4", "verdict": "NOT_REACHED" },
-    "G5": { "milestone": "M5", "verdict": "NOT_REACHED" },
-    "G6": { "milestone": "M6", "verdict": "NOT_REACHED" }
+    "G1": {
+      "milestone": "M1",
+      "verdict": "PASS",
+      "definition": "从 Qt 打开工程并读取真实会话，关闭不乱杀进程",
+      "evidence": [
+        "docs/evidence/m1-live/e2e.json",
+        "docs/evidence/m1-live/live-studio.png",
+        "docs/evidence/m1-live/live-run.log"
+      ],
+      "reason": "真实本地运行验证端口回退、Snapshot、编译预览与关窗进程组清理。"
+    },
+    "G2": {
+      "milestone": "M2",
+      "verdict": "NOT_REACHED"
+    },
+    "G3": {
+      "milestone": "M3",
+      "verdict": "NOT_REACHED"
+    },
+    "G4": {
+      "milestone": "M4",
+      "verdict": "NOT_REACHED"
+    },
+    "G5": {
+      "milestone": "M5",
+      "verdict": "NOT_REACHED"
+    },
+    "G6": {
+      "milestone": "M6",
+      "verdict": "NOT_REACHED"
+    }
   },
   "tasks": [
     {
@@ -25,7 +50,10 @@
       "milestone": "M0",
       "title": "探测本机 OS、编译器、CMake、Qt Kit、Node、pnpm、FFmpeg",
       "status": "done",
-      "evidence": ["docs/ENVIRONMENT_REPORT.md#1-主机与工具链t001", "config/version-lock.json"],
+      "evidence": [
+        "docs/ENVIRONMENT_REPORT.md#1-主机与工具链t001",
+        "config/version-lock.json"
+      ],
       "findings": [
         "macOS 15.7.7 arm64 / clang 17 / CMake 4.4.3 / Qt 6.11.2 含 WebEngineWidgets / Node 22.22.1 / FFmpeg 9.0.2",
         "本轮经授权安装 cmake 与 qt",
@@ -37,7 +65,10 @@
       "milestone": "M0",
       "title": "固定实际使用的 Hypit 版本，读取源码与 --help",
       "status": "done",
-      "evidence": ["config/version-lock.json", "docs/ENVIRONMENT_REPORT.md#2-hypit-版本固定t002"],
+      "evidence": [
+        "config/version-lock.json",
+        "docs/ENVIRONMENT_REPORT.md#2-hypit-版本固定t002"
+      ],
       "findings": [
         "实际版本 0.2.10，commit 1af179d3f58284c2d6d3c1f63052172a4fe1b5a6",
         "修正上游线索：CODEX_START.md 的 0.2.12 与实际不符",
@@ -66,7 +97,12 @@
       "milestone": "M0",
       "title": "验证 Studio 地址发现、GET session、可写属性 mutation、冲突与失败行为",
       "status": "done",
-      "evidence": ["docs/API_CONTRACT.md", "docs/evidence/m0/session.json", "docs/evidence/m0/http_probe.txt", "docs/evidence/m1/http_probe_write.txt"],
+      "evidence": [
+        "docs/API_CONTRACT.md",
+        "docs/evidence/m0/session.json",
+        "docs/evidence/m0/http_probe.txt",
+        "docs/evidence/m1/http_probe_write.txt"
+      ],
       "verified": [
         "地址发现：必须解析 stdout URL 行；端口被占时 Studio 自动递增（实测 5610→5611），不能假定 --port 生效",
         "GET session 200，响应体即 Snapshot，无 data 信封（已断言 wrappedInData=false）",
@@ -102,8 +138,13 @@
       "milestone": "M1",
       "title": "安装 pnpm@10.33.0 并验证可重新编译 Author Package",
       "status": "done",
-      "dependsOn": ["T001"],
-      "evidence": ["docs/evidence/m1/t006_types.log", "docs/evidence/m1/t006_scene.log"],
+      "dependsOn": [
+        "T001"
+      ],
+      "evidence": [
+        "docs/evidence/m1/t006_types.log",
+        "docs/evidence/m1/t006_scene.log"
+      ],
       "findings": [
         "经 npm install -g pnpm@10.33.0 安装，与上游 packageManager 声明的版本一致",
         "pnpm build:public-types 退出码 0",
@@ -117,7 +158,10 @@
       "milestone": "M1",
       "title": "取得可写属性样本并验证一次真实成功的 parameter.adjust",
       "status": "done",
-      "dependsOn": ["T004", "T006"],
+      "dependsOn": [
+        "T004",
+        "T006"
+      ],
       "evidence": [
         "docs/evidence/m1/http_probe_write.txt",
         "docs/evidence/m1/session_with_writable_fields.json",
@@ -143,7 +187,9 @@
       "milestone": "M1",
       "title": "Qt 主窗口骨架与 CMake 构建分层",
       "status": "done",
-      "dependsOn": ["T007"],
+      "dependsOn": [
+        "T007"
+      ],
       "acceptance": [
         "cmake --build 成功产出可执行文件",
         "程序能启动并显示主窗口的四个区域骨架（工程/预览/属性/任务）",
@@ -167,45 +213,121 @@
         "SnapshotMapper 是唯一认识 Hypit 字段名的边界，已挡住无 data 信封与 error 键两个实测坑",
         "退出码契约：0 成功，2 用法错误（缺 --out），3 会话读取或映射失败"
       ],
-      "knownIssue": "Qt 在两个取值选项相邻时会把后一个选项名当成前者的值并静默丢弃，isSet 为 false、positionalArguments 也为空，解析后无痕迹可检测。已把 --selftest 改为布尔标志 + 独立 --out 以缓解，但 --session 仍必须用等号形式（--session=<json>），空格形式会被丢弃并截出空图。"
+      "resolvedIssue": "原 --session 丢失来自 QApplication 消耗同名参数；main 在初始化前保存 argv，等号和空格形式均由 cli-cases.json 验证。"
     },
     {
       "id": "T009",
       "milestone": "M1",
       "title": "设置与日志：Hypit 路径配置、结构化日志、启动自检",
-      "status": "pending",
-      "dependsOn": ["T008"],
+      "status": "done",
+      "dependsOn": [
+        "T008"
+      ],
       "acceptance": [
         "从 config 读取 hypit distributionPath 并在启动时自检可执行",
         "缺失或版本不符时给出可读错误而非崩溃",
         "日志写入文件且包含命令行与退出码"
+      ],
+      "evidence": [
+        "docs/evidence/m1-live/ctest.log",
+        "docs/evidence/m1-live/cli-cases.json",
+        "docs/evidence/m1-live/workbench.jsonl"
+      ],
+      "findings": [
+        "配置路径按仓库根目录解析，异步版本自检成功与缺失/错误/超时均有测试。",
+        "日志使用 JSONL，记录独立参数数组与退出码。"
       ]
     },
     {
       "id": "T010",
       "milestone": "M1",
       "title": "自动启动 Studio 子进程并从 stdout 解析实际地址",
-      "status": "pending",
-      "dependsOn": ["T009"],
+      "status": "done",
+      "dependsOn": [
+        "T009"
+      ],
       "acceptance": [
         "QProcess 启动 hypit studio 并同时传 --workspace 与 --runtime",
         "从 stdout 解析 Local URL 行作为就绪信号，不假定 --port 生效",
         "关闭窗口时优雅终止子进程，不留孤儿进程"
       ],
-      "note": "端口被占时上游会自动递增，必须解析 stdout（见 docs/API_CONTRACT.md §1）"
+      "note": "端口被占时上游会自动递增，必须解析 stdout（见 docs/API_CONTRACT.md §1）",
+      "evidence": [
+        "docs/evidence/m1-live/ctest.log",
+        "docs/evidence/m1-live/e2e.json",
+        "docs/evidence/m1-live/live-run.log"
+      ],
+      "findings": [
+        "真实 QProcess 同时传入 run/workspace/runtime，端口被占时以 stdout Local 实际地址连接。",
+        "关闭窗口后独占 Unix 进程组全部退出，无关监听进程保留。",
+        "当前进程树清理验收平台为 macOS；Windows 尚未验收。"
+      ]
     },
     {
       "id": "T011",
       "milestone": "M1",
       "title": "读取真实会话并渲染组件树与只读属性表",
-      "status": "pending",
-      "dependsOn": ["T010"],
+      "status": "done",
+      "dependsOn": [
+        "T010"
+      ],
       "acceptance": [
         "GET /__studio/session 解析为领域模型，不预期 data 信封",
         "组件树按 tracks/clips 层级显示",
         "属性表按 control 映射控件，edit 缺失时禁用并显示 disabledReason 原文"
       ],
-      "gate": "G1"
+      "gate": "G1",
+      "evidence": [
+        "docs/evidence/m1-live/session.json",
+        "docs/evidence/m1-live/live-studio.png",
+        "docs/evidence/m1-live/e2e.json",
+        "docs/evidence/m1-live/ctest.log"
+      ],
+      "findings": [
+        "真实裸 Snapshot 映射到轨道/组件树，按选择显示原生属性；控件映射与只读原因有测试。",
+        "QWebEngineView 实际显示已编译 composition；原生面板明确只读，M3 前不声称支持写回。",
+        "取消、替换请求与 payload 回调内取消均阻止旧快照发布。"
+      ]
+    },
+    {
+      "id": "T012",
+      "milestone": "M2",
+      "title": "工程创建与重开：ProjectStore 持久化元数据",
+      "status": "pending",
+      "dependsOn": [
+        "T011"
+      ],
+      "acceptance": [
+        "应用自身工程元数据可保存并重开；源文件仍为权威事实",
+        "工程可包含中文和空格路径，外部依赖按版本锁解析"
+      ]
+    },
+    {
+      "id": "T013",
+      "milestone": "M2",
+      "title": "本地素材不可变导入与引用管理",
+      "status": "pending",
+      "dependsOn": [
+        "T012"
+      ],
+      "acceptance": [
+        "导入本地素材后工程内保留稳定引用",
+        "重开工程可定位素材，不覆写已有资源"
+      ]
+    },
+    {
+      "id": "T014",
+      "milestone": "M2",
+      "title": "原创 title-card 模板及独立工程实例化",
+      "status": "pending",
+      "dependsOn": [
+        "T013"
+      ],
+      "acceptance": [
+        "脱离上游样例目录创建并打开本项目模板",
+        "真实标题、颜色和图片 slot 来自已实现模板声明，不编造可写字段"
+      ],
+      "gate": "G2"
     }
   ]
 }

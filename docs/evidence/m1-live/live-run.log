@@ -1,0 +1,22 @@
+正在检查 Hypit 配置：/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/config/version-lock.json
+Hypit 0.2.10 自检通过（/Users/bytedance/Downloads/国产资产作业/hypit）
+正在打开工程：/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/真实 工程-0yt9jhfc/chat.svrun
+Project            /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/真实 工程-0yt9jhfc
+Run                /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/真实 工程-0yt9jhfc/chat.svrun
+Runtime Profile    /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/真实 工程-0yt9jhfc/hypit.runtime.json
+Runtime selection  command argument (this session only)
+
+Port 55145 is in use, trying another one...
+➜  Local:   http://localhost:55146/
+Studio 已就绪：http://localhost:55146/（PID 85254）
+2026-09-24 17:46:44.895 qt-video-workbench[85097:13058647] error messaging the mach port for IMKCFRunLoopWakeUpReliable
+➜  Network: use --host to expose
+Comments           http://localhost:55146/#comments
+已读取真实会话：revision 1，轨道 1，可写字段 2
+js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PREVIEW compiled composition present=true
+SCREENSHOT saved= true /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/docs/evidence/m1-live/live-studio.png
+Studio process exited with code 143.
+Studio 已退出，exit=143
+CLEANUP ownedPid= 85254 running= false

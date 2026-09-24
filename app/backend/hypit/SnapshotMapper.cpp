@@ -4,6 +4,8 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonParseError>
+#include <cmath>
+#include <limits>
 
 namespace qvw::backend::hypit {
 namespace {
@@ -31,7 +33,12 @@ InspectorField mapField(const QJsonObject &raw) {
     if (field.label.isEmpty()) field.label = raw.value(QStringLiteral("binding")).toString();
     field.control = domain::controlKindFromKey(raw.value(QStringLiteral("control")).toString());
     field.value = stringifyValue(raw.value(QStringLiteral("value")));
-    field.writable = raw.contains(QStringLiteral("edit"));
+    field.rawValue = raw.value("value").toVariant();
+    for (const auto &option : raw.value("options").toArray()) {
+        if (option.isString()) field.options.append({option.toString(), option.toVariant()});
+        else if (option.isObject()) field.options.append({option.toObject().value("label").toString(), option.toObject().value("value").toVariant()});
+    }
+    field.writable = raw.value(QStringLiteral("edit")).isObject();
     field.disabledReason = raw.value(QStringLiteral("disabledReason")).toString();
     return field;
 }
@@ -40,6 +47,8 @@ Clip mapClip(const QJsonObject &raw) {
     Clip clip;
     clip.id = raw.value(QStringLiteral("id")).toString();
     clip.label = raw.value(QStringLiteral("label")).toString();
+    if (clip.label.isEmpty()) clip.label = raw.value("display").toObject().value("title").toString();
+    if (clip.label.isEmpty()) clip.label = raw.value("authoredId").toString();
     clip.startFrame = raw.value(QStringLiteral("startFrame")).toInt();
     clip.endFrameExclusive = raw.value(QStringLiteral("endFrameExclusive")).toInt();
     for (const QJsonValue &entry : raw.value(QStringLiteral("inspector")).toArray()) {
@@ -87,10 +96,17 @@ MapResult mapSessionPayload(const QByteArray &payload) {
     // server's own message instead of reporting an empty project.
     if (root.contains(QStringLiteral("error"))) {
         result.error = root.value(QStringLiteral("error")).toString();
+        if (result.error.isEmpty()) result.error = QStringLiteral("Studio 返回错误响应，但未提供错误说明。");
         return result;
     }
-    if (!root.contains(QStringLiteral("revision"))) {
-        result.error = QStringLiteral("会话响应缺少 revision 字段。");
+    const auto revision = root.value("revision");
+    if (!revision.isDouble() || revision.toDouble() < 0 || std::floor(revision.toDouble()) != revision.toDouble()
+        || revision.toDouble() > std::numeric_limits<int>::max()) {
+        result.error = QStringLiteral("会话响应缺少有效的非负整数 revision。");
+        return result;
+    }
+    if (!root.value("tracks").isArray() || !root.value("space").isObject() || !root.value("source").isObject()) {
+        result.error = QStringLiteral("会话响应缺少 tracks / space / source，不能显示为有效工程。");
         return result;
     }
 

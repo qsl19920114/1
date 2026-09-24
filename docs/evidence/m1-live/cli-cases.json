@@ -1,0 +1,46 @@
+[
+  {
+    "case": "session-spaces",
+    "expected": 0,
+    "actual": 0,
+    "passed": true,
+    "loadedExpectedSession": true
+  },
+  {
+    "case": "session-equals",
+    "expected": 0,
+    "actual": 0,
+    "passed": true,
+    "loadedExpectedSession": true
+  },
+  {
+    "case": "missing-out",
+    "expected": 2,
+    "actual": 2,
+    "passed": true
+  },
+  {
+    "case": "unknown-option",
+    "expected": 1,
+    "actual": 1,
+    "passed": true
+  },
+  {
+    "case": "missing-file",
+    "expected": 3,
+    "actual": 3,
+    "passed": true
+  },
+  {
+    "case": "invalid-output",
+    "expected": 3,
+    "actual": 3,
+    "passed": true
+  },
+  {
+    "case": "invalid-config",
+    "expected": 4,
+    "actual": 4,
+    "passed": true
+  }
+]

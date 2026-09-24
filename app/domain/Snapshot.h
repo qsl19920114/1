@@ -4,6 +4,7 @@
 
 #include <QString>
 #include <QVector>
+#include <QMetaType>
 
 namespace qvw::domain {
 
@@ -47,3 +48,4 @@ struct Snapshot {
 };
 
 }
+Q_DECLARE_METATYPE(qvw::domain::Snapshot)

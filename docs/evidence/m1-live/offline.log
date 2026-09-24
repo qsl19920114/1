@@ -1,0 +1,6 @@
+qt.qpa.fonts: Populating font family aliases took 34 ms. Replace uses of missing font family "Sans Serif" with one that exists to avoid this cost. 
+This plugin does not support propagateSizeHints()
+OFFLINE revision= 1 writableFields= 2
+This plugin does not support propagateSizeHints()
+SCREENSHOT saved= true docs/evidence/m1-live/offline.png
+CLEANUP ownedPid= 0 running= false

@@ -1,0 +1,41 @@
+{"level":"INFO","message":"正在检查 Hypit 配置：/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/config/version-lock.json","timestamp":"2026-09-24T09:43:58.976Z"}
+{"level":"INFO","message":"开始版本自检：/Users/bytedance/Downloads/国产资产作业/hypit/bin/hypit.mjs version --json","timestamp":"2026-09-24T09:43:58.982Z"}
+{"arguments":["version","--json"],"exitCode":0,"level":"INFO","message":"外部命令结束","program":"/Users/bytedance/Downloads/国产资产作业/hypit/bin/hypit.mjs","timestamp":"2026-09-24T09:43:59.787Z"}
+{"level":"INFO","message":"Hypit 0.2.10 自检通过（/Users/bytedance/Downloads/国产资产作业/hypit）","timestamp":"2026-09-24T09:43:59.794Z"}
+{"level":"INFO","message":"Hypit 0.2.10 自检通过（/Users/bytedance/Downloads/国产资产作业/hypit）","timestamp":"2026-09-24T09:43:59.802Z"}
+{"level":"INFO","message":"正在打开工程：/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/真实 工程-jnj7l7ro/chat.svrun","timestamp":"2026-09-24T09:43:59.809Z"}
+{"level":"INFO","message":"Project            /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/真实 工程-jnj7l7ro","timestamp":"2026-09-24T09:44:00.905Z"}
+{"level":"INFO","message":"Run                /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/真实 工程-jnj7l7ro/chat.svrun","timestamp":"2026-09-24T09:44:00.914Z"}
+{"level":"INFO","message":"Runtime Profile    /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/真实 工程-jnj7l7ro/hypit.runtime.json","timestamp":"2026-09-24T09:44:00.922Z"}
+{"level":"INFO","message":"Runtime selection  command argument (this session only)","timestamp":"2026-09-24T09:44:00.928Z"}
+{"level":"INFO","message":"","timestamp":"2026-09-24T09:44:00.935Z"}
+{"level":"INFO","message":"5:44:01 PM [vite] (client) Re-optimizing dependencies because vite config has changed","timestamp":"2026-09-24T09:44:01.440Z"}
+{"level":"INFO","message":"Port 54769 is in use, trying another one...","timestamp":"2026-09-24T09:44:01.454Z"}
+{"level":"INFO","message":"➜  Local:   http://localhost:54770/","timestamp":"2026-09-24T09:44:01.465Z"}
+{"level":"INFO","message":"Studio 已就绪：http://localhost:54770/（PID 81537）","timestamp":"2026-09-24T09:44:01.476Z"}
+{"level":"INFO","message":"➜  Network: use --host to expose","timestamp":"2026-09-24T09:44:01.809Z"}
+{"level":"INFO","message":"Comments           http://localhost:54770/#comments","timestamp":"2026-09-24T09:44:01.816Z"}
+{"level":"INFO","message":"已读取真实会话：revision 1，轨道 1，可写字段 2","timestamp":"2026-09-24T09:44:02.127Z"}
+{"level":"INFO","message":"Studio process exited with code 143.","timestamp":"2026-09-24T09:44:03.745Z"}
+{"arguments":["studio","--run","/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/真实 工程-jnj7l7ro/chat.svrun","--workspace","/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/真实 工程-jnj7l7ro","--runtime","/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/真实 工程-jnj7l7ro/hypit.runtime.json","--port","54769"],"exitCode":143,"level":"ERROR","message":"外部命令结束","program":"/Users/bytedance/Downloads/国产资产作业/hypit/bin/hypit.mjs","timestamp":"2026-09-24T09:44:03.752Z"}
+{"level":"INFO","message":"Studio 已退出，exit=143","timestamp":"2026-09-24T09:44:03.755Z"}
+{"level":"INFO","message":"正在检查 Hypit 配置：/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/config/version-lock.json","timestamp":"2026-09-24T09:46:42.030Z"}
+{"level":"INFO","message":"开始版本自检：/Users/bytedance/Downloads/国产资产作业/hypit/bin/hypit.mjs version --json","timestamp":"2026-09-24T09:46:42.039Z"}
+{"arguments":["version","--json"],"exitCode":0,"level":"INFO","message":"外部命令结束","program":"/Users/bytedance/Downloads/国产资产作业/hypit/bin/hypit.mjs","timestamp":"2026-09-24T09:46:43.032Z"}
+{"level":"INFO","message":"Hypit 0.2.10 自检通过（/Users/bytedance/Downloads/国产资产作业/hypit）","timestamp":"2026-09-24T09:46:43.040Z"}
+{"level":"INFO","message":"Hypit 0.2.10 自检通过（/Users/bytedance/Downloads/国产资产作业/hypit）","timestamp":"2026-09-24T09:46:43.049Z"}
+{"level":"INFO","message":"正在打开工程：/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/真实 工程-0yt9jhfc/chat.svrun","timestamp":"2026-09-24T09:46:43.059Z"}
+{"level":"INFO","message":"Project            /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/真实 工程-0yt9jhfc","timestamp":"2026-09-24T09:46:43.991Z"}
+{"level":"INFO","message":"Run                /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/真实 工程-0yt9jhfc/chat.svrun","timestamp":"2026-09-24T09:46:43.999Z"}
+{"level":"INFO","message":"Runtime Profile    /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/真实 工程-0yt9jhfc/hypit.runtime.json","timestamp":"2026-09-24T09:46:44.004Z"}
+{"level":"INFO","message":"Runtime selection  command argument (this session only)","timestamp":"2026-09-24T09:46:44.009Z"}
+{"level":"INFO","message":"","timestamp":"2026-09-24T09:46:44.014Z"}
+{"level":"INFO","message":"Port 55145 is in use, trying another one...","timestamp":"2026-09-24T09:46:44.598Z"}
+{"level":"INFO","message":"➜  Local:   http://localhost:55146/","timestamp":"2026-09-24T09:46:44.603Z"}
+{"level":"INFO","message":"Studio 已就绪：http://localhost:55146/（PID 85254）","timestamp":"2026-09-24T09:46:44.609Z"}
+{"level":"INFO","message":"➜  Network: use --host to expose","timestamp":"2026-09-24T09:46:44.937Z"}
+{"level":"INFO","message":"Comments           http://localhost:55146/#comments","timestamp":"2026-09-24T09:46:44.948Z"}
+{"level":"INFO","message":"已读取真实会话：revision 1，轨道 1，可写字段 2","timestamp":"2026-09-24T09:46:45.008Z"}
+{"level":"INFO","message":"Studio process exited with code 143.","timestamp":"2026-09-24T09:46:46.283Z"}
+{"arguments":["studio","--run","/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/真实 工程-0yt9jhfc/chat.svrun","--workspace","/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/真实 工程-0yt9jhfc","--runtime","/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/真实 工程-0yt9jhfc/hypit.runtime.json","--port","55145"],"exitCode":143,"level":"ERROR","message":"外部命令结束","program":"/Users/bytedance/Downloads/国产资产作业/hypit/bin/hypit.mjs","timestamp":"2026-09-24T09:46:46.296Z"}
+{"level":"INFO","message":"Studio 已退出，exit=143","timestamp":"2026-09-24T09:46:46.305Z"}

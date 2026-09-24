@@ -1,0 +1,87 @@
+-- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
+-- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
+-- Configuring done (1.8s)
+-- Generating done (0.5s)
+-- Build files have been written to: /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build
+[  1%] Built target qvw_infra_autogen_timestamp_deps
+[  1%] Built target qvw_domain_autogen_timestamp_deps
+[  1%] Built target qt_video_workbench_qmlimportscan
+[  3%] Automatic MOC for target qvw_domain
+[  5%] Automatic MOC for target qvw_infra
+[  5%] Built target qvw_domain_autogen
+[  5%] Built target qvw_infra_autogen
+[ 13%] Built target qvw_domain
+[ 13%] Built target qvw_ui_autogen_timestamp_deps
+[ 13%] Built target qvw_backend_autogen_timestamp_deps
+[ 23%] Built target qvw_infra
+[ 23%] Built target hypit_probe_test_autogen_timestamp_deps
+[ 23%] Built target infrastructure_test_autogen_timestamp_deps
+[ 25%] Automatic MOC for target qvw_ui
+[ 27%] Automatic MOC for target qvw_backend
+[ 29%] Built target hypit_probe_test_autogen
+[ 31%] Built target infrastructure_test_autogen
+[ 31%] Built target qvw_ui_autogen
+[ 31%] Built target qvw_backend_autogen
+[ 37%] Built target hypit_probe_test
+[ 43%] Built target infrastructure_test
+[ 50%] Built target qvw_ui
+[ 60%] Built target qvw_backend
+[ 60%] Built target inspector_controls_test_autogen_timestamp_deps
+[ 60%] Built target studio_client_test_autogen_timestamp_deps
+[ 60%] Built target qvw_controllers_autogen_timestamp_deps
+[ 60%] Built target studio_process_test_autogen_timestamp_deps
+[ 62%] Built target inspector_controls_test_autogen
+[ 64%] Built target studio_client_test_autogen
+[ 66%] Automatic MOC for target qvw_controllers
+[ 68%] Built target studio_process_test_autogen
+[ 68%] Built target qvw_controllers_autogen
+[ 74%] Built target inspector_controls_test
+[ 80%] Built target studio_client_test
+[ 86%] Built target studio_process_test
+[ 92%] Built target qvw_controllers
+[ 92%] Built target qt_video_workbench_autogen_timestamp_deps
+[ 94%] Automatic MOC for target qt_video_workbench
+[ 94%] Built target qt_video_workbench_autogen
+[100%] Built target qt_video_workbench
+[  1%] Built target qvw_infra_autogen_timestamp_deps
+[  1%] Built target qvw_domain_autogen_timestamp_deps
+[  1%] Built target qt_video_workbench_qmlimportscan
+[  3%] Built target qvw_domain_autogen
+[  5%] Built target qvw_infra_autogen
+[ 13%] Built target qvw_domain
+[ 23%] Built target qvw_infra
+[ 23%] Built target qvw_ui_autogen_timestamp_deps
+[ 23%] Built target qvw_backend_autogen_timestamp_deps
+[ 23%] Built target hypit_probe_test_autogen_timestamp_deps
+[ 23%] Built target infrastructure_test_autogen_timestamp_deps
+[ 25%] Built target qvw_ui_autogen
+[ 29%] Built target hypit_probe_test_autogen
+[ 29%] Automatic MOC for target qvw_backend
+[ 31%] Built target infrastructure_test_autogen
+[ 37%] Built target hypit_probe_test
+[ 37%] Built target qvw_backend_autogen
+[ 45%] Built target qvw_ui
+[ 45%] Built target inspector_controls_test_autogen_timestamp_deps
+[ 50%] Built target infrastructure_test
+[ 52%] Building CXX object app/CMakeFiles/qvw_backend.dir/backend/hypit/SnapshotMapper.cpp.o
+[ 54%] Built target inspector_controls_test_autogen
+[ 60%] Built target inspector_controls_test
+[ 62%] Linking CXX static library libqvw_backend.a
+[ 68%] Built target qvw_backend
+[ 68%] Built target studio_process_test_autogen_timestamp_deps
+[ 68%] Built target studio_client_test_autogen_timestamp_deps
+[ 68%] Built target qvw_controllers_autogen_timestamp_deps
+[ 72%] Automatic MOC for target studio_client_test
+[ 72%] Built target studio_process_test_autogen
+[ 74%] Linking CXX executable studio_process_test
+[ 76%] Built target qvw_controllers_autogen
+[ 82%] Built target qvw_controllers
+[ 82%] Built target qt_video_workbench_autogen_timestamp_deps
+[ 84%] Built target qt_video_workbench_autogen
+[ 86%] Linking CXX executable qt-video-workbench
+[ 90%] Built target studio_process_test
+[ 94%] Built target qt_video_workbench
+[ 94%] Built target studio_client_test_autogen
+[ 96%] Building CXX object tests/CMakeFiles/studio_client_test.dir/unit/StudioClientTest.cpp.o
+[ 98%] Linking CXX executable studio_client_test
+[100%] Built target studio_client_test

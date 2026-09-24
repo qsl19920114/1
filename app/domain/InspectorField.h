@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QString>
+#include <QVariant>
 #include <QVector>
 
 namespace qvw::domain {
@@ -25,11 +26,14 @@ QString controlKindLabel(ControlKind kind);
 /// carried an `edit` endpoint for the field. It is NOT derived from `control`:
 /// per docs/API_CONTRACT.md §4 a field can be rendered as a text box and still
 /// be read-only, so the two concepts are stored separately on purpose.
+struct InspectorOption { QString label; QVariant value; };
 struct InspectorField {
     QString id;
     QString label;
     ControlKind control = ControlKind::Unsupported;
     QString value;
+    QVariant rawValue;
+    QVector<InspectorOption> options;
     bool writable = false;
     /// Verbatim server-side explanation; shown as-is when !writable so the UI
     /// never invents its own wording.

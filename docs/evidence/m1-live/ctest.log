@@ -1,0 +1,15 @@
+Test project /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build
+    Start 1: infrastructure
+1/5 Test #1: infrastructure ...................   Passed    0.05 sec
+    Start 2: studio_process
+2/5 Test #2: studio_process ...................   Passed   33.45 sec
+    Start 3: studio_client
+3/5 Test #3: studio_client ....................   Passed    1.44 sec
+    Start 4: hypit_probe
+4/5 Test #4: hypit_probe ......................   Passed    1.18 sec
+    Start 5: inspector_controls
+5/5 Test #5: inspector_controls ...............   Passed    0.82 sec
+
+100% tests passed out of 5
+
+Total Test time (real) =  36.99 sec

@@ -1,0 +1,17 @@
+{
+  "workspace": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/真实 工程-0yt9jhfc",
+  "hypit": "/Users/bytedance/Downloads/国产资产作业/hypit",
+  "localProvidersOnly": true,
+  "exitCode": 0,
+  "requestedPort": 55145,
+  "actualUrl": "http://localhost:55146/",
+  "studioPid": 85254,
+  "portFallbackVerified": true,
+  "revision": 1,
+  "tracks": 1,
+  "writableFields": 2,
+  "compiledPreviewPresent": true,
+  "ownedProcessGroupStopped": true,
+  "unrelatedProcessPreserved": true,
+  "verdict": "PASS"
+}

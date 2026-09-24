@@ -1,0 +1,29 @@
+[
+  {
+    "title": "Cancellation during payload delivery still publishes a stale snapshot",
+    "file": "app/backend/hypit/StudioClient.cpp",
+    "start_line": 53,
+    "end_line": 54,
+    "severity": "P2",
+    "category": "CONCURRENCY",
+    "confidence": 10,
+    "rationale": "In main.cpp, failure writing --session-out synchronously calls finish(), then closeProject()/StudioClient.cancel() from payloadReceived. The old finished handler then emits snapshotReady after the project was cleared. A local QtTest confirmed one snapshot was emitted after cancellation. The latest generation check fixes this code path; retain this entry as resolved review history only.",
+    "suggestion": "Increment request generation on cancel and verify it after emitting payloadReceived. Implemented by parent during this review.",
+    "status": "resolved",
+    "resolution": "StudioClient::cancel increments m_generation and finished callback verifies captured generation after payloadReceived. New cancelFromPayloadCallbackSuppressesSnapshot regression included in passing 5/5 CTest; docs/evidence/m1-live/ctest.log."
+  },
+  {
+    "title": "Ensure the WebEngine page is deleted before its profile",
+    "file": "app/ui/MainWindow.cpp",
+    "start_line": 144,
+    "end_line": 145,
+    "severity": "P2",
+    "category": "ROBUSTNESS",
+    "confidence": 10,
+    "rationale": "After opening any live preview and then closing the application, the view owns both the profile and page, with the profile added first. QObject child destruction therefore releases the profile while its WebEnginePage is still alive. An isolated probe using the same construction with the installed Qt reproduces `Release of profile requested but WebEnginePage still not deleted. Expect troubles !`, followed by PROFILE DESTROYED then PAGE DESTROYED. This violates the required page/profile lifetime and makes live-preview teardown unsafe; the offline-only UI smoke test does not exercise it.",
+    "suggestion": "Give the profile an owner whose lifetime extends beyond the page, or explicitly destroy the view/page before deleting the profile during MainWindow teardown. Add a focused live-preview close check and verify the Qt profile-lifetime warning disappears.",
+    "evidence": "/tmp/qvw-m1-review/ui-probe/main.cpp; local installed Qt probe exited 0 and printed LOAD true / DELETE VIEW / Release of profile requested but WebEnginePage still not deleted. Expect troubles ! / PROFILE DESTROYED / PAGE DESTROYED / DELETE DONE",
+    "status": "resolved",
+    "resolution": "MainWindow destructor explicitly deletes m_webView (owning the page) before m_webProfile; profile now parented to MainWindow. Real Studio E2E PASS with application exit 0 and no profile lifetime warning in docs/evidence/m1-live/live-run.log. main selftest JavaScript callback now checks a QPointer guard before accessing captured stack locals."
+  }
+]
