@@ -1,0 +1,36 @@
+$ cmake -S . -B build -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+-- Configuring done (3.1s)
+-- Generating done (0.2s)
+-- Build files have been written to: /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build
+
+$ cmake --build build -j4
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  5%] Automatic MOC for target qvw_domain
+[  5%] Built target qvw_domain_autogen
+[ 23%] Building CXX object app/CMakeFiles/qvw_domain.dir/qvw_domain_autogen/mocs_compilation.cpp.o
+[ 23%] Building CXX object app/CMakeFiles/qvw_domain.dir/domain/InspectorField.cpp.o
+[ 23%] Building CXX object app/CMakeFiles/qvw_domain.dir/domain/Snapshot.cpp.o
+[ 29%] Linking CXX static library libqvw_domain.a
+[ 29%] Built target qvw_domain
+[ 29%] Built target qvw_ui_autogen_timestamp_deps
+[ 29%] Built target qvw_backend_autogen_timestamp_deps
+[ 41%] Automatic MOC for target qvw_backend
+[ 41%] Automatic MOC for target qvw_ui
+[ 41%] Built target qvw_backend_autogen
+[ 47%] Building CXX object app/CMakeFiles/qvw_backend.dir/qvw_backend_autogen/mocs_compilation.cpp.o
+[ 52%] Building CXX object app/CMakeFiles/qvw_backend.dir/backend/hypit/SnapshotMapper.cpp.o
+[ 58%] Linking CXX static library libqvw_backend.a
+[ 58%] Built target qvw_backend
+[ 58%] Built target qvw_ui_autogen
+[ 70%] Building CXX object app/CMakeFiles/qvw_ui.dir/ui/MainWindow.cpp.o
+[ 70%] Building CXX object app/CMakeFiles/qvw_ui.dir/qvw_ui_autogen/mocs_compilation.cpp.o
+[ 76%] Linking CXX static library libqvw_ui.a
+[ 76%] Built target qvw_ui
+[ 76%] Built target qt_video_workbench_autogen_timestamp_deps
+[ 82%] Automatic MOC for target qt_video_workbench
+[ 82%] Built target qt_video_workbench_autogen
+[ 94%] Building CXX object app/CMakeFiles/qt_video_workbench.dir/qt_video_workbench_autogen/mocs_compilation.cpp.o
+[ 94%] Building CXX object app/CMakeFiles/qt_video_workbench.dir/main.cpp.o
+[100%] Linking CXX executable qt-video-workbench
+[100%] Built target qt_video_workbench
+BUILD_EXIT=0

@@ -15,7 +15,10 @@ Qt 6 桌面应用：新建视频工程、选模板、导入本地素材、用原
 ## 仓库里有什么
 
 ```
-app/                 Qt 应用源码（骨架，尚未实现）
+app/                 Qt 应用源码（四区域骨架已可构建运行）
+  domain/            归一化 DTO（Snapshot / InspectorField），不依赖 Widgets
+  backend/hypit/     SnapshotMapper：唯一认识 Hypit 字段名的边界
+  ui/                MainWindow：工程与组件 / 预览 / 属性 / 任务与日志
   ui/ controllers/ domain/ backend/ services/ infrastructure/ resources/
 templates/           原创模板与 manifest（尚未实现）
 probes/qt-webengine/ M0 验证探针，已编译可运行
@@ -47,8 +50,10 @@ M0 与 T007 证据分别留档在 `docs/evidence/m0/` 与 `docs/evidence/m1/`：
 
 ## 仍未完成
 
-- Qt 主应用尚未实现：`app/` 为空骨架；当前只有探针、fixture、契约和证据。
-- M1 的实际桌面任务 T006–T009 尚未开始；本地 tasks.json 中的 T006/T007 是补充前置验证编号，不代表原计划的 M1 已完成。
+- **尚未连接真实 Studio 进程。** 主窗口目前只能从离线 JSON 文件载入会话（`--session=<json>`），预览区是占位文字。自动启动 Studio 是 T010，接真实会话是 T011。
+- 属性面板目前是只读展示；原生编辑写回属于 M3。
+- `controllers/`、`services/` 尚未建立（留给 T009–T011），CMake 只列实际存在的文件，没建空壳 target 充数。
+- 任务编号注意：tasks.json 里的 T006/T007 是补充前置验证，与 PROJECT_PLAN §7 原表的桌面壳任务不同名；对应关系见计划 §7.1 修订表。
 
 ## 环境要求
 

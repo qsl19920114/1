@@ -1,0 +1,17 @@
+$ qt-video-workbench --selftest --out=docs/evidence/m1-t008/shell_empty.png
+selftest: size= 2560 x 1600 saved= true docs/evidence/m1-t008/shell_empty.png
+EXIT=0
+
+$ qt-video-workbench --selftest --out=docs/evidence/m1-t008/shell_with_session.png --session=docs/evidence/m1/session_with_writable_fields.json
+selftest: revision= 1 tracks= 1 writableFields= 2
+selftest: size= 2560 x 1600 saved= true docs/evidence/m1-t008/shell_with_session.png
+EXIT=0
+
+$ qt-video-workbench --selftest --out=/tmp/qvw/x.png --session=/nope.json
+selftest: cannot read /nope.json
+EXIT=3
+
+$ qt-video-workbench --selftest
+selftest: --out=<png> is required
+EXIT=2
+

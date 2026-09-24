@@ -6,9 +6,11 @@
 
 ## 当前位置
 
-**G0 = PASS。M0 全部完成，M1 的前置任务（T006、T007）也已完成。下一步是 T008 开始写 Qt 主窗口。**
+**G0 = PASS。M0 全部完成，T006、T007、T008 已完成。下一步是 T009（设置与日志）。**
 
-应用代码尚未开始编写：`app/` 目录目前为空骨架。已完成的是风险验证与契约固定，这是 PROJECT_PLAN §7 要求的前置条件（"先做 M0 的真实小闭环，不能在两周 UI 之后才第一次测试视频导出"）。
+Qt 应用已有可运行的四区域骨架（T008），但**尚未连接真实 Studio 进程**——目前只能从离线 JSON 文件载入会话。自动启动 Studio 是 T010、接真实会话是 T011。
+
+M0 先做风险验证与契约固定，是 PROJECT_PLAN §7 的要求："先做 M0 的真实小闭环，不能在两周 UI 之后才第一次测试视频导出"。
 
 ## G0 三项子门禁
 
@@ -60,6 +62,22 @@ fixture 与复现步骤在 `tests/fixtures/writable-probe/`。
 2. **不能假设 `edit.source.range` 非空。** 被省略的属性给出空区间（实测 `{650,650}`），写入是向源文件**插入**而非替换。
 3. **端口以 stdout 实际打印为准。** 被占用时 Studio 自动递增（实测 5610→5611）。另外改动包代码或 activation 后**必须重启 Studio**，它不热加载包模块。
 
+## T008：Qt 四区域骨架
+
+构建与验收证据在 `docs/evidence/m1-t008/`：
+
+| 验收项 | 结果 |
+|---|---|
+| 全新构建（清空 build 后） | `BUILD_EXIT=0` |
+| 四区域布局 | 抽帧人工确认：工程与组件 / 预览 / 属性 / 任务与日志 |
+| 属性表按契约渲染 | 标题=文本=Launch crew=可编辑是；入场帧数=数值=10=可编辑是 |
+| 状态栏 | `revision 1 · 可写字段 2 个` |
+| 数据真的进了界面 | 空载与载入截图哈希不同（20c17848 vs 641546b6）|
+
+为避开桌面辅助权限依赖，主窗口支持 `--selftest --out=<png> [--session=<json>]`，用 `widget->grab()` 自绘截图后退出，可进 CI。退出码：0 成功 / 2 缺 `--out` / 3 会话读取或映射失败。
+
+**已知限制：`--session` 必须用等号形式。** 空格形式（`--out a.png --session b.json`）会被 Qt 静默丢弃并截出空图返回 0。尝试三次拦截均失败：`isSet()` 为 false、`positionalArguments()` 为空、`app.arguments()` 已被消化，解析后无痕迹可查。已把 `--selftest` 改为布尔标志缓解，残留风险记入 `tasks.json` 的 `knownIssue`。
+
 ## 阻塞项
 
 无。M0 遗留的两项均已解除：
@@ -71,18 +89,38 @@ fixture 与复现步骤在 `tests/fixtures/writable-probe/`。
 
 ## 下一轮做什么
 
-**T008：Qt 主窗口骷构与 CMake 构建分层。**
+按顺序做，T009 → T010 → T011，最后一步冲 G1。
 
-按 PROJECT_PLAN §6 的依赖方向（UI → Controller → Domain/Backend/Service）搭 `app/`，Hypit 字段只出现在 adapter 层。属性面板的数据契约现在已经清楚：
+**T009 设置与日志。** 从 `config/version-lock.json` 读 `distributionPath`，启动时自检 hypit 可执行；缺失或版本不符给可读错误而不是崩溃；日志写文件并包含命令行与退出码。
 
-- 控件可用性看 `edit` 是否存在；
+**T010 自动启动 Studio。** 用 `QProcess` 拉起 `hypit studio`，**必须同时传 `--workspace` 与 `--runtime`**；从 stdout 解析 Local URL 行作为就绪信号，不假定 `--port` 生效（端口被占时上游会自动递增）；关窗时优雅终止子进程，不留孤儿进程。
+
+**T011 接真实会话（G1）。** 把现在的离线 JSON 载入换成 `GET /__studio/session`。属性面板的数据契约已确定：
+
+- 控件可用性看 `edit` 是否存在，**不看** `control`；
 - 控件类型按 `control` 映射（`text` / `number` / `boolean` / `select` / `color`，另有 `list` / `record` 首版只读）；
-- 不可写字段显示服务端给的 `disabledReason` 原文，两种文案分别对应"引用绑定"与"组件声明只读"。
+- 不可写字段显示服务端的 `disabledReason` 原文，两种文案分别对应"引用绑定"与"组件声明只读"。
+
+G1 的门禁是"从 Qt 打开工程并读取真实会话，关闭不乱杀进程"。
 
 ## 环境复现
 
+### 构建并运行 Qt 应用
+
 ```bash
-# 构建并运行 M0 探针
+cmake -S . -B build -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+cmake --build build -j4
+
+./build/app/qt-video-workbench                      # 直接启动
+
+# 无人值守验收（注意 --session 必须用等号形式）
+./build/app/qt-video-workbench --selftest --out=/tmp/shell.png \
+  --session=docs/evidence/m1/session_with_writable_fields.json
+```
+
+### 构建并运行 M0 探针
+
+```bash
 cd probes/qt-webengine
 cmake -S . -B build -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 cmake --build build -j4

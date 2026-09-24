@@ -142,9 +142,70 @@
       "id": "T008",
       "milestone": "M1",
       "title": "Qt 主窗口骨架与 CMake 构建分层",
-      "status": "pending",
+      "status": "done",
       "dependsOn": ["T007"],
-      "note": "前置已清，G0 已 PASS，可以开工。属性面板按 inspector[].edit 存在与否决定控件可用性，控件类型按 control 字段映射，不可写字段显示服务端的 disabledReason 原文"
+      "acceptance": [
+        "cmake --build 成功产出可执行文件",
+        "程序能启动并显示主窗口的四个区域骨架（工程/预览/属性/任务）",
+        "无 Qt 运行期警告级错误"
+      ],
+      "evidence": [
+        "docs/evidence/m1-t008/build.log",
+        "docs/evidence/m1-t008/selftest.log",
+        "docs/evidence/m1-t008/shell_empty.png",
+        "docs/evidence/m1-t008/shell_with_session.png"
+      ],
+      "findings": [
+        "清空 build 目录后全新构建退出码 0，产出 build/app/qt-video-workbench",
+        "分层由 target 依赖强制：qvw_ui / qvw_backend → qvw_domain，下层不链上层，反向 include 会直接编译失败",
+        "CMake 清单只列实际存在的文件，未建空壳 target 充数；controllers / services 留给 T009–T011",
+        "新增 --selftest --out=<png> [--session=<json>]：用 widget->grab() 自绘截图后退出，不依赖桌面辅助权限，可进 CI",
+        "抽帧人工确认四区域齐全（工程与组件 / 预览 / 属性 / 任务与日志），状态栏显示 revision 1 · 可写字段 2 个",
+        "属性表按契约渲染：标题=文本=Launch crew=可编辑是；入场帧数=数值=10=可编辑是",
+        "空载与载入会话的截图哈希不同（20c17848 vs 641546b6），证明数据真的进入控件而非只渲染了空壳",
+        "domain::InspectorField 刻意把 writable 与 control 分开存储，可写性只来自 edit 端点（AGENTS.md 第 4 条）",
+        "SnapshotMapper 是唯一认识 Hypit 字段名的边界，已挡住无 data 信封与 error 键两个实测坑",
+        "退出码契约：0 成功，2 用法错误（缺 --out），3 会话读取或映射失败"
+      ],
+      "knownIssue": "Qt 在两个取值选项相邻时会把后一个选项名当成前者的值并静默丢弃，isSet 为 false、positionalArguments 也为空，解析后无痕迹可检测。已把 --selftest 改为布尔标志 + 独立 --out 以缓解，但 --session 仍必须用等号形式（--session=<json>），空格形式会被丢弃并截出空图。"
+    },
+    {
+      "id": "T009",
+      "milestone": "M1",
+      "title": "设置与日志：Hypit 路径配置、结构化日志、启动自检",
+      "status": "pending",
+      "dependsOn": ["T008"],
+      "acceptance": [
+        "从 config 读取 hypit distributionPath 并在启动时自检可执行",
+        "缺失或版本不符时给出可读错误而非崩溃",
+        "日志写入文件且包含命令行与退出码"
+      ]
+    },
+    {
+      "id": "T010",
+      "milestone": "M1",
+      "title": "自动启动 Studio 子进程并从 stdout 解析实际地址",
+      "status": "pending",
+      "dependsOn": ["T009"],
+      "acceptance": [
+        "QProcess 启动 hypit studio 并同时传 --workspace 与 --runtime",
+        "从 stdout 解析 Local URL 行作为就绪信号，不假定 --port 生效",
+        "关闭窗口时优雅终止子进程，不留孤儿进程"
+      ],
+      "note": "端口被占时上游会自动递增，必须解析 stdout（见 docs/API_CONTRACT.md §1）"
+    },
+    {
+      "id": "T011",
+      "milestone": "M1",
+      "title": "读取真实会话并渲染组件树与只读属性表",
+      "status": "pending",
+      "dependsOn": ["T010"],
+      "acceptance": [
+        "GET /__studio/session 解析为领域模型，不预期 data 信封",
+        "组件树按 tracks/clips 层级显示",
+        "属性表按 control 映射控件，edit 缺失时禁用并显示 disabledReason 原文"
+      ],
+      "gate": "G1"
     }
   ]
 }
