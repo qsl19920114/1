@@ -232,7 +232,7 @@ Qt 侧不得主动添加 `Origin` 头；一旦添加且不同源即被 403 拒�
 
 1. 解析 session 响应时**不要**假设 `{data:...}` 信封。
 2. 端口显式传入，以 stdout 的 URL 行为就绪信号。
-3. 调用任何 CLI/Studio 命令必须同时带 `--workspace` 与 `--runtime`。
+3. `plan/build/studio` 显式指定 `--workspace` 与 `--runtime`；`check` 不接受 `--runtime`。
 4. 属性控件的可用性以 `inspector[].edit` 是否存在为准，禁止以 `control` 推断。
 5. 不可写字段展示 `disabledReason` 原文。
 6. 写入前后都要重新 GET session 核对 revision，不缓存旧 revision 重试。
@@ -243,3 +243,11 @@ Qt 侧不得主动添加 `Origin` 头；一旦添加且不同源即被 403 拒�
 11. **不得假设 `edit.source.range` 非空。** 省略的属性给出空区间（如 `{650,650}`），写入为插入而非替换。
 12. **端口以 stdout 实际打印为准**，占用时会自动递增。
 13. **改动包代码或 activation 后必须重启 Studio 进程**，它不热加载包模块（上游 `packages/studio/README.md` 与 `docs/guide/studio-companion-architecture.md` 均明确说明）。
+
+## 9. M3 原生写入补充（2026-10-02）
+
+- `server.ts:416–420`：number/boolean 控件的 mutation value 必须分别为 JSON number/boolean，即便快照原始值因SVML字面量是字符串。Qt历史保存语义值，回读按控件类型核对；不能照搬rawValue字符串发送。
+- `server.ts:454–455`：无变化的参数写入可以返回原revision；Source PUT必须推进revision。
+- GET500的明确编译错误包含revision。Source202后，仅对应ack revision的编译失败触发内容核对恢复；网络超时、坏响应和未知结果不自动回滚。
+- `source.files` 为唯一源码编辑白名单；缺失时禁用编辑。合法改变import会改变依赖集合，确认时比较目标文件及仍存在的其他旧文件，不要求集合成员完全不变。
+- `server.ts:115–117,184–191,602–604,626–635`：文件监听可调度延迟编译；`/__studio/session` 在编译中仍可能返回旧快照，`/__studio/document` 此时返回409。macOS真实测试观察到422回滚后立即Source写入得到409忙碌响应。应用按冲突处理并等待用户下一次操作，不自动重放；集成测试在下一个独立场景前只读等待document就绪并刷新。

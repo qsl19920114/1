@@ -1,0 +1,12 @@
+********* Start testing of EditorE2ETest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : EditorE2ETest::initTestCase()
+QINFO  : EditorE2ETest::nativeEditingAndRecovery() EDITOR expected-or-error: Producer @qvw/title-card@1#render failed: 入场帧数需为1–60的整数。
+QINFO  : EditorE2ETest::nativeEditingAndRecovery() EDITOR expected-or-error: A Studio author mutation is already in progress.
+FAIL!  : EditorE2ETest::nativeEditingAndRecovery() Compared values are not the same
+   Actual   (succeeded.size()): 8
+   Expected (9)               : 9
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/integration/EditorE2ETest.cpp(73)]
+PASS   : EditorE2ETest::cleanupTestCase()
+Totals: 2 passed, 1 failed, 0 skipped, 0 blacklisted, 96285ms
+********* Finished testing of EditorE2ETest *********

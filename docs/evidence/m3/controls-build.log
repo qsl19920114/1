@@ -1,0 +1,13 @@
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  7%] Built target qvw_domain_autogen
+[ 35%] Built target qvw_domain
+[ 35%] Built target qvw_ui_autogen_timestamp_deps
+[ 42%] Automatic MOC for target qvw_ui
+[ 42%] Built target qvw_ui_autogen
+[ 50%] Building CXX object app/CMakeFiles/qvw_ui.dir/ui/InspectorControls.cpp.o
+[ 57%] Linking CXX static library libqvw_ui.a
+[ 71%] Built target qvw_ui
+[ 71%] Built target inspector_controls_test_autogen_timestamp_deps
+[ 78%] Built target inspector_controls_test_autogen
+[ 85%] Linking CXX executable inspector_controls_test
+[100%] Built target inspector_controls_test

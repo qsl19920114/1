@@ -18,7 +18,9 @@ signals:
     void snapshotReady(const qvw::domain::Snapshot &snapshot);
     void payloadReceived(const QByteArray &payload);
     void failed(const QString &message);
+    void requestFailed(int httpStatus,int serverRevision,const QString &message);
 private:
+    void reportFailure(int status,int revision,const QString &message);
     QNetworkAccessManager m_network;
     QPointer<QNetworkReply> m_reply;
     int m_timeoutMs = 15000;

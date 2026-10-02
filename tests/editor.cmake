@@ -1,0 +1,3 @@
+add_executable(editor_controller_test unit/EditorControllerTest.cpp)
+target_link_libraries(editor_controller_test PRIVATE qvw_controllers Qt6::Test)
+add_test(NAME editor_controller COMMAND editor_controller_test)

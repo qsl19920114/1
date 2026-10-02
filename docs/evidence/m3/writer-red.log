@@ -1,0 +1,111 @@
+********* Start testing of StudioWriterTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : StudioWriterTest::initTestCase()
+FAIL!  : StudioWriterTest::preservesScalarAndIds(unicode-text) Compared values are not the same
+   Actual   (success.size()): 0
+   Expected (1)             : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(70)]
+FAIL!  : StudioWriterTest::preservesScalarAndIds(number) Compared values are not the same
+   Actual   (success.size()): 0
+   Expected (1)             : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(70)]
+FAIL!  : StudioWriterTest::preservesScalarAndIds(boolean) Compared values are not the same
+   Actual   (success.size()): 0
+   Expected (1)             : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(70)]
+FAIL!  : StudioWriterTest::preservesScalarAndIds(null) Compared values are not the same
+   Actual   (success.size()): 0
+   Expected (1)             : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(70)]
+FAIL!  : StudioWriterTest::replaceSourceRequires202() Compared values are not the same
+   Actual   (success.size()): 0
+   Expected (1)             : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(84)]
+FAIL!  : StudioWriterTest::noOpMayKeepRevision() Compared values are not the same
+   Actual   (success.size()): 0
+   Expected (1)             : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(95)]
+FAIL!  : StudioWriterTest::responseClassification(conflict) Compared values are not the same
+   Actual   (failure[0][0].value<StudioWriter::WriteFailure>()): InvalidRequest
+   Expected (StudioWriter::WriteFailure(kind))                 : Conflict
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(122)]
+FAIL!  : StudioWriterTest::responseClassification(source-conflict) Compared values are not the same
+   Actual   (failure[0][0].value<StudioWriter::WriteFailure>()): InvalidRequest
+   Expected (StudioWriter::WriteFailure(kind))                 : Conflict
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(122)]
+FAIL!  : StudioWriterTest::responseClassification(rejected-rollback) Compared values are not the same
+   Actual   (failure[0][0].value<StudioWriter::WriteFailure>()): InvalidRequest
+   Expected (StudioWriter::WriteFailure(kind))                 : Rejected
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(122)]
+FAIL!  : StudioWriterTest::responseClassification(source-422-unknown) Compared values are not the same
+   Actual   (failure[0][0].value<StudioWriter::WriteFailure>()): InvalidRequest
+   Expected (StudioWriter::WriteFailure(kind))                 : Indeterminate
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(122)]
+FAIL!  : StudioWriterTest::responseClassification(invalid-body) Compared values are not the same
+   Actual   (failure[0][2].toInt()): 0
+   Expected (status)               : 400
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(123)]
+FAIL!  : StudioWriterTest::responseClassification(forbidden) Compared values are not the same
+   Actual   (failure[0][2].toInt()): 0
+   Expected (status)               : 403
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(123)]
+FAIL!  : StudioWriterTest::responseClassification(server-failure) Compared values are not the same
+   Actual   (failure[0][0].value<StudioWriter::WriteFailure>()): InvalidRequest
+   Expected (StudioWriter::WriteFailure(kind))                 : Indeterminate
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(122)]
+FAIL!  : StudioWriterTest::responseClassification(malformed-success) Compared values are not the same
+   Actual   (failure[0][0].value<StudioWriter::WriteFailure>()): InvalidRequest
+   Expected (StudioWriter::WriteFailure(kind))                 : Indeterminate
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(122)]
+FAIL!  : StudioWriterTest::responseClassification(missing-revision) Compared values are not the same
+   Actual   (failure[0][0].value<StudioWriter::WriteFailure>()): InvalidRequest
+   Expected (StudioWriter::WriteFailure(kind))                 : Indeterminate
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(122)]
+FAIL!  : StudioWriterTest::responseClassification(old-revision) Compared values are not the same
+   Actual   (failure[0][0].value<StudioWriter::WriteFailure>()): InvalidRequest
+   Expected (StudioWriter::WriteFailure(kind))                 : Indeterminate
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(122)]
+FAIL!  : StudioWriterTest::responseClassification(fractional-revision) Compared values are not the same
+   Actual   (failure[0][0].value<StudioWriter::WriteFailure>()): InvalidRequest
+   Expected (StudioWriter::WriteFailure(kind))                 : Indeterminate
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(122)]
+FAIL!  : StudioWriterTest::responseClassification(string-revision) Compared values are not the same
+   Actual   (failure[0][0].value<StudioWriter::WriteFailure>()): InvalidRequest
+   Expected (StudioWriter::WriteFailure(kind))                 : Indeterminate
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(122)]
+FAIL!  : StudioWriterTest::responseClassification(source-200) Compared values are not the same
+   Actual   (failure[0][0].value<StudioWriter::WriteFailure>()): InvalidRequest
+   Expected (StudioWriter::WriteFailure(kind))                 : Indeterminate
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(122)]
+FAIL!  : StudioWriterTest::responseClassification(mutation-202) Compared values are not the same
+   Actual   (failure[0][0].value<StudioWriter::WriteFailure>()): InvalidRequest
+   Expected (StudioWriter::WriteFailure(kind))                 : Indeterminate
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(122)]
+FAIL!  : StudioWriterTest::timeoutHasUnknownOutcome() Compared values are not the same
+   Actual   (failure[0][0].value<StudioWriter::WriteFailure>()): InvalidRequest
+   Expected (StudioWriter::Indeterminate)                      : Indeterminate
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(130)]
+FAIL!  : StudioWriterTest::refusesParallelWriteWithoutCancellingFirst() Compared values are not the same
+   Actual   (http.requests.size()): 0
+   Expected (1)                   : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(136)]
+FAIL!  : StudioWriterTest::cancelledReplyCannotSignalIntoNextWrite() Compared values are not the same
+   Actual   (first.requests.size()): 0
+   Expected (1)                    : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(144)]
+FAIL!  : StudioWriterTest::completionCanStartNextWriteReentrantly() Compared values are not the same
+   Actual   (success.size()): 0
+   Expected (2)             : 2
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(155)]
+FAIL!  : StudioWriterTest::redirectsAreNeverFollowed() Compared values are not the same
+   Actual   (failure[0][0].value<StudioWriter::WriteFailure>()): InvalidRequest
+   Expected (StudioWriter::Indeterminate)                      : Indeterminate
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(162)]
+FAIL!  : StudioWriterTest::oversizedResponseIsUnknownOutcome() Compared values are not the same
+   Actual   (failure[0][0].value<StudioWriter::WriteFailure>()): InvalidRequest
+   Expected (StudioWriter::Indeterminate)                      : Indeterminate
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StudioWriterTest.cpp(169)]
+PASS   : StudioWriterTest::invalidInputNeverMakesRequest()
+PASS   : StudioWriterTest::cleanupTestCase()
+Totals: 3 passed, 26 failed, 0 skipped, 0 blacklisted, 64668ms
+********* Finished testing of StudioWriterTest *********

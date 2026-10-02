@@ -18,6 +18,7 @@ public:
     void openDocument(const domain::Project &project, int port = 5599);
     void refresh();
     void closeProject();
+    QString workspace() const { return m_workspace; }
     qint64 studioPid() const { return m_studio.processId(); }
     bool isRunning() const { return m_studio.isRunning(); }
 signals:
@@ -37,6 +38,7 @@ private:
     backend::hypit::StudioProcess m_studio;
     backend::hypit::StudioClient m_client;
     QUrl m_baseUrl;
+    QString m_workspace;
     bool m_available = false;
     bool m_open = false;
 };

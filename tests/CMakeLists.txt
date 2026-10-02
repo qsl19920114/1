@@ -28,3 +28,14 @@ include(assets.cmake)
 add_executable(project_e2e_test integration/ProjectE2ETest.cpp)
 target_link_libraries(project_e2e_test PRIVATE qvw_controllers Qt6::Test)
 target_compile_definitions(project_e2e_test PRIVATE QVW_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
+
+add_executable(source_edit_guard_test unit/SourceEditGuardTest.cpp)
+target_link_libraries(source_edit_guard_test PRIVATE qvw_services Qt6::Test)
+add_test(NAME source_edit_guard COMMAND source_edit_guard_test)
+
+include(writer.cmake)
+
+include(editor.cmake)
+add_executable(editor_e2e_test integration/EditorE2ETest.cpp)
+target_link_libraries(editor_e2e_test PRIVATE qvw_controllers Qt6::Test)
+target_compile_definitions(editor_e2e_test PRIVATE QVW_SOURCE_DIR="${PROJECT_SOURCE_DIR}")

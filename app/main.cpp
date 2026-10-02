@@ -1,6 +1,7 @@
 #include "backend/hypit/SnapshotMapper.h"
 #include "controllers/ProjectController.h"
 #include "controllers/DocumentController.h"
+#include "controllers/EditorController.h"
 #include "infrastructure/AppConfig.h"
 #include "infrastructure/LogWriter.h"
 #include "ui/MainWindow.h"
@@ -22,7 +23,7 @@ int main(int argc, char **argv) {
     QStringList arguments;
     for (int i = 0; i < argc; ++i) arguments.append(QString::fromLocal8Bit(argv[i]));
     QApplication app(argc, argv);
-    app.setApplicationName("Qt Video Workbench"); app.setApplicationVersion("0.3.0");
+    app.setApplicationName("Qt Video Workbench"); app.setApplicationVersion("0.4.0");
     QCommandLineParser parser;
     parser.setApplicationDescription(QStringLiteral("Qt 视频工作台：打开本地 Hypit Run 与 Studio 会话"));
     parser.addHelpOption(); parser.addVersionOption();
@@ -57,6 +58,7 @@ int main(int argc, char **argv) {
     qvw::infra::LogWriter log(logPath);
     qvw::controllers::ProjectController controller(loaded.config, log);
     qvw::controllers::DocumentController document;
+    qvw::controllers::EditorController editor;
     qvw::ui::MainWindow window;
     window.appendLog(QStringLiteral("日志：%1").arg(log.filePath()));
     if (!log.isReady()) window.appendLog(QStringLiteral("日志不可写：%1").arg(log.lastError()));
@@ -84,8 +86,20 @@ int main(int argc, char **argv) {
     QObject::connect(&controller, &qvw::controllers::ProjectController::projectClosed, &window, &qvw::ui::MainWindow::clearProject);
     QObject::connect(&controller, &qvw::controllers::ProjectController::previewRequested, &window, &qvw::ui::MainWindow::showPreview);
     QObject::connect(&controller, &qvw::controllers::ProjectController::snapshotReady, &window, [&](const qvw::domain::Snapshot &snapshot) {
-        gotSnapshot = true; window.showSnapshot(snapshot);
+        gotSnapshot = true; editor.acceptSnapshot(snapshot);
     });
+    QObject::connect(&controller, &qvw::controllers::ProjectController::previewRequested, &editor, [&](const QUrl &url) {
+        editor.attach(url,controller.workspace());
+    });
+    QObject::connect(&controller, &qvw::controllers::ProjectController::projectClosed, &editor, &qvw::controllers::EditorController::clear);
+    QObject::connect(&editor, &qvw::controllers::EditorController::snapshotReady, &window, &qvw::ui::MainWindow::showSnapshot);
+    QObject::connect(&editor, &qvw::controllers::EditorController::stateChanged, &window, &qvw::ui::MainWindow::setEditorState);
+    QObject::connect(&window, &qvw::ui::MainWindow::editRequested, &editor, &qvw::controllers::EditorController::edit);
+    QObject::connect(&window, &qvw::ui::MainWindow::sourceEditRequested, &editor, &qvw::controllers::EditorController::replaceSource);
+    QObject::connect(&window, &qvw::ui::MainWindow::undoRequested, &editor, &qvw::controllers::EditorController::undo);
+    QObject::connect(&window, &qvw::ui::MainWindow::redoRequested, &editor, &qvw::controllers::EditorController::redo);
+    QObject::connect(&editor, &qvw::controllers::EditorController::message, &window, [&](const QString &text){window.appendLog(text);log.info(text);});
+    QObject::connect(&editor, &qvw::controllers::EditorController::failed, &window, [&](const QString &text){window.appendLog(QStringLiteral("编辑未完成：%1").arg(text));log.error(text);});
     QObject::connect(&controller, &qvw::controllers::ProjectController::failed, &window, [&](const QString &error) {
         window.showError(error); qCritical().noquote() << error;
         if (selftest) finish(6);
@@ -119,7 +133,9 @@ int main(int argc, char **argv) {
         window.appendLog(QStringLiteral("工程操作失败：%1").arg(text)); log.error(text); qCritical().noquote()<<text;
         if(selftest) finish(3);
     });
-    QObject::connect(&window, &qvw::ui::MainWindow::refreshRequested, &controller, &qvw::controllers::ProjectController::refresh);
+    QObject::connect(&window, &qvw::ui::MainWindow::refreshRequested, &editor, [&] {
+        if(editor.snapshot().isLoaded())editor.refresh();else controller.refresh();
+    });
     QObject::connect(&window, &qvw::ui::MainWindow::configurationRequested, &controller, [&](const QString &path) {
         const auto config = qvw::infra::loadAppConfig(path);
         if (!config.ok()) window.showError(config.error); else controller.configure(config.config);

@@ -1,0 +1,10 @@
+********* Start testing of EditorE2ETest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : EditorE2ETest::initTestCase()
+QINFO  : EditorE2ETest::nativeEditingAndRecovery() EDITOR expected-or-error: Producer @qvw/title-card@1#render failed: 入场帧数需为1–60的整数。
+QINFO  : EditorE2ETest::nativeEditingAndRecovery() EDITOR expected-or-error: 源码提交后的编译或回读失败：读取 Studio 会话失败（HTTP 500）：main.svml:1:1: Source must begin with <?svml using="..."?>。 已恢复原文件并确认有效会话，本次编辑未应用。
+QINFO  : EditorE2ETest::nativeEditingAndRecovery() EDITOR expected-or-error: 源码或 revision 已发生外部变化；已刷新会话并重置历史，本次操作未写入。
+PASS   : EditorE2ETest::nativeEditingAndRecovery()
+PASS   : EditorE2ETest::cleanupTestCase()
+Totals: 3 passed, 0 failed, 0 skipped, 0 blacklisted, 6392ms
+********* Finished testing of EditorE2ETest *********

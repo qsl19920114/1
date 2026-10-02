@@ -25,7 +25,7 @@ bool DocumentController::importImage(const QString &path) {
     domain::Asset asset; QString error;
     if (!services::AssetService::importImage(*m_project,path,&asset,&error)) { emit failed(error); return false; }
     emit projectChanged(*m_project);
-    emit message(QStringLiteral("图片已导入并保存：%1；设置 Studio 的图片路径后才会应用到画面。").arg(asset.path)); return true;
+    emit message(QStringLiteral("图片已导入并保存：%1；选中素材和组件后，点击“应用到选中组件的图片”。").arg(asset.path)); return true;
 }
 void DocumentController::close() { m_project.reset(); emit documentClosed(); }
 }

@@ -1,0 +1,47 @@
+[  2%] Built target qvw_domain_autogen_timestamp_deps
+[  2%] Built target qvw_infra_autogen_timestamp_deps
+[  2%] Built target qt_video_workbench_qmlimportscan
+[  5%] Built target qvw_domain_autogen
+[  7%] Built target qvw_infra_autogen
+[ 17%] Built target qvw_domain
+[ 30%] Built target qvw_infra
+[ 30%] Built target qvw_backend_autogen_timestamp_deps
+[ 30%] Built target qvw_services_autogen_timestamp_deps
+[ 30%] Built target qvw_ui_autogen_timestamp_deps
+[ 32%] Built target qvw_services_autogen
+[ 35%] Built target qvw_backend_autogen
+[ 37%] Built target qvw_ui_autogen
+[ 50%] Built target qvw_services
+[ 65%] Built target qvw_backend
+[ 65%] Built target qvw_controllers_autogen_timestamp_deps
+[ 75%] Built target qvw_ui
+[ 77%] Built target qvw_controllers_autogen
+[ 90%] Built target qvw_controllers
+[ 90%] Built target qt_video_workbench_autogen_timestamp_deps
+[ 92%] Automatic MOC for target qt_video_workbench
+[ 92%] Built target qt_video_workbench_autogen
+[ 95%] Building CXX object app/CMakeFiles/qt_video_workbench.dir/main.cpp.o
+[ 97%] Linking CXX executable qt-video-workbench
+[100%] Built target qt_video_workbench
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  0%] Built target qvw_infra_autogen_timestamp_deps
+[  2%] Built target qvw_domain_autogen
+[  5%] Built target qvw_infra_autogen
+[ 17%] Built target qvw_domain
+[ 32%] Built target qvw_infra
+[ 32%] Built target qvw_services_autogen_timestamp_deps
+[ 32%] Built target qvw_backend_autogen_timestamp_deps
+[ 35%] Built target qvw_services_autogen
+[ 38%] Built target qvw_backend_autogen
+[ 52%] Built target qvw_services
+[ 70%] Built target qvw_backend
+[ 70%] Built target qvw_controllers_autogen_timestamp_deps
+[ 73%] Built target qvw_controllers_autogen
+[ 88%] Built target qvw_controllers
+[ 88%] Built target editor_e2e_test_autogen_timestamp_deps
+[ 91%] Automatic MOC for target editor_e2e_test
+[ 91%] Built target editor_e2e_test_autogen
+[ 97%] Building CXX object tests/CMakeFiles/editor_e2e_test.dir/editor_e2e_test_autogen/mocs_compilation.cpp.o
+[ 97%] Building CXX object tests/CMakeFiles/editor_e2e_test.dir/integration/EditorE2ETest.cpp.o
+[100%] Linking CXX executable editor_e2e_test
+[100%] Built target editor_e2e_test

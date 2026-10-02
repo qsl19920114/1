@@ -1,0 +1,13 @@
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  6%] Built target qvw_domain_autogen
+[ 33%] Built target qvw_domain
+[ 33%] Built target qvw_services_autogen_timestamp_deps
+[ 40%] Automatic MOC for target qvw_services
+[ 40%] Built target qvw_services_autogen
+[ 46%] Building CXX object app/CMakeFiles/qvw_services.dir/services/SourceEditGuard.cpp.o
+[ 53%] Linking CXX static library libqvw_services.a
+[ 73%] Built target qvw_services
+[ 73%] Built target source_edit_guard_test_autogen_timestamp_deps
+[ 80%] Built target source_edit_guard_test_autogen
+[ 86%] Linking CXX executable source_edit_guard_test
+[100%] Built target source_edit_guard_test

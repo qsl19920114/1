@@ -4,6 +4,9 @@
 #include <QApplication>
 #include <QClipboard>
 #include <QInputDialog>
+#include <QComboBox>
+#include <QTimer>
+#include <QTextDocument>
 #include <QDialog>
 #include <QDialogButtonBox>
 #include <QFileDialog>
@@ -56,6 +59,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     });
     m_importAction->setEnabled(false);
     bar->addSeparator();
+    m_undoAction=bar->addAction(QStringLiteral("撤销"),this,&MainWindow::undoRequested);m_undoAction->setShortcut(QKeySequence::Undo);
+    m_redoAction=bar->addAction(QStringLiteral("重做"),this,&MainWindow::redoRequested);m_redoAction->setShortcut(QKeySequence::Redo);
+    m_sourceAction=bar->addAction(QStringLiteral("编辑源码…"),this,&MainWindow::sourceDialog);
+    m_undoAction->setEnabled(false);m_redoAction->setEnabled(false);m_sourceAction->setEnabled(false);
+    bar->addSeparator();
     m_openAction = bar->addAction(QStringLiteral("打开 Run…"), this, &MainWindow::openProjectDialog);
     m_refreshAction = bar->addAction(QStringLiteral("刷新会话"), this, &MainWindow::refreshRequested);
     m_refreshAction->setShortcut(QKeySequence::Refresh);
@@ -106,9 +114,12 @@ QWidget *MainWindow::buildProjectPanel() {
     m_assetTree->header()->setSectionResizeMode(0,QHeaderView::Stretch);
     connect(m_assetTree,&QTreeWidget::itemDoubleClicked,this,[this](QTreeWidgetItem *item) {
         QApplication::clipboard()->setText(item->data(0,Qt::UserRole).toString());
-        statusBar()->showMessage(QStringLiteral("已复制图片路径。在 Studio 的图片路径字段中设置后才会加入画面。"));
+        statusBar()->showMessage(QStringLiteral("已复制图片路径；也可点击“应用到选中组件的图片”。"));
     });
     layout->addWidget(m_assetTree,1);
+    m_applyAssetButton=new QPushButton(QStringLiteral("应用到选中组件的图片"));m_applyAssetButton->setEnabled(false);
+    connect(m_applyAssetButton,&QPushButton::clicked,this,&MainWindow::applySelectedAsset);
+    layout->addWidget(m_applyAssetButton);
     return withTitle(QStringLiteral("工程与素材"),body);
 }
 QWidget *MainWindow::buildPreviewPanel() {
@@ -128,13 +139,15 @@ QWidget *MainWindow::buildInspectorPanel() {
     m_inspectorTable->header()->setSectionResizeMode(2, QHeaderView::Stretch);
     m_inspectorTable->setColumnWidth(1, 55); m_inspectorTable->setColumnWidth(3, 65);
     m_inspectorTable->setRootIsDecorated(false);
-    return withTitle(QStringLiteral("原生属性 · 只读查看"), m_inspectorTable);
+    return withTitle(QStringLiteral("原生属性"), m_inspectorTable);
 }
 QWidget *MainWindow::buildTaskPanel() {
     m_taskLog = new QPlainTextEdit; m_taskLog->setReadOnly(true); m_taskLog->setMaximumBlockCount(2000);
     return withTitle(QStringLiteral("任务与日志"), m_taskLog);
 }
 void MainWindow::showSnapshot(const domain::Snapshot &snapshot) {
+    QString selectedId;
+    if(const auto *item=m_componentTree->currentItem())selectedId=item->toolTip(0);
     m_snapshot = snapshot; m_componentTree->clear(); m_inspectorTable->clear();
     if (!snapshot.isLoaded()) {
         m_spaceSummary->setText(QStringLiteral("画幅：未加载"));
@@ -153,11 +166,12 @@ void MainWindow::showSnapshot(const domain::Snapshot &snapshot) {
             item->setToolTip(0, clip.id);
             item->setText(1, QStringLiteral("%1–%2").arg(clip.startFrame).arg(clip.endFrameExclusive));
             item->setData(0, Qt::UserRole, t); item->setData(0, Qt::UserRole + 1, c);
-            if (!first) first = item;
+            if (!first || clip.id==selectedId) first = item;
         }
     }
+    m_sourceAction->setEnabled(m_editorReady&&!m_editorBusy&&!snapshot.sourceFiles.isEmpty());
     m_componentTree->expandAll(); if (first) m_componentTree->setCurrentItem(first);
-    statusBar()->showMessage(QStringLiteral("revision %1 · 后端可写字段 %2 个 · 原生面板只读，网页修改后请刷新会话")
+    statusBar()->showMessage(QStringLiteral("revision %1 · 可写字段 %2 个 · 修改经后端确认后记录历史")
         .arg(snapshot.revision).arg(snapshot.writableFieldCount()));
 }
 void MainWindow::showSelectedInspector() {
@@ -170,10 +184,13 @@ void MainWindow::showSelectedInspector() {
         auto *row = new QTreeWidgetItem(m_inspectorTable);
         row->setText(0, field.label.isEmpty() ? field.id : field.label);
         row->setText(1, domain::controlKindLabel(field.control));
-        row->setText(3, field.isEditable() ? QStringLiteral("可写¹") : QStringLiteral("只读"));
+        row->setText(3, field.isEditable() ? QStringLiteral("可编辑") : QStringLiteral("只读"));
         row->setToolTip(3, field.disabledReason.isEmpty()
-            ? QStringLiteral("¹后端支持写入；本阶段原生面板仅展示，不提交修改。") : field.disabledReason);
-        m_inspectorTable->setItemWidget(row, 2, createInspectorControl(field, m_inspectorTable));
+            ? QStringLiteral("确认成功后才记录历史；外部修改会要求刷新。") : field.disabledReason);
+        const auto entity=m_snapshot.tracks[t].clips[c].id;
+        std::function<void(const QVariant &)> commit;
+        if(m_editorReady)commit=[this,entity,id=field.id](const QVariant &value){QTimer::singleShot(0,this,[this,entity,id,value]{emit editRequested(entity,id,value);});};
+        m_inspectorTable->setItemWidget(row, 2, createInspectorControl(field, m_inspectorTable,commit));
     }
 }
 void MainWindow::showPreview(const QUrl &url) {
@@ -202,6 +219,46 @@ void MainWindow::showError(const QString &error) {
     showSnapshot({}); appendLog(QStringLiteral("错误：%1").arg(error)); statusBar()->showMessage(error);
 }
 void MainWindow::appendLog(const QString &line) { m_taskLog->appendPlainText(line); }
+void MainWindow::setEditorState(bool ready,bool busy,bool canUndo,bool canRedo) {
+    const bool readinessChanged=m_editorReady!=ready;
+    m_editorReady=ready;m_editorBusy=busy;
+    m_inspectorTable->setEnabled(ready&&!busy);
+    m_undoAction->setEnabled(ready&&!busy&&canUndo);m_redoAction->setEnabled(ready&&!busy&&canRedo);
+    m_sourceAction->setEnabled(ready&&!busy&&!m_snapshot.sourceFiles.isEmpty());
+    m_applyAssetButton->setEnabled(ready&&!busy);
+    m_refreshAction->setEnabled(!busy&&!m_previewUrl.isEmpty());
+    if(readinessChanged)showSelectedInspector();
+    if(busy)statusBar()->showMessage(QStringLiteral("正在校验并提交修改…"));
+}
+void MainWindow::applySelectedAsset() {
+    if(!m_editorReady||m_editorBusy)return;
+    const auto *asset=m_assetTree->currentItem(),*item=m_componentTree->currentItem();
+    if(!asset||!item||!item->data(0,Qt::UserRole).isValid()) {appendLog(QStringLiteral("请先选择图片素材和组件。"));return;}
+    const int t=item->data(0,Qt::UserRole).toInt(),c=item->data(0,Qt::UserRole+1).toInt();
+    if(t<0||t>=m_snapshot.tracks.size()||c<0||c>=m_snapshot.tracks[t].clips.size())return;
+    const auto &clip=m_snapshot.tracks[t].clips[c];
+    for(const auto &field:clip.inspector)if(field.binding=="image"&&field.isEditable()) {
+        emit editRequested(clip.id,field.id,asset->data(0,Qt::UserRole));return;
+    }
+    appendLog(QStringLiteral("选中组件没有可写的图片字段。"));
+}
+void MainWindow::sourceDialog() {
+    if(!m_editorReady||m_editorBusy||m_snapshot.sourceFiles.isEmpty())return;
+    const auto files=m_snapshot.sourceFiles;
+    QDialog dialog(this);dialog.setWindowTitle(QStringLiteral("编辑当前工程源码"));dialog.resize(850,600);
+    auto *layout=new QVBoxLayout(&dialog);auto *paths=new QComboBox;paths->addItems(files.keys());
+    paths->setCurrentText(m_snapshot.sourcePath);auto *text=new QPlainTextEdit;
+    text->setPlainText(files.value(paths->currentText()));
+    layout->addWidget(new QLabel(QStringLiteral("提交后检查编译；失败时尝试恢复本次预像，检测到外部改动则停止恢复。")));
+    layout->addWidget(paths);layout->addWidget(text,1);
+    connect(text->document(),&QTextDocument::modificationChanged,paths,[paths](bool modified){paths->setEnabled(!modified);});
+    paths->setToolTip(QStringLiteral("每次提交一个文件；编辑后可取消本次操作再选择其他文件。"));
+    connect(paths,&QComboBox::currentTextChanged,&dialog,[&](const QString &path){text->setPlainText(files.value(path));});
+    auto *buttons=new QDialogButtonBox(QDialogButtonBox::Save|QDialogButtonBox::Cancel);layout->addWidget(buttons);
+    connect(buttons,&QDialogButtonBox::accepted,&dialog,&QDialog::accept);connect(buttons,&QDialogButtonBox::rejected,&dialog,&QDialog::reject);
+    if(dialog.exec()==QDialog::Accepted&&text->toPlainText()!=files.value(paths->currentText()))
+        emit sourceEditRequested(paths->currentText(),text->toPlainText());
+}
 void MainWindow::showDocument(const domain::Project &project) {
     setWindowTitle(QStringLiteral("%1 — Qt 视频工作台").arg(project.name));
     m_documentTitle->setText(QStringLiteral("%1\n模板：%2").arg(project.name,project.templateId));
@@ -210,7 +267,7 @@ void MainWindow::showDocument(const domain::Project &project) {
         auto *item = new QTreeWidgetItem(m_assetTree);
         item->setText(0,asset.originalName);
         item->setText(1,QStringLiteral("%1×%2").arg(asset.width).arg(asset.height));
-        item->setToolTip(0,QStringLiteral("已导入；绑定图片路径后才应用到画面。\n%1").arg(asset.path));
+        item->setToolTip(0,QStringLiteral("已导入；点击应用到选中组件后才修改画面。\n%1").arg(asset.path));
         item->setData(0,Qt::UserRole,"./"+asset.path);
     }
     m_saveAction->setEnabled(true); m_importAction->setEnabled(true);

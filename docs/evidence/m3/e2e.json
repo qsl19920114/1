@@ -1,0 +1,15 @@
+{
+    "compiledPreviewContainsChanges": true,
+    "externalConflictProtected": true,
+    "imageBytesMatch": true,
+    "mutation422Rollback": true,
+    "numericLiteralRoundTrip": true,
+    "ownedProcessStopped": true,
+    "protectedSourceAndRollback": true,
+    "reopenedConsistent": true,
+    "screenshots": false,
+    "staleRevision409": true,
+    "titleColorImageNativeWrites": true,
+    "undoRedo": true,
+    "verdict": "PASS"
+}

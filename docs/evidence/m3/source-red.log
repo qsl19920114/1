@@ -1,0 +1,12 @@
+********* Start testing of SourceEditGuardTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : SourceEditGuardTest::initTestCase()
+FAIL!  : SourceEditGuardTest::restoresOnlyItsOwnFailedWrite() 'guard.arm(tmp.path(),snapshot,"main.svml","broken",&error)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/SourceEditGuardTest.cpp(14)]
+FAIL!  : SourceEditGuardTest::protectsExternalChangesAndWhitelist() 'guard.arm(tmp.path(),snapshot,"main.svml","broken",&error)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/SourceEditGuardTest.cpp(25)]
+FAIL!  : SourceEditGuardTest::detectsReplacedSymlinkBeforeRestore() 'guard.arm(tmp.path(),snapshot,"main.svml","broken",&error)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/SourceEditGuardTest.cpp(34)]
+PASS   : SourceEditGuardTest::cleanupTestCase()
+Totals: 2 passed, 3 failed, 0 skipped, 0 blacklisted, 9ms
+********* Finished testing of SourceEditGuardTest *********

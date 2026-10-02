@@ -1,0 +1,13 @@
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  6%] Built target qvw_domain_autogen
+[ 31%] Built target qvw_domain
+[ 31%] Built target qvw_backend_autogen_timestamp_deps
+[ 37%] Automatic MOC for target qvw_backend
+[ 37%] Built target qvw_backend_autogen
+[ 43%] Building CXX object app/CMakeFiles/qvw_backend.dir/backend/hypit/StudioClient.cpp.o
+[ 50%] Linking CXX static library libqvw_backend.a
+[ 75%] Built target qvw_backend
+[ 75%] Built target studio_client_test_autogen_timestamp_deps
+[ 81%] Built target studio_client_test_autogen
+[ 87%] Linking CXX executable studio_client_test
+[100%] Built target studio_client_test

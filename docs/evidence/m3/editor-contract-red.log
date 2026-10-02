@@ -1,0 +1,21 @@
+Captured from the pre-fix test run (tool session 50819, exit code 3).
+Command: ./build/tests/editor_controller_test typedWireValuesFromLiteralSnapshots sourceDependencyClosureMayChange
+
+********* Start testing of EditorControllerTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : EditorControllerTest::initTestCase()
+FAIL!  : EditorControllerTest::typedWireValuesFromLiteralSnapshots(number) Compared values are not the same
+   Actual   (ok.size()): 0
+   Expected (1)        : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(87)]
+FAIL!  : EditorControllerTest::typedWireValuesFromLiteralSnapshots(boolean) Compared values are not the same
+   Actual   (ok.size()): 0
+   Expected (1)        : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(87)]
+FAIL!  : EditorControllerTest::sourceDependencyClosureMayChange() Compared values are not the same
+   Actual   (ok.size()): 0
+   Expected (1)        : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(94)]
+PASS   : EditorControllerTest::cleanupTestCase()
+Totals: 2 passed, 3 failed, 0 skipped, 0 blacklisted, 9298ms
+********* Finished testing of EditorControllerTest *********

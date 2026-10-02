@@ -5,6 +5,7 @@
 #include <QJsonObject>
 #include <QJsonParseError>
 #include <cmath>
+#include <QCryptographicHash>
 #include <limits>
 
 namespace qvw::backend::hypit {
@@ -29,6 +30,7 @@ QString stringifyValue(const QJsonValue &value) {
 InspectorField mapField(const QJsonObject &raw) {
     InspectorField field;
     field.id = raw.value(QStringLiteral("id")).toString();
+    field.binding = raw.value("binding").toString();
     field.label = raw.value(QStringLiteral("label")).toString();
     if (field.label.isEmpty()) field.label = raw.value(QStringLiteral("binding")).toString();
     field.control = domain::controlKindFromKey(raw.value(QStringLiteral("control")).toString());
@@ -114,6 +116,17 @@ MapResult mapSessionPayload(const QByteArray &payload) {
     snapshot.revision = root.value(QStringLiteral("revision")).toInt();
     snapshot.sourcePath = root.value(QStringLiteral("source")).toObject()
                               .value(QStringLiteral("path")).toString();
+    const auto source = root.value("source").toObject();
+    for (const auto &entry : source.value("files").toArray()) {
+        const auto file=entry.toObject();
+        if (file.value("path").isString() && file.value("text").isString())
+            snapshot.sourceFiles.insert(file.value("path").toString(),file.value("text").toString());
+    }
+    if (!snapshot.sourceFiles.isEmpty()) {
+        QJsonObject texts;
+        for (auto it=snapshot.sourceFiles.cbegin();it!=snapshot.sourceFiles.cend();++it) texts.insert(it.key(),it.value());
+        snapshot.sourceFingerprint=QCryptographicHash::hash(QJsonDocument(texts).toJson(QJsonDocument::Compact),QCryptographicHash::Sha256);
+    }
     snapshot.space = mapSpace(root.value(QStringLiteral("space")).toObject());
 
     for (const QJsonValue &trackValue : root.value(QStringLiteral("tracks")).toArray()) {

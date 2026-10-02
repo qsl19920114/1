@@ -35,7 +35,14 @@
     },
     "G3": {
       "milestone": "M3",
-      "verdict": "NOT_REACHED"
+      "verdict": "PASS",
+      "definition": "原生编辑真实编译画面；409/422及失败不误报；关闭重开一致",
+      "evidence": [
+        "docs/evidence/m3/ctest-final.log",
+        "docs/evidence/m3/e2e.json",
+        "docs/evidence/m3/e2e.log"
+      ],
+      "reason": "生产编辑控制器完成标题/颜色/图片/数值写入、异步历史、Source保护恢复与重开；真实过期请求返回409，非法帧数422回滚。"
     },
     "G4": {
       "milestone": "M4",
@@ -354,59 +361,79 @@
       "id": "T015",
       "milestone": "M3",
       "title": "Qt 原生参数编辑与串行版本安全 mutation",
-      "status": "pending",
+      "status": "done",
       "dependsOn": [
         "T014"
       ],
       "acceptance": [
         "仅对快照真实edit字段写入，支持基础五类控件",
         "写前后GET核对revision和值；关闭会话取消旧回调"
+      ],
+      "evidence": [
+        "docs/evidence/m3/ctest-final.log",
+        "docs/evidence/m3/e2e.json",
+        "docs/evidence/m3/README.md"
       ]
     },
     {
       "id": "T016",
       "milestone": "M3",
       "title": "409/422 与不确定写入的恢复",
-      "status": "pending",
+      "status": "done",
       "dependsOn": [
         "T015"
       ],
       "acceptance": [
         "409刷新并建立新历史起点；不自动重放旧写入",
         "422读取回滚后的快照，网络错误不误报成功"
+      ],
+      "evidence": [
+        "docs/evidence/m3/ctest-final.log",
+        "docs/evidence/m3/e2e.json",
+        "docs/evidence/m3/README.md"
       ]
     },
     {
       "id": "T017",
       "milestone": "M3",
       "title": "异步撤销/重做和图片slot绑定",
-      "status": "pending",
+      "status": "done",
       "dependsOn": [
         "T016"
       ],
       "acceptance": [
         "后端确认后才推进历史指针",
         "外部改动清空历史；导入素材经同一编辑链绑定"
+      ],
+      "evidence": [
+        "docs/evidence/m3/ctest-final.log",
+        "docs/evidence/m3/e2e.json",
+        "docs/evidence/m3/README.md"
       ]
     },
     {
       "id": "T018",
       "milestone": "M3",
       "title": "受保护的单文件 Source 编辑",
-      "status": "pending",
+      "status": "done",
       "dependsOn": [
         "T017"
       ],
       "acceptance": [
         "保存预像、白名单相对路径与版本校验",
         "编译失败仅在源内容仍为本次写入时恢复预像，禁止覆盖外部改动"
+      ],
+      "evidence": [
+        "docs/evidence/m3/ctest-final.log",
+        "docs/evidence/m3/e2e.json",
+        "docs/evidence/m3/README.md"
       ]
     },
     {
       "id": "T019",
       "milestone": "M3",
       "title": "原生编辑真实集成与重开一致性",
-      "status": "pending",
+      "status": "done",
       "dependsOn": [
         "T018"
       ],
@@ -414,7 +441,78 @@
         "真实修改标题/颜色/图片，撤销重做，错误恢复",
         "重新打开读取一致；G3不依赖截图"
       ],
-      "gate": "G3"
+      "gate": "G3",
+      "evidence": [
+        "docs/evidence/m3/ctest-final.log",
+        "docs/evidence/m3/e2e.json",
+        "docs/evidence/m3/README.md"
+      ]
+    },
+    {
+      "id": "T020",
+      "milestone": "M4",
+      "title": "异步 plan 与本地 Runtime 构建前校验",
+      "status": "pending",
+      "dependsOn": [
+        "T019"
+      ],
+      "acceptance": [
+        "固定版本CLI参数来自源码/help与实测",
+        "展示计划与诊断，拒绝未授权付费Provider"
+      ]
+    },
+    {
+      "id": "T021",
+      "milestone": "M4",
+      "title": "构建提交、精确 Build ID 与状态观察",
+      "status": "pending",
+      "dependsOn": [
+        "T020"
+      ],
+      "acceptance": [
+        "区分CLI退出与Build完成，异步更新状态",
+        "记录源版本和Build ID，旧输出不代表最新源码"
+      ]
+    },
+    {
+      "id": "T022",
+      "milestone": "M4",
+      "title": "取消与任务记录恢复观察",
+      "status": "pending",
+      "dependsOn": [
+        "T021"
+      ],
+      "acceptance": [
+        "仅取消指定Build，不误杀共享Worker",
+        "保存任务记录并支持重开后观察已有Build"
+      ]
+    },
+    {
+      "id": "T023",
+      "milestone": "M4",
+      "title": "按精确 Output 获取成片与媒体校验",
+      "status": "pending",
+      "dependsOn": [
+        "T022"
+      ],
+      "acceptance": [
+        "仅获取选定Build的Output，失败不显示导出成功",
+        "ffprobe与全片解码验证时长/分辨率/编码"
+      ]
+    },
+    {
+      "id": "T024",
+      "milestone": "M4",
+      "title": "原创工程 P0 创作与导出真实闭环",
+      "status": "pending",
+      "dependsOn": [
+        "T023"
+      ],
+      "acceptance": [
+        "新建、导入、原生编辑、构建、获取并验证真实MP4",
+        "失败与取消场景可复现；不截图验收"
+      ],
+      "gate": "G4"
     }
   ]
 }

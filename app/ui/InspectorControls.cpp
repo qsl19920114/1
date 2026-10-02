@@ -5,25 +5,42 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QColor>
+#include <QColorDialog>
+#include <memory>
 #include <limits>
 
 namespace qvw::ui {
-QWidget *createInspectorControl(const domain::InspectorField &field, QWidget *parent) {
+QWidget *createInspectorControl(const domain::InspectorField &field, QWidget *parent, std::function<void(const QVariant &)> onCommit) {
+    bool editable = field.isEditable() && bool(onCommit);
+    const auto last = std::make_shared<QVariant>(field.rawValue);
+    const auto commit = [onCommit,last](const QVariant &value) {
+        if (!onCommit || *last==value) return;
+        *last=value; onCommit(value);
+    };
     QWidget *control = nullptr;
     switch (field.control) {
     case domain::ControlKind::Boolean: {
         auto *box = new QCheckBox(parent);
         box->setChecked(field.value == "true");
+        if (editable) QObject::connect(box,&QCheckBox::toggled,box,[commit](bool value) {
+            commit(QVariant(value));
+        });
         control = box; break;
     }
     case domain::ControlKind::Number: {
-        bool numeric = false; const double value = field.value.toDouble(&numeric);
+        bool numeric = false; const double value = field.rawValue.isValid() ? field.rawValue.toDouble(&numeric) : field.value.toDouble(&numeric);
         if (numeric) {
             auto *spin = new QDoubleSpinBox(parent);
             spin->setRange(-std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
-            spin->setDecimals(6); spin->setValue(value); spin->setReadOnly(true);
-            spin->setButtonSymbols(QAbstractSpinBox::NoButtons); control = spin;
-        }
+            spin->setDecimals(12); spin->setValue(value); spin->setReadOnly(!editable);
+            if (!editable) spin->setButtonSymbols(QAbstractSpinBox::NoButtons);
+            else QObject::connect(spin,&QDoubleSpinBox::editingFinished,spin,[commit,spin,lastDisplayed=std::make_shared<double>(spin->value())] {
+                if(spin->value()==*lastDisplayed)return;
+                *lastDisplayed=spin->value();
+                commit(QVariant(spin->value()));
+            });
+            control = spin;
+        } else editable=false;
         break;
     }
     case domain::ControlKind::Select: {
@@ -31,25 +48,31 @@ QWidget *createInspectorControl(const domain::InspectorField &field, QWidget *pa
         for (const auto &option : field.options) combo->addItem(option.label, option.value);
         int selected = combo->findData(field.rawValue);
         if (selected < 0) { combo->addItem(field.value, field.rawValue); selected = combo->count() - 1; }
-        combo->setCurrentIndex(selected); control = combo; break;
+        combo->setCurrentIndex(selected);
+        if (editable) QObject::connect(combo,&QComboBox::activated,combo,[commit,combo](int index){commit(combo->itemData(index));});
+        control = combo; break;
     }
     case domain::ControlKind::Color: {
         auto *button = new QPushButton(field.value, parent);
         const QColor color(field.value);
         if (color.isValid()) button->setStyleSheet(QStringLiteral("border-left: 18px solid %1; padding: 4px;").arg(color.name()));
+        if (editable) QObject::connect(button,&QPushButton::clicked,button,[commit,button] {
+            const auto selected=QColorDialog::getColor(QColor(button->text()),button,QStringLiteral("选择主题色"));
+            if(selected.isValid()){button->setText(selected.name());commit(selected.name());}
+        });
         control = button; break;
     }
     default: break;
     }
     if (!control) {
         auto *line = new QLineEdit(field.value, parent);
-        line->setReadOnly(true); control = line;
+        line->setReadOnly(!editable);
+        if (editable) QObject::connect(line,&QLineEdit::editingFinished,line,[commit,line]{commit(line->text());});
+        control = line;
     }
-    // M1 is a read-only connection. Do not let edits appear saved before the
-    // version-safe EditorController exists (M3).
-    control->setEnabled(false);
+    control->setEnabled(editable);
     control->setToolTip(field.disabledReason.isEmpty()
-        ? QStringLiteral("当前为只读查看，原生属性写回尚未启用。") : field.disabledReason);
+        ? (editable ? QStringLiteral("修改后提交，后端确认生效后记录历史。") : QStringLiteral("当前字段或会话不支持编辑。")) : field.disabledReason);
     return control;
 }
 }

@@ -34,6 +34,24 @@ public:
 class StudioClientTest : public QObject {
     Q_OBJECT
 private slots:
+    void missingSourceFilesDoesNotGrantWriteWhitelist() {
+        const auto mapped=qvw::backend::hypit::mapSessionPayload(R"({"revision":1,"source":{"path":"main.svml","text":"hello"},"space":{},"tracks":[]})");
+        QVERIFY(mapped.ok());QVERIFY(mapped.snapshot.sourceFiles.isEmpty());QVERIFY(mapped.snapshot.sourceFingerprint.isEmpty());
+    }
+    void sourceProjectionTracksContentAndBindings() {
+        auto root=QJsonDocument::fromJson(R"({"revision":1,"source":{"path":"main.svml","text":"initial","files":[{"path":"main.svml","text":"initial"}]},"space":{},"tracks":[{"clips":[{"id":"clip","inspector":[{"id":"field","binding":"title","control":"text","value":"hello","edit":{}}]}]}]})").object();
+        auto mapped=qvw::backend::hypit::mapSessionPayload(QJsonDocument(root).toJson());
+        QVERIFY(mapped.ok()); QCOMPARE(mapped.snapshot.sourceFiles.value("main.svml"),QString("initial"));
+        QVERIFY(!mapped.snapshot.sourceFingerprint.isEmpty());
+        QCOMPARE(mapped.snapshot.tracks[0].clips[0].inspector[0].binding,QString("title"));
+        root["revision"]=2;
+        auto same=qvw::backend::hypit::mapSessionPayload(QJsonDocument(root).toJson());
+        QCOMPARE(same.snapshot.sourceFingerprint,mapped.snapshot.sourceFingerprint);
+        auto source=root["source"].toObject(); source["text"]="changed";
+        source["files"]=QJsonArray{QJsonObject{{"path","main.svml"},{"text","changed"}}};root["source"]=source;
+        auto changed=qvw::backend::hypit::mapSessionPayload(QJsonDocument(root).toJson());
+        QVERIFY(changed.snapshot.sourceFingerprint!=mapped.snapshot.sourceFingerprint);
+    }
     void bareSnapshotAndNoOriginHeader() {
         HttpFixture http; QVERIFY(http.listen());
         qvw::backend::hypit::StudioClient client;
@@ -45,6 +63,13 @@ private slots:
         QCOMPARE(success[0][0].value<qvw::domain::Snapshot>().revision, 2);
         QVERIFY(http.request.startsWith("GET /__studio/session "));
         QVERIFY(!http.request.toLower().contains("\r\norigin:"));
+    }
+    void compileFailureCarriesRevisionButNetworkFailureDoesNot() {
+        HttpFixture http;http.status=500;http.body=R"({"revision":9,"error":"bad source"})";QVERIFY(http.listen());
+        qvw::backend::hypit::StudioClient client;QSignalSpy details(&client,&qvw::backend::hypit::StudioClient::requestFailed);
+        client.fetchSession(http.url());QTRY_COMPARE(details.size(),1);QCOMPARE(details[0][0].toInt(),500);QCOMPARE(details[0][1].toInt(),9);
+        HttpFixture stalled;stalled.stall=true;QVERIFY(stalled.listen());client.setTimeoutMs(50);client.fetchSession(stalled.url());
+        QTRY_COMPARE(details.size(),2);QCOMPARE(details[1][0].toInt(),0);QCOMPARE(details[1][1].toInt(),-1);
     }
     void serverErrorIsNotSuccess() {
         HttpFixture http; http.status = 500; http.body = R"({"error":"source compile failed"})";

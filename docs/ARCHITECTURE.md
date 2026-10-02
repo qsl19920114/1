@@ -1,6 +1,6 @@
 # 当前架构与工程格式
 
-UI 使用领域 DTO；main 仅连接信号。DocumentController 管理持久化工程和素材，ProjectController 管理异步 Hypit 自检、Studio 生命周期和 Snapshot。UI 不解析 Hypit 内部 JSON。
+UI 使用领域 DTO；main 仅连接信号。DocumentController 管理持久化工程和素材，ProjectController 管理异步 Hypit 自检、Studio 生命周期和 Snapshot，EditorController 管理原生编辑与历史。UI 不解析 Hypit 内部 JSON。
 
 依赖由 CMake targets 约束：UI → Domain，Controllers → Services / Backend / Infrastructure；Services → Domain + Qt Core/Gui；Backend → Domain + Network。
 
@@ -16,4 +16,10 @@ UI 使用领域 DTO；main 仅连接信号。DocumentController 管理持久化�
 
 启动器与外部 Hypit 从版本锁解析。模板的 `@hypit/` imports 由 Distribution resolver 解析；工程内不含上游仓库或机器绝对依赖路径。
 
-Studio Snapshot 只是编译结果。M2 新建工程后预览与原生只读属性来自真实 Snapshot；图片导入与场景绑定是两个动作。M3 将通过统一 EditorController 实现版本安全写回和历史。M4 再实现 build/status/get 与可解码验证；此前不把 plan 或 HTTP 成功显示为导出成功。
+Studio Snapshot 是编译结果。图片导入与场景绑定是两个动作，绑定与原生属性、撤销/重做统一经过 EditorController。原生表单只启用真实 edit 声明与支持的控件；number/boolean 按接口要求发 JSON 数字/布尔值，快照中的字符串字面量只在边界转换。
+
+EditorController 串行执行预检 GET、写入、确认 GET。预检同时核对 revision 与源码指纹；只在写后 revision 和目标值吻合时推进历史。409 刷新并重置历史；422 核对服务端回滚后保留有效历史；超时或未知结果不重放写入。关闭或切换工程取消旧代次请求，防止回调污染新工程。
+
+单文件 Source 编辑只允许 `source.files` 白名单。SourceEditGuard 保存磁盘预像并校验工程路径；PUT 202 后，只有相同 revision 的明确编译失败才恢复预像。恢复前再次检查文件仍为本次写入，外部变化不覆盖。该内容检查不是跨进程文件锁；多编辑器竞态仍由版本与回读检测处理。合法增删 import 可以改变编译依赖文件集合。
+
+M4 再实现 build/status/get 与可解码验证；此前不把 plan 或 HTTP 成功显示为导出成功。

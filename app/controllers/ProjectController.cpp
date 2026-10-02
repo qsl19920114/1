@@ -74,7 +74,7 @@ void ProjectController::openProject(const QString &workspace, const QString &run
         emit failed(QStringLiteral("工程目录、Run 文件或端口无效。")); return;
     }
     closeProject();
-    m_open = true;
+    m_open = true; m_workspace=QFileInfo(workspace).absoluteFilePath();
     report(QStringLiteral("正在打开工程：%1").arg(QFileInfo(run).absoluteFilePath()));
     if (!m_studio.start(m_config.launcherPath, QFileInfo(workspace).absoluteFilePath(),
                         QFileInfo(run).absoluteFilePath(), QFileInfo(runtime).absoluteFilePath(), port)) m_open = false;
@@ -90,6 +90,6 @@ void ProjectController::refresh() {
     if (m_open && !m_baseUrl.isEmpty()) m_client.fetchSession(m_baseUrl);
 }
 void ProjectController::closeProject() {
-    m_open = false; m_baseUrl = QUrl(); m_client.cancel(); m_studio.stop(); emit projectClosed();
+    m_open = false; m_workspace.clear(); m_baseUrl = QUrl(); m_client.cancel(); m_studio.stop(); emit projectClosed();
 }
 }

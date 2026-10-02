@@ -30,6 +30,7 @@ struct InspectorOption { QString label; QVariant value; };
 struct InspectorField {
     QString id;
     QString label;
+    QString binding;
     ControlKind control = ControlKind::Unsupported;
     QString value;
     QVariant rawValue;

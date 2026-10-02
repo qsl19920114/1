@@ -5,6 +5,7 @@
 #include <QString>
 #include <QVector>
 #include <QMetaType>
+#include <QMap>
 
 namespace qvw::domain {
 
@@ -40,6 +41,8 @@ struct CanvasSpace {
 struct Snapshot {
     int revision = -1;
     QString sourcePath;
+    QMap<QString, QString> sourceFiles;
+    QByteArray sourceFingerprint;
     CanvasSpace space;
     QVector<Track> tracks;
 

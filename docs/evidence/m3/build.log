@@ -1,0 +1,75 @@
+-- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
+-- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
+-- Configuring done (1.5s)
+-- Generating done (0.5s)
+-- Build files have been written to: /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  1%] Built target qvw_infra_autogen_timestamp_deps
+[  1%] Built target qt_video_workbench_qmlimportscan
+[  2%] Automatic MOC for target qvw_domain
+[  3%] Automatic MOC for target qvw_infra
+[  3%] Built target qvw_domain_autogen
+[  3%] Built target qvw_infra_autogen
+[  7%] Built target qvw_domain
+[ 13%] Built target qvw_infra
+[ 13%] Built target qvw_backend_autogen_timestamp_deps
+[ 13%] Built target qvw_ui_autogen_timestamp_deps
+[ 13%] Built target qvw_services_autogen_timestamp_deps
+[ 13%] Built target infrastructure_test_autogen_timestamp_deps
+[ 13%] Built target hypit_probe_test_autogen_timestamp_deps
+[ 14%] Automatic MOC for target qvw_backend
+[ 15%] Automatic MOC for target qvw_ui
+[ 16%] Automatic MOC for target qvw_services
+[ 17%] Built target infrastructure_test_autogen
+[ 17%] Built target qvw_ui_autogen
+[ 17%] Built target qvw_backend_autogen
+[ 17%] Built target qvw_services_autogen
+[ 18%] Built target hypit_probe_test_autogen
+[ 21%] Built target infrastructure_test
+[ 27%] Built target qvw_services
+[ 31%] Built target qvw_ui
+[ 38%] Built target qvw_backend
+[ 41%] Built target hypit_probe_test
+[ 41%] Built target asset_service_test_autogen_timestamp_deps
+[ 41%] Built target project_store_test_autogen_timestamp_deps
+[ 41%] Built target source_edit_guard_test_autogen_timestamp_deps
+[ 41%] Built target studio_writer_test_autogen_timestamp_deps
+[ 41%] Built target studio_process_test_autogen_timestamp_deps
+[ 41%] Built target qvw_controllers_autogen_timestamp_deps
+[ 41%] Built target studio_client_test_autogen_timestamp_deps
+[ 41%] Built target inspector_controls_test_autogen_timestamp_deps
+[ 43%] Built target asset_service_test_autogen
+[ 43%] Built target project_store_test_autogen
+[ 44%] Built target source_edit_guard_test_autogen
+[ 45%] Built target studio_writer_test_autogen
+[ 47%] Built target studio_process_test_autogen
+[ 47%] Automatic MOC for target qvw_controllers
+[ 48%] Built target studio_client_test_autogen
+[ 50%] Built target inspector_controls_test_autogen
+[ 50%] Built target qvw_controllers_autogen
+[ 53%] Built target project_store_test
+[ 56%] Built target asset_service_test
+[ 59%] Built target source_edit_guard_test
+[ 63%] Built target studio_writer_test
+[ 66%] Built target studio_client_test
+[ 71%] Built target studio_process_test
+[ 75%] Built target qvw_controllers
+[ 78%] Built target inspector_controls_test
+[ 78%] Built target document_controller_test_autogen_timestamp_deps
+[ 78%] Built target qt_video_workbench_autogen_timestamp_deps
+[ 78%] Built target editor_controller_test_autogen_timestamp_deps
+[ 78%] Built target project_e2e_test_autogen_timestamp_deps
+[ 78%] Built target editor_e2e_test_autogen_timestamp_deps
+[ 79%] Automatic MOC for target qt_video_workbench
+[ 80%] Built target project_e2e_test_autogen
+[ 81%] Built target document_controller_test_autogen
+[ 82%] Built target editor_controller_test_autogen
+[ 82%] Built target qt_video_workbench_autogen
+[ 83%] Built target editor_e2e_test_autogen
+[ 86%] Built target document_controller_test
+[ 90%] Built target project_e2e_test
+[ 93%] Built target editor_controller_test
+[ 94%] Building CXX object app/CMakeFiles/qt_video_workbench.dir/main.cpp.o
+[ 97%] Built target editor_e2e_test
+[ 98%] Linking CXX executable qt-video-workbench
+[100%] Built target qt_video_workbench

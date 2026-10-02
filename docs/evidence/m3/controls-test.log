@@ -1,0 +1,18 @@
+********* Start testing of InspectorControlsTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : InspectorControlsTest::initTestCase()
+QWARN  : InspectorControlsTest::editableTextCommitsOnlyChanges() qt.qpa.fonts: Populating font family aliases took 31 ms. Replace uses of missing font family "Sans Serif" with one that exists to avoid this cost. 
+PASS   : InspectorControlsTest::editableTextCommitsOnlyChanges()
+PASS   : InspectorControlsTest::numberLiteralUsesNumericWireValue()
+PASS   : InspectorControlsTest::unchangedRoundedNumberDoesNotWrite()
+PASS   : InspectorControlsTest::booleanAndSelectPreserveValues()
+PASS   : InspectorControlsTest::undeclaredAndUnsupportedStayDisabledWithHandler()
+PASS   : InspectorControlsTest::mapping(text)
+PASS   : InspectorControlsTest::mapping(number)
+PASS   : InspectorControlsTest::mapping(boolean)
+PASS   : InspectorControlsTest::mapping(select)
+PASS   : InspectorControlsTest::mapping(color)
+PASS   : InspectorControlsTest::mapping(list-readonly)
+PASS   : InspectorControlsTest::cleanupTestCase()
+Totals: 13 passed, 0 failed, 0 skipped, 0 blacklisted, 223ms
+********* Finished testing of InspectorControlsTest *********

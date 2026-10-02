@@ -10,6 +10,7 @@ class QStackedWidget;
 class QWebEngineView;
 class QWebEngineProfile;
 class QAction;
+class QPushButton;
 namespace qvw::ui {
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -24,6 +25,7 @@ public:
     void setBackendAvailable(bool ready);
     void showDocument(const domain::Project &project);
     void clearDocument();
+    void setEditorState(bool ready,bool busy,bool canUndo,bool canRedo);
     QWebEngineView *previewView() const { return m_webView; }
 signals:
     void openRequested(const QString &workspace, const QString &run, const QString &runtime);
@@ -31,6 +33,10 @@ signals:
     void openDocumentRequested(const QString &manifest);
     void saveDocumentRequested();
     void importImageRequested(const QString &path);
+    void editRequested(const QString &entityId,const QString &fieldId,const QVariant &value);
+    void sourceEditRequested(const QString &path,const QString &text);
+    void undoRequested();
+    void redoRequested();
     void closeRequested();
     void refreshRequested();
     void configurationRequested(const QString &path);
@@ -42,6 +48,8 @@ private:
     QWidget *buildTaskPanel();
     void openProjectDialog();
     void newDocumentDialog();
+    void sourceDialog();
+    void applySelectedAsset();
     void showSelectedInspector();
     QTreeWidget *m_componentTree = nullptr;
     QTreeWidget *m_inspectorTable = nullptr;
@@ -51,6 +59,12 @@ private:
     QStackedWidget *m_previewStack = nullptr;
     QWebEngineView *m_webView = nullptr;
     QWebEngineProfile *m_webProfile = nullptr;
+    bool m_editorReady=false;
+    bool m_editorBusy=false;
+    QAction *m_undoAction=nullptr;
+    QAction *m_redoAction=nullptr;
+    QAction *m_sourceAction=nullptr;
+    QPushButton *m_applyAssetButton=nullptr;
     QTreeWidget *m_assetTree = nullptr;
     QLabel *m_documentTitle = nullptr;
     QAction *m_newAction = nullptr;
