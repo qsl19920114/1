@@ -3,7 +3,7 @@
 # one, so an accidental reverse include fails the build instead of rotting.
 #
 # Only layers with concrete implementations are declared.
-# Services for project persistence and assets belong to the next milestone.
+# Services persist project metadata and immutable image assets.
 
 add_library(qvw_domain STATIC
   domain/InspectorField.cpp
@@ -31,6 +31,10 @@ add_library(qvw_infra STATIC
 target_include_directories(qvw_infra PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(qvw_infra PUBLIC Qt6::Core)
 
+add_library(qvw_services STATIC services/ProjectStore.cpp services/AssetService.cpp)
+target_include_directories(qvw_services PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(qvw_services PUBLIC qvw_domain Qt6::Gui)
+
 add_library(qvw_ui STATIC
   ui/MainWindow.cpp
   ui/MainWindow.h
@@ -39,12 +43,13 @@ add_library(qvw_ui STATIC
 target_include_directories(qvw_ui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(qvw_ui PUBLIC qvw_domain Qt6::Widgets Qt6::WebEngineWidgets)
 
-add_library(qvw_controllers STATIC controllers/ProjectController.cpp)
+add_library(qvw_controllers STATIC controllers/ProjectController.cpp controllers/DocumentController.cpp)
 target_include_directories(qvw_controllers PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(qvw_controllers PUBLIC qvw_backend qvw_infra)
+target_link_libraries(qvw_controllers PUBLIC qvw_backend qvw_infra qvw_services)
 
 qt_add_executable(qt_video_workbench main.cpp)
 target_link_libraries(qt_video_workbench PRIVATE qvw_ui qvw_controllers)
+target_compile_definitions(qt_video_workbench PRIVATE QVW_TEMPLATE_DIR="${PROJECT_SOURCE_DIR}/templates")
 
 set_target_properties(qt_video_workbench PROPERTIES
   MACOSX_BUNDLE FALSE

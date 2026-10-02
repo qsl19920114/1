@@ -1,0 +1,31 @@
+✖ authored text, color and exact image artifact reach visual elements (3.1465ms)
+✔ invalid colors and animation duration fail instead of injecting CSS (0.294542ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 1
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 286.185541
+
+✖ failing tests:
+
+test at tests/template/title-card.test.mjs:17:1
+✖ authored text, color and exact image artifact reach visual elements (3.1465ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  4 !== 7
+  
+      at TestContext.<anonymous> (file:///Users/bytedance/Downloads/%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A/qt-video-workbench/tests/template/title-card.test.mjs:23:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.start (node:internal/test_runner/test:1096:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 4,
+    expected: 7,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -16,3 +16,15 @@ add_executable(inspector_controls_test unit/InspectorControlsTest.cpp)
 target_link_libraries(inspector_controls_test PRIVATE qvw_ui Qt6::Test)
 add_test(NAME inspector_controls COMMAND inspector_controls_test)
 set_tests_properties(inspector_controls PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen")
+include(project_store.cmake)
+
+add_executable(document_controller_test unit/DocumentControllerTest.cpp)
+target_link_libraries(document_controller_test PRIVATE qvw_controllers Qt6::Test)
+target_compile_definitions(document_controller_test PRIVATE QVW_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
+add_test(NAME document_controller COMMAND document_controller_test)
+
+include(assets.cmake)
+# Real G2 test is opt-in: it launches the installed local Hypit/Studio.
+add_executable(project_e2e_test integration/ProjectE2ETest.cpp)
+target_link_libraries(project_e2e_test PRIVATE qvw_controllers Qt6::Test)
+target_compile_definitions(project_e2e_test PRIVATE QVW_SOURCE_DIR="${PROJECT_SOURCE_DIR}")

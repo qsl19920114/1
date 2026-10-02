@@ -1,5 +1,6 @@
 #include "backend/hypit/SnapshotMapper.h"
 #include "controllers/ProjectController.h"
+#include "controllers/DocumentController.h"
 #include "infrastructure/AppConfig.h"
 #include "infrastructure/LogWriter.h"
 #include "ui/MainWindow.h"
@@ -21,7 +22,7 @@ int main(int argc, char **argv) {
     QStringList arguments;
     for (int i = 0; i < argc; ++i) arguments.append(QString::fromLocal8Bit(argv[i]));
     QApplication app(argc, argv);
-    app.setApplicationName("Qt Video Workbench"); app.setApplicationVersion("0.2.0");
+    app.setApplicationName("Qt Video Workbench"); app.setApplicationVersion("0.3.0");
     QCommandLineParser parser;
     parser.setApplicationDescription(QStringLiteral("Qt 视频工作台：打开本地 Hypit Run 与 Studio 会话"));
     parser.addHelpOption(); parser.addVersionOption();
@@ -30,21 +31,23 @@ int main(int argc, char **argv) {
     parser.addOption({"session", QStringLiteral("离线会话 JSON，与 --run 互斥。"), "json"});
     parser.addOption({"config", QStringLiteral("版本锁 JSON 路径。"), "json"});
     parser.addOption({"log", QStringLiteral("JSONL 日志路径。"), "jsonl"});
+    parser.addOption({"project", QStringLiteral("打开 workbench.qvw.json 工程清单。"), "json"});
     parser.addOption({"run", QStringLiteral("要打开的 .svrun 文件。"), "file"});
     parser.addOption({"workspace", QStringLiteral("工程目录，与 --run 同时指定。"), "directory"});
     parser.addOption({"runtime", QStringLiteral("本地 Runtime JSON，与 --run 同时指定。"), "json"});
     parser.addOption({"port", QStringLiteral("请求的端口，最终以 Studio stdout 为准。"), "number", "5599"});
     parser.addOption({"session-out", QStringLiteral("保存真实 GET 返回的会话 JSON。"), "json"});
     parser.process(arguments);
-    const bool selftest = parser.isSet("selftest"), live = parser.isSet("run");
+    const bool selftest = parser.isSet("selftest"), live = parser.isSet("run") || parser.isSet("project");
     const bool offline = parser.isSet("session") || (selftest && !live);
     bool portOk = false; const int port = parser.value("port").toInt(&portOk);
     if (!parser.positionalArguments().isEmpty() || (selftest && parser.value("out").isEmpty())
-        || (live && (parser.value("run").isEmpty() || parser.value("workspace").isEmpty() || parser.value("runtime").isEmpty()))
-        || (!live && (parser.isSet("workspace") || parser.isSet("runtime")))
+        || (parser.isSet("run") && (parser.value("run").isEmpty() || parser.value("workspace").isEmpty() || parser.value("runtime").isEmpty()))
+        || (!parser.isSet("run") && (parser.isSet("workspace") || parser.isSet("runtime")))
+        || (parser.isSet("project") && (parser.value("project").isEmpty() || parser.isSet("run")))
         || (live && parser.isSet("session")) || (parser.isSet("session") && parser.value("session").isEmpty())
         || !portOk || port < 1 || port > 65535) {
-        qCritical().noquote() << "参数错误：selftest 需要 --out；--run/--workspace/--runtime 需同时指定；--session 与 --run 互斥；端口为 1–65535。";
+        qCritical().noquote() << "参数错误：selftest 需要 --out；--run/--workspace/--runtime 需同时指定；--project、--session、--run 互斥；端口为 1–65535。";
         return 2;
     }
     auto loaded = qvw::infra::loadAppConfig(parser.value("config"));
@@ -53,6 +56,7 @@ int main(int argc, char **argv) {
         : QDir(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)).filePath("workbench.jsonl");
     qvw::infra::LogWriter log(logPath);
     qvw::controllers::ProjectController controller(loaded.config, log);
+    qvw::controllers::DocumentController document;
     qvw::ui::MainWindow window;
     window.appendLog(QStringLiteral("日志：%1").arg(log.filePath()));
     if (!log.isReady()) window.appendLog(QStringLiteral("日志不可写：%1").arg(log.lastError()));
@@ -95,8 +99,26 @@ int main(int argc, char **argv) {
         }
     });
     QObject::connect(&window, &qvw::ui::MainWindow::openRequested, &controller,
-        [&](const QString &workspace, const QString &run, const QString &runtime) { controller.openProject(workspace, run, runtime, port); });
-    QObject::connect(&window, &qvw::ui::MainWindow::closeRequested, &controller, &qvw::controllers::ProjectController::closeProject);
+        [&](const QString &workspace, const QString &run, const QString &runtime) { document.close(); controller.openProject(workspace, run, runtime, port); });
+    QObject::connect(&window, &qvw::ui::MainWindow::closeRequested, &controller, [&] { controller.closeProject(); document.close(); });
+    QObject::connect(&window, &qvw::ui::MainWindow::newDocumentRequested, &document, [&](const QString &directory,const QString &name) {
+        document.create(QStringLiteral(QVW_TEMPLATE_DIR "/title-card"),directory,name);
+    });
+    QObject::connect(&window, &qvw::ui::MainWindow::openDocumentRequested, &document, &qvw::controllers::DocumentController::open);
+    QObject::connect(&window, &qvw::ui::MainWindow::saveDocumentRequested, &document, &qvw::controllers::DocumentController::save);
+    QObject::connect(&window, &qvw::ui::MainWindow::importImageRequested, &document, &qvw::controllers::DocumentController::importImage);
+    QObject::connect(&document, &qvw::controllers::DocumentController::projectChanged, &window, &qvw::ui::MainWindow::showDocument);
+    QObject::connect(&document, &qvw::controllers::DocumentController::documentClosed, &window, &qvw::ui::MainWindow::clearDocument);
+    QObject::connect(&document, &qvw::controllers::DocumentController::projectLoaded, &controller, [&](const qvw::domain::Project &project) {
+        controller.openDocument(project,port);
+    });
+    QObject::connect(&document, &qvw::controllers::DocumentController::message, &window, [&](const QString &text) {
+        window.appendLog(text); log.info(text);
+    });
+    QObject::connect(&document, &qvw::controllers::DocumentController::failed, &window, [&](const QString &text) {
+        window.appendLog(QStringLiteral("工程操作失败：%1").arg(text)); log.error(text); qCritical().noquote()<<text;
+        if(selftest) finish(3);
+    });
     QObject::connect(&window, &qvw::ui::MainWindow::refreshRequested, &controller, &qvw::controllers::ProjectController::refresh);
     QObject::connect(&window, &qvw::ui::MainWindow::configurationRequested, &controller, [&](const QString &path) {
         const auto config = qvw::infra::loadAppConfig(path);
@@ -114,7 +136,8 @@ int main(int argc, char **argv) {
         qInfo() << "CLEANUP ownedPid=" << ownedPid << "running=" << controller.isRunning();
     });
     QObject::connect(&controller, &qvw::controllers::ProjectController::initialized, &app, [&] {
-        if (live) controller.openProject(parser.value("workspace"), parser.value("run"), parser.value("runtime"), port);
+        if (parser.isSet("project")) document.open(parser.value("project"));
+        else if (live) controller.openProject(parser.value("workspace"), parser.value("run"), parser.value("runtime"), port);
     });
     QObject::connect(&deadline, &QTimer::timeout, &app, [&] { qCritical() << "selftest: live preview timeout"; finish(8); });
     QObject::connect(&poll, &QTimer::timeout, &app, [&] {

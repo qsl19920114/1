@@ -1,0 +1,21 @@
+********* Start testing of AssetServiceTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : AssetServiceTest::initTestCase()
+PASS   : AssetServiceTest::importsByContents(png)
+PASS   : AssetServiceTest::importsByContents(jpeg)
+PASS   : AssetServiceTest::importsByContents(misleading-png)
+PASS   : AssetServiceTest::importsByContents(misleading-jpeg)
+PASS   : AssetServiceTest::duplicatesAndChangedOriginal()
+PASS   : AssetServiceTest::rejectsInvalid(garbage)
+PASS   : AssetServiceTest::rejectsInvalid(unsupported-bmp)
+PASS   : AssetServiceTest::rejectsInvalid(truncated-png)
+PASS   : AssetServiceTest::rejectsInvalid(truncated-jpeg)
+PASS   : AssetServiceTest::enforcesByteAndPixelLimits()
+PASS   : AssetServiceTest::metadataFailureRollsBackOnlyNewCopy()
+PASS   : AssetServiceTest::manifestWriteFailurePreservesProject()
+PASS   : AssetServiceTest::registeredCorruptionIsNotSilentlyDeduplicated()
+PASS   : AssetServiceTest::refusesCorruptExistingTarget()
+PASS   : AssetServiceTest::rejectsEscapingAssetsLink()
+PASS   : AssetServiceTest::cleanupTestCase()
+Totals: 17 passed, 0 failed, 0 skipped, 0 blacklisted, 1000ms
+********* Finished testing of AssetServiceTest *********

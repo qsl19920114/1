@@ -1,0 +1,21 @@
+********* Start testing of ProjectStoreTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : ProjectStoreTest::initTestCase()
+PASS   : ProjectStoreTest::createReopenAndRelocate()
+PASS   : ProjectStoreTest::noncanonicalManifestNameRejected()
+PASS   : ProjectStoreTest::assetsRoundTrip()
+PASS   : ProjectStoreTest::invalidManifest(invalid-json)
+PASS   : ProjectStoreTest::invalidManifest(wrong-root)
+PASS   : ProjectStoreTest::invalidManifest(wrong-version)
+PASS   : ProjectStoreTest::invalidManifest(missing-schema)
+PASS   : ProjectStoreTest::escapePathsAndSymlinks()
+PASS   : ProjectStoreTest::rejectedSavePreservesManifest()
+PASS   : ProjectStoreTest::malformedAssetsAndMissingSource()
+PASS   : ProjectStoreTest::nestedAndExistingEmptyDestination()
+PASS   : ProjectStoreTest::destinationSymlinkEscapeRejected()
+PASS   : ProjectStoreTest::writeFailurePreservesPreviousManifest()
+PASS   : ProjectStoreTest::failedCopyRollsBackOnlyCreatedFiles()
+PASS   : ProjectStoreTest::destinationPreservedAndTemplateSymlinksRejected()
+PASS   : ProjectStoreTest::cleanupTestCase()
+Totals: 17 passed, 0 failed, 0 skipped, 0 blacklisted, 503ms
+********* Finished testing of ProjectStoreTest *********

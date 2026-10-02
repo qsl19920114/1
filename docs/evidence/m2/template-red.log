@@ -1,0 +1,35 @@
+
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/templates/title-card/packages/title-card/render.js' imported from /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/template/title-card.test.mjs
+    at finalizeResolution (node:internal/modules/esm/resolve:271:11)
+    at moduleResolve (node:internal/modules/esm/resolve:861:10)
+    at defaultResolve (node:internal/modules/esm/resolve:988:11)
+    at nextResolve (node:internal/modules/esm/hooks:769:28)
+    at resolveBase (file:///Users/bytedance/Downloads/%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A/hypit/node_modules/.pnpm/tsx@4.21.0/node_modules/tsx/dist/esm/index.mjs?1790243809800:2:3744)
+    at resolveDirectory (file:///Users/bytedance/Downloads/%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A/hypit/node_modules/.pnpm/tsx@4.21.0/node_modules/tsx/dist/esm/index.mjs?1790243809800:2:4243)
+    at resolveTsPaths (file:///Users/bytedance/Downloads/%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A/hypit/node_modules/.pnpm/tsx@4.21.0/node_modules/tsx/dist/esm/index.mjs?1790243809800:2:4984)
+    at resolve (file:///Users/bytedance/Downloads/%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A/hypit/node_modules/.pnpm/tsx@4.21.0/node_modules/tsx/dist/esm/index.mjs?1790243809800:2:5361)
+    at nextResolve (node:internal/modules/esm/hooks:769:28)
+    at AsyncLoaderHooksOnLoaderHookWorker.resolve (node:internal/modules/esm/hooks:265:30) {
+  code: 'ERR_MODULE_NOT_FOUND',
+  url: 'file:///Users/bytedance/Downloads/%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A/qt-video-workbench/templates/title-card/packages/title-card/render.js'
+}
+
+Node.js v25.8.2
+✖ tests/template/title-card.test.mjs (286.578125ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 295.506167
+
+✖ failing tests:
+
+test at tests/template/title-card.test.mjs:1:1
+✖ tests/template/title-card.test.mjs (286.578125ms)
+  'test failed'

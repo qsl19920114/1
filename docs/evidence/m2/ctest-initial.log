@@ -1,0 +1,41 @@
+Test project /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build
+    Start 1: infrastructure
+1/8 Test #1: infrastructure ...................   Passed    0.05 sec
+    Start 2: studio_process
+2/8 Test #2: studio_process ...................   Passed   33.09 sec
+    Start 3: studio_client
+3/8 Test #3: studio_client ....................   Passed    0.80 sec
+    Start 4: hypit_probe
+4/8 Test #4: hypit_probe ......................***Failed    1.45 sec
+********* Start testing of HypitProbeTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : HypitProbeTest::initTestCase()
+FAIL!  : HypitProbeTest::detectsFailures(success) Compared values are not the same
+   Actual   (int(result.status)): 3
+   Expected (expected)          : 0
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/HypitProbeTest.cpp(31)]
+PASS   : HypitProbeTest::detectsFailures(mismatch)
+PASS   : HypitProbeTest::detectsFailures(malformed)
+PASS   : HypitProbeTest::detectsFailures(exit7)
+PASS   : HypitProbeTest::detectsFailures(timeout)
+PASS   : HypitProbeTest::missingLauncher()
+PASS   : HypitProbeTest::cleanupTestCase()
+Totals: 7 passed, 1 failed, 0 skipped, 0 blacklisted, 1381ms
+********* Finished testing of HypitProbeTest *********
+
+    Start 5: inspector_controls
+5/8 Test #5: inspector_controls ...............   Passed    2.68 sec
+    Start 6: project_store
+6/8 Test #6: project_store ....................   Passed    0.35 sec
+    Start 7: document_controller
+7/8 Test #7: document_controller ..............   Passed    0.42 sec
+    Start 8: asset_service
+8/8 Test #8: asset_service ....................   Passed    0.93 sec
+
+88% tests passed, 1 tests failed out of 8
+
+Total Test time (real) =  39.89 sec
+
+The following tests FAILED:
+	  4 - hypit_probe (Failed)
+Errors while running CTest

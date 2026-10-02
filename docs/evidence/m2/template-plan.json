@@ -1,0 +1,118 @@
+{
+  "format": "hypit.cli-plan@1",
+  "ok": true,
+  "run": "main.svrun",
+  "targetCount": 1,
+  "targets": [
+    "final.video"
+  ],
+  "requestCount": 3,
+  "requestIssueCount": 0,
+  "providerRequestCount": 0,
+  "localRequestCount": 3,
+  "unresolvedRequestCount": 0,
+  "unsupportedRequestCount": 0,
+  "choiceCount": 0,
+  "providers": [
+    {
+      "request": "need:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2Ftemplates%2Ftitle-card%2Fmain.svml%3A%3Acomponent%3A%3Afinal:request-audio-render",
+      "capability": "@hypit/media-pipeline@1#render-timeline-audio",
+      "status": "resolved",
+      "endpoint": "media.local",
+      "use": "@hypit/provider-media-local",
+      "pricing": {
+        "kind": "local"
+      }
+    },
+    {
+      "request": "need:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2Ftemplates%2Ftitle-card%2Fmain.svml%3A%3Acomponent%3A%3Afinal:request-mux",
+      "capability": "@hypit/media-pipeline@1#mux-program-media",
+      "status": "resolved",
+      "endpoint": "media.local",
+      "use": "@hypit/provider-media-local",
+      "pricing": {
+        "kind": "local"
+      }
+    },
+    {
+      "request": "need:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2Ftemplates%2Ftitle-card%2Fmain.svml%3A%3Acomponent%3A%3Afinal:request-visual-render",
+      "capability": "@hypit/render-hyperframes@1#render-visual",
+      "status": "resolved",
+      "endpoint": "hyperframes.local",
+      "use": "@hypit/provider-hyperframes-local",
+      "pricing": {
+        "kind": "local"
+      }
+    }
+  ],
+  "needs": [
+    {
+      "request": "need:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2Ftemplates%2Ftitle-card%2Fmain.svml%3A%3Acomponent%3A%3Afinal:request-audio-render",
+      "step": "operation:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2Ftemplates%2Ftitle-card%2Fmain.svml%3A%3Acomponent%3A%3Afinal:request-audio-render",
+      "port": "audio",
+      "capability": "@hypit/media-pipeline@1#render-timeline-audio",
+      "endpoint": "media.local",
+      "summary": {
+        "fields": {},
+        "references": {}
+      },
+      "pending": [
+        {
+          "input": "plan",
+          "record": "record:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2Ftemplates%2Ftitle-card%2Fmain.svml%3A%3Acomponent%3A%3Afinal:compile-audio-program",
+          "sourceStep": "operation:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2Ftemplates%2Ftitle-card%2Fmain.svml%3A%3Acomponent%3A%3Afinal:compile-audio-program"
+        }
+      ]
+    },
+    {
+      "request": "need:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2Ftemplates%2Ftitle-card%2Fmain.svml%3A%3Acomponent%3A%3Afinal:request-mux",
+      "step": "operation:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2Ftemplates%2Ftitle-card%2Fmain.svml%3A%3Acomponent%3A%3Afinal:request-mux",
+      "port": "media",
+      "capability": "@hypit/media-pipeline@1#mux-program-media",
+      "endpoint": "media.local",
+      "summary": {
+        "fields": {},
+        "references": {
+          "audio": 1,
+          "video": 1
+        }
+      },
+      "pending": [
+        {
+          "input": "audio",
+          "record": "record:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2Ftemplates%2Ftitle-card%2Fmain.svml%3A%3Acomponent%3A%3Afinal:request-audio-render",
+          "kind": "audio"
+        },
+        {
+          "input": "visual",
+          "record": "record:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2Ftemplates%2Ftitle-card%2Fmain.svml%3A%3Acomponent%3A%3Afinal:request-visual-render",
+          "kind": "video"
+        }
+      ]
+    },
+    {
+      "request": "need:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2Ftemplates%2Ftitle-card%2Fmain.svml%3A%3Acomponent%3A%3Afinal:request-visual-render",
+      "step": "operation:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2Ftemplates%2Ftitle-card%2Fmain.svml%3A%3Acomponent%3A%3Afinal:request-visual-render",
+      "port": "visual",
+      "capability": "@hypit/render-hyperframes@1#render-visual",
+      "endpoint": "hyperframes.local",
+      "summary": {
+        "fields": {},
+        "references": {}
+      },
+      "pending": [
+        {
+          "input": "document",
+          "record": "record:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2Ftemplates%2Ftitle-card%2Fmain.svml%3A%3Acomponent%3A%3Afinal:compile-document",
+          "sourceStep": "operation:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2Ftemplates%2Ftitle-card%2Fmain.svml%3A%3Acomponent%3A%3Afinal:compile-document"
+        }
+      ]
+    }
+  ],
+  "preflight": {
+    "ok": true,
+    "capabilityCount": 3,
+    "diagnosticCount": 0,
+    "diagnostics": []
+  }
+}

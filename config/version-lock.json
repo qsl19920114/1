@@ -21,7 +21,14 @@
     "version": "6.11.2",
     "prefix": "/opt/homebrew/opt/qt",
     "installedVia": "homebrew",
-    "requiredComponents": ["Core", "Gui", "Widgets", "Network", "Test", "WebEngineWidgets"],
+    "requiredComponents": [
+      "Core",
+      "Gui",
+      "Widgets",
+      "Network",
+      "Test",
+      "WebEngineWidgets"
+    ],
     "componentsVerified": true,
     "webEngineProcessPresent": true,
     "planMinimumTarget": "6.8",
@@ -41,9 +48,11 @@
     "verifiedBy": "./hypit version --json; git rev-parse HEAD"
   },
   "node": {
-    "version": "22.22.1",
+    "version": "25.8.2",
     "satisfiesHypitRequirement": true,
-    "verifiedBy": "node -v"
+    "verifiedBy": "node --version; docs/evidence/m2/e2e.log",
+    "previousVerifiedVersion": "22.22.1",
+    "note": "M2 当前会话实测 Node 25.8.2，原 M0/M1 的22.22.1保留为历史；本轮未安装或修改全局环境。"
   },
   "pnpm": {
     "requiredVersion": "10.33.0",

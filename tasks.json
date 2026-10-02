@@ -1,7 +1,7 @@
 {
   "format": "qt-video-workbench.tasks@1",
   "note": "状态只有四种：done 需附证据路径；partial 需写明未验证部分；blocked 需写明阻塞原因；pending 未开始。不得在前置门禁未过时把后续任务标为 done。",
-  "updatedAt": "2026-09-24",
+  "updatedAt": "2026-10-02",
   "gates": {
     "G0": {
       "milestone": "M0",
@@ -25,7 +25,13 @@
     },
     "G2": {
       "milestone": "M2",
-      "verdict": "NOT_REACHED"
+      "verdict": "PASS",
+      "definition": "脱离上游样例目录创建、导入并搬迁重开原创工程；真实会话可交付图片资源",
+      "evidence": [
+        "docs/evidence/m2/e2e.json",
+        "docs/evidence/m2/e2e.log"
+      ],
+      "reason": "生产Controller/Service完成新建、导入、保存和搬迁重开；真实Snapshot五个字段，图片HTTP字节一致。"
     },
     "G3": {
       "milestone": "M3",
@@ -293,33 +299,43 @@
       "id": "T012",
       "milestone": "M2",
       "title": "工程创建与重开：ProjectStore 持久化元数据",
-      "status": "pending",
+      "status": "done",
       "dependsOn": [
         "T011"
       ],
       "acceptance": [
         "应用自身工程元数据可保存并重开；源文件仍为权威事实",
         "工程可包含中文和空格路径，外部依赖按版本锁解析"
+      ],
+      "evidence": [
+        "docs/evidence/m2/ctest-final.log",
+        "docs/evidence/m2/e2e.json",
+        "docs/evidence/m2/session.json"
       ]
     },
     {
       "id": "T013",
       "milestone": "M2",
       "title": "本地素材不可变导入与引用管理",
-      "status": "pending",
+      "status": "done",
       "dependsOn": [
         "T012"
       ],
       "acceptance": [
         "导入本地素材后工程内保留稳定引用",
         "重开工程可定位素材，不覆写已有资源"
+      ],
+      "evidence": [
+        "docs/evidence/m2/ctest-final.log",
+        "docs/evidence/m2/e2e.json",
+        "docs/evidence/m2/session.json"
       ]
     },
     {
       "id": "T014",
       "milestone": "M2",
       "title": "原创 title-card 模板及独立工程实例化",
-      "status": "pending",
+      "status": "done",
       "dependsOn": [
         "T013"
       ],
@@ -327,7 +343,78 @@
         "脱离上游样例目录创建并打开本项目模板",
         "真实标题、颜色和图片 slot 来自已实现模板声明，不编造可写字段"
       ],
-      "gate": "G2"
+      "gate": "G2",
+      "evidence": [
+        "docs/evidence/m2/ctest-final.log",
+        "docs/evidence/m2/e2e.json",
+        "docs/evidence/m2/session.json"
+      ]
+    },
+    {
+      "id": "T015",
+      "milestone": "M3",
+      "title": "Qt 原生参数编辑与串行版本安全 mutation",
+      "status": "pending",
+      "dependsOn": [
+        "T014"
+      ],
+      "acceptance": [
+        "仅对快照真实edit字段写入，支持基础五类控件",
+        "写前后GET核对revision和值；关闭会话取消旧回调"
+      ]
+    },
+    {
+      "id": "T016",
+      "milestone": "M3",
+      "title": "409/422 与不确定写入的恢复",
+      "status": "pending",
+      "dependsOn": [
+        "T015"
+      ],
+      "acceptance": [
+        "409刷新并建立新历史起点；不自动重放旧写入",
+        "422读取回滚后的快照，网络错误不误报成功"
+      ]
+    },
+    {
+      "id": "T017",
+      "milestone": "M3",
+      "title": "异步撤销/重做和图片slot绑定",
+      "status": "pending",
+      "dependsOn": [
+        "T016"
+      ],
+      "acceptance": [
+        "后端确认后才推进历史指针",
+        "外部改动清空历史；导入素材经同一编辑链绑定"
+      ]
+    },
+    {
+      "id": "T018",
+      "milestone": "M3",
+      "title": "受保护的单文件 Source 编辑",
+      "status": "pending",
+      "dependsOn": [
+        "T017"
+      ],
+      "acceptance": [
+        "保存预像、白名单相对路径与版本校验",
+        "编译失败仅在源内容仍为本次写入时恢复预像，禁止覆盖外部改动"
+      ]
+    },
+    {
+      "id": "T019",
+      "milestone": "M3",
+      "title": "原生编辑真实集成与重开一致性",
+      "status": "pending",
+      "dependsOn": [
+        "T018"
+      ],
+      "acceptance": [
+        "真实修改标题/颜色/图片，撤销重做，错误恢复",
+        "重新打开读取一致；G3不依赖截图"
+      ],
+      "gate": "G3"
     }
   ]
 }

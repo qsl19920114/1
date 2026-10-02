@@ -79,6 +79,13 @@ void ProjectController::openProject(const QString &workspace, const QString &run
     if (!m_studio.start(m_config.launcherPath, QFileInfo(workspace).absoluteFilePath(),
                         QFileInfo(run).absoluteFilePath(), QFileInfo(runtime).absoluteFilePath(), port)) m_open = false;
 }
+void ProjectController::openDocument(const domain::Project &project, int port) {
+    // Native document metadata has already switched. Never leave the previous
+    // editable Studio visible if validation of the new document fails.
+    closeProject();
+    const QDir root(project.rootPath);
+    openProject(project.rootPath,root.filePath(project.runPath),root.filePath(project.runtimePath),port);
+}
 void ProjectController::refresh() {
     if (m_open && !m_baseUrl.isEmpty()) m_client.fetchSession(m_baseUrl);
 }

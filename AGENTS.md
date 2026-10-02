@@ -29,8 +29,8 @@
 这些是 M0 实测得出的，照做即可，不要重新发明：
 
 ```bash
-# 必须同时传 --workspace 和 --runtime，否则无法解析已安装包
-<hypit> <cmd> <path>/x.svrun \
+# plan/build/studio 显式传 --workspace 和 --runtime；check 不接受 --runtime
+<hypit> plan <path>/x.svrun \
   --workspace <example-dir> \
   --runtime <example-dir>/hypit.runtime.json
 

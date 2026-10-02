@@ -10,6 +10,7 @@ private slots:
     void detectsFailures_data() {
         QTest::addColumn<QByteArray>("script"); QTest::addColumn<int>("expected");
         QTest::newRow("success") << QByteArray("printf '%s' '{\"version\":\"0.2.10\"}'") << int(qvw::infra::ProbeStatus::Ok);
+        QTest::newRow("delayed-success") << QByteArray("/bin/sleep 0.5; printf '%s' '{\"version\":\"0.2.10\"}'") << int(qvw::infra::ProbeStatus::Ok);
         QTest::newRow("mismatch") << QByteArray("printf '%s' '{\"version\":\"9.0\"}'") << int(qvw::infra::ProbeStatus::VersionMismatch);
         QTest::newRow("malformed") << QByteArray("printf '%s' broken") << int(qvw::infra::ProbeStatus::UnreadableOutput);
         QTest::newRow("exit7") << QByteArray("exit 7") << int(qvw::infra::ProbeStatus::InvocationFailed);
@@ -23,12 +24,15 @@ private slots:
         QVERIFY(file.setPermissions(QFile::ReadOwner | QFile::WriteOwner | QFile::ExeOwner));
         qvw::infra::AppConfig config; config.launcherPath = file.fileName(); config.distributionPath = tmp.path(); config.expectedHypitVersion = "0.2.10";
         qvw::infra::LogWriter log(tmp.filePath("log.jsonl"));
-        qvw::infra::HypitProbe probe; probe.setTimeoutMs(300);
+        qvw::infra::HypitProbe probe;
+        // Only the timeout fixture needs an aggressively short deadline. Normal
+        // process startup may exceed 300ms on a busy machine (production uses 20s).
+        probe.setTimeoutMs(script.startsWith("exec /bin/sleep") ? 300 : 2000);
         QSignalSpy done(&probe, &qvw::infra::HypitProbe::completed);
         probe.start(config, log);
         QTRY_COMPARE(done.size(), 1);
         const auto result = done[0][0].value<qvw::infra::ProbeResult>();
-        QCOMPARE(int(result.status), expected); QVERIFY(!result.message.isEmpty());
+        QVERIFY2(int(result.status) == expected, qPrintable(result.message)); QVERIFY(!result.message.isEmpty());
     }
     void missingLauncher() {
         QTemporaryDir tmp; qvw::infra::LogWriter log(tmp.filePath("log.jsonl"));

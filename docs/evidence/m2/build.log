@@ -1,0 +1,52 @@
+[  1%] Built target qvw_infra_autogen_timestamp_deps
+[  1%] Built target qvw_domain_autogen_timestamp_deps
+[  1%] Built target qt_video_workbench_qmlimportscan
+[  2%] Built target qvw_domain_autogen
+[  4%] Built target qvw_infra_autogen
+[  9%] Built target qvw_domain
+[ 16%] Built target qvw_infra
+[ 16%] Built target qvw_backend_autogen_timestamp_deps
+[ 16%] Built target qvw_ui_autogen_timestamp_deps
+[ 16%] Built target qvw_services_autogen_timestamp_deps
+[ 16%] Built target infrastructure_test_autogen_timestamp_deps
+[ 16%] Built target hypit_probe_test_autogen_timestamp_deps
+[ 17%] Built target qvw_services_autogen
+[ 19%] Built target infrastructure_test_autogen
+[ 21%] Built target qvw_ui_autogen
+[ 21%] Built target qvw_backend_autogen
+[ 23%] Automatic MOC for target hypit_probe_test
+[ 28%] Built target qvw_services
+[ 32%] Built target infrastructure_test
+[ 32%] Built target project_store_test_autogen_timestamp_deps
+[ 39%] Built target qvw_backend
+[ 45%] Built target qvw_ui
+[ 45%] Built target asset_service_test_autogen_timestamp_deps
+[ 45%] Built target qvw_controllers_autogen_timestamp_deps
+[ 45%] Built target studio_process_test_autogen_timestamp_deps
+[ 45%] Built target studio_client_test_autogen_timestamp_deps
+[ 45%] Built target inspector_controls_test_autogen_timestamp_deps
+[ 46%] Built target project_store_test_autogen
+[ 47%] Built target asset_service_test_autogen
+[ 49%] Built target studio_process_test_autogen
+[ 50%] Built target qvw_controllers_autogen
+[ 52%] Built target studio_client_test_autogen
+[ 53%] Built target inspector_controls_test_autogen
+[ 57%] Built target project_store_test
+[ 61%] Built target asset_service_test
+[ 67%] Built target qvw_controllers
+[ 71%] Built target studio_process_test
+[ 75%] Built target studio_client_test
+[ 79%] Built target inspector_controls_test
+[ 79%] Built target document_controller_test_autogen_timestamp_deps
+[ 79%] Built target project_e2e_test_autogen_timestamp_deps
+[ 79%] Built target qt_video_workbench_autogen_timestamp_deps
+[ 80%] Built target document_controller_test_autogen
+[ 82%] Built target qt_video_workbench_autogen
+[ 83%] Built target project_e2e_test_autogen
+[ 87%] Built target document_controller_test
+[ 91%] Built target qt_video_workbench
+[ 95%] Built target project_e2e_test
+[ 95%] Built target hypit_probe_test_autogen
+[ 97%] Building CXX object tests/CMakeFiles/hypit_probe_test.dir/unit/HypitProbeTest.cpp.o
+[ 98%] Linking CXX executable hypit_probe_test
+[100%] Built target hypit_probe_test

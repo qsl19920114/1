@@ -1,5 +1,6 @@
 #pragma once
 #include "infrastructure/AppConfig.h"
+#include "domain/Project.h"
 #include "infrastructure/HypitProbe.h"
 #include "backend/hypit/StudioClient.h"
 #include "backend/hypit/StudioProcess.h"
@@ -14,6 +15,7 @@ public:
     void initialize();
     void configure(const infra::AppConfig &config);
     void openProject(const QString &workspace, const QString &run, const QString &runtime, int port = 5599);
+    void openDocument(const domain::Project &project, int port = 5599);
     void refresh();
     void closeProject();
     qint64 studioPid() const { return m_studio.processId(); }

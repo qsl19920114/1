@@ -1,0 +1,15 @@
+{
+  "format": "hypit.cli-check@1",
+  "sourceKind": "run",
+  "ok": true,
+  "run": "main.svrun",
+  "author": "main.svml",
+  "frontend": "@hypit/run-markup@1",
+  "targetCount": 1,
+  "targets": [
+    "final.video"
+  ],
+  "candidates": 0,
+  "satisfactions": 0,
+  "historicalOutputCount": 0
+}

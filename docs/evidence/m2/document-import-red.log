@@ -1,0 +1,22 @@
+Test project /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build
+    Start 7: document_controller
+1/1 Test #7: document_controller ..............***Failed    0.99 sec
+********* Start testing of DocumentControllerTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : DocumentControllerTest::initTestCase()
+PASS   : DocumentControllerTest::createsSavesClosesAndReopens()
+FAIL!  : DocumentControllerTest::importsAndReopensAssets() 'controller.importImage(path)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/DocumentControllerTest.cpp(31)]
+PASS   : DocumentControllerTest::failedOpenKeepsCurrentDocument()
+PASS   : DocumentControllerTest::cleanupTestCase()
+Totals: 4 passed, 1 failed, 0 skipped, 0 blacklisted, 153ms
+********* Finished testing of DocumentControllerTest *********
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   1.02 sec
+
+The following tests FAILED:
+	  7 - document_controller (Failed)
+Errors while running CTest

@@ -1,0 +1,18 @@
+<?svml using="@hypit/markup@1"?>
+<svml>
+  <import as="time" from="@hypit/timeline-author@1"/>
+  <import as="spatial" from="@hypit/spatial@1"/>
+  <import as="fonts" from="@hypit/fonts-open@1"/>
+  <import as="card" from="@qvw/title-card@1"/>
+  <import as="film" from="@hypit/film@1"/>
+  <import as="render" from="@hypit/render-hyperframes@1"/>
+  <import as="style" source="./main.svs"/>
+  <time:Clock id="clock" frame-rate="30"/>
+  <time:Timeline id="timeline" clock={clock} end="8s"/>
+  <spatial:Canvas id="canvas" width="1280" height="720"/>
+  <fonts:Stack id="font" family="noto-sans-sc" weight="600" style="normal"/>
+  <card:Card id="cover" timeline={timeline.timeline} canvas={canvas} font={font} during="program"
+    title="校园创作社" subtitle="用镜头记录热爱，让灵感在这里相遇。" color="#35bca8" image="./assets/default.png" entrance-frames="18"/>
+  <film:Film id="main" canvas={canvas} timeline={timeline.timeline} appearance={style.film.main}><film:Track source={cover.track}/></film:Film>
+  <render:Video id="final" composition={main.composition} timeline={timeline.timeline}/>
+</svml>

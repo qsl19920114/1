@@ -1,0 +1,8 @@
+********* Start testing of HypitProbeTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : HypitProbeTest::initTestCase()
+FAIL!  : HypitProbeTest::detectsFailures(delayed-success) 'int(result.status) == expected' returned FALSE. (Hypit 版本自检超时。)
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/HypitProbeTest.cpp(32)]
+PASS   : HypitProbeTest::cleanupTestCase()
+Totals: 2 passed, 1 failed, 0 skipped, 0 blacklisted, 316ms
+********* Finished testing of HypitProbeTest *********

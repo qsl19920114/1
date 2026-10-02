@@ -1,6 +1,9 @@
 #include "ui/MainWindow.h"
 #include "ui/InspectorControls.h"
 #include <QAction>
+#include <QApplication>
+#include <QClipboard>
+#include <QInputDialog>
 #include <QDialog>
 #include <QDialogButtonBox>
 #include <QFileDialog>
@@ -38,8 +41,22 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     setWindowTitle(QStringLiteral("Qt 视频工作台")); resize(1480, 900);
     auto *bar = addToolBar(QStringLiteral("工程"));
     bar->setMovable(false);
-    m_openAction = bar->addAction(QStringLiteral("打开工程…"), this, &MainWindow::openProjectDialog);
-    m_openAction->setShortcut(QKeySequence::Open);
+    m_newAction = bar->addAction(QStringLiteral("新建工程…"), this, &MainWindow::newDocumentDialog);
+    m_newAction->setShortcut(QKeySequence::New);
+    m_documentOpenAction = bar->addAction(QStringLiteral("打开工程…"), this, [this] {
+        const auto path = QFileDialog::getOpenFileName(this, QStringLiteral("打开工作台工程"), {}, "工作台工程 (workbench.qvw.json)");
+        if (!path.isEmpty()) emit openDocumentRequested(path);
+    });
+    m_documentOpenAction->setShortcut(QKeySequence::Open);
+    m_saveAction = bar->addAction(QStringLiteral("保存工程"), this, &MainWindow::saveDocumentRequested);
+    m_saveAction->setShortcut(QKeySequence::Save); m_saveAction->setEnabled(false);
+    m_importAction = bar->addAction(QStringLiteral("导入图片…"), this, [this] {
+        const auto path = QFileDialog::getOpenFileName(this, QStringLiteral("导入 PNG/JPEG 图片"), {}, "图片 (*.png *.jpg *.jpeg);;所有文件 (*)");
+        if (!path.isEmpty()) emit importImageRequested(path);
+    });
+    m_importAction->setEnabled(false);
+    bar->addSeparator();
+    m_openAction = bar->addAction(QStringLiteral("打开 Run…"), this, &MainWindow::openProjectDialog);
     m_refreshAction = bar->addAction(QStringLiteral("刷新会话"), this, &MainWindow::refreshRequested);
     m_refreshAction->setShortcut(QKeySequence::Refresh);
     m_closeAction = bar->addAction(QStringLiteral("关闭工程"), this, &MainWindow::closeRequested);
@@ -61,6 +78,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     connect(m_componentTree, &QTreeWidget::currentItemChanged, this, [this] { showSelectedInspector(); });
 }
 void MainWindow::setBackendAvailable(bool ready) {
+    m_newAction->setEnabled(ready); m_documentOpenAction->setEnabled(ready);
     m_openAction->setEnabled(ready); m_closeAction->setEnabled(ready);
     m_refreshAction->setEnabled(ready && !m_previewUrl.isEmpty());
     if (ready) statusBar()->showMessage(QStringLiteral("环境就绪，请打开一个视频工程。"));
@@ -76,11 +94,26 @@ QWidget *MainWindow::buildProjectPanel() {
     m_componentTree = new QTreeWidget;
     m_componentTree->setHeaderLabels({QStringLiteral("组件"), QStringLiteral("帧范围")});
     m_componentTree->header()->setSectionResizeMode(0, QHeaderView::Stretch);
-    return withTitle(QStringLiteral("工程与组件"), m_componentTree);
+    auto *body = new QWidget; auto *layout = new QVBoxLayout(body);
+    layout->setContentsMargins(0,0,0,0);
+    m_documentTitle = new QLabel(QStringLiteral("新建标题卡工程，或打开已保存的工程。"));
+    m_documentTitle->setWordWrap(true); layout->addWidget(m_documentTitle);
+    layout->addWidget(m_componentTree, 2);
+    layout->addWidget(new QLabel(QStringLiteral("图片素材 · 双击复制相对路径")));
+    m_assetTree = new QTreeWidget;
+    m_assetTree->setHeaderLabels({QStringLiteral("素材"),QStringLiteral("尺寸")});
+    m_assetTree->setRootIsDecorated(false);
+    m_assetTree->header()->setSectionResizeMode(0,QHeaderView::Stretch);
+    connect(m_assetTree,&QTreeWidget::itemDoubleClicked,this,[this](QTreeWidgetItem *item) {
+        QApplication::clipboard()->setText(item->data(0,Qt::UserRole).toString());
+        statusBar()->showMessage(QStringLiteral("已复制图片路径。在 Studio 的图片路径字段中设置后才会加入画面。"));
+    });
+    layout->addWidget(m_assetTree,1);
+    return withTitle(QStringLiteral("工程与素材"),body);
 }
 QWidget *MainWindow::buildPreviewPanel() {
     m_previewStack = new QStackedWidget;
-    m_previewPlaceholder = new QLabel(QStringLiteral("打开工程后显示 Studio 预览"));
+    m_previewPlaceholder = new QLabel(QStringLiteral("新建标题卡工程或打开工程后显示预览"));
     m_previewPlaceholder->setAlignment(Qt::AlignCenter); m_previewPlaceholder->setMinimumHeight(280);
     m_previewStack->addWidget(m_previewPlaceholder);
     auto *body = new QWidget; auto *layout = new QVBoxLayout(body);
@@ -169,6 +202,35 @@ void MainWindow::showError(const QString &error) {
     showSnapshot({}); appendLog(QStringLiteral("错误：%1").arg(error)); statusBar()->showMessage(error);
 }
 void MainWindow::appendLog(const QString &line) { m_taskLog->appendPlainText(line); }
+void MainWindow::showDocument(const domain::Project &project) {
+    setWindowTitle(QStringLiteral("%1 — Qt 视频工作台").arg(project.name));
+    m_documentTitle->setText(QStringLiteral("%1\n模板：%2").arg(project.name,project.templateId));
+    m_documentTitle->setToolTip(project.rootPath); m_assetTree->clear();
+    for (const auto &asset : project.assets) {
+        auto *item = new QTreeWidgetItem(m_assetTree);
+        item->setText(0,asset.originalName);
+        item->setText(1,QStringLiteral("%1×%2").arg(asset.width).arg(asset.height));
+        item->setToolTip(0,QStringLiteral("已导入；绑定图片路径后才应用到画面。\n%1").arg(asset.path));
+        item->setData(0,Qt::UserRole,"./"+asset.path);
+    }
+    m_saveAction->setEnabled(true); m_importAction->setEnabled(true);
+}
+void MainWindow::clearDocument() {
+    setWindowTitle(QStringLiteral("Qt 视频工作台"));
+    m_documentTitle->setText(QStringLiteral("新建标题卡工程，或打开已保存的工程。"));
+    m_assetTree->clear(); m_saveAction->setEnabled(false); m_importAction->setEnabled(false);
+}
+void MainWindow::newDocumentDialog() {
+    bool ok = false;
+    const auto name = QInputDialog::getText(this,QStringLiteral("新建图片标题卡"),QStringLiteral("工程名称"),QLineEdit::Normal,QStringLiteral("校园社团介绍"),&ok).trimmed();
+    if (!ok || name.isEmpty()) return;
+    const auto parent = QFileDialog::getExistingDirectory(this,QStringLiteral("选择保存位置，将创建同名子目录"));
+    if (parent.isEmpty()) return;
+    if (name=="." || name==".." || name.contains('/') || name.contains('\\') || name.contains(':')) {
+        appendLog(QStringLiteral("工程名称不能包含路径分隔符。")); return;
+    }
+    emit newDocumentRequested(QDir(parent).filePath(name),name);
+}
 void MainWindow::openProjectDialog() {
     QDialog dialog(this); dialog.setWindowTitle(QStringLiteral("打开视频工程")); dialog.resize(680, 240);
     auto *layout = new QVBoxLayout(&dialog); auto *form = new QFormLayout;

@@ -223,3 +223,7 @@ PROJECT_PLAN §7 定义 G0 为"至少一份真实可解码 MP4、Qt 可显示预
 - **T008 起**：方可进入 M1 桌面壳。
 
 不建议在 T007 之前开工 Qt 主窗口：属性面板的数据契约取决于真实可写字段的形状，提前写会返工。
+
+## M2 环境补充（2026-09-24）
+
+本轮 `node --version` 返回 `v25.8.2`，实际使用该版本完成原创 title-card 的 check/plan 与真实 Studio 会话和图片 HTTP 校验。M0/M1 上表中的22.22.1保留为历史事实；版本锁记录当前验证版本及 previousVerifiedVersion。本轮未修改全局 PATH 或安装 Node。Hypit 版本仍固定0.2.10。
