@@ -1,0 +1,96 @@
+[  1%] Built target qvw_infra_autogen_timestamp_deps
+[  1%] Built target qvw_domain_autogen_timestamp_deps
+[  1%] Built target qt_video_workbench_qmlimportscan
+[  1%] Built target qvw_domain_autogen
+[  2%] Built target qvw_infra_autogen
+[  6%] Built target qvw_domain
+[  6%] Built target qvw_backend_autogen_timestamp_deps
+[  6%] Built target qvw_ui_autogen_timestamp_deps
+[ 12%] Built target qvw_infra
+[ 12%] Built target qvw_services_autogen_timestamp_deps
+[ 12%] Built target infrastructure_test_autogen_timestamp_deps
+[ 12%] Built target json_process_test_autogen_timestamp_deps
+[ 13%] Built target hypit_probe_test_autogen_timestamp_deps
+[ 13%] Built target qvw_backend_autogen
+[ 14%] Built target qvw_ui_autogen
+[ 15%] Built target json_process_test_autogen
+[ 16%] Built target infrastructure_test_autogen
+[ 16%] Built target hypit_probe_test_autogen
+[ 16%] Automatic MOC for target qvw_services
+[ 19%] Built target infrastructure_test
+[ 24%] Built target qvw_backend
+[ 24%] Built target qvw_services_autogen
+[ 28%] Built target qvw_ui
+[ 30%] Built target hypit_probe_test
+[ 33%] Built target json_process_test
+[ 33%] Built target studio_process_test_autogen_timestamp_deps
+[ 34%] Building CXX object app/CMakeFiles/qvw_services.dir/services/ExportWorkspace.cpp.o
+[ 34%] Built target studio_client_test_autogen_timestamp_deps
+[ 34%] Built target inspector_controls_test_autogen_timestamp_deps
+[ 34%] Built target studio_writer_test_autogen_timestamp_deps
+[ 35%] Built target studio_process_test_autogen
+[ 36%] Built target studio_client_test_autogen
+[ 37%] Built target inspector_controls_test_autogen
+[ 38%] Built target studio_writer_test_autogen
+[ 40%] Built target studio_process_test
+[ 43%] Built target studio_client_test
+[ 45%] Built target inspector_controls_test
+[ 48%] Built target studio_writer_test
+[ 49%] Linking CXX static library libqvw_services.a
+[ 53%] Built target qvw_services
+[ 53%] Built target qvw_controllers_autogen_timestamp_deps
+[ 53%] Built target asset_service_test_autogen_timestamp_deps
+[ 53%] Built target source_edit_guard_test_autogen_timestamp_deps
+[ 53%] Built target project_store_test_autogen_timestamp_deps
+[ 53%] Built target export_workspace_test_autogen_timestamp_deps
+[ 53%] Built target media_validation_test_autogen_timestamp_deps
+[ 56%] Built target project_store_test_autogen
+[ 56%] Built target source_edit_guard_test_autogen
+[ 56%] Built target asset_service_test_autogen
+[ 57%] Automatic MOC for target qvw_controllers
+[ 59%] Built target media_validation_test_autogen
+[ 59%] Built target export_workspace_test_autogen
+[ 59%] Built target qvw_controllers_autogen
+[ 60%] Linking CXX executable source_edit_guard_test
+[ 62%] Linking CXX executable project_store_test
+[ 62%] Linking CXX executable asset_service_test
+[ 63%] Linking CXX executable export_workspace_test
+[ 66%] Built target asset_service_test
+[ 66%] Built target export_workspace_test
+[ 67%] Built target source_edit_guard_test
+[ 69%] Built target project_store_test
+[ 70%] Linking CXX executable media_validation_test
+[ 70%] Building CXX object app/CMakeFiles/qvw_controllers.dir/controllers/ExportController.cpp.o
+[ 72%] Built target media_validation_test
+[ 73%] Linking CXX static library libqvw_controllers.a
+[ 77%] Built target qvw_controllers
+[ 77%] Built target document_controller_test_autogen_timestamp_deps
+[ 77%] Built target editor_controller_test_autogen_timestamp_deps
+[ 77%] Built target project_e2e_test_autogen_timestamp_deps
+[ 77%] Built target qt_video_workbench_autogen_timestamp_deps
+[ 77%] Built target export_e2e_test_autogen_timestamp_deps
+[ 77%] Built target export_controller_test_autogen_timestamp_deps
+[ 77%] Built target editor_e2e_test_autogen_timestamp_deps
+[ 78%] Built target qt_video_workbench_autogen
+[ 79%] Built target document_controller_test_autogen
+[ 80%] Built target project_e2e_test_autogen
+[ 80%] Built target editor_controller_test_autogen
+[ 81%] Built target editor_e2e_test_autogen
+[ 82%] Built target export_e2e_test_autogen
+[ 83%] Automatic MOC for target export_controller_test
+[ 84%] Linking CXX executable document_controller_test
+[ 84%] Linking CXX executable project_e2e_test
+[ 84%] Linking CXX executable qt-video-workbench
+[ 86%] Built target document_controller_test
+[ 88%] Built target project_e2e_test
+[ 90%] Built target qt_video_workbench
+[ 91%] Linking CXX executable editor_controller_test
+[ 91%] Linking CXX executable editor_e2e_test
+[ 92%] Linking CXX executable export_e2e_test
+[ 94%] Built target editor_controller_test
+[ 96%] Built target editor_e2e_test
+[ 97%] Built target export_e2e_test
+[ 97%] Built target export_controller_test_autogen
+[ 98%] Building CXX object tests/CMakeFiles/export_controller_test.dir/unit/ExportControllerTest.cpp.o
+[ 99%] Linking CXX executable export_controller_test
+[100%] Built target export_controller_test

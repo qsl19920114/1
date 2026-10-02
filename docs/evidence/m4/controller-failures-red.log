@@ -1,0 +1,42 @@
+********* Start testing of ExportControllerTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : ExportControllerTest::initTestCase()
+FAIL!  : ExportControllerTest::failedOrMalformedBuild(badid) Compared values are not the same
+   Actual   (fail.size()): 0
+   Expected (1)          : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportControllerTest.cpp(83)]
+FAIL!  : ExportControllerTest::failedOrMalformedBuild(buildfailure) Compared values are not the same
+   Actual   (fail.size()): 0
+   Expected (1)          : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportControllerTest.cpp(83)]
+FAIL!  : ExportControllerTest::failedOrMalformedBuild(terminalfailure) Compared values are not the same
+   Actual   (fail.size()): 0
+   Expected (1)          : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportControllerTest.cpp(83)]
+FAIL!  : ExportControllerTest::failedOrMalformedBuild(wrongid) Compared values are not the same
+   Actual   (fail.size()): 0
+   Expected (1)          : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportControllerTest.cpp(83)]
+FAIL!  : ExportControllerTest::failedOrMalformedBuild(shape) Compared values are not the same
+   Actual   (fail.size()): 0
+   Expected (1)          : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportControllerTest.cpp(83)]
+FAIL!  : ExportControllerTest::failedOrMalformedBuild(missingresult) Compared values are not the same
+   Actual   (fail.size()): 0
+   Expected (1)          : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportControllerTest.cpp(83)]
+FAIL!  : ExportControllerTest::resourceAndDecodeFailure(nooutput) Compared values are not the same
+   Actual   (fail.size()): 0
+   Expected (1)          : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportControllerTest.cpp(85)]
+FAIL!  : ExportControllerTest::resourceAndDecodeFailure(staleid) Compared values are not the same
+   Actual   (fail.size()): 0
+   Expected (1)          : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportControllerTest.cpp(85)]
+FAIL!  : ExportControllerTest::resourceAndDecodeFailure(decode) Compared values are not the same
+   Actual   (fail.size()): 0
+   Expected (1)          : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportControllerTest.cpp(85)]
+PASS   : ExportControllerTest::cleanupTestCase()
+Totals: 2 passed, 9 failed, 0 skipped, 0 blacklisted, 92958ms
+********* Finished testing of ExportControllerTest *********

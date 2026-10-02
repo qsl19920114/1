@@ -46,7 +46,15 @@
     },
     "G4": {
       "milestone": "M4",
-      "verdict": "NOT_REACHED"
+      "verdict": "PASS",
+      "definition": "原创P0创作真实导出闭环，恢复/取消/失败不交付",
+      "reason": "15套回归及真实E2E通过；质量修复后受影响2套顺序回归通过；精确Output经参数及全片解码后原子交付。",
+      "evidence": [
+        "docs/evidence/m4/ctest-final.log",
+        "docs/evidence/m4/ctest-quality-final.log",
+        "docs/evidence/m4/e2e.json",
+        "docs/evidence/m4/quality-review.json"
+      ]
     },
     "G5": {
       "milestone": "M5",
@@ -452,59 +460,83 @@
       "id": "T020",
       "milestone": "M4",
       "title": "异步 plan 与本地 Runtime 构建前校验",
-      "status": "pending",
+      "status": "done",
       "dependsOn": [
         "T019"
       ],
       "acceptance": [
         "固定版本CLI参数来自源码/help与实测",
         "展示计划与诊断，拒绝未授权付费Provider"
+      ],
+      "evidence": [
+        "docs/evidence/m4/ctest-final.log",
+        "docs/evidence/m4/ctest-quality-final.log",
+        "docs/evidence/m4/e2e.json",
+        "docs/evidence/m4/quality-review.json"
       ]
     },
     {
       "id": "T021",
       "milestone": "M4",
       "title": "构建提交、精确 Build ID 与状态观察",
-      "status": "pending",
+      "status": "done",
       "dependsOn": [
         "T020"
       ],
       "acceptance": [
         "区分CLI退出与Build完成，异步更新状态",
         "记录源版本和Build ID，旧输出不代表最新源码"
+      ],
+      "evidence": [
+        "docs/evidence/m4/ctest-final.log",
+        "docs/evidence/m4/ctest-quality-final.log",
+        "docs/evidence/m4/e2e.json",
+        "docs/evidence/m4/quality-review.json"
       ]
     },
     {
       "id": "T022",
       "milestone": "M4",
       "title": "取消与任务记录恢复观察",
-      "status": "pending",
+      "status": "done",
       "dependsOn": [
         "T021"
       ],
       "acceptance": [
         "仅取消指定Build，不误杀共享Worker",
         "保存任务记录并支持重开后观察已有Build"
+      ],
+      "evidence": [
+        "docs/evidence/m4/ctest-final.log",
+        "docs/evidence/m4/ctest-quality-final.log",
+        "docs/evidence/m4/e2e.json",
+        "docs/evidence/m4/quality-review.json"
       ]
     },
     {
       "id": "T023",
       "milestone": "M4",
       "title": "按精确 Output 获取成片与媒体校验",
-      "status": "pending",
+      "status": "done",
       "dependsOn": [
         "T022"
       ],
       "acceptance": [
         "仅获取选定Build的Output，失败不显示导出成功",
         "ffprobe与全片解码验证时长/分辨率/编码"
+      ],
+      "evidence": [
+        "docs/evidence/m4/ctest-final.log",
+        "docs/evidence/m4/ctest-quality-final.log",
+        "docs/evidence/m4/e2e.json",
+        "docs/evidence/m4/quality-review.json"
       ]
     },
     {
       "id": "T024",
       "milestone": "M4",
       "title": "原创工程 P0 创作与导出真实闭环",
-      "status": "pending",
+      "status": "done",
       "dependsOn": [
         "T023"
       ],
@@ -512,7 +544,119 @@
         "新建、导入、原生编辑、构建、获取并验证真实MP4",
         "失败与取消场景可复现；不截图验收"
       ],
-      "gate": "G4"
+      "gate": "G4",
+      "evidence": [
+        "docs/evidence/m4/ctest-final.log",
+        "docs/evidence/m4/ctest-quality-final.log",
+        "docs/evidence/m4/e2e.json",
+        "docs/evidence/m4/quality-review.json"
+      ]
+    },
+    {
+      "id": "T025",
+      "milestone": "M5",
+      "title": "受约束单操作 EditProposal 与严格校验",
+      "status": "pending",
+      "dependsOn": [
+        "T024"
+      ],
+      "acceptance": [
+        "Schema白名单、当前可写字段/类型、图片仅登记素材",
+        "拒绝畸形、越权、Source/Shell及过期输入"
+      ]
+    },
+    {
+      "id": "T026",
+      "milestone": "M5",
+      "title": "原生确认提案与共同执行链",
+      "status": "pending",
+      "dependsOn": [
+        "T025"
+      ],
+      "acceptance": [
+        "确认前不修改，确认时核对版本/指纹",
+        "关闭重开和快照变化失效，成功进入已有历史"
+      ]
+    },
+    {
+      "id": "T027",
+      "milestone": "M5",
+      "title": "可替换 Provider 与明确模拟演示",
+      "status": "pending",
+      "dependsOn": [
+        "T026"
+      ],
+      "acceptance": [
+        "标题/颜色/已导入图片的模拟提案标注",
+        "外部JSON来源未核验，真实模型未配置不宣称接入"
+      ]
+    },
+    {
+      "id": "T028",
+      "milestone": "M5",
+      "title": "提案负向与真实确认撤销验证",
+      "status": "pending",
+      "dependsOn": [
+        "T027"
+      ],
+      "acceptance": [
+        "真实Studio确认前源码不变，确认后回读及撤销",
+        "模拟与真实执行证据分开"
+      ],
+      "gate": "G5"
+    },
+    {
+      "id": "T029",
+      "milestone": "M6",
+      "title": "路径/任务安全、日志有界与终态缓存清理",
+      "status": "pending",
+      "dependsOn": [
+        "T028"
+      ],
+      "acceptance": [
+        "活动或未知Build不可删除，只清理自有终态冻结目录",
+        "配置与日志有界，不删除工程输入"
+      ]
+    },
+    {
+      "id": "T030",
+      "milestone": "M6",
+      "title": "macOS bundle 资源与 Qt/WebEngine 部署",
+      "status": "pending",
+      "dependsOn": [
+        "T029"
+      ],
+      "acceptance": [
+        "无绝对模板路径，声明外部Hypit/Node/媒体依赖",
+        "递归链接签名检查、许可材料与ZIP"
+      ]
+    },
+    {
+      "id": "T031",
+      "milestone": "M6",
+      "title": "搬移后的真实启动与预览验证",
+      "status": "pending",
+      "dependsOn": [
+        "T030"
+      ],
+      "acceptance": [
+        "中文空格路径、非仓库CWD、最小初始PATH",
+        "bundle模板创建、Snapshot/预览/图片及清理"
+      ]
+    },
+    {
+      "id": "T032",
+      "milestone": "M6",
+      "title": "使用指南、完整演示与最终交付",
+      "status": "pending",
+      "dependsOn": [
+        "T031"
+      ],
+      "acceptance": [
+        "真实操作视频、成片、运行包、校验和",
+        "原创复用边界与未验收能力明确"
+      ],
+      "gate": "G6"
     }
   ]
 }

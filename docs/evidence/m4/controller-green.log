@@ -1,0 +1,23 @@
+********* Start testing of ExportControllerTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : ExportControllerTest::initTestCase()
+PASS   : ExportControllerTest::successRequiresAllLayers()
+PASS   : ExportControllerTest::rejectsPlan(paid)
+PASS   : ExportControllerTest::rejectsPlan(malformed)
+PASS   : ExportControllerTest::rejectsPlan(preflight)
+PASS   : ExportControllerTest::failedOrMalformedBuild(badid)
+PASS   : ExportControllerTest::failedOrMalformedBuild(buildfailure)
+PASS   : ExportControllerTest::failedOrMalformedBuild(terminalfailure)
+PASS   : ExportControllerTest::failedOrMalformedBuild(wrongid)
+PASS   : ExportControllerTest::failedOrMalformedBuild(shape)
+PASS   : ExportControllerTest::failedOrMalformedBuild(missingresult)
+PASS   : ExportControllerTest::resourceAndDecodeFailure(nooutput)
+PASS   : ExportControllerTest::resourceAndDecodeFailure(staleid)
+PASS   : ExportControllerTest::resourceAndDecodeFailure(decode)
+PASS   : ExportControllerTest::cancelWaitsForTerminal()
+PASS   : ExportControllerTest::resumeUsesSameBuildAndFrozenSource()
+PASS   : ExportControllerTest::reentrantCloseCannotSubmit()
+PASS   : ExportControllerTest::sourceAndUnsafeDestinationRejected()
+PASS   : ExportControllerTest::cleanupTestCase()
+Totals: 19 passed, 0 failed, 0 skipped, 0 blacklisted, 24629ms
+********* Finished testing of ExportControllerTest *********

@@ -1,0 +1,8 @@
+********* Start testing of ExportControllerTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : ExportControllerTest::initTestCase()
+FAIL!  : ExportControllerTest::pinnedCliErrorMessageIsVisible() 'fail[0][0].toString().contains("activation syntax error")' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportControllerTest.cpp(130)]
+PASS   : ExportControllerTest::cleanupTestCase()
+Totals: 2 passed, 1 failed, 0 skipped, 0 blacklisted, 515ms
+********* Finished testing of ExportControllerTest *********

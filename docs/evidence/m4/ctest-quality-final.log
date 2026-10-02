@@ -1,0 +1,9 @@
+Test project /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build
+    Start 13: export_workspace
+1/2 Test #13: export_workspace .................   Passed    0.40 sec
+    Start 15: export_controller
+2/2 Test #15: export_controller ................   Passed   48.88 sec
+
+100% tests passed out of 2
+
+Total Test time (real) =  49.30 sec

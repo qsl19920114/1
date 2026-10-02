@@ -1,0 +1,50 @@
+Test project /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build
+    Start 13: export_workspace
+1/2 Test #13: export_workspace .................   Passed    0.77 sec
+    Start 15: export_controller
+2/2 Test #15: export_controller ................***Failed   45.54 sec
+********* Start testing of ExportControllerTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : ExportControllerTest::initTestCase()
+PASS   : ExportControllerTest::successRequiresAllLayers()
+PASS   : ExportControllerTest::rejectsPlan(paid)
+PASS   : ExportControllerTest::rejectsPlan(malformed)
+PASS   : ExportControllerTest::rejectsPlan(preflight)
+PASS   : ExportControllerTest::rejectsPlan(providers)
+PASS   : ExportControllerTest::failedOrMalformedBuild(badid)
+PASS   : ExportControllerTest::failedOrMalformedBuild(buildfailure)
+PASS   : ExportControllerTest::failedOrMalformedBuild(terminalfailure)
+PASS   : ExportControllerTest::failedOrMalformedBuild(wrongid)
+PASS   : ExportControllerTest::failedOrMalformedBuild(shape)
+PASS   : ExportControllerTest::failedOrMalformedBuild(missingresult)
+PASS   : ExportControllerTest::resourceAndDecodeFailure(nooutput)
+PASS   : ExportControllerTest::resourceAndDecodeFailure(staleid)
+PASS   : ExportControllerTest::resourceAndDecodeFailure(decode)
+PASS   : ExportControllerTest::cancelWaitsForTerminal()
+PASS   : ExportControllerTest::resumeUsesSameBuildAndFrozenSource()
+PASS   : ExportControllerTest::completedWorkWaitsForFinishedResult()
+PASS   : ExportControllerTest::reentrantCloseCannotSubmit()
+PASS   : ExportControllerTest::failedTaskPersistenceCannotReportCompletion()
+PASS   : ExportControllerTest::closeBeforeBuildAcknowledgementRecoversWithoutResubmit()
+PASS   : ExportControllerTest::stopPlanningRecordsThatNoBuildWasSubmitted()
+PASS   : ExportControllerTest::diagnosticsAreVisible()
+PASS   : ExportControllerTest::pinnedCliErrorMessageIsVisible()
+PASS   : ExportControllerTest::reentrantCancellationDoesNotStartParallelStatus()
+PASS   : ExportControllerTest::unknownIdRecoveryReentrantCancellationKeepsCancelCommand()
+FAIL!  : ExportControllerTest::unconfirmedCancelMessageCannotPublishIntoAnotherProject() Compared values are not the same
+   Actual   (c.task().phase) : "working"
+   Expected (QString("idle")): "idle"
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportControllerTest.cpp(145)]
+PASS   : ExportControllerTest::sourceAndUnsafeDestinationRejected()
+PASS   : ExportControllerTest::cleanupTestCase()
+Totals: 28 passed, 1 failed, 0 skipped, 0 blacklisted, 45012ms
+********* Finished testing of ExportControllerTest *********
+
+
+50% tests passed, 1 tests failed out of 2
+
+Total Test time (real) =  46.35 sec
+
+The following tests FAILED:
+	 15 - export_controller (Failed)
+Errors while running CTest

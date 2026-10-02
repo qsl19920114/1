@@ -1,0 +1,34 @@
+********* Start testing of ExportE2ETest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : ExportE2ETest::initTestCase()
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT idle  
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT planning  
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT planning  
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT submitting  
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT working bld_20261002T022355517Z_F65AE5E140 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT stopped bld_20261002T022355517Z_F65AE5E140 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT idle  
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT idle  
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT stopped bld_20261002T022355517Z_F65AE5E140 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT working bld_20261002T022355517Z_F65AE5E140 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT working bld_20261002T022355517Z_F65AE5E140 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT working bld_20261002T022355517Z_F65AE5E140 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT working bld_20261002T022355517Z_F65AE5E140 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT working bld_20261002T022355517Z_F65AE5E140 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT working bld_20261002T022355517Z_F65AE5E140 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT working bld_20261002T022355517Z_F65AE5E140 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT getting bld_20261002T022355517Z_F65AE5E140 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT validating bld_20261002T022355517Z_F65AE5E140 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT complete bld_20261002T022355517Z_F65AE5E140 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT planning  
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT planning  
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT submitting  
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT working bld_20261002T022408837Z_9ED47613D2 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT cancelling bld_20261002T022408837Z_9ED47613D2 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT cancelling bld_20261002T022408837Z_9ED47613D2 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT cancelled bld_20261002T022408837Z_9ED47613D2 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() Build 已进入取消终态。
+PASS   : ExportE2ETest::originalProjectToValidatedFilm()
+PASS   : ExportE2ETest::cleanupTestCase()
+Totals: 3 passed, 0 failed, 0 skipped, 0 blacklisted, 22929ms
+********* Finished testing of ExportE2ETest *********

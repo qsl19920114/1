@@ -1,0 +1,117 @@
+{
+  "format": "hypit.cli-plan@1",
+  "ok": true,
+  "run": "main.svrun",
+  "targetCount": 1,
+  "targets": [
+    "final.video"
+  ],
+  "requestCount": 3,
+  "requestIssueCount": 0,
+  "providerRequestCount": 0,
+  "localRequestCount": 3,
+  "unresolvedRequestCount": 0,
+  "unsupportedRequestCount": 0,
+  "choiceCount": 0,
+  "providers": [
+    {
+      "request": "need:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2F.workbench%2Fm4-plan-probe%2Fmain.svml%3A%3Acomponent%3A%3Afinal:request-audio-render",
+      "capability": "@hypit/media-pipeline@1#render-timeline-audio",
+      "status": "resolved",
+      "endpoint": "media.local",
+      "use": "@hypit/provider-media-local",
+      "pricing": {
+        "kind": "local"
+      }
+    },
+    {
+      "request": "need:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2F.workbench%2Fm4-plan-probe%2Fmain.svml%3A%3Acomponent%3A%3Afinal:request-mux",
+      "capability": "@hypit/media-pipeline@1#mux-program-media",
+      "status": "resolved",
+      "endpoint": "media.local",
+      "use": "@hypit/provider-media-local",
+      "pricing": {
+        "kind": "local"
+      }
+    },
+    {
+      "request": "need:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2F.workbench%2Fm4-plan-probe%2Fmain.svml%3A%3Acomponent%3A%3Afinal:request-visual-render",
+      "capability": "@hypit/render-hyperframes@1#render-visual",
+      "status": "resolved",
+      "endpoint": "hyperframes.local",
+      "use": "@hypit/provider-hyperframes-local",
+      "pricing": {
+        "kind": "local"
+      }
+    }
+  ],
+  "needs": [
+    {
+      "request": "need:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2F.workbench%2Fm4-plan-probe%2Fmain.svml%3A%3Acomponent%3A%3Afinal:request-audio-render",
+      "step": "operation:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2F.workbench%2Fm4-plan-probe%2Fmain.svml%3A%3Acomponent%3A%3Afinal:request-audio-render",
+      "port": "audio",
+      "capability": "@hypit/media-pipeline@1#render-timeline-audio",
+      "endpoint": "media.local",
+      "summary": {
+        "fields": {
+          "startFrame": 0,
+          "endFrameExclusive": 240,
+          "frameRate": "30/1",
+          "sampleRate": 48000
+        },
+        "references": {}
+      },
+      "pending": []
+    },
+    {
+      "request": "need:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2F.workbench%2Fm4-plan-probe%2Fmain.svml%3A%3Acomponent%3A%3Afinal:request-mux",
+      "step": "operation:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2F.workbench%2Fm4-plan-probe%2Fmain.svml%3A%3Acomponent%3A%3Afinal:request-mux",
+      "port": "media",
+      "capability": "@hypit/media-pipeline@1#mux-program-media",
+      "endpoint": "media.local",
+      "summary": {
+        "fields": {},
+        "references": {
+          "audio": 1,
+          "video": 1
+        }
+      },
+      "pending": [
+        {
+          "input": "audio",
+          "record": "record:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2F.workbench%2Fm4-plan-probe%2Fmain.svml%3A%3Acomponent%3A%3Afinal:request-audio-render",
+          "kind": "audio"
+        },
+        {
+          "input": "visual",
+          "record": "record:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2F.workbench%2Fm4-plan-probe%2Fmain.svml%3A%3Acomponent%3A%3Afinal:request-visual-render",
+          "kind": "video"
+        }
+      ]
+    },
+    {
+      "request": "need:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2F.workbench%2Fm4-plan-probe%2Fmain.svml%3A%3Acomponent%3A%3Afinal:request-visual-render",
+      "step": "operation:author%3A%2FUsers%2Fbytedance%2FDownloads%2F%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A%2Fqt-video-workbench%2F.workbench%2Fm4-plan-probe%2Fmain.svml%3A%3Acomponent%3A%3Afinal:request-visual-render",
+      "port": "visual",
+      "capability": "@hypit/render-hyperframes@1#render-visual",
+      "endpoint": "hyperframes.local",
+      "summary": {
+        "fields": {
+          "width": 1280,
+          "height": 720,
+          "startFrame": 0,
+          "endFrameExclusive": 240,
+          "frameRate": "30/1"
+        },
+        "references": {}
+      },
+      "pending": []
+    }
+  ],
+  "preflight": {
+    "ok": true,
+    "capabilityCount": 3,
+    "diagnosticCount": 0,
+    "diagnostics": []
+  }
+}

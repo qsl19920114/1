@@ -2,6 +2,7 @@
 #include "controllers/ProjectController.h"
 #include "controllers/DocumentController.h"
 #include "controllers/EditorController.h"
+#include "controllers/ExportController.h"
 #include "infrastructure/AppConfig.h"
 #include "infrastructure/LogWriter.h"
 #include "ui/MainWindow.h"
@@ -23,7 +24,7 @@ int main(int argc, char **argv) {
     QStringList arguments;
     for (int i = 0; i < argc; ++i) arguments.append(QString::fromLocal8Bit(argv[i]));
     QApplication app(argc, argv);
-    app.setApplicationName("Qt Video Workbench"); app.setApplicationVersion("0.4.0");
+    app.setApplicationName("Qt Video Workbench"); app.setApplicationVersion("0.5.0");
     QCommandLineParser parser;
     parser.setApplicationDescription(QStringLiteral("Qt 视频工作台：打开本地 Hypit Run 与 Studio 会话"));
     parser.addHelpOption(); parser.addVersionOption();
@@ -59,6 +60,7 @@ int main(int argc, char **argv) {
     qvw::controllers::ProjectController controller(loaded.config, log);
     qvw::controllers::DocumentController document;
     qvw::controllers::EditorController editor;
+    qvw::controllers::ExportController exporter(loaded.config,log);
     qvw::ui::MainWindow window;
     window.appendLog(QStringLiteral("日志：%1").arg(log.filePath()));
     if (!log.isReady()) window.appendLog(QStringLiteral("日志不可写：%1").arg(log.lastError()));
@@ -98,6 +100,17 @@ int main(int argc, char **argv) {
     QObject::connect(&window, &qvw::ui::MainWindow::sourceEditRequested, &editor, &qvw::controllers::EditorController::replaceSource);
     QObject::connect(&window, &qvw::ui::MainWindow::undoRequested, &editor, &qvw::controllers::EditorController::undo);
     QObject::connect(&window, &qvw::ui::MainWindow::redoRequested, &editor, &qvw::controllers::EditorController::redo);
+    QObject::connect(&window, &qvw::ui::MainWindow::exportRequested, &exporter, [&](const QString &path){
+        if(editor.isBusy()){window.appendLog(QStringLiteral("请等待编辑完成后导出。"));return;}
+        exporter.startExport(editor.snapshot(),path);
+    });
+    QObject::connect(&window, &qvw::ui::MainWindow::cancelExportRequested, &exporter, &qvw::controllers::ExportController::cancelBuild);
+    QObject::connect(&window, &qvw::ui::MainWindow::stopExportObservationRequested, &exporter, &qvw::controllers::ExportController::stopObserving);
+    QObject::connect(&window, &qvw::ui::MainWindow::resumeExportRequested, &exporter, &qvw::controllers::ExportController::resume);
+    QObject::connect(&exporter, &qvw::controllers::ExportController::taskChanged, &window, &qvw::ui::MainWindow::showExportTask);
+    QObject::connect(&exporter, &qvw::controllers::ExportController::message, &window, [&](const QString &text){window.appendLog(text);log.info(text);});
+    QObject::connect(&exporter, &qvw::controllers::ExportController::failed, &window, [&](const QString &text){window.appendLog(QStringLiteral("导出未完成：%1").arg(text));log.error(text);});
+    QObject::connect(&exporter, &qvw::controllers::ExportController::completed, &window, [&](const QString &path){window.appendLog(QStringLiteral("成片已通过参数与全片解码验证：%1").arg(path));});
     QObject::connect(&editor, &qvw::controllers::EditorController::message, &window, [&](const QString &text){window.appendLog(text);log.info(text);});
     QObject::connect(&editor, &qvw::controllers::EditorController::failed, &window, [&](const QString &text){window.appendLog(QStringLiteral("编辑未完成：%1").arg(text));log.error(text);});
     QObject::connect(&controller, &qvw::controllers::ProjectController::failed, &window, [&](const QString &error) {
@@ -123,6 +136,8 @@ int main(int argc, char **argv) {
     QObject::connect(&window, &qvw::ui::MainWindow::importImageRequested, &document, &qvw::controllers::DocumentController::importImage);
     QObject::connect(&document, &qvw::controllers::DocumentController::projectChanged, &window, &qvw::ui::MainWindow::showDocument);
     QObject::connect(&document, &qvw::controllers::DocumentController::documentClosed, &window, &qvw::ui::MainWindow::clearDocument);
+    QObject::connect(&document, &qvw::controllers::DocumentController::documentClosed, &exporter, &qvw::controllers::ExportController::clearProject);
+    QObject::connect(&document, &qvw::controllers::DocumentController::projectLoaded, &exporter, &qvw::controllers::ExportController::setProject);
     QObject::connect(&document, &qvw::controllers::DocumentController::projectLoaded, &controller, [&](const qvw::domain::Project &project) {
         controller.openDocument(project,port);
     });
@@ -137,8 +152,12 @@ int main(int argc, char **argv) {
         if(editor.snapshot().isLoaded())editor.refresh();else controller.refresh();
     });
     QObject::connect(&window, &qvw::ui::MainWindow::configurationRequested, &controller, [&](const QString &path) {
+        if (exporter.isBusy()) {
+            window.appendLog(QStringLiteral("导出正在观察或验证，请先停止观察再切换后端配置。"));
+            return;
+        }
         const auto config = qvw::infra::loadAppConfig(path);
-        if (!config.ok()) window.showError(config.error); else controller.configure(config.config);
+        if (!config.ok()) window.showError(config.error); else {exporter.setConfig(config.config);controller.configure(config.config);}
     });
     QObject::connect(&window, &qvw::ui::MainWindow::previewLoaded, &app, [&](bool ok) {
         pageLoaded = ok;

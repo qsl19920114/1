@@ -1,0 +1,13 @@
+Test project /private/tmp/qvw-m4-test/build
+    Start 4: export_controller
+    Start 3: media_validation
+    Start 1: json_process
+    Start 2: export_workspace
+1/4 Test #1: json_process .....................   Passed    1.37 sec
+2/4 Test #2: export_workspace .................   Passed    1.36 sec
+3/4 Test #3: media_validation .................   Passed    4.52 sec
+4/4 Test #4: export_controller ................   Passed   39.75 sec
+
+100% tests passed out of 4
+
+Total Test time (real) =  39.77 sec

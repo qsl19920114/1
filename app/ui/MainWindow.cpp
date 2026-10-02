@@ -58,6 +58,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
         if (!path.isEmpty()) emit importImageRequested(path);
     });
     m_importAction->setEnabled(false);
+    m_exportAction=bar->addAction(QStringLiteral("导出 MP4…"),this,[this] {
+        const auto path=QFileDialog::getSaveFileName(this,QStringLiteral("导出验证后的 MP4"),QStringLiteral("校园社团介绍.mp4"),"MP4 (*.mp4)");
+        if(!path.isEmpty())emit exportRequested(path.endsWith(".mp4",Qt::CaseInsensitive)?path:path+".mp4");
+    });
+    m_exportAction->setEnabled(false);
     bar->addSeparator();
     m_undoAction=bar->addAction(QStringLiteral("撤销"),this,&MainWindow::undoRequested);m_undoAction->setShortcut(QKeySequence::Undo);
     m_redoAction=bar->addAction(QStringLiteral("重做"),this,&MainWindow::redoRequested);m_redoAction->setShortcut(QKeySequence::Redo);
@@ -143,7 +148,31 @@ QWidget *MainWindow::buildInspectorPanel() {
 }
 QWidget *MainWindow::buildTaskPanel() {
     m_taskLog = new QPlainTextEdit; m_taskLog->setReadOnly(true); m_taskLog->setMaximumBlockCount(2000);
-    return withTitle(QStringLiteral("任务与日志"), m_taskLog);
+    auto *body=new QWidget;auto *layout=new QVBoxLayout(body);layout->setContentsMargins(0,0,0,0);
+    m_exportSummary=new QLabel(QStringLiteral("尚无导出任务。编辑完成后点击“导出 MP4…”。"));m_exportSummary->setWordWrap(true);
+    layout->addWidget(m_exportSummary);
+    auto *buttons=new QHBoxLayout;
+    m_cancelExport=new QPushButton(QStringLiteral("取消构建"));m_stopExport=new QPushButton(QStringLiteral("停止观察"));m_resumeExport=new QPushButton(QStringLiteral("恢复观察"));
+    for(auto *button:{m_cancelExport,m_stopExport,m_resumeExport}){button->setEnabled(false);buttons->addWidget(button);}
+    buttons->addStretch();layout->addLayout(buttons);layout->addWidget(m_taskLog,1);
+    connect(m_cancelExport,&QPushButton::clicked,this,&MainWindow::cancelExportRequested);
+    connect(m_stopExport,&QPushButton::clicked,this,&MainWindow::stopExportObservationRequested);
+    connect(m_resumeExport,&QPushButton::clicked,this,&MainWindow::resumeExportRequested);
+    return withTitle(QStringLiteral("任务与日志"), body);
+}
+void MainWindow::showExportTask(const domain::ExportTask &task) {
+    const bool observing=QStringList{"planning","submitting","working","cancelling","getting","validating"}.contains(task.phase);
+    m_exportActive=task.active||observing;
+    const QMap<QString,QString> labels{{"idle","尚无任务"},{"planning","检查构建计划"},{"submitting","提交构建"},{"working","正在构建"},{"cancelling","等待取消终态"},{"stopped","已停止观察"},{"getting","获取成片"},{"validating","校验视频与全片解码"},{"complete","导出及校验通过"},{"failed","任务失败"},{"cancelled","构建已取消"}};
+    QString summary=labels.value(task.phase,task.phase);
+    if(!task.buildId.isEmpty())summary+=QStringLiteral(" · %1 · 源码 revision %2").arg(task.buildId).arg(task.revision);
+    if(!task.destination.isEmpty())summary+=QStringLiteral("\n%1").arg(task.destination);
+    if(!task.error.isEmpty())summary+=QStringLiteral("\n%1").arg(task.error);
+    m_exportSummary->setText(summary);
+    m_cancelExport->setEnabled(task.active&&!task.buildId.isEmpty()&&task.phase!="cancelling");
+    m_stopExport->setEnabled(observing);
+    m_resumeExport->setEnabled(task.phase=="stopped"&&(task.active||!task.buildId.isEmpty()));
+    m_exportAction->setEnabled(m_hasDocument&&m_editorReady&&!m_editorBusy&&!m_exportActive);
 }
 void MainWindow::showSnapshot(const domain::Snapshot &snapshot) {
     QString selectedId;
@@ -222,6 +251,7 @@ void MainWindow::appendLog(const QString &line) { m_taskLog->appendPlainText(lin
 void MainWindow::setEditorState(bool ready,bool busy,bool canUndo,bool canRedo) {
     const bool readinessChanged=m_editorReady!=ready;
     m_editorReady=ready;m_editorBusy=busy;
+    m_exportAction->setEnabled(m_hasDocument&&ready&&!busy&&!m_exportActive);
     m_inspectorTable->setEnabled(ready&&!busy);
     m_undoAction->setEnabled(ready&&!busy&&canUndo);m_redoAction->setEnabled(ready&&!busy&&canRedo);
     m_sourceAction->setEnabled(ready&&!busy&&!m_snapshot.sourceFiles.isEmpty());
@@ -260,6 +290,8 @@ void MainWindow::sourceDialog() {
         emit sourceEditRequested(paths->currentText(),text->toPlainText());
 }
 void MainWindow::showDocument(const domain::Project &project) {
+    m_hasDocument=true;
+    m_exportAction->setEnabled(m_editorReady&&!m_editorBusy&&!m_exportActive);
     setWindowTitle(QStringLiteral("%1 — Qt 视频工作台").arg(project.name));
     m_documentTitle->setText(QStringLiteral("%1\n模板：%2").arg(project.name,project.templateId));
     m_documentTitle->setToolTip(project.rootPath); m_assetTree->clear();
@@ -273,6 +305,7 @@ void MainWindow::showDocument(const domain::Project &project) {
     m_saveAction->setEnabled(true); m_importAction->setEnabled(true);
 }
 void MainWindow::clearDocument() {
+    m_hasDocument=false;m_exportAction->setEnabled(false);
     setWindowTitle(QStringLiteral("Qt 视频工作台"));
     m_documentTitle->setText(QStringLiteral("新建标题卡工程，或打开已保存的工程。"));
     m_assetTree->clear(); m_saveAction->setEnabled(false); m_importAction->setEnabled(false);

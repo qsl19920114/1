@@ -1,0 +1,15 @@
+{
+    "buildId": "bld_20261002T023731321Z_A03C16CEB6",
+    "cancelledBuildId": "bld_20261002T023742973Z_73768F0CEB",
+    "cancelledWithoutDelivering": true,
+    "exactOutput": "final.video",
+    "exampleFilm": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables/校园摄影社-验证成片.mp4",
+    "frozenInputs": true,
+    "nativeTitleColorImage": true,
+    "realPlanFailureWithoutDelivery": true,
+    "reopenedSameBuild": true,
+    "screenshots": false,
+    "stoppedObservationIsNotCancellation": true,
+    "validatedMp4": true,
+    "verdict": "PASS"
+}

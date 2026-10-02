@@ -1,6 +1,7 @@
 #pragma once
 #include "domain/Snapshot.h"
 #include "domain/Project.h"
+#include "domain/ExportTask.h"
 #include <QMainWindow>
 #include <QUrl>
 class QLabel;
@@ -26,6 +27,7 @@ public:
     void showDocument(const domain::Project &project);
     void clearDocument();
     void setEditorState(bool ready,bool busy,bool canUndo,bool canRedo);
+    void showExportTask(const domain::ExportTask &task);
     QWebEngineView *previewView() const { return m_webView; }
 signals:
     void openRequested(const QString &workspace, const QString &run, const QString &runtime);
@@ -37,6 +39,10 @@ signals:
     void sourceEditRequested(const QString &path,const QString &text);
     void undoRequested();
     void redoRequested();
+    void exportRequested(const QString &destination);
+    void cancelExportRequested();
+    void stopExportObservationRequested();
+    void resumeExportRequested();
     void closeRequested();
     void refreshRequested();
     void configurationRequested(const QString &path);
@@ -74,6 +80,13 @@ private:
     QAction *m_openAction = nullptr;
     QAction *m_closeAction = nullptr;
     QAction *m_refreshAction = nullptr;
+    QAction *m_exportAction = nullptr;
+    QLabel *m_exportSummary = nullptr;
+    QPushButton *m_cancelExport = nullptr;
+    QPushButton *m_stopExport = nullptr;
+    QPushButton *m_resumeExport = nullptr;
+    bool m_hasDocument = false;
+    bool m_exportActive = false;
     QUrl m_previewUrl;
     domain::Snapshot m_snapshot;
 };

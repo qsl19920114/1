@@ -18,6 +18,14 @@
 - 原生控件：五类控件、只读字段、真实提交值类型、数值显示精度不导致无意写入。
 - `editor_e2e_test`：真实标题/颜色/图片、编译预览与图片字节、撤销重做、422 服务端回滚、Source 编译失败恢复、外部冲突、关闭重开。测试直接使用生产控制器，不截图。
 
+## M4
+
+- JsonProcess：有界stdout/stderr、严格JSON、绝对期限、取消、退出后重新start的回调隔离。
+- ExportWorkspace：快照预像与输入hash冻结、中文路径、symlink和dataRoot逃逸、任务原子保存、恢复时输入篡改拒绝。
+- MediaValidation：H.264/MP4、尺寸/帧率/时长、工具缺失、ffmpeg全片解码；未通过不发validated。
+- ExportController：严格本地计划、真实诊断、精确ID/Output、Work与Result、取消终态、保存记录失败、未知提交恢复不重提、公开信号重入和取消隔离。
+- `export_e2e_test`：生产Controller完成原创工程/图片/标题/颜色→真实成片；停止重开恢复同ID，原工程后续改动不污染冻结；实际取消及包语法错误的计划失败不交付。全过程不截图。
+
 ## 后续硬门禁
 
 M3 必须区分409冲突与422回滚，写入成功后才能推进撤销历史；重开工程一致。M4 必须区分 HTTP 接受、CLI 退出、Build完成、Output获取与成片可解码；用 ffprobe 和全片解码验证真正的 MP4。M6 验证发布包脱离开发机路径。

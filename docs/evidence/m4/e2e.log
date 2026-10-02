@@ -1,0 +1,40 @@
+********* Start testing of ExportE2ETest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : ExportE2ETest::initTestCase()
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT idle  
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT planning  
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT planning  
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() 导出计划：目标 final.video；3 项本地请求，0 项付费请求；预检通过。
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT submitting  
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT working bld_20261002T023731321Z_A03C16CEB6 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT stopped bld_20261002T023731321Z_A03C16CEB6 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT idle  
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT idle  
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT stopped bld_20261002T023731321Z_A03C16CEB6 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT working bld_20261002T023731321Z_A03C16CEB6 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT working bld_20261002T023731321Z_A03C16CEB6 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT working bld_20261002T023731321Z_A03C16CEB6 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT working bld_20261002T023731321Z_A03C16CEB6 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT working bld_20261002T023731321Z_A03C16CEB6 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT working bld_20261002T023731321Z_A03C16CEB6 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT getting bld_20261002T023731321Z_A03C16CEB6 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT validating bld_20261002T023731321Z_A03C16CEB6 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT complete bld_20261002T023731321Z_A03C16CEB6 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT planning  
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT planning  
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() 导出计划：目标 final.video；3 项本地请求，0 项付费请求；预检通过。
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT submitting  
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT working bld_20261002T023742973Z_73768F0CEB 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT cancelling bld_20261002T023742973Z_73768F0CEB 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT cancelling bld_20261002T023742973Z_73768F0CEB 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT cancelled bld_20261002T023742973Z_73768F0CEB 
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() Build 已进入取消终态。
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT planning  
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT planning  
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() CLI_ERROR：Unexpected token ';'
+QINFO  : ExportE2ETest::originalProjectToValidatedFilm() EXPORT failed  CLI_ERROR：Unexpected token ';'
+QWARN  : ExportE2ETest::originalProjectToValidatedFilm() CLI_ERROR：Unexpected token ';'
+PASS   : ExportE2ETest::originalProjectToValidatedFilm()
+PASS   : ExportE2ETest::cleanupTestCase()
+Totals: 3 passed, 0 failed, 0 skipped, 0 blacklisted, 20985ms
+********* Finished testing of ExportE2ETest *********

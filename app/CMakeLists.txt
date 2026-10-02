@@ -28,13 +28,14 @@ add_library(qvw_infra STATIC
   infrastructure/AppConfig.cpp
   infrastructure/HypitProbe.cpp
   infrastructure/LogWriter.cpp
+  infrastructure/JsonProcess.cpp
 )
 target_include_directories(qvw_infra PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(qvw_infra PUBLIC Qt6::Core)
 
-add_library(qvw_services STATIC services/ProjectStore.cpp services/AssetService.cpp services/SourceEditGuard.cpp)
+add_library(qvw_services STATIC services/ProjectStore.cpp services/AssetService.cpp services/SourceEditGuard.cpp services/ExportWorkspace.cpp services/MediaValidation.cpp)
 target_include_directories(qvw_services PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(qvw_services PUBLIC qvw_domain Qt6::Gui)
+target_link_libraries(qvw_services PUBLIC qvw_domain qvw_infra Qt6::Gui)
 
 add_library(qvw_ui STATIC
   ui/MainWindow.cpp
@@ -44,7 +45,7 @@ add_library(qvw_ui STATIC
 target_include_directories(qvw_ui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(qvw_ui PUBLIC qvw_domain Qt6::Widgets Qt6::WebEngineWidgets)
 
-add_library(qvw_controllers STATIC controllers/ProjectController.cpp controllers/DocumentController.cpp controllers/EditorController.cpp)
+add_library(qvw_controllers STATIC controllers/ProjectController.cpp controllers/DocumentController.cpp controllers/EditorController.cpp controllers/ExportController.cpp)
 target_include_directories(qvw_controllers PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(qvw_controllers PUBLIC qvw_backend qvw_infra qvw_services)
 

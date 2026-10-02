@@ -1,0 +1,34 @@
+********* Start testing of MediaValidationTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : MediaValidationTest::initTestCase()
+FAIL!  : MediaValidationTest::requiresProbeAndFullDecode() Compared values are not the same
+   Actual   (ok.size()): 0
+   Expected (1)        : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/MediaValidationTest.cpp(18)]
+FAIL!  : MediaValidationTest::rejectsMetadata(codec) Compared values are not the same
+   Actual   (failed.size()): 0
+   Expected (1)            : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/MediaValidationTest.cpp(23)]
+FAIL!  : MediaValidationTest::rejectsMetadata(size) Compared values are not the same
+   Actual   (failed.size()): 0
+   Expected (1)            : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/MediaValidationTest.cpp(23)]
+FAIL!  : MediaValidationTest::rejectsMetadata(fps) Compared values are not the same
+   Actual   (failed.size()): 0
+   Expected (1)            : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/MediaValidationTest.cpp(23)]
+FAIL!  : MediaValidationTest::rejectsMetadata(duration) Compared values are not the same
+   Actual   (failed.size()): 0
+   Expected (1)            : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/MediaValidationTest.cpp(23)]
+FAIL!  : MediaValidationTest::decodeFailureNeverSucceeds() Compared values are not the same
+   Actual   (failed.size()): 0
+   Expected (1)            : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/MediaValidationTest.cpp(27)]
+FAIL!  : MediaValidationTest::missingToolIsReadableFailure() Compared values are not the same
+   Actual   (failed.size()): 0
+   Expected (1)            : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/MediaValidationTest.cpp(29)]
+PASS   : MediaValidationTest::cleanupTestCase()
+Totals: 2 passed, 7 failed, 0 skipped, 0 blacklisted, 23294ms
+********* Finished testing of MediaValidationTest *********
