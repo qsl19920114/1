@@ -90,12 +90,12 @@ bool ProposalService::validate(const domain::EditProposal &proposal,const domain
     const auto *field=findField(snapshot,proposal);
     if(!field||!field->isEditable()||!typedValue(*field,proposal.value))
         return fail(error,QStringLiteral("提案属性不存在、不可写，或 value 与当前属性类型不匹配。"));
-    if(field->binding=="image") {
+    if(field->binding=="image"||field->binding=="video") {
         auto path=proposal.value.toString();if(path.startsWith("./"))path.remove(0,2);
         const domain::Asset *registered=nullptr;
         for(const auto &asset:project.assets)if(asset.path==path){if(registered)return fail(error,QStringLiteral("工程素材路径登记重复。"));registered=&asset;}
-        if(!registered||(registered->mime!="image/png"&&registered->mime!="image/jpeg"))
-            return fail(error,QStringLiteral("图片提案只能使用当前工程登记的 PNG/JPEG 素材。"));
+        if(!registered||(field->binding=="image"?(registered->mime!="image/png"&&registered->mime!="image/jpeg"):registered->mime!="video/mp4"))
+            return fail(error,QStringLiteral("素材提案只能使用当前工程登记的兼容图片或视频。"));
         QString absolute;if(!ProjectStore::resolvePath(project,path,&absolute,error))return false;
         const QFileInfo file(absolute);
         if(!file.isFile()||!file.isReadable()||file.isSymLink())return fail(error,QStringLiteral("登记素材不可读或已被替换为符号链接。"));

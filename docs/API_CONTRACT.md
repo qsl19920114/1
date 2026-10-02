@@ -251,3 +251,11 @@ Qt 侧不得主动添加 `Origin` 头；一旦添加且不同源即被 403 拒�
 - GET500的明确编译错误包含revision。Source202后，仅对应ack revision的编译失败触发内容核对恢复；网络超时、坏响应和未知结果不自动回滚。
 - `source.files` 为唯一源码编辑白名单；缺失时禁用编辑。合法改变import会改变依赖集合，确认时比较目标文件及仍存在的其他旧文件，不要求集合成员完全不变。
 - `server.ts:115–117,184–191,602–604,626–635`：文件监听可调度延迟编译；`/__studio/session` 在编译中仍可能返回旧快照，`/__studio/document` 此时返回409。macOS真实测试观察到422回滚后立即Source写入得到409忙碌响应。应用按冲突处理并等待用户下一次操作，不自动重放；集成测试在下一个独立场景前只读等待document就绪并刷新。
+
+## M7：原生预览桥接与视频输入
+
+固定版本本地证据（Hypit0.2.10、commit1af179d3）：`packages/studio/src/ui/stage.ts:238–245`的`data-previous`/`data-next`在composition模式逐帧，artifact模式则前后5秒；`:256–281`实际scrubber输入，`:296–310`compositionTime更新时长/步长/位置；`:317–345`以`.stage-scaler.hidden`区分composition/artifact。Qt轮询真实DOM，命令执行时再次检查该模式、scrubber就绪及已编译composition，防止poll间隔内模式变化。隐藏面板仅为本项目注入的展示CSS，不修改外部Hypit。
+
+`examples/semantic-composition/packages/responsive-explainer/src/render.ts:21–30`声明Visual IR video artifact+sampling；`packages/hyperframes/src/document.ts:372–407`生成采样视频。`packages/media/src/surface.ts:85–118`只解析Video到artifact blob，并不自动提供时间轴。原创video-story因此声明固定30fps/240frame采样，VideoAssetImporter先验证真实源帧时间，再接受此模板可用的媒体。音轨不进入原创composition，画面静音。
+
+实际ffprobe frame命令采用`-show_frames -show_entries frame=best_effort_timestamp_time`的顺序。相反顺序会覆盖字段筛选，本机输出超过64KiB；正确顺序前240帧17952字节，满足受控进程输出上限。导入流程为受控暂存复制、完整元数据probe、前240帧时间probe、完整视频流decode、安全复制/去重、原子保存清单。生产成片导出仍使用原有MediaValidation全片验证。

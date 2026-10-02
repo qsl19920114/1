@@ -1,0 +1,13 @@
+✔ video-story template exists (0.5395ms)
+✔ MP4 uses exactly the first 240 frames and is muted (1.122ms)
+✔ default image keeps the same composition (0.124625ms)
+✔ rejects invalid native fields (0.154166ms)
+✔ strings stay in text nodes (0.117208ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 274.729166

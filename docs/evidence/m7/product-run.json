@@ -1,0 +1,20 @@
+{
+    "artifactModeGuard": true,
+    "audio": "muted in original video-story template",
+    "buildId": "bld_20261002T093046457Z_7641A34CB0",
+    "duplicateSources": 3,
+    "exportPhase": "complete: production full media validation",
+    "film": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m7/对话之外-FrameLab成片.mp4",
+    "filmPlayerDecoded": true,
+    "keyboardAndWheelSeek": true,
+    "nativeSeekFrame": 90,
+    "previewVideoDecoded": true,
+    "project": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m7/对话之外 20261002-093038-727/workbench.qvw.json",
+    "realPlaybackAdvanced": true,
+    "reopened": true,
+    "sampleSha256": "e63183cb8638c6df7776a1e2993ef605c0d11363d42e5a3ecc658e861d043ece",
+    "screenshotsForAcceptance": false,
+    "sourceFingerprint": "bfd9fda5d876f4059e188e8efaeee838a03349898b97607995379b709628687d",
+    "ui": "production MainWindow signals plus actual native playback/seek buttons",
+    "verdict": "PASS"
+}

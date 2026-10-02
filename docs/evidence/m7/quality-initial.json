@@ -1,0 +1,13 @@
+[
+  {
+    "title": "原生定位滑块的键盘操作不会定位预览",
+    "file": "app/ui/MainWindow.cpp",
+    "start_line": 148,
+    "end_line": 148,
+    "severity": "P2",
+    "category": "LOGIC",
+    "confidence": 10,
+    "suggestion": "为键盘/滚轮等用户 actionTriggered 增加定位提交；拖动仍在释放时提交，轮询调用 setValue 时阻止反馈，避免每 250 ms 把回读再次发送为定位。增加键盘 Right/End 操作的 UI 回归覆盖。",
+    "rationale": "定位只连接 QSlider::sliderReleased。Qt 的 Right、End 等键盘操作会发出 actionTriggered/valueChanged，未发出 sliderReleased，因而不会调用 StudioTransport::seek。MainWindow 的 positionChanged 回调每 250 ms 将非拖动状态下的滑块恢复为实际播放帧，用户键盘选定的帧会被恢复。临时 Qt 6 探针确认 Right 从90到91、End到239，而 sliderReleased 计数始终0；actionTriggered计数分别1、2。鼠标拖动定位仍可用，因此定为影响较小的P2。"
+  }
+]

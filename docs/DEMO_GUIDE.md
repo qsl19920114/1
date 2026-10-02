@@ -33,3 +33,18 @@ build/tests/walkthrough_demo
 每次创建新的带时间戳演示工程，最终操作视频和样例成片写入上述固定交付位置。临时录制帧自动清理；不删除既有工程。
 
 建议课程提交包含源码仓库、运行包ZIP与SHA256、操作视频、样例成片、使用/架构/测试说明和第三方依赖说明。应用为macOS arm64本地签名包；外部Hypit等依赖准备方法见 `USER_GUIDE.md`。最终证据索引见 `evidence/m6/README.md`。
+
+## M7 视频创作演示
+
+运行FrameLab1.1.0，左侧「示例」播放本地测试视频，再「用此视频创作…」。编辑标题/副标题，使用原生播放、逐帧、定位条（支持键盘和滚轮），导出完成后在Qt内播放成片。当前示例来源三个相同副本已合并，模板取前8秒静音；自己的视频也可经校验导入后应用到视频组件。
+
+复现生产自动化流程：
+
+```bash
+./build/tests/product_e2e_test -o docs/evidence/m7/product-e2e-final.log,txt
+python3 scripts/release/verify_relocated.py \
+  --app .workbench/release-macos-arm64-1.1.0/QtVideoWorkbench.app \
+  --evidence-dir docs/evidence/m7
+```
+
+Qt测试驱动生产UI信号及真实播放定位控件，不是模拟Hypit回应；`product-run.json`记录可重开工程与真实成片的位置。M6历史完整操作视频仍保留，M7新增实际视频作品与新运行包；本轮无需截图验收。

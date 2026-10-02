@@ -35,7 +35,7 @@ add_library(qvw_infra STATIC
 target_include_directories(qvw_infra PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(qvw_infra PUBLIC Qt6::Core)
 
-add_library(qvw_services STATIC services/ProjectStore.cpp services/AssetService.cpp services/SourceEditGuard.cpp services/ExportWorkspace.cpp services/MediaValidation.cpp services/ProposalService.cpp services/ProposalProvider.cpp)
+add_library(qvw_services STATIC services/ProjectStore.cpp services/AssetService.cpp services/SourceEditGuard.cpp services/ExportWorkspace.cpp services/MediaValidation.cpp services/ProposalService.cpp services/ProposalProvider.cpp services/SampleCatalog.cpp services/VideoAssetImporter.cpp services/VideoAssetImporter.h)
 target_include_directories(qvw_services PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(qvw_services PUBLIC qvw_domain qvw_infra Qt6::Gui)
 
@@ -43,11 +43,13 @@ add_library(qvw_ui STATIC
   ui/MainWindow.cpp
   ui/MainWindow.h
   ui/InspectorControls.cpp
+  ui/StudioTransport.cpp
+  ui/MediaPlayerDialog.cpp
 )
 target_include_directories(qvw_ui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(qvw_ui PUBLIC qvw_domain Qt6::Widgets Qt6::WebEngineWidgets)
 
-add_library(qvw_controllers STATIC controllers/ProjectController.cpp controllers/DocumentController.cpp controllers/EditorController.cpp controllers/ExportController.cpp controllers/ProposalController.cpp)
+add_library(qvw_controllers STATIC controllers/ProjectController.cpp controllers/DocumentController.cpp controllers/EditorController.cpp controllers/ExportController.cpp controllers/ProposalController.cpp controllers/SampleCreationController.cpp)
 target_include_directories(qvw_controllers PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(qvw_controllers PUBLIC qvw_backend qvw_infra qvw_services)
 
@@ -58,7 +60,7 @@ target_compile_definitions(qt_video_workbench PRIVATE QVW_APP_VERSION="${PROJECT
 set_target_properties(qt_video_workbench PROPERTIES
   MACOSX_BUNDLE ${APPLE}
   MACOSX_BUNDLE_GUI_IDENTIFIER "edu.qvw.workbench"
-  MACOSX_BUNDLE_BUNDLE_NAME "Qt Video Workbench"
+  MACOSX_BUNDLE_BUNDLE_NAME "FrameLab"
   MACOSX_BUNDLE_BUNDLE_VERSION "${PROJECT_VERSION}"
   MACOSX_BUNDLE_SHORT_VERSION_STRING "${PROJECT_VERSION}"
   OUTPUT_NAME qt-video-workbench

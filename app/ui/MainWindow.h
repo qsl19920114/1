@@ -2,6 +2,7 @@
 #include "domain/Snapshot.h"
 #include "domain/Project.h"
 #include "domain/ExportTask.h"
+#include "domain/VideoSample.h"
 #include <QMainWindow>
 #include <QUrl>
 class QLabel;
@@ -13,7 +14,11 @@ class QWebEngineProfile;
 class QAction;
 class QPushButton;
 class QLineEdit;
+class QTabWidget;
+class QSlider;
+class QProgressBar;
 namespace qvw::ui {
+class StudioTransport;
 class MainWindow : public QMainWindow {
     Q_OBJECT
 public:
@@ -30,6 +35,8 @@ public:
     void showProposal(const QString &summary,bool pending);
     void setEditorState(bool ready,bool busy,bool canUndo,bool canRedo);
     void showExportTask(const domain::ExportTask &task);
+    void setImportBusy(bool busy);
+    void setSamples(const domain::VideoSamples &samples);
     QWebEngineView *previewView() const { return m_webView; }
 signals:
     void openRequested(const QString &workspace, const QString &run, const QString &runtime);
@@ -37,6 +44,10 @@ signals:
     void openDocumentRequested(const QString &manifest);
     void saveDocumentRequested();
     void importImageRequested(const QString &path);
+    void importVideoRequested(const QString &path);
+    void cancelImportRequested();
+    void newTemplateDocumentRequested(const QString &templateId,const QString &directory,const QString &name);
+    void sampleDocumentRequested(const QString &video,const QString &directory,const QString &name);
     void editRequested(const QString &entityId,const QString &fieldId,const QVariant &value);
     void sourceEditRequested(const QString &path,const QString &text);
     void undoRequested();
@@ -60,7 +71,10 @@ private:
     QWidget *buildInspectorPanel();
     QWidget *buildTaskPanel();
     void openProjectDialog();
-    void newDocumentDialog();
+    void newDocumentDialog(const QString &samplePath={});
+    void updateActions();
+    QString compatibleAssetField() const;
+    void useSelectedSample();
     void sourceDialog();
     void applySelectedAsset();
     void showSelectedInspector();
@@ -103,5 +117,35 @@ private:
     bool m_hasProposal = false;
     QUrl m_previewUrl;
     domain::Snapshot m_snapshot;
+    domain::VideoSamples m_samples;
+    domain::ExportTask m_exportTask;
+    StudioTransport *m_transport=nullptr;
+    QLabel *m_backendStatus=nullptr;
+    QLabel *m_transportTime=nullptr;
+    QSlider *m_seekSlider=nullptr;
+    QProgressBar *m_exportProgress=nullptr;
+    QTabWidget *m_libraryTabs=nullptr;
+    QTabWidget *m_taskTabs=nullptr;
+    QTreeWidget *m_sampleTree=nullptr;
+    QWidget *m_leftPanel=nullptr;
+    QWidget *m_rightPanel=nullptr;
+    QWidget *m_welcome=nullptr;
+    QPushButton *m_welcomeNew=nullptr;
+    QPushButton *m_welcomeOpen=nullptr;
+    QPushButton *m_sampleUse=nullptr;
+    QPushButton *m_cancelImport=nullptr;
+    QPushButton *m_samplePreview=nullptr;
+    QPushButton *m_play=nullptr;
+    QPushButton *m_previous=nullptr;
+    QPushButton *m_next=nullptr;
+    QPushButton *m_discardProposal=nullptr;
+    QPushButton *m_playFilm=nullptr;
+    QPushButton *m_revealFilm=nullptr;
+    QAction *m_configAction=nullptr;
+    QString m_backendError;
+    bool m_backendReady=false;
+    bool m_importBusy=false;
+    bool m_canUndo=false,m_canRedo=false;
+    quint64 m_editGeneration=0;
 };
 }

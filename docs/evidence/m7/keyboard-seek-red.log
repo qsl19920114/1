@@ -1,0 +1,29 @@
+********* Start testing of ProductE2ETest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : ProductE2ETest::initTestCase()
+QINFO  : ProductE2ETest::sampleToValidatedFilm() 正在检查 Hypit 配置：/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/config/version-lock.json
+QINFO  : ProductE2ETest::sampleToValidatedFilm() Hypit 0.2.10 自检通过（/Users/bytedance/Downloads/国产资产作业/hypit）
+QINFO  : ProductE2ETest::sampleToValidatedFilm() 正在打开工程：/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m7/对话之外 20261002-092815-646/main.svrun
+QINFO  : ProductE2ETest::sampleToValidatedFilm() 已创建工程：/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m7/对话之外 20261002-092815-646/workbench.qvw.json
+QINFO  : ProductE2ETest::sampleToValidatedFilm() 已创建视频故事工程，正在校验并导入示例。
+QINFO  : ProductE2ETest::sampleToValidatedFilm() 视频已导入并保存：assets/e63183cb8638c6df7776a1e2993ef605c0d11363d42e5a3ecc658e861d043ece.mp4；模板使用前 8 秒，静音播放。
+QINFO  : ProductE2ETest::sampleToValidatedFilm() Project            /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m7/对话之外 20261002-092815-646
+QINFO  : ProductE2ETest::sampleToValidatedFilm() Run                /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m7/对话之外 20261002-092815-646/main.svrun
+QINFO  : ProductE2ETest::sampleToValidatedFilm() Runtime Profile    /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m7/对话之外 20261002-092815-646/hypit.runtime.json
+QINFO  : ProductE2ETest::sampleToValidatedFilm() Runtime selection  command argument (this session only)
+QINFO  : ProductE2ETest::sampleToValidatedFilm()
+QINFO  : ProductE2ETest::sampleToValidatedFilm() ➜  Local:   http://localhost:5791/
+QINFO  : ProductE2ETest::sampleToValidatedFilm() Studio 已就绪：http://localhost:5791/（PID 49361）
+QINFO  : ProductE2ETest::sampleToValidatedFilm() ➜  Network: use --host to expose
+QINFO  : ProductE2ETest::sampleToValidatedFilm() Comments           http://localhost:5791/#comments
+QINFO  : ProductE2ETest::sampleToValidatedFilm() 已读取真实会话：revision 1，轨道 1，可写字段 5
+QINFO  : ProductE2ETest::sampleToValidatedFilm() 示例视频已应用，可以调整文案并导出作品。
+QWARN  : ProductE2ETest::sampleToValidatedFilm() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : ProductE2ETest::sampleToValidatedFilm() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+FAIL!  : ProductE2ETest::sampleToValidatedFilm() 'js("Number(document.querySelector('.stage-scrubber')?.value)").toDouble()>3.01' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/integration/ProductE2ETest.cpp(72)]
+QINFO  : ProductE2ETest::sampleToValidatedFilm() Studio process exited with code 143.
+QINFO  : ProductE2ETest::sampleToValidatedFilm() Studio 已退出，exit=143
+PASS   : ProductE2ETest::cleanupTestCase()
+Totals: 2 passed, 1 failed, 0 skipped, 0 blacklisted, 17908ms
+********* Finished testing of ProductE2ETest *********

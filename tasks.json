@@ -92,6 +92,27 @@
         "Windows、另一台无Qt机器及公开再分发授权/完整源码分发审核未验收"
       ],
       "promotedAt": "2026-10-02"
+    },
+    "G7": {
+      "milestone": "M7",
+      "verdict": "PASS",
+      "definition": "本地示例真实视频导入、原生播放定位、原创横屏模板导出、可重开工程与深色产品交互；经审查与发布验证",
+      "evidence": [
+        "docs/evidence/m7/sample-inventory.json",
+        "docs/evidence/m7/ctest-final.log",
+        "docs/evidence/m7/ctest-quality-final.log",
+        "docs/evidence/m7/importer-final.log",
+        "docs/evidence/m7/template-final.log",
+        "docs/evidence/m7/product-run.json",
+        "docs/evidence/m7/film-verification.json",
+        "docs/evidence/m7/packaged-video-startup.json",
+        "docs/evidence/m7/relocation.json",
+        "docs/evidence/m7/release.json",
+        "docs/evidence/m7/spec-review.md",
+        "docs/evidence/m7/quality-review.md"
+      ],
+      "reason": "本地样例哈希/全片解码通过；异步视频素材32项负向/取消/路径测试通过；真实Qt原生播放/定位、键盘滚轮、原创静音视频导出、成片播放与重开通过；源码规格和质量复审PASS；1.1.0运行包82项链接/签名、248份许可材料和9种搬移场景通过，纯视频启动验证通过。",
+      "promotedAt": "2026-10-02"
     }
   },
   "tasks": [
@@ -755,6 +776,53 @@
         "docs/THIRD_PARTY.md",
         "docs/DEMO_GUIDE.md",
         "docs/TEST_REPORT.md"
+      ]
+    },
+    {
+      "id": "T033",
+      "milestone": "M7",
+      "title": "本地测试视频发现、去重与来源校验",
+      "status": "done",
+      "evidence": [
+        "docs/evidence/m7/sample-inventory.json",
+        "docs/evidence/m7/ctest-final.log"
+      ]
+    },
+    {
+      "id": "T034",
+      "milestone": "M7",
+      "title": "异步不可变视频素材与原创视频故事模板",
+      "status": "done",
+      "evidence": [
+        "docs/evidence/m7/importer-final.log",
+        "docs/evidence/m7/template-final.log",
+        "docs/evidence/m7/product-run.json"
+      ]
+    },
+    {
+      "id": "T035",
+      "milestone": "M7",
+      "title": "深色产品工作台、原生播放定位与状态控制",
+      "status": "done",
+      "evidence": [
+        "docs/evidence/m7/ctest-quality-final.log",
+        "docs/evidence/m7/product-e2e-final.log",
+        "docs/evidence/m7/quality-review.md"
+      ]
+    },
+    {
+      "id": "T036",
+      "milestone": "M7",
+      "title": "真实视频创作闭环、审查与1.1.0发布交付",
+      "status": "done",
+      "evidence": [
+        "docs/evidence/m7/product-run.json",
+        "docs/evidence/m7/film-verification.json",
+        "docs/evidence/m7/relocation.json",
+        "docs/evidence/m7/packaged-video-startup.json",
+        "docs/evidence/m7/release.json",
+        "docs/evidence/m7/spec-review.md",
+        "docs/evidence/m7/quality-review.md"
       ]
     }
   ]

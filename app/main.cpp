@@ -4,6 +4,8 @@
 #include "controllers/EditorController.h"
 #include "controllers/ExportController.h"
 #include "controllers/ProposalController.h"
+#include "controllers/SampleCreationController.h"
+#include "services/SampleCatalog.h"
 #include "infrastructure/AppConfig.h"
 #include "infrastructure/LogWriter.h"
 #include "infrastructure/RuntimePaths.h"
@@ -30,7 +32,7 @@ int main(int argc, char **argv) {
     QStringList arguments;
     for (int i = 0; i < argc; ++i) arguments.append(QString::fromLocal8Bit(argv[i]));
     QApplication app(argc, argv);
-    app.setApplicationName("Qt Video Workbench"); app.setApplicationVersion(QStringLiteral(QVW_APP_VERSION));
+    app.setApplicationName("Qt Video Workbench");app.setApplicationDisplayName(QStringLiteral("FrameLab · 灵感片场")); app.setApplicationVersion(QStringLiteral(QVW_APP_VERSION));
     QCommandLineParser parser;
     parser.setApplicationDescription(QStringLiteral("Qt 视频工作台：打开本地 Hypit Run 与 Studio 会话"));
     parser.addHelpOption(); parser.addVersionOption();
@@ -73,13 +75,16 @@ int main(int argc, char **argv) {
     qvw::controllers::ProjectController controller(loaded.config, log);
     qvw::controllers::DocumentController document;
     qvw::controllers::EditorController editor;
+    qvw::controllers::SampleCreationController creation(document,editor);
+    document.setMediaTools(loaded.config.ffprobePath,loaded.config.ffmpegPath,loaded.config.processEnvironment);
     qvw::controllers::ProposalController proposals(editor);
     qvw::controllers::ExportController exporter(loaded.config,log);
     qvw::ui::MainWindow window;
+    window.setSamples(qvw::services::SampleCatalog::discover(loaded.config.distributionPath));
     window.appendLog(QStringLiteral("日志：%1").arg(log.filePath()));
     if (!log.isReady()) window.appendLog(QStringLiteral("日志不可写：%1").arg(log.lastError()));
     bool finished = false, gotSnapshot = false, pageLoaded = false, jsPending = false, cleanupStopped = true;
-    bool compiledReady=false,imagesReady=false,verificationSucceeded=false; qint64 ownedPid=0;QUrl studioUrl;qvw::domain::Snapshot lastSnapshot;
+    bool compiledReady=false,imagesReady=false,mediaReady=false,previewVideosReady=false,verificationSucceeded=false; qint64 ownedPid=0;QUrl studioUrl;qvw::domain::Snapshot lastSnapshot;
     QString verificationError;
     QTimer poll, deadline;
     poll.setInterval(500); deadline.setSingleShot(true); deadline.setInterval(60000);
@@ -125,7 +130,7 @@ int main(int argc, char **argv) {
     QObject::connect(&window, &qvw::ui::MainWindow::undoRequested, &editor, &qvw::controllers::EditorController::undo);
     QObject::connect(&window, &qvw::ui::MainWindow::redoRequested, &editor, &qvw::controllers::EditorController::redo);
     QObject::connect(&window, &qvw::ui::MainWindow::exportRequested, &exporter, [&](const QString &path){
-        if(editor.isBusy()){window.appendLog(QStringLiteral("请等待编辑完成后导出。"));return;}
+        if(editor.isBusy()||document.importingVideo()){window.appendLog(QStringLiteral("请等待编辑或素材导入完成后导出。"));return;}
         exporter.startExport(editor.snapshot(),path);
     });
     QObject::connect(&window, &qvw::ui::MainWindow::cancelExportRequested, &exporter, &qvw::controllers::ExportController::cancelBuild);
@@ -154,11 +159,24 @@ int main(int argc, char **argv) {
         [&](const QString &workspace, const QString &run, const QString &runtime) { document.close(); controller.openProject(workspace, run, runtime, port); });
     QObject::connect(&window, &qvw::ui::MainWindow::closeRequested, &controller, [&] { controller.closeProject(); document.close(); });
     QObject::connect(&window, &qvw::ui::MainWindow::newDocumentRequested, &document, [&](const QString &directory,const QString &name) {
-        document.create(QDir(qvw::infra::RuntimePaths::templateDirectory()).filePath("title-card"),directory,name);
+        creation.cancel();document.create(QDir(qvw::infra::RuntimePaths::templateDirectory()).filePath("title-card"),directory,name);
     });
-    QObject::connect(&window, &qvw::ui::MainWindow::openDocumentRequested, &document, &qvw::controllers::DocumentController::open);
+    QObject::connect(&window,&qvw::ui::MainWindow::newTemplateDocumentRequested,&document,[&](const QString &id,const QString &dir,const QString &name){
+        if(editor.isBusy()||document.importingVideo()||exporter.isBusy())return;
+        if(id!="title-card"&&id!="video-story"){window.showError("未知创作模板。");return;}
+        creation.cancel();document.create(QDir(qvw::infra::RuntimePaths::templateDirectory()).filePath(id),dir,name);
+    });
+    QObject::connect(&window,&qvw::ui::MainWindow::sampleDocumentRequested,&creation,[&](const QString &sample,const QString &dir,const QString &name){
+        if(exporter.isBusy())return;creation.create(sample,QDir(qvw::infra::RuntimePaths::templateDirectory()).filePath("video-story"),dir,name);
+    });
+    QObject::connect(&window,&qvw::ui::MainWindow::openDocumentRequested,&document,[&](const QString &manifest){creation.cancel();document.open(manifest);});
+    QObject::connect(&creation,&qvw::controllers::SampleCreationController::message,&window,&qvw::ui::MainWindow::appendLog);
+    QObject::connect(&creation,&qvw::controllers::SampleCreationController::failed,&window,&qvw::ui::MainWindow::showError);
     QObject::connect(&window, &qvw::ui::MainWindow::saveDocumentRequested, &document, &qvw::controllers::DocumentController::save);
     QObject::connect(&window, &qvw::ui::MainWindow::importImageRequested, &document, &qvw::controllers::DocumentController::importImage);
+    QObject::connect(&window,&qvw::ui::MainWindow::importVideoRequested,&document,&qvw::controllers::DocumentController::importVideo);
+    QObject::connect(&document,&qvw::controllers::DocumentController::videoImportStateChanged,&window,&qvw::ui::MainWindow::setImportBusy);
+    QObject::connect(&window,&qvw::ui::MainWindow::cancelImportRequested,&document,[&]{creation.cancel();document.cancelVideoImport();window.appendLog("视频导入已取消，工程保持不变。");});
     QObject::connect(&document, &qvw::controllers::DocumentController::projectChanged, &window, &qvw::ui::MainWindow::showDocument);
     QObject::connect(&document, &qvw::controllers::DocumentController::documentClosed, &window, &qvw::ui::MainWindow::clearDocument);
     QObject::connect(&document, &qvw::controllers::DocumentController::documentClosed, &exporter, &qvw::controllers::ExportController::clearProject);
@@ -172,19 +190,19 @@ int main(int argc, char **argv) {
         window.appendLog(text); log.info(text);
     });
     QObject::connect(&document, &qvw::controllers::DocumentController::failed, &window, [&](const QString &text) {
-        window.appendLog(QStringLiteral("工程操作失败：%1").arg(text)); log.error(text); qCritical().noquote()<<text;
+        window.showError(QStringLiteral("工程操作失败：%1").arg(text)); log.error(text); qCritical().noquote()<<text;
         verificationError=text;if(verification) finish(3);
     });
     QObject::connect(&window, &qvw::ui::MainWindow::refreshRequested, &editor, [&] {
         if(editor.snapshot().isLoaded())editor.refresh();else controller.refresh();
     });
     QObject::connect(&window, &qvw::ui::MainWindow::configurationRequested, &controller, [&](const QString &path) {
-        if (exporter.isBusy()) {
+        if (exporter.isBusy()||editor.isBusy()||document.importingVideo()) {
             window.appendLog(QStringLiteral("导出正在观察或验证，请先停止观察再切换后端配置。"));
             return;
         }
         const auto config = qvw::infra::loadAppConfig(path);
-        if (!config.ok()) window.showError(config.error); else {exporter.setConfig(config.config);controller.configure(config.config);}
+        if (!config.ok()) window.showError(config.error); else {creation.cancel();document.close();document.setMediaTools(config.config.ffprobePath,config.config.ffmpegPath,config.config.processEnvironment);window.setSamples(qvw::services::SampleCatalog::discover(config.config.distributionPath));exporter.setConfig(config.config);controller.configure(config.config);}
     });
     QObject::connect(&window, &qvw::ui::MainWindow::previewLoaded, &app, [&](bool ok) {
         if(finished)return;
@@ -194,7 +212,7 @@ int main(int argc, char **argv) {
     QObject::connect(&app, &QCoreApplication::aboutToQuit, &controller, [&] {
         finished = true; poll.stop(); deadline.stop();
         ownedPid = controller.studioPid();
-        controller.closeProject();
+        document.cancelVideoImport();creation.cancel();controller.closeProject();
         cleanupStopped = !controller.isRunning();
         qInfo() << "CLEANUP ownedPid=" << ownedPid << "running=" << controller.isRunning();
     });
@@ -211,12 +229,12 @@ int main(int argc, char **argv) {
         // stage.ts:40 embeds a same-origin preview iframe. Its compiled
         // composition proves the SPA rendered, beyond loadFinished's HTTP success.
         window.previewView()->page()->runJavaScript(
-            "(() => { try { const d=document.querySelector('iframe')?.contentDocument; const imgs=d?Array.from(d.querySelectorAll('img')):[]; return {composition:!!d?.querySelector('[data-composition-id]'),images:imgs.length>0&&imgs.every(i=>i.complete&&i.naturalWidth>0)}; } catch (_) { return {}; } })()",
+            "(() => { try { const d=document.querySelector('iframe')?.contentDocument; const imgs=d?Array.from(d.querySelectorAll('img')):[];const videos=d?Array.from(d.querySelectorAll('video')):[];const imagesOk=imgs.every(i=>i.complete&&i.naturalWidth>0);const videosOk=videos.every(v=>v.readyState>=2&&v.videoWidth>0);return {composition:!!d?.querySelector('[data-composition-id]'),images:imgs.length>0&&imagesOk,videos:videos.length>0&&videosOk,media:imgs.length+videos.length>0&&imagesOk&&videosOk}; } catch (_) { return {}; } })()",
             [&, guard](const QVariant &ready) {
                 if (!guard || finished) return;
                 jsPending = false;
-                const auto result=ready.toMap();compiledReady=result.value("composition").toBool();imagesReady=result.value("images").toBool();
-                if (finished || !compiledReady || !imagesReady) return;
+                const auto result=ready.toMap();compiledReady=result.value("composition").toBool();imagesReady=result.value("images").toBool();mediaReady=result.value("media").toBool();previewVideosReady=result.value("videos").toBool();
+                if (finished || !compiledReady || !mediaReady) return;
                 qInfo() << "PREVIEW compiled composition present=true";
                 poll.stop(); QTimer::singleShot(750, &app, [&] { if (!finished) {if(verify){verificationSucceeded=true;finish(0);}else capture();} });
             });
@@ -251,7 +269,7 @@ int main(int argc, char **argv) {
     if(incompleteVerification&&verificationError.isEmpty())verificationError=QStringLiteral("验证未完成：窗口在真实预览就绪前被关闭或程序提前结束。");
     if(!cleanupStopped&&verificationError.isEmpty())verificationError=QStringLiteral("自有 Studio 未完全退出。");
     if(verify&&parser.isSet("report-out")) {
-        QJsonObject report{{"format","qvw.startup-verification@1"},{"verdict",finalCode==0?"PASS":"FAIL"},{"exitCode",finalCode},{"error",verificationError},{"qtVersion",qVersion()},{"appVersion",app.applicationVersion()},{"resourceRoot",qvw::infra::RuntimePaths::resourceRoot()},{"templateDirectory",qvw::infra::RuntimePaths::templateDirectory()},{"config",loaded.config.configFilePath},{"distribution",loaded.config.distributionPath},{"node",loaded.config.nodePath},{"ffmpeg",loaded.config.ffmpegPath},{"ffprobe",loaded.config.ffprobePath},{"project",document.project().manifestPath()},{"studioUrl",studioUrl.toString()},{"revision",lastSnapshot.revision},{"sourceFingerprint",QString::fromLatin1(lastSnapshot.sourceFingerprint.toHex())},{"snapshot",gotSnapshot},{"pageLoaded",pageLoaded},{"compiledCompositionReady",compiledReady},{"imagesReady",imagesReady},{"ownedStudioPid",ownedPid},{"cleanupStopped",cleanupStopped},{"screenshots",false}};
+        QJsonObject report{{"format","qvw.startup-verification@1"},{"verdict",finalCode==0?"PASS":"FAIL"},{"exitCode",finalCode},{"error",verificationError},{"qtVersion",qVersion()},{"appVersion",app.applicationVersion()},{"resourceRoot",qvw::infra::RuntimePaths::resourceRoot()},{"templateDirectory",qvw::infra::RuntimePaths::templateDirectory()},{"config",loaded.config.configFilePath},{"distribution",loaded.config.distributionPath},{"node",loaded.config.nodePath},{"ffmpeg",loaded.config.ffmpegPath},{"ffprobe",loaded.config.ffprobePath},{"project",document.project().manifestPath()},{"studioUrl",studioUrl.toString()},{"revision",lastSnapshot.revision},{"sourceFingerprint",QString::fromLatin1(lastSnapshot.sourceFingerprint.toHex())},{"snapshot",gotSnapshot},{"pageLoaded",pageLoaded},{"compiledCompositionReady",compiledReady},{"imagesReady",imagesReady},{"mediaReady",mediaReady},{"previewVideosReady",previewVideosReady},{"ownedStudioPid",ownedPid},{"cleanupStopped",cleanupStopped},{"screenshots",false}};
         report["project"]=document.hasProject()?document.project().manifestPath():QString();
         report["verificationSucceeded"]=verificationSucceeded;
         report["webEngineVersion"]=qWebEngineVersion();

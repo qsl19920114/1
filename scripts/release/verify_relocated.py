@@ -13,12 +13,15 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--app', default=str(REPO / '.workbench/release-macos-arm64/QtVideoWorkbench.app'))
     parser.add_argument('--hypit', default=str(REPO.parent / 'hypit'))
+    parser.add_argument('--evidence-dir', default=str(REPO / 'docs/evidence/m6'))
     args = parser.parse_args()
     source = pathlib.Path(args.app).resolve()
     hypit = pathlib.Path(args.hypit).resolve()
     if not source.is_dir() or not (hypit / 'bin/hypit.mjs').is_file():
         raise RuntimeError('Prepared .app and external Hypit Distribution required')
-    evidence = REPO / 'docs/evidence/m6'
+    evidence = pathlib.Path(args.evidence_dir).absolute()
+    if not evidence.is_relative_to(REPO) or evidence.is_symlink():
+        raise RuntimeError('Evidence directory must be inside repository')
     evidence.mkdir(parents=True, exist_ok=True)
     root = pathlib.Path(tempfile.mkdtemp(prefix='qvw-m6-relocated-')).resolve() / '中文 空格目录'
     root.mkdir()

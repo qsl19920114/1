@@ -166,18 +166,22 @@ def sign(app):
 def main():
     if sys.platform != 'darwin':
         raise RuntimeError('This release target is macOS only')
+    match = re.search(r'project\(QtVideoWorkbench VERSION ([0-9]+\.[0-9]+\.[0-9]+)', (REPO / 'CMakeLists.txt').read_text())
+    if not match:
+        raise RuntimeError('Application version missing')
+    app_version = match.group(1)
     parser = argparse.ArgumentParser()
     parser.add_argument('--qt-prefix', default='/opt/homebrew/opt/qt')
-    parser.add_argument('--output', default=str(REPO / '.workbench/release-macos-arm64'))
-    parser.add_argument('--repair-existing', action='store_true', help='Repair links/signatures of this script\'s existing 1.0.0 deployment without rebuilding application code')
+    parser.add_argument('--output', default=str(REPO / ('.workbench/release-macos-arm64-' + app_version)))
+    parser.add_argument('--repair-existing', action='store_true', help='Repair links/signatures of this script\'s existing deployment of the current version without rebuilding application code')
     args = parser.parse_args()
     output = pathlib.Path(args.output).absolute()
     if not output.parent.resolve().is_relative_to(REPO) or output.is_symlink() or (output.exists() and not args.repair_existing):
         raise RuntimeError('Release output must be a new directory inside repository')
     if args.repair_existing:
         marker = output / 'release.json'
-        if not marker.is_file() or json.loads(marker.read_text()).get('format') != 'qvw.release-artifact@1' or json.loads(marker.read_text()).get('version') != 'Qt Video Workbench 1.0.0':
-            raise RuntimeError('Repair requires this script\'s existing 1.0.0 release marker')
+        if not marker.is_file() or json.loads(marker.read_text()).get('format') != 'qvw.release-artifact@1' or json.loads(marker.read_text()).get('version') != 'Qt Video Workbench ' + app_version:
+            raise RuntimeError('Repair requires this script\'s release marker for the current version')
     license_inputs = REPO / '.workbench/license-inputs'
     if not (license_inputs / 'sources.json').is_file():
         raise RuntimeError('Run collect_licenses.py first')
@@ -218,7 +222,7 @@ def main():
     (output / 'link-audit.json').write_text(json.dumps({'format':'qvw.bundle-link-audit@1','verdict':'PASS','binaries':entries},indent=2)+'\n')
     (output / 'helper-entitlements.txt').write_text(entitlements)
     version = capture([app / 'Contents/MacOS/qt-video-workbench', '--version']).strip()
-    archive = output / 'QtVideoWorkbench-1.0.0-macOS-arm64.zip'
+    archive = output / ('FrameLab-' + app_version + '-macOS-arm64.zip')
     if archive.exists():
         archive.replace(archive.with_suffix('.previous.zip'))
     run(['/usr/bin/ditto', '-c', '-k', '--sequesterRsrc', '--keepParent', app, archive])

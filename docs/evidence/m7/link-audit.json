@@ -1,0 +1,1882 @@
+{
+  "format": "qvw.bundle-link-audit@1",
+  "verdict": "PASS",
+  "binaries": [
+    {
+      "file": "Contents/Frameworks/QtCore.framework/Versions/A/QtCore",
+      "dependencies": [
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+        "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices",
+        "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices",
+        "/System/Library/Frameworks/Security.framework/Versions/A/Security",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "@rpath/libicui18n.78.dylib",
+        "@rpath/libicuuc.78.dylib",
+        "@rpath/libicudata.78.dylib",
+        "@rpath/libglib-2.0.0.dylib",
+        "/usr/lib/libz.1.dylib",
+        "@rpath/libdouble-conversion.3.dylib",
+        "@rpath/libb2.1.dylib",
+        "@rpath/libpcre2-16.0.dylib",
+        "@rpath/libzstd.1.dylib",
+        "@rpath/libgthread-2.0.0.dylib",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib",
+        "/usr/lib/libobjc.A.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../",
+        "@loader_path/../../.."
+      ],
+      "buildVersion": [
+        "14.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/QtDBus.framework/Versions/A/QtDBus",
+      "dependencies": [
+        "@rpath/QtDBus.framework/Versions/A/QtDBus",
+        "@rpath/libdbus-1.3.dylib",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../",
+        "@loader_path/../../.."
+      ],
+      "buildVersion": [
+        "14.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/QtGui.framework/Versions/A/QtGui",
+      "dependencies": [
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/Carbon.framework/Versions/A/Carbon",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+        "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics",
+        "/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText",
+        "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+        "@rpath/libglib-2.0.0.dylib",
+        "@rpath/QtDBus.framework/Versions/A/QtDBus",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore",
+        "@rpath/libpng16.16.dylib",
+        "/usr/lib/libz.1.dylib",
+        "@rpath/libharfbuzz.0.dylib",
+        "@rpath/libmd4c.0.dylib",
+        "@rpath/libfreetype.6.dylib",
+        "@rpath/libgthread-2.0.0.dylib",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib",
+        "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices",
+        "/usr/lib/libobjc.A.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../",
+        "@loader_path/../../.."
+      ],
+      "buildVersion": [
+        "14.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/QtNetwork.framework/Versions/A/QtNetwork",
+      "dependencies": [
+        "@rpath/QtNetwork.framework/Versions/A/QtNetwork",
+        "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+        "/System/Library/Frameworks/Security.framework/Versions/A/Security",
+        "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices",
+        "/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration",
+        "/System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork",
+        "/System/Library/Frameworks/Network.framework/Versions/A/Network",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "@rpath/libbrotlidec.1.dylib",
+        "@rpath/libzstd.1.dylib",
+        "/usr/lib/libz.1.dylib",
+        "/usr/lib/libresolv.9.dylib",
+        "/System/Library/Frameworks/GSS.framework/Versions/A/GSS",
+        "@rpath/libssl.3.dylib",
+        "@rpath/libcrypto.3.dylib",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../",
+        "@loader_path/../../.."
+      ],
+      "buildVersion": [
+        "14.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/QtOpenGL.framework/Versions/A/QtOpenGL",
+      "dependencies": [
+        "@rpath/QtOpenGL.framework/Versions/A/QtOpenGL",
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../",
+        "@loader_path/../../.."
+      ],
+      "buildVersion": [
+        "14.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/QtPdf.framework/Versions/A/QtPdf",
+      "dependencies": [
+        "@rpath/QtPdf.framework/Versions/A/QtPdf",
+        "@rpath/libpng16.16.dylib",
+        "/usr/lib/libz.1.dylib",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+        "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+        "/System/Library/Frameworks/Security.framework/Versions/A/Security",
+        "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics",
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "@rpath/QtNetwork.framework/Versions/A/QtNetwork",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib",
+        "/usr/lib/libobjc.A.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../",
+        "@loader_path/../../.."
+      ],
+      "buildVersion": [
+        "14.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/QtPositioning.framework/Versions/A/QtPositioning",
+      "dependencies": [
+        "@rpath/QtPositioning.framework/Versions/A/QtPositioning",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../",
+        "@loader_path/../../.."
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/QtPrintSupport.framework/Versions/A/QtPrintSupport",
+      "dependencies": [
+        "@rpath/QtPrintSupport.framework/Versions/A/QtPrintSupport",
+        "/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices",
+        "@rpath/QtWidgets.framework/Versions/A/QtWidgets",
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/usr/lib/libcups.2.dylib",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib",
+        "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+        "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics",
+        "/usr/lib/libobjc.A.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../",
+        "@loader_path/../../.."
+      ],
+      "buildVersion": [
+        "14.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/QtQml.framework/Versions/A/QtQml",
+      "dependencies": [
+        "@rpath/QtQml.framework/Versions/A/QtQml",
+        "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+        "@rpath/QtNetwork.framework/Versions/A/QtNetwork",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../",
+        "@loader_path/../../.."
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/QtQmlMeta.framework/Versions/A/QtQmlMeta",
+      "dependencies": [
+        "@rpath/QtQmlMeta.framework/Versions/A/QtQmlMeta",
+        "@rpath/QtQmlModels.framework/Versions/A/QtQmlModels",
+        "@rpath/QtQmlWorkerScript.framework/Versions/A/QtQmlWorkerScript",
+        "@rpath/QtQml.framework/Versions/A/QtQml",
+        "@rpath/QtNetwork.framework/Versions/A/QtNetwork",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../",
+        "@loader_path/../../.."
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/QtQmlModels.framework/Versions/A/QtQmlModels",
+      "dependencies": [
+        "@rpath/QtQmlModels.framework/Versions/A/QtQmlModels",
+        "@rpath/QtQml.framework/Versions/A/QtQml",
+        "@rpath/QtNetwork.framework/Versions/A/QtNetwork",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../",
+        "@loader_path/../../.."
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/QtQmlWorkerScript.framework/Versions/A/QtQmlWorkerScript",
+      "dependencies": [
+        "@rpath/QtQmlWorkerScript.framework/Versions/A/QtQmlWorkerScript",
+        "@rpath/QtQml.framework/Versions/A/QtQml",
+        "@rpath/QtNetwork.framework/Versions/A/QtNetwork",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../",
+        "@loader_path/../../.."
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/QtQuick.framework/Versions/A/QtQuick",
+      "dependencies": [
+        "@rpath/QtQuick.framework/Versions/A/QtQuick",
+        "@rpath/QtQmlMeta.framework/Versions/A/QtQmlMeta",
+        "@rpath/QtQmlModels.framework/Versions/A/QtQmlModels",
+        "@rpath/QtQmlWorkerScript.framework/Versions/A/QtQmlWorkerScript",
+        "@rpath/QtQml.framework/Versions/A/QtQml",
+        "@rpath/QtNetwork.framework/Versions/A/QtNetwork",
+        "@rpath/QtOpenGL.framework/Versions/A/QtOpenGL",
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../",
+        "@loader_path/../../.."
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/QtQuickWidgets.framework/Versions/A/QtQuickWidgets",
+      "dependencies": [
+        "@rpath/QtQuickWidgets.framework/Versions/A/QtQuickWidgets",
+        "@rpath/QtQuick.framework/Versions/A/QtQuick",
+        "@rpath/QtOpenGL.framework/Versions/A/QtOpenGL",
+        "@rpath/QtQmlMeta.framework/Versions/A/QtQmlMeta",
+        "@rpath/QtQmlModels.framework/Versions/A/QtQmlModels",
+        "@rpath/QtQmlWorkerScript.framework/Versions/A/QtQmlWorkerScript",
+        "@rpath/QtQml.framework/Versions/A/QtQml",
+        "@rpath/QtNetwork.framework/Versions/A/QtNetwork",
+        "@rpath/QtWidgets.framework/Versions/A/QtWidgets",
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../",
+        "@loader_path/../../.."
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/QtSerialPort.framework/Versions/A/QtSerialPort",
+      "dependencies": [
+        "@rpath/QtSerialPort.framework/Versions/A/QtSerialPort",
+        "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../",
+        "@loader_path/../../.."
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/QtSvg.framework/Versions/A/QtSvg",
+      "dependencies": [
+        "@rpath/QtSvg.framework/Versions/A/QtSvg",
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libz.1.dylib",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../",
+        "@loader_path/../../.."
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/QtVirtualKeyboard.framework/Versions/A/QtVirtualKeyboard",
+      "dependencies": [
+        "@rpath/QtVirtualKeyboard.framework/Versions/A/QtVirtualKeyboard",
+        "@rpath/QtQuick.framework/Versions/A/QtQuick",
+        "@rpath/QtOpenGL.framework/Versions/A/QtOpenGL",
+        "@rpath/QtQml.framework/Versions/A/QtQml",
+        "@rpath/QtNetwork.framework/Versions/A/QtNetwork",
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../",
+        "@loader_path/../../.."
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/QtVirtualKeyboardQml.framework/Versions/A/QtVirtualKeyboardQml",
+      "dependencies": [
+        "@rpath/QtVirtualKeyboardQml.framework/Versions/A/QtVirtualKeyboardQml",
+        "@rpath/QtVirtualKeyboard.framework/Versions/A/QtVirtualKeyboard",
+        "@rpath/QtQuick.framework/Versions/A/QtQuick",
+        "@rpath/QtOpenGL.framework/Versions/A/QtOpenGL",
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtQml.framework/Versions/A/QtQml",
+        "@rpath/QtNetwork.framework/Versions/A/QtNetwork",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../",
+        "@loader_path/../../.."
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/QtWebChannel.framework/Versions/A/QtWebChannel",
+      "dependencies": [
+        "@rpath/QtWebChannel.framework/Versions/A/QtWebChannel",
+        "@rpath/QtQml.framework/Versions/A/QtQml",
+        "@rpath/QtNetwork.framework/Versions/A/QtNetwork",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../",
+        "@loader_path/../../.."
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/QtWebEngineCore.framework/Versions/A/Helpers/QtWebEngineProcess.app/Contents/MacOS/QtWebEngineProcess",
+      "dependencies": [
+        "@rpath/QtWebEngineCore.framework/Versions/A/QtWebEngineCore",
+        "@rpath/QtQuick.framework/Versions/A/QtQuick",
+        "@rpath/QtOpenGL.framework/Versions/A/QtOpenGL",
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtWebChannel.framework/Versions/A/QtWebChannel",
+        "@rpath/QtQml.framework/Versions/A/QtQml",
+        "@rpath/QtNetwork.framework/Versions/A/QtNetwork",
+        "@rpath/QtPositioning.framework/Versions/A/QtPositioning",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../../../../",
+        "@loader_path/../../../../lib",
+        "@loader_path/../../../../../../.."
+      ],
+      "buildVersion": [
+        "14.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/QtWebEngineCore.framework/Versions/A/QtWebEngineCore",
+      "dependencies": [
+        "@rpath/QtWebEngineCore.framework/Versions/A/QtWebEngineCore",
+        "/usr/lib/libbsm.0.dylib",
+        "/usr/lib/libpmenergy.dylib",
+        "/usr/lib/libpmsample.dylib",
+        "/usr/lib/libresolv.9.dylib",
+        "/usr/lib/libsandbox.1.dylib",
+        "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+        "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics",
+        "/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText",
+        "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+        "/System/Library/Frameworks/Security.framework/Versions/A/Security",
+        "/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/OpenDirectory.framework/Versions/A/OpenDirectory",
+        "/System/Library/Frameworks/CryptoTokenKit.framework/Versions/A/CryptoTokenKit",
+        "/System/Library/Frameworks/LocalAuthentication.framework/Versions/A/LocalAuthentication",
+        "/System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork",
+        "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices",
+        "/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo",
+        "/System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface",
+        "/System/Library/Frameworks/AVFoundation.framework/Versions/A/AVFoundation",
+        "/System/Library/Frameworks/CoreMedia.framework/Versions/A/CoreMedia",
+        "/System/Library/Frameworks/Accelerate.framework/Versions/A/Accelerate",
+        "/System/Library/Frameworks/AudioUnit.framework/Versions/A/AudioUnit",
+        "/System/Library/Frameworks/AVFAudio.framework/Versions/A/AVFAudio",
+        "/System/Library/Frameworks/Carbon.framework/Versions/A/Carbon",
+        "/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore",
+        "/System/Library/Frameworks/AudioToolbox.framework/Versions/A/AudioToolbox",
+        "/System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/Quartz.framework/Versions/A/Quartz",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "/System/Library/Frameworks/Cocoa.framework/Versions/A/Cocoa",
+        "/System/Library/Frameworks/VideoToolbox.framework/Versions/A/VideoToolbox",
+        "/System/Library/Frameworks/AuthenticationServices.framework/Versions/A/AuthenticationServices",
+        "/System/Library/Frameworks/CoreBluetooth.framework/Versions/A/CoreBluetooth",
+        "/System/Library/Frameworks/IOBluetooth.framework/Versions/A/IOBluetooth",
+        "/System/Library/Frameworks/CoreMIDI.framework/Versions/A/CoreMIDI",
+        "/System/Library/Frameworks/Accessibility.framework/Versions/A/Accessibility",
+        "/System/Library/Frameworks/MediaAccessibility.framework/Versions/A/MediaAccessibility",
+        "/System/Library/Frameworks/SecurityInterface.framework/Versions/A/SecurityInterface",
+        "/System/Library/Frameworks/MediaPlayer.framework/Versions/A/MediaPlayer",
+        "/System/Library/Frameworks/MetalKit.framework/Versions/A/MetalKit",
+        "/System/Library/Frameworks/GameController.framework/Versions/A/GameController",
+        "/System/Library/Frameworks/ForceFeedback.framework/Versions/A/ForceFeedback",
+        "/System/Library/Frameworks/CoreWLAN.framework/Versions/A/CoreWLAN",
+        "/System/Library/Frameworks/CoreLocation.framework/Versions/A/CoreLocation",
+        "/System/Library/Frameworks/Vision.framework/Versions/A/Vision",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/ImageCaptureCore.framework/Versions/A/ImageCaptureCore",
+        "/System/Library/Frameworks/ScreenCaptureKit.framework/Versions/A/ScreenCaptureKit",
+        "@rpath/QtWebChannel.framework/Versions/A/QtWebChannel",
+        "@rpath/QtPositioning.framework/Versions/A/QtPositioning",
+        "@rpath/QtQuick.framework/Versions/A/QtQuick",
+        "@rpath/QtOpenGL.framework/Versions/A/QtOpenGL",
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "@rpath/QtQmlMeta.framework/Versions/A/QtQmlMeta",
+        "@rpath/QtQmlModels.framework/Versions/A/QtQmlModels",
+        "@rpath/QtQmlWorkerScript.framework/Versions/A/QtQmlWorkerScript",
+        "@rpath/QtQml.framework/Versions/A/QtQml",
+        "@rpath/QtNetwork.framework/Versions/A/QtNetwork",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib",
+        "/System/Library/Frameworks/CoreImage.framework/Versions/A/CoreImage",
+        "/usr/lib/libobjc.A.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../",
+        "@loader_path/../../.."
+      ],
+      "buildVersion": [
+        "14.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/QtWebEngineWidgets.framework/Versions/A/QtWebEngineWidgets",
+      "dependencies": [
+        "@rpath/QtWebEngineWidgets.framework/Versions/A/QtWebEngineWidgets",
+        "@rpath/QtQuickWidgets.framework/Versions/A/QtQuickWidgets",
+        "@rpath/QtPrintSupport.framework/Versions/A/QtPrintSupport",
+        "@rpath/QtWebEngineCore.framework/Versions/A/QtWebEngineCore",
+        "@rpath/QtWebChannel.framework/Versions/A/QtWebChannel",
+        "@rpath/QtPositioning.framework/Versions/A/QtPositioning",
+        "@rpath/QtQuick.framework/Versions/A/QtQuick",
+        "@rpath/QtOpenGL.framework/Versions/A/QtOpenGL",
+        "@rpath/QtQmlMeta.framework/Versions/A/QtQmlMeta",
+        "@rpath/QtQmlModels.framework/Versions/A/QtQmlModels",
+        "@rpath/QtQmlWorkerScript.framework/Versions/A/QtQmlWorkerScript",
+        "@rpath/QtQml.framework/Versions/A/QtQml",
+        "@rpath/QtNetwork.framework/Versions/A/QtNetwork",
+        "@rpath/QtWidgets.framework/Versions/A/QtWidgets",
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices",
+        "/usr/lib/libcups.2.dylib",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../",
+        "@loader_path/../../.."
+      ],
+      "buildVersion": [
+        "14.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/QtWidgets.framework/Versions/A/QtWidgets",
+      "dependencies": [
+        "@rpath/QtWidgets.framework/Versions/A/QtWidgets",
+        "/usr/lib/libz.1.dylib",
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib",
+        "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+        "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+        "/usr/lib/libobjc.A.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../",
+        "@loader_path/../../.."
+      ],
+      "buildVersion": [
+        "14.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libb2.1.dylib",
+      "dependencies": [
+        "@rpath/libb2.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libbrotlicommon.1.dylib",
+      "dependencies": [
+        "@rpath/libbrotlicommon.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../lib",
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libbrotlidec.1.dylib",
+      "dependencies": [
+        "@rpath/libbrotlidec.1.dylib",
+        "/usr/lib/libSystem.B.dylib",
+        "@rpath/libbrotlicommon.1.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../lib",
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libcrypto.3.dylib",
+      "dependencies": [
+        "@rpath/libcrypto.3.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libdbus-1.3.dylib",
+      "dependencies": [
+        "@rpath/libdbus-1.3.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libdouble-conversion.3.dylib",
+      "dependencies": [
+        "@rpath/libdouble-conversion.3.dylib",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libfreetype.6.dylib",
+      "dependencies": [
+        "@rpath/libfreetype.6.dylib",
+        "/usr/lib/libz.1.dylib",
+        "/usr/lib/libbz2.1.0.dylib",
+        "@rpath/libpng16.16.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libgio-2.0.0.dylib",
+      "dependencies": [
+        "@rpath/libgio-2.0.0.dylib",
+        "@rpath/libglib-2.0.0.dylib",
+        "@rpath/libgobject-2.0.0.dylib",
+        "@rpath/libgmodule-2.0.0.dylib",
+        "/usr/lib/libz.1.dylib",
+        "@rpath/libintl.8.dylib",
+        "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+        "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/usr/lib/libresolv.9.dylib",
+        "/usr/lib/libSystem.B.dylib",
+        "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices",
+        "/usr/lib/libobjc.A.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libglib-2.0.0.dylib",
+      "dependencies": [
+        "@rpath/libglib-2.0.0.dylib",
+        "/usr/lib/libiconv.2.dylib",
+        "@rpath/libintl.8.dylib",
+        "/usr/lib/libSystem.B.dylib",
+        "@rpath/libpcre2-8.0.dylib",
+        "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+        "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices",
+        "/usr/lib/libobjc.A.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libgmodule-2.0.0.dylib",
+      "dependencies": [
+        "@rpath/libgmodule-2.0.0.dylib",
+        "@rpath/libglib-2.0.0.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libgobject-2.0.0.dylib",
+      "dependencies": [
+        "@rpath/libgobject-2.0.0.dylib",
+        "@rpath/libglib-2.0.0.dylib",
+        "/usr/lib/libffi.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libgraphite2.3.dylib",
+      "dependencies": [
+        "@rpath/libgraphite2.3.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../lib",
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libgthread-2.0.0.dylib",
+      "dependencies": [
+        "@rpath/libgthread-2.0.0.dylib",
+        "@rpath/libglib-2.0.0.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libharfbuzz.0.dylib",
+      "dependencies": [
+        "@rpath/libharfbuzz.0.dylib",
+        "/usr/lib/libSystem.B.dylib",
+        "@rpath/libfreetype.6.dylib",
+        "@rpath/libglib-2.0.0.dylib",
+        "@rpath/libgraphite2.3.dylib",
+        "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+        "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics",
+        "/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libicudata.78.dylib",
+      "dependencies": [
+        "@rpath/libicudata.78.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libicui18n.78.dylib",
+      "dependencies": [
+        "@rpath/libicui18n.78.dylib",
+        "@loader_path/libicuuc.78.dylib",
+        "@loader_path/libicudata.78.dylib",
+        "/usr/lib/libSystem.B.dylib",
+        "/usr/lib/libc++.1.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libicuuc.78.dylib",
+      "dependencies": [
+        "@rpath/libicuuc.78.dylib",
+        "@loader_path/libicudata.78.dylib",
+        "/usr/lib/libSystem.B.dylib",
+        "/usr/lib/libc++.1.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libintl.8.dylib",
+      "dependencies": [
+        "@rpath/libintl.8.dylib",
+        "/usr/lib/libiconv.2.dylib",
+        "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+        "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libjasper.7.dylib",
+      "dependencies": [
+        "@rpath/libjasper.7.dylib",
+        "@rpath/libjpeg.8.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libjpeg.8.dylib",
+      "dependencies": [
+        "@rpath/libjpeg.8.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/liblcms2.2.dylib",
+      "dependencies": [
+        "@rpath/liblcms2.2.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/liblzma.5.dylib",
+      "dependencies": [
+        "@rpath/liblzma.5.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libmd4c.0.dylib",
+      "dependencies": [
+        "@rpath/libmd4c.0.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../lib",
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libmng.2.dylib",
+      "dependencies": [
+        "@rpath/libmng.2.dylib",
+        "/usr/lib/libz.1.dylib",
+        "@rpath/libjpeg.8.dylib",
+        "@rpath/liblcms2.2.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libpcre2-16.0.dylib",
+      "dependencies": [
+        "@rpath/libpcre2-16.0.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libpcre2-8.0.dylib",
+      "dependencies": [
+        "@rpath/libpcre2-8.0.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libpng16.16.dylib",
+      "dependencies": [
+        "@rpath/libpng16.16.dylib",
+        "/usr/lib/libz.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libsharpyuv.0.dylib",
+      "dependencies": [
+        "@rpath/libsharpyuv.0.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../lib",
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libssl.3.dylib",
+      "dependencies": [
+        "@rpath/libssl.3.dylib",
+        "@rpath/libcrypto.3.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libtiff.6.dylib",
+      "dependencies": [
+        "@rpath/libtiff.6.dylib",
+        "@rpath/libwebp.7.dylib",
+        "@rpath/libzstd.1.dylib",
+        "@rpath/liblzma.5.dylib",
+        "@rpath/libjpeg.8.dylib",
+        "/usr/lib/libz.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libwebp.7.dylib",
+      "dependencies": [
+        "@rpath/libwebp.7.dylib",
+        "@rpath/libsharpyuv.0.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../lib",
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libwebpdemux.2.dylib",
+      "dependencies": [
+        "@rpath/libwebpdemux.2.dylib",
+        "@rpath/libwebp.7.dylib",
+        "@rpath/libsharpyuv.0.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../lib",
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libwebpmux.3.dylib",
+      "dependencies": [
+        "@rpath/libwebpmux.3.dylib",
+        "@rpath/libwebp.7.dylib",
+        "@rpath/libsharpyuv.0.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../lib",
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/Frameworks/libzstd.1.dylib",
+      "dependencies": [
+        "@rpath/libzstd.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../lib",
+        "@loader_path"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/MacOS/qt-video-workbench",
+      "dependencies": [
+        "@rpath/QtWebEngineWidgets.framework/Versions/A/QtWebEngineWidgets",
+        "@rpath/QtWebEngineCore.framework/Versions/A/QtWebEngineCore",
+        "@rpath/QtWebChannel.framework/Versions/A/QtWebChannel",
+        "@rpath/QtPositioning.framework/Versions/A/QtPositioning",
+        "@rpath/QtPrintSupport.framework/Versions/A/QtPrintSupport",
+        "/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices",
+        "/usr/lib/libcups.2.dylib",
+        "@rpath/QtWidgets.framework/Versions/A/QtWidgets",
+        "@rpath/QtQuick.framework/Versions/A/QtQuick",
+        "@rpath/QtOpenGL.framework/Versions/A/QtOpenGL",
+        "@rpath/QtQml.framework/Versions/A/QtQml",
+        "@rpath/QtNetwork.framework/Versions/A/QtNetwork",
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../Frameworks"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/iconengines/libqsvgicon.dylib",
+      "dependencies": [
+        "@rpath/QtSvg.framework/Versions/A/QtSvg",
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/imageformats/libqgif.dylib",
+      "dependencies": [
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "14.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/imageformats/libqicns.dylib",
+      "dependencies": [
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/imageformats/libqico.dylib",
+      "dependencies": [
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "14.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/imageformats/libqjp2.dylib",
+      "dependencies": [
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "@rpath/libjasper.7.dylib",
+        "@rpath/libjpeg.8.dylib",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/imageformats/libqjpeg.dylib",
+      "dependencies": [
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "@rpath/libjpeg.8.dylib",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "14.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/imageformats/libqmacheif.dylib",
+      "dependencies": [
+        "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+        "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics",
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/imageformats/libqmng.dylib",
+      "dependencies": [
+        "@rpath/libmng.2.dylib",
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/imageformats/libqpdf.dylib",
+      "dependencies": [
+        "@rpath/QtPdf.framework/Versions/A/QtPdf",
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "14.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/imageformats/libqtga.dylib",
+      "dependencies": [
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/imageformats/libqtiff.dylib",
+      "dependencies": [
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "@rpath/libtiff.6.dylib",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/imageformats/libqwbmp.dylib",
+      "dependencies": [
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/imageformats/libqwebp.dylib",
+      "dependencies": [
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "@rpath/libwebpdemux.2.dylib",
+        "@rpath/libwebpmux.3.dylib",
+        "@rpath/libwebp.7.dylib",
+        "@rpath/libsharpyuv.0.dylib",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/networkinformation/libqapplenetworkinformation.dylib",
+      "dependencies": [
+        "/System/Library/Frameworks/Network.framework/Versions/A/Network",
+        "@rpath/QtNetwork.framework/Versions/A/QtNetwork",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "14.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/networkinformation/libqglib.dylib",
+      "dependencies": [
+        "@rpath/libgobject-2.0.0.dylib",
+        "@rpath/libgio-2.0.0.dylib",
+        "@rpath/QtNetwork.framework/Versions/A/QtNetwork",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "14.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/platforminputcontexts/libqtvirtualkeyboardplugin.dylib",
+      "dependencies": [
+        "@rpath/QtVirtualKeyboardQml.framework/Versions/A/QtVirtualKeyboardQml",
+        "@rpath/QtVirtualKeyboard.framework/Versions/A/QtVirtualKeyboard",
+        "@rpath/QtQuick.framework/Versions/A/QtQuick",
+        "@rpath/QtOpenGL.framework/Versions/A/QtOpenGL",
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtQml.framework/Versions/A/QtQml",
+        "@rpath/QtNetwork.framework/Versions/A/QtNetwork",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/platforms/libqcocoa.dylib",
+      "dependencies": [
+        "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+        "/System/Library/Frameworks/Carbon.framework/Versions/A/Carbon",
+        "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices",
+        "/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo",
+        "/System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface",
+        "/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore",
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib",
+        "/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices",
+        "/System/Library/Frameworks/ColorSync.framework/Versions/A/ColorSync",
+        "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+        "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics",
+        "/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText",
+        "/usr/lib/libobjc.A.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "14.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/position/libqtposition_cl.dylib",
+      "dependencies": [
+        "/System/Library/Frameworks/CoreLocation.framework/Versions/A/CoreLocation",
+        "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+        "@rpath/QtPositioning.framework/Versions/A/QtPositioning",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib",
+        "/usr/lib/libobjc.A.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/position/libqtposition_nmea.dylib",
+      "dependencies": [
+        "@rpath/QtPositioning.framework/Versions/A/QtPositioning",
+        "@rpath/QtNetwork.framework/Versions/A/QtNetwork",
+        "@rpath/QtSerialPort.framework/Versions/A/QtSerialPort",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/position/libqtposition_positionpoll.dylib",
+      "dependencies": [
+        "@rpath/QtPositioning.framework/Versions/A/QtPositioning",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "15.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/styles/libqmacstyle.dylib",
+      "dependencies": [
+        "@rpath/QtWidgets.framework/Versions/A/QtWidgets",
+        "@rpath/QtGui.framework/Versions/A/QtGui",
+        "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+        "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL",
+        "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+        "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib",
+        "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+        "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics",
+        "/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText",
+        "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+        "/usr/lib/libobjc.A.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "14.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/tls/libqcertonlybackend.dylib",
+      "dependencies": [
+        "@rpath/QtNetwork.framework/Versions/A/QtNetwork",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "14.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/tls/libqopensslbackend.dylib",
+      "dependencies": [
+        "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+        "/System/Library/Frameworks/Security.framework/Versions/A/Security",
+        "@rpath/QtNetwork.framework/Versions/A/QtNetwork",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "@rpath/libssl.3.dylib",
+        "@rpath/libcrypto.3.dylib",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "14.0"
+      ],
+      "architectures": "arm64"
+    },
+    {
+      "file": "Contents/PlugIns/tls/libqsecuretransportbackend.dylib",
+      "dependencies": [
+        "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+        "/System/Library/Frameworks/Security.framework/Versions/A/Security",
+        "@rpath/QtNetwork.framework/Versions/A/QtNetwork",
+        "@rpath/QtCore.framework/Versions/A/QtCore",
+        "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+        "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration",
+        "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+        "/usr/lib/libc++.1.dylib",
+        "/usr/lib/libSystem.B.dylib"
+      ],
+      "rpaths": [
+        "@loader_path/../../../../lib",
+        "@loader_path/../../Frameworks"
+      ],
+      "buildVersion": [
+        "14.0"
+      ],
+      "architectures": "arm64"
+    }
+  ]
+}

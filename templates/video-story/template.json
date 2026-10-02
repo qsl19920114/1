@@ -1,0 +1,1 @@
+{"format":"qt-video-workbench.template@1","id":"video-story","title":"校园故事 · 静音视频卡","version":"1.0.0","source":"main.svml","run":"main.svrun","runtime":"hypit.runtime.json","width":1280,"height":720,"fps":30,"durationSeconds":8,"audioRequired":false}

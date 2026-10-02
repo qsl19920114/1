@@ -1,0 +1,4 @@
+正在检查 Hypit 配置：/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-yyxv4hcy/中文 空格目录/config/missing-hypit.json
+找不到 Hypit 启动器：/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-yyxv4hcy/中文 空格目录/runtime/not-installed/bin/hypit.mjs。请检查 hypit.distributionPath。
+找不到 Hypit 启动器：/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-yyxv4hcy/中文 空格目录/runtime/not-installed/bin/hypit.mjs。请检查 hypit.distributionPath。
+CLEANUP ownedPid= 0 running= false

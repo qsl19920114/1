@@ -10,6 +10,23 @@
 #include <limits>
 
 namespace qvw::ui {
+namespace {
+class CompactSpinBox:public QDoubleSpinBox {
+public:
+    using QDoubleSpinBox::QDoubleSpinBox;
+protected:
+    QString textFromValue(double value) const override {
+        auto text=QDoubleSpinBox::textFromValue(value);
+        const auto decimal=locale().decimalPoint();
+        if(text.contains(decimal)) {
+            while(!text.isEmpty()&&text.back().digitValue()==0)text.chop(1);
+            if(text.endsWith(decimal))text.chop(decimal.size());
+        }
+        return text;
+    }
+};
+}
+
 QWidget *createInspectorControl(const domain::InspectorField &field, QWidget *parent, std::function<void(const QVariant &)> onCommit) {
     bool editable = field.isEditable() && bool(onCommit);
     const auto last = std::make_shared<QVariant>(field.rawValue);
@@ -30,7 +47,7 @@ QWidget *createInspectorControl(const domain::InspectorField &field, QWidget *pa
     case domain::ControlKind::Number: {
         bool numeric = false; const double value = field.rawValue.isValid() ? field.rawValue.toDouble(&numeric) : field.value.toDouble(&numeric);
         if (numeric) {
-            auto *spin = new QDoubleSpinBox(parent);
+            auto *spin = new CompactSpinBox(parent);
             spin->setRange(-std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
             spin->setDecimals(12); spin->setValue(value); spin->setReadOnly(!editable);
             if (!editable) spin->setButtonSymbols(QAbstractSpinBox::NoButtons);
