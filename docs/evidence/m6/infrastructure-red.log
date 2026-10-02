@@ -1,0 +1,61 @@
+Test project /private/tmp/qvw-m6-infra-build-canonical
+    Start 1: runtime_paths
+1/2 Test #1: runtime_paths ....................***Failed    1.10 sec
+********* Start testing of RuntimePathsTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : RuntimePathsTest::initTestCase()
+FAIL!  : RuntimePathsTest::rejectsOversizedConfig() '!loadAppConfig(path).ok()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/RuntimePathsTest.cpp(16)]
+PASS   : RuntimePathsTest::rejectsDirectoryConfig()
+FAIL!  : RuntimePathsTest::rejectsSymlinkConfig() '!loadAppConfig(tmp.filePath("link.json")).ok()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/RuntimePathsTest.cpp(18)]
+FAIL!  : RuntimePathsTest::validatesToolFields(tools object) '!loadAppConfig(path).ok()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/RuntimePathsTest.cpp(20)]
+FAIL!  : RuntimePathsTest::validatesToolFields(type) '!loadAppConfig(path).ok()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/RuntimePathsTest.cpp(20)]
+FAIL!  : RuntimePathsTest::validatesToolFields(relative) '!loadAppConfig(path).ok()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/RuntimePathsTest.cpp(20)]
+FAIL!  : RuntimePathsTest::validatesToolFields(missing) '!loadAppConfig(path).ok()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/RuntimePathsTest.cpp(20)]
+FAIL!  : RuntimePathsTest::validatesToolFields(empty) '!loadAppConfig(path).ok()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/RuntimePathsTest.cpp(20)]
+FAIL!  : RuntimePathsTest::validatesHypitLengths() '!loadAppConfig(path).ok()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/RuntimePathsTest.cpp(21)]
+FAIL!  : RuntimePathsTest::bundledConfigWinsOverDeveloperConfig() Compared values are not the same
+   Actual   (result["error"].toString()): "\u627E\u4E0D\u5230 config/version-lock.json\uFF0C\u8BF7\u4ECE\u4ED3\u5E93\u6839\u76EE\u5F55\u8FD0\u884C\uFF0C\u6216\u7528 --config \u6307\u5B9A\u3002"
+   Expected (QString())                 : ""
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/RuntimePathsTest.cpp(22)]
+FAIL!  : RuntimePathsTest::childPathIncludesStandardToolsWithoutChangingParent() 'path.split(':').contains(entry)' returned FALSE. (/missing-tools)
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/RuntimePathsTest.cpp(23)]
+PASS   : RuntimePathsTest::cleanupTestCase()
+Totals: 3 passed, 10 failed, 0 skipped, 0 blacklisted, 477ms
+********* Finished testing of RuntimePathsTest *********
+
+    Start 2: log_rotation
+2/2 Test #2: log_rotation .....................***Failed    0.15 sec
+********* Start testing of LogRotationTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : LogRotationTest::initTestCase()
+FAIL!  : LogRotationTest::messagesAreBounded() 'line.size()<=64*1024' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/LogRotationTest.cpp(14)]
+FAIL!  : LogRotationTest::argumentsAreBoundedAndRemainAnArray() 'line.size()<=64*1024' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/LogRotationTest.cpp(15)]
+FAIL!  : LogRotationTest::rotatesFiveMiBWithTwoBackups() Compared values are not the same
+   Actual   (QFileInfo(path+".1").size()): 8
+   Expected (qint64(5*1024*1024))        : 5242880
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/LogRotationTest.cpp(16)]
+FAIL!  : LogRotationTest::rotationFailureIsVisible() '!log.isReady()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/LogRotationTest.cpp(17)]
+PASS   : LogRotationTest::cleanupTestCase()
+Totals: 2 passed, 4 failed, 0 skipped, 0 blacklisted, 122ms
+********* Finished testing of LogRotationTest *********
+
+
+0% tests passed, 2 tests failed out of 2
+
+Total Test time (real) =   1.28 sec
+
+The following tests FAILED:
+	  1 - runtime_paths (Failed)
+	  2 - log_rotation (Failed)
+Errors while running CTest

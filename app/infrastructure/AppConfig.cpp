@@ -28,6 +28,8 @@ QString findConfigUpwards(const QString &start) {
 }
 
 QString locateConfig() {
+    const QString resourceConfig = QDir(RuntimePaths::resourceRoot()).filePath(QString::fromLatin1(kConfigRelativePath));
+    if (QFileInfo(resourceConfig).exists()) return resourceConfig;
     const QString fromExecutable = findConfigUpwards(QCoreApplication::applicationDirPath());
     if (!fromExecutable.isEmpty()) return fromExecutable;
     return findConfigUpwards(QDir::currentPath());
@@ -50,6 +52,11 @@ ConfigLoadResult loadAppConfig(const QString &configPath) {
         return result;
     }
 
+    const QFileInfo info(path);
+    if (!info.isFile() || info.isSymLink() || info.size() > 64 * 1024) {
+        result.error = QStringLiteral("配置必须是普通文件、不能是符号链接，且不能超过 64 KiB：%1").arg(path);
+        return result;
+    }
     QFile file(path);
     if (!file.open(QIODevice::ReadOnly)) {
         result.error = QStringLiteral("无法读取配置 %1：%2").arg(path, file.errorString());
@@ -57,21 +64,57 @@ ConfigLoadResult loadAppConfig(const QString &configPath) {
     }
 
     QJsonParseError parseError{};
-    const QJsonDocument document = QJsonDocument::fromJson(file.readAll(), &parseError);
+    const auto data = file.read(64 * 1024 + 1);
+    if (file.error() != QFileDevice::NoError || data.size() > 64 * 1024) {
+        result.error = QStringLiteral("配置读取失败或超过 64 KiB：%1").arg(path);
+        return result;
+    }
+    const QJsonDocument document = QJsonDocument::fromJson(data, &parseError);
     if (parseError.error != QJsonParseError::NoError || !document.isObject()) {
         result.error = QStringLiteral("配置 %1 不是合法 JSON：%2").arg(path, parseError.errorString());
         return result;
     }
 
-    const QJsonObject hypit = document.object().value(QStringLiteral("hypit")).toObject();
+    const auto root = document.object();
+    const QJsonObject hypit = root.value(QStringLiteral("hypit")).toObject();
     const QString declaredPath = hypit.value(QStringLiteral("distributionPath")).toString();
     const QString launcher = hypit.value(QStringLiteral("launcher")).toString();
     const QString version = hypit.value(QStringLiteral("version")).toString();
 
-    if (declaredPath.isEmpty() || launcher.isEmpty() || version.isEmpty()) {
+    const auto validString = [](const QJsonValue &value, int limit) {
+        return value.isString() && !value.toString().trimmed().isEmpty()
+            && value.toString().size() <= limit && !value.toString().contains(QChar::Null);
+    };
+    if (!root.value("hypit").isObject() || !validString(hypit["distributionPath"], 4096)
+        || !validString(hypit["launcher"], 4096) || !validString(hypit["version"], 128)) {
         result.error = QStringLiteral("配置 %1 缺少 hypit.distributionPath / launcher / version。").arg(path);
         return result;
     }
+
+    if (root.contains("tools") && !root["tools"].isObject()) {
+        result.error = QStringLiteral("配置 tools 必须是 JSON 对象。");
+        return result;
+    }
+    const auto tools = root["tools"].toObject();
+    QStringList explicitPaths;
+    for (const auto &name : {QStringLiteral("node"), QStringLiteral("ffmpeg"), QStringLiteral("ffprobe")}) {
+        if (!tools.contains(name)) continue;
+        const auto value = tools[name];
+        const QFileInfo tool(value.toString());
+        if (!validString(value, 4096) || !QDir::isAbsolutePath(value.toString()) || !tool.isFile() || !tool.isExecutable()) {
+            result.error = QStringLiteral("tools.%1 必须是现有可执行文件的绝对路径。备选工具可省略此字段。").arg(name);
+            return result;
+        }
+        explicitPaths << tool.absoluteFilePath();
+    }
+    result.config.processEnvironment = RuntimePaths::processEnvironment(explicitPaths);
+    const auto resolve = [&](const QString &name) {
+        return tools.contains(name) ? QFileInfo(tools[name].toString()).absoluteFilePath() : RuntimePaths::resolveTool(name, result.config.processEnvironment);
+    };
+    result.config.nodePath = resolve(QStringLiteral("node"));
+    result.config.nodeExplicit = tools.contains(QStringLiteral("node"));
+    result.config.ffmpegPath = resolve(QStringLiteral("ffmpeg"));
+    result.config.ffprobePath = resolve(QStringLiteral("ffprobe"));
 
     // The lock lives in <repository>/config; its ../hypit points to a sibling
     // checkout of that repository, independent of the caller's working directory.

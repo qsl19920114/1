@@ -1,0 +1,9 @@
+{
+  "format": "qt-video-workbench.runtime-config@1",
+  "hypit": {
+    "version": "0.2.10",
+    "distributionPath": "../../../hypit",
+    "launcher": "bin/hypit.mjs"
+  },
+  "note": "Place the external fixed Hypit distribution beside the app; configure explicit tools if not installed in standard locations."
+}

@@ -1,0 +1,21 @@
+正在检查 Hypit 配置：/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-ptcdgwwk/中文 空格目录/config/explicit.json
+Hypit 0.2.10 自检通过（/Users/bytedance/Downloads/国产资产作业/hypit）
+正在打开工程：/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-ptcdgwwk/中文 空格目录/默认 新建工程/main.svrun
+Project            /private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-ptcdgwwk/中文 空格目录/默认 新建工程
+Run                /private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-ptcdgwwk/中文 空格目录/默认 新建工程/main.svrun
+Runtime Profile    /private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-ptcdgwwk/中文 空格目录/默认 新建工程/hypit.runtime.json
+Runtime selection  command argument (this session only)
+
+➜  Local:   http://localhost:5599/
+Studio 已就绪：http://localhost:5599/（PID 71757）
+➜  Network: use --host to expose
+[1002/123506.654145:WARNING:src/core/web_engine_library_info.cpp:63] Command line switch --webengine-resources-path not passed to renderer process
+[1002/123506.656287:WARNING:src/core/web_engine_library_info.cpp:63] Command line switch --webengine-locales-path not passed to renderer process
+Comments           http://localhost:5599/#comments
+已读取真实会话：revision 1，轨道 1，可写字段 5
+js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PREVIEW compiled composition present=true
+Studio process exited with code 143.
+Studio 已退出，exit=143
+CLEANUP ownedPid= 71757 running= false

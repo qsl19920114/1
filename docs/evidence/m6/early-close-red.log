@@ -1,0 +1,17 @@
+Test project /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build
+    Start 21: startup_early_close
+1/1 Test #21: startup_early_close ..............***Failed    3.03 sec
+qt.qpa.fonts: Populating font family aliases took 33 ms. Replace uses of missing font family "Sans Serif" with one that exists to avoid this cost.
+This plugin does not support propagateSizeHints()
+正在检查 Hypit 配置：/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qt_temp-RbwFBP/config/version-lock.json
+CLEANUP ownedPid= 0 running= false
+Early close falsely accepted: 0 QJsonObject({"appVersion":"1.0.0","chromiumSecurityPatchVersion":"151.0.7922.71","chromiumVersion":"140.0.7339.225","cleanupStopped":true,"compiledCompositionReady":false,"config":"/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qt_temp-RbwFBP/config/version-lock.json","distribution":"/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qt_temp-RbwFBP/runtime","error":"","exitCode":0,"ffmpeg":"/usr/bin/true","ffprobe":"/usr/bin/true","format":"qvw.startup-verification@1","imagesReady":false,"node":"/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qt_temp-RbwFBP/slow-node","ownedStudioPid":0,"pageLoaded":false,"project":"","qtVersion":"6.11.2","resourceRoot":"/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build/tests/resources","revision":-1,"screenshots":false,"snapshot":false,"sourceFingerprint":"","studioUrl":"","templateDirectory":"/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build/tests/resources/templates","verdict":"PASS","webEngineVersion":"6.11.2"})
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   3.07 sec
+
+The following tests FAILED:
+	 21 - startup_early_close (Failed)
+Errors while running CTest

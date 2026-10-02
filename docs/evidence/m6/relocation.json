@@ -1,0 +1,77 @@
+{
+  "format": "qvw.relocation-verification@1",
+  "verdict": "PASS",
+  "initialPath": "/usr/bin:/bin:/usr/sbin:/sbin",
+  "cwd": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-ptcdgwwk/中文 空格目录",
+  "app": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-ptcdgwwk/中文 空格目录/Qt 视频工作台.app",
+  "externalHypit": "/Users/bytedance/Downloads/国产资产作业/hypit",
+  "externalHypitLayout": "prepared external Distribution symlink; not bundled",
+  "qtLinkOverrideEnvironmentRemoved": true,
+  "cases": [
+    {
+      "name": "relocated-default",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "report": "docs/evidence/m6/relocated-default.json",
+      "ownedStudioAbsent": true
+    },
+    {
+      "name": "relocated-explicit",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "report": "docs/evidence/m6/relocated-explicit.json",
+      "ownedStudioAbsent": true
+    },
+    {
+      "name": "relocated-shell",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "report": "docs/evidence/m6/relocated-shell.json",
+      "ownedStudioAbsent": true
+    },
+    {
+      "name": "relocated-shell-explicit",
+      "expectedSuccess": true,
+      "exitCode": 0,
+      "report": "docs/evidence/m6/relocated-shell-explicit.json",
+      "ownedStudioAbsent": true
+    },
+    {
+      "name": "missing-hypit",
+      "expectedSuccess": false,
+      "exitCode": 6,
+      "report": "docs/evidence/m6/missing-hypit.json",
+      "ownedStudioAbsent": null
+    },
+    {
+      "name": "wrong-version",
+      "expectedSuccess": false,
+      "exitCode": 6,
+      "report": "docs/evidence/m6/wrong-version.json",
+      "ownedStudioAbsent": null
+    },
+    {
+      "name": "missing-node",
+      "expectedSuccess": false,
+      "exitCode": 4,
+      "report": "docs/evidence/m6/missing-node.json",
+      "ownedStudioAbsent": null
+    },
+    {
+      "name": "missing-ffmpeg",
+      "expectedSuccess": false,
+      "exitCode": 4,
+      "report": "docs/evidence/m6/missing-ffmpeg.json",
+      "ownedStudioAbsent": null
+    },
+    {
+      "name": "missing-ffprobe",
+      "expectedSuccess": false,
+      "exitCode": 4,
+      "report": "docs/evidence/m6/missing-ffprobe.json",
+      "ownedStudioAbsent": null
+    }
+  ],
+  "otherMachineVerified": false,
+  "screenshots": false
+}

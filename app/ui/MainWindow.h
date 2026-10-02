@@ -45,6 +45,7 @@ signals:
     void cancelExportRequested();
     void stopExportObservationRequested();
     void resumeExportRequested();
+    void clearExportCacheRequested();
     void demoProposalRequested(const QString &request);
     void importProposalRequested(const QByteArray &json);
     void confirmProposalRequested();
@@ -91,6 +92,7 @@ private:
     QPushButton *m_cancelExport = nullptr;
     QPushButton *m_stopExport = nullptr;
     QPushButton *m_resumeExport = nullptr;
+    QPushButton *m_clearExportCache = nullptr;
     bool m_hasDocument = false;
     bool m_exportActive = false;
     QLineEdit *m_proposalRequest = nullptr;

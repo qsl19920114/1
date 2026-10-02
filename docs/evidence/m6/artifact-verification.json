@@ -1,0 +1,9 @@
+{
+  "format": "qvw.final-artifact-check@1",
+  "verdict": "PASS",
+  "zipSha256": "b4affaaac14ab44a153058fbee2986ff8c8021e7e6550aa95e940fcd31fb09c3",
+  "guidesMatch": true,
+  "licenseFiles": 248,
+  "qtAttributionPages": 126,
+  "source": "Actual final ZIP, bundle resources and sources.json size/hash checks; console verification in this session"
+}

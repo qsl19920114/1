@@ -1,0 +1,15 @@
+{"level":"INFO","message":"正在检查 Hypit 配置：/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-zmhbok90/中文 空格目录/config/wrong-version.json","timestamp":"2026-10-02T04:00:35.820Z"}
+{"level":"INFO","message":"开始版本自检：/opt/homebrew/bin/node /private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-zmhbok90/中文 空格目录/runtime/hypit/bin/hypit.mjs version --json","timestamp":"2026-10-02T04:00:35.820Z"}
+{"argumentCount":3,"arguments":["/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-zmhbok90/中文 空格目录/runtime/hypit/bin/hypit.mjs","version","--json"],"exitCode":0,"level":"INFO","message":"外部命令结束","program":"/opt/homebrew/bin/node","timestamp":"2026-10-02T04:00:36.314Z","truncated":false}
+{"level":"ERROR","message":"Hypit 版本不符：实际 0.2.10，版本锁要求 0.2.11。请选择匹配版本的配置。","timestamp":"2026-10-02T04:00:36.323Z"}
+{"level":"INFO","message":"Hypit 版本不符：实际 0.2.10，版本锁要求 0.2.11。请选择匹配版本的配置。","timestamp":"2026-10-02T04:00:36.331Z"}
+{"level":"INFO","message":"正在检查 Hypit 配置：/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-qk3mepuc/中文 空格目录/config/wrong-version.json","timestamp":"2026-10-02T04:03:45.879Z"}
+{"level":"INFO","message":"开始版本自检：/opt/homebrew/bin/node /private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-qk3mepuc/中文 空格目录/runtime/hypit/bin/hypit.mjs version --json","timestamp":"2026-10-02T04:03:45.880Z"}
+{"argumentCount":3,"arguments":["/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-qk3mepuc/中文 空格目录/runtime/hypit/bin/hypit.mjs","version","--json"],"exitCode":0,"level":"INFO","message":"外部命令结束","program":"/opt/homebrew/bin/node","timestamp":"2026-10-02T04:03:46.368Z","truncated":false}
+{"level":"ERROR","message":"Hypit 版本不符：实际 0.2.10，版本锁要求 0.2.11。请选择匹配版本的配置。","timestamp":"2026-10-02T04:03:46.369Z"}
+{"level":"INFO","message":"Hypit 版本不符：实际 0.2.10，版本锁要求 0.2.11。请选择匹配版本的配置。","timestamp":"2026-10-02T04:03:46.377Z"}
+{"level":"INFO","message":"正在检查 Hypit 配置：/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-ptcdgwwk/中文 空格目录/config/wrong-version.json","timestamp":"2026-10-02T04:35:16.489Z"}
+{"level":"INFO","message":"开始版本自检：/opt/homebrew/bin/node /private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-ptcdgwwk/中文 空格目录/runtime/hypit/bin/hypit.mjs version --json","timestamp":"2026-10-02T04:35:16.490Z"}
+{"argumentCount":3,"arguments":["/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-ptcdgwwk/中文 空格目录/runtime/hypit/bin/hypit.mjs","version","--json"],"exitCode":0,"level":"INFO","message":"外部命令结束","program":"/opt/homebrew/bin/node","timestamp":"2026-10-02T04:35:17.007Z","truncated":false}
+{"level":"ERROR","message":"Hypit 版本不符：实际 0.2.10，版本锁要求 0.2.11。请选择匹配版本的配置。","timestamp":"2026-10-02T04:35:17.015Z"}
+{"level":"INFO","message":"Hypit 版本不符：实际 0.2.10，版本锁要求 0.2.11。请选择匹配版本的配置。","timestamp":"2026-10-02T04:35:17.279Z"}

@@ -47,7 +47,7 @@ void HypitProbe::cancel() {
     if (m_process.state() != QProcess::NotRunning) {
         m_process.kill();
         m_process.waitForFinished(2000);
-        if (m_log) m_log->command(m_config.launcherPath, {"version", "--json"}, -1);
+        if (m_log) m_log->command(m_process.program(), m_process.arguments(), -1);
     }
 }
 void HypitProbe::start(const AppConfig &config, LogWriter &log) {
@@ -55,6 +55,13 @@ void HypitProbe::start(const AppConfig &config, LogWriter &log) {
     m_config = config;
     m_log = &log;
     m_pending = true;
+    const auto invocation = RuntimePaths::hypitInvocation(config.launcherPath, config.nodePath, config.nodeExplicit, {"version", "--json"});
+    m_process.setProgram(invocation.program);
+    m_process.setArguments(invocation.arguments);
+    if (!invocation.ok()) {
+        finish({ProbeStatus::InvocationFailed, {}, {}, invocation.error}, -1);
+        return;
+    }
     const QFileInfo launcher(config.launcherPath);
     if (!launcher.isFile()) {
         finish({ProbeStatus::LauncherMissing, {}, {}, QStringLiteral("找不到 Hypit 启动器：%1。请检查 hypit.distributionPath。").arg(config.launcherPath)}, -1);
@@ -65,9 +72,10 @@ void HypitProbe::start(const AppConfig &config, LogWriter &log) {
         return;
     }
     m_process.setWorkingDirectory(config.distributionPath);
-    m_log->info(QStringLiteral("开始版本自检：%1 version --json").arg(config.launcherPath));
+    m_process.setProcessEnvironment(config.processEnvironment);
+    m_log->info(QStringLiteral("开始版本自检：%1 %2").arg(m_process.program(), invocation.arguments.join(' ')));
     m_timeout.start();
-    m_process.start(config.launcherPath, {"version", "--json"});
+    m_process.start();
 }
 void HypitProbe::finish(ProbeResult result, int exitCode) {
     if (!m_pending) return;
@@ -77,7 +85,7 @@ void HypitProbe::finish(ProbeResult result, int exitCode) {
         m_process.kill();
         m_process.waitForFinished(2000);
     }
-    m_log->command(m_config.launcherPath, {"version", "--json"}, exitCode);
+    m_log->command(m_process.program(), m_process.arguments(), exitCode);
     if (result.ok()) m_log->info(result.message); else m_log->error(result.message);
     emit completed(result);
 }

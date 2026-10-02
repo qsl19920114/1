@@ -74,6 +74,16 @@ bool collect(const QString &root,const QString &relative,QStringList *files,QStr
     }
     return true;
 }
+bool removableTree(const QString &root,QString *error,int depth=0,int *count=nullptr) {
+    int localCount=0;if(!count)count=&localCount;
+    if(depth>64)return fail(error,QStringLiteral("缓存目录层级超过安全上限。"));
+    for(const auto &entry:QDir(root).entryInfoList(QDir::AllEntries|QDir::NoDotAndDotDot|QDir::Hidden|QDir::System)) {
+        if(++*count>100000||entry.isSymLink()||(!entry.isDir()&&!entry.isFile())||entry.canonicalFilePath()!=entry.absoluteFilePath())
+            return fail(error,QStringLiteral("缓存含不安全路径、特殊文件或超过安全数量限制：%1").arg(entry.absoluteFilePath()));
+        if(entry.isDir()&&!removableTree(entry.absoluteFilePath(),error,depth+1,count))return false;
+    }
+    return true;
+}
 }
 bool ExportWorkspace::validateLocalRuntime(const QString &path,QString *error) {
     QJsonObject runtime;if(!object(path,&runtime,error))return false;
@@ -135,6 +145,7 @@ bool ExportWorkspace::loadTask(const domain::Project &project,domain::ExportTask
     domain::ExportTask task;
     for(const auto &key:{"phase","buildId","output","destination","workspace","sourceFingerprint","error"})if(!record.value(QLatin1String(key)).isString())return fail(error,QStringLiteral("导出记录字段无效。"));
     task.phase=record["phase"].toString();task.buildId=record["buildId"].toString();task.output=record["output"].toString();task.destination=record["destination"].toString();task.error=record["error"].toString();
+    if(!QStringList{"planning","submitting","working","cancelling","getting","validating","stopped","complete","failed","cancelled"}.contains(task.phase))return fail(error,QStringLiteral("导出记录任务阶段未知。"));
     if(!record["active"].isBool()||!record["hypitVersion"].isString())return fail(error,QStringLiteral("导出记录缺少执行状态或 Hypit 版本。"));task.active=record["active"].toBool();task.hypitVersion=record["hypitVersion"].toString();
     const auto revision=record["revision"].toDouble(-1);if(!std::isfinite(revision)||revision<0||revision>2147483647||std::floor(revision)!=revision)return fail(error,QStringLiteral("导出记录修订号无效。"));task.revision=int(revision);
     static const QRegularExpression hex(QStringLiteral("^[0-9a-f]{64}$"));if(!hex.match(record["sourceFingerprint"].toString()).hasMatch())return fail(error,QStringLiteral("导出记录指纹无效。"));task.sourceFingerprint=QByteArray::fromHex(record["sourceFingerprint"].toString().toLatin1());
@@ -160,5 +171,27 @@ bool ExportWorkspace::validateRecovered(const domain::Project &project,const dom
         total+=data.size();if(total>maxCopyBytes||QString::fromLatin1(QCryptographicHash::hash(data,QCryptographicHash::Sha256).toHex())!=it.value().toString())return fail(error,QStringLiteral("冻结输入已变化，不能恢复此 Build：%1").arg(it.key()));
     }
     out->stagePath=QDir(task.workspace).filePath(".export-stage.mp4");if(QFileInfo(out->stagePath).isSymLink())return fail(error,QStringLiteral("恢复暂存成片路径不安全。"));return true;
+}
+bool ExportWorkspace::validateFinishedCache(const domain::Project &project,const domain::ExportTask &task,FrozenExport *out,QString *error) {
+    if(task.active||!QStringList{"complete","failed","cancelled"}.contains(task.phase)||task.buildId.isEmpty())
+        return fail(error,QStringLiteral("只可清理已有 Build ID、已确认终态且没有活动任务的缓存。"));
+    domain::ExportTask persisted;
+    if(!loadTask(project,&persisted,error))return fail(error,QStringLiteral("缓存任务记录无法安全读取：%1").arg(error?*error:QString()));
+    if(persisted.active||persisted.phase!=task.phase||persisted.buildId!=task.buildId||persisted.workspace!=task.workspace
+        ||persisted.sourceFingerprint!=task.sourceFingerprint||persisted.revision!=task.revision||persisted.output!=task.output
+        ||persisted.destination!=task.destination||persisted.hypitVersion!=task.hypitVersion
+        ||persisted.space.width!=task.space.width||persisted.space.height!=task.space.height||persisted.space.frameCount!=task.space.frameCount
+        ||persisted.space.durationSec!=task.space.durationSec||persisted.space.frameRate!=task.space.frameRate)
+        return fail(error,QStringLiteral("磁盘缓存任务记录已变化，未清理。"));
+    return validateRecovered(project,task,out,error)&&removableTree(task.workspace,error);
+}
+bool ExportWorkspace::removeFinishedCache(const domain::Project &project,const domain::ExportTask &task,QString *error) {
+    FrozenExport frozen;if(!validateFinishedCache(project,task,&frozen,error))return false;
+    QString record;if(!noLinks(project,".workbench/export-task.json",&record,error)||!QFileInfo(record).isFile())return false;
+    // The UUID and manifest checks above prohibit project inputs and sibling
+    // Builds. Generated files are included in the no-links tree check.
+    if(!QDir(frozen.workspace).removeRecursively())return fail(error,QStringLiteral("无法删除当前终态任务的冻结缓存。"));
+    if(!QFile::remove(record))return fail(error,QStringLiteral("缓存已删除，但无法删除当前任务记录。"));
+    if(error)error->clear();return true;
 }
 }

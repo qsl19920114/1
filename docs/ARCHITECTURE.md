@@ -2,7 +2,7 @@
 
 UI 使用领域 DTO；main 仅连接信号。DocumentController 管理持久化工程和素材，ProjectController 管理异步 Hypit 自检、Studio 生命周期和 Snapshot，EditorController 管理原生编辑与历史。UI 不解析 Hypit 内部 JSON。
 
-依赖由 CMake targets 约束：UI → Domain，Controllers → Services / Backend / Infrastructure；Services → Domain + Qt Core/Gui；Backend → Domain + Network。
+依赖由 CMake targets 约束：UI → Domain，Controllers → Services / Backend / Infrastructure；Services → Domain / Infrastructure + Qt Core/Gui；Backend → Domain / Infrastructure + Network。
 
 ## 工程格式 v1
 
@@ -33,3 +33,13 @@ plan要求本地Runtime、完整providers、本地请求计数与预检通过；
 `IProposalProvider`只返回单项属性提案；默认`DemoProposalProvider`为显式模拟，不发模型请求。外部JSON来源不由其自述决定，导入后统一标来源未核验。`ProposalService`严格核对schema、值类型、真实可写字段、revision/源码指纹，以及图片素材白名单。
 
 `ProposalController`管理待确认提案；生成不写入，确认时重新校验，随后只调用现有`EditorController::edit`。快照、工程、就绪状态或编辑过程变化会使旧提案失效。界面以纯文本显示当前值/拟修改值/来源，避免把不可信提案内容作为HTML。
+
+## M6 运行资源与发布
+
+`RuntimePaths`根据 executable 定位相对资源；macOS 为.app内Contents/Resources，其余平台为可执行文件旁resources（仅macOS已验收）。构建复制原创templates；发布脚本复制相对布局的默认配置及第三方材料。打包默认配置优先于开发仓库/CWD搜索，无绝对模板编译常量。
+
+`AppConfig`限制普通配置文件64KiB、类型/路径长度与NUL，解析可选绝对tools路径；各QProcess继承同一应用环境。子进程PATH加入显式工具目录及常用安装位置，系统环境不改。统一启动策略用解析到的Node执行JS入口，默认直接执行shell启动器；显式Node与固定版本官方shell同时配置时，核对官方脚本内容后使用其相邻JS入口。自定义shell不擅自绕过，无法满足显式Node约束时返回可读错误。媒体校验使用解析到的ffprobe/ffmpeg。Hypit Distribution仍为固定版本的外部依赖。
+
+`LogWriter`限制消息/参数/单条JSON，5MiB轮转到.1/.2；既有备份为symlink或特殊文件时拒绝轮转。初始化和轮转/追加共用跨进程QLockFile；最多等100毫秒，竞争时记录警告并保留后续写入能力，成功后清除临时错误。轮转后当前文件缺失可在持锁时重建；真正不安全路径或I/O失败仍明确报错。界面日志保留有限block。`clearFinishedCache`拒绝活动、未知、缺ID或版本不符任务，再按status→activity→runtime down确认精确终态与停止；各步骤重验当前任务记录、UUID目录、输入hash与全树无链接。仅删除当前冻结目录及记录。其他Build即便已完成也保守拒绝；停止观察和应用关闭不删除Worker数据。
+
+发布脚本部署Qt/WebEngine，逐个实际Mach-O检查非系统链接与RPATH、架构和minimum deployment target；本地签名包含WebEngine helper原权限，并校验plugin、ICU/pak/snapshot资源。资源/Qt随包，Hypit/Node/媒体/渲染浏览器不在ZIP内。`--verify-startup`使用真实Studio验证Snapshot、已编译composition、至少一张实际加载图片和退出清理，以JSON报告记录结果；验证完成前关闭窗口返回退出码9和FAIL，退出清理成功不代替预览验证成功。

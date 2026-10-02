@@ -1,0 +1,24 @@
+[  0%] Built target qvw_infra_autogen_timestamp_deps
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  0%] Built target qvw_domain_autogen
+[  0%] Built target qvw_infra_autogen
+[ 12%] Built target qvw_domain
+[ 12%] Built target qvw_ui_autogen_timestamp_deps
+[ 28%] Built target qvw_infra
+[ 28%] Built target qvw_backend_autogen_timestamp_deps
+[ 28%] Built target qvw_services_autogen_timestamp_deps
+[ 28%] Built target qvw_ui_autogen
+[ 34%] Built target qvw_services_autogen
+[ 34%] Built target qvw_backend_autogen
+[ 43%] Built target qvw_ui
+[ 56%] Built target qvw_backend
+[ 75%] Built target qvw_services
+[ 75%] Built target qvw_controllers_autogen_timestamp_deps
+[ 75%] Built target qvw_controllers_autogen
+[ 90%] Built target qvw_controllers
+[ 90%] Built target startup_early_close_test_autogen_timestamp_deps
+[ 93%] Automatic MOC for target startup_early_close_test
+[ 93%] Built target startup_early_close_test_autogen
+[ 96%] Building CXX object tests/CMakeFiles/startup_early_close_test.dir/integration/StartupEarlyCloseTest.cpp.o
+[ 96%] Linking CXX executable startup_early_close_test
+[100%] Built target startup_early_close_test

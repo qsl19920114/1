@@ -1,0 +1,1496 @@
+{
+  "format": "qvw.license-materials@1",
+  "qtVersion": "6.11.2",
+  "qtAttributionPages": 126,
+  "records": [
+    {
+      "file": "Qt/attributions/index.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-licensing.html",
+      "bytes": 59384,
+      "sha256": "dc3fc4a73cce79c1070d9b5f752907e629ddb3f1b5b828103a01dbc9ab99d1e7"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-abseil.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-abseil.html",
+      "bytes": 28233,
+      "sha256": "2f3e26e89ea3a290e1d51863242981ddcc039ec678fd2bbe1213f9dfb69b773a"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-acorn-a-tiny-fast-javascript-parser-written-in-javascript.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-acorn-a-tiny-fast-javascript-parser-written-in-javascript.html",
+      "bytes": 18406,
+      "sha256": "2318c515b032aca58ff5683f939c2c7b885d2e4eb52bcf56e0e46000c868e9fd"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-alliance-for-open-media-video-codec.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-alliance-for-open-media-video-codec.html",
+      "bytes": 24462,
+      "sha256": "62bc8786e96653abd443370f1bcea49d4492b861774e291c5ffa1f1095566dc4"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-almost-native-graphics-layer-engine.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-almost-native-graphics-layer-engine.html",
+      "bytes": 18821,
+      "sha256": "53356e3676dc531bc4f38f3a1b4c9eaaec58f37db977636d5d97c3730331c00f"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-android-explicit-synchronization.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-android-explicit-synchronization.html",
+      "bytes": 28350,
+      "sha256": "1c33bea225650c2ba181a6493226080ddaaf20ecac144cf9462c5ef611149a87"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-boringssl.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-boringssl.html",
+      "bytes": 30565,
+      "sha256": "1f02c8c92f7d40bfc3d255cabf496be8d13a77372ed549f57286d08a9b7a8974"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-brotli.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-brotli.html",
+      "bytes": 18121,
+      "sha256": "17075008539cd7545ae894fd216a3283b365953ddfd68ab0ceecd4ba4397fcc7"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-c-signal-slot-library.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-c-signal-slot-library.html",
+      "bytes": 17353,
+      "sha256": "ad97dde70701060021f574891b1630232ece34fc9395d45c0881d8ff088a7b68"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-chromium-global.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-chromium-global.html",
+      "bytes": 19519,
+      "sha256": "b18e0775f61446ec6a831c56ab0329a2a8200d5dded4bcc7f5b57bfb1d5d5023"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-cityhash.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-cityhash.html",
+      "bytes": 18159,
+      "sha256": "161bbfc64528744b83710301c1e1ffb99145bf93561f52ab2a333b350ad2dace"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-codemirror-5.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-codemirror-5.html",
+      "bytes": 18197,
+      "sha256": "e73ee4b0e87eac4d8b6970268d86695c7683a323b3ab9059758be06d38918f40"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-codemirror-6.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-codemirror-6.html",
+      "bytes": 18207,
+      "sha256": "b2d5966d131b034f80ba606a74b11633be8242b28bb0a2dfabd067770267b266"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-compact-encoding-detection.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-compact-encoding-detection.html",
+      "bytes": 28336,
+      "sha256": "aa1b640d6a9e585a5b98eb5e1fab44c8a4eedbbff3b2334127a177b9abc0baa1"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-compact-language-detector-v3.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-compact-language-detector-v3.html",
+      "bytes": 28877,
+      "sha256": "80a877bcd235f84aabdf3e803a9e26b1ddc1be206b2367d6026d767b1faafa07"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-cpuinfo.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-cpuinfo.html",
+      "bytes": 18459,
+      "sha256": "6de9004de35f3d41d24c16c1c2af8ea46cb3a72a8b5253a86fa8a2ab174ef190"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-crashpad.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-crashpad.html",
+      "bytes": 28235,
+      "sha256": "1e4d9f45ff9efebb054c61ae2d6d5f410e254646c75bf16a8a280e0b2a8ae605"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-crc32c.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-crc32c.html",
+      "bytes": 18488,
+      "sha256": "7298795a48113e5e753f771e51275058179e2893db94c829c13186f6d63a8159"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-csp-evaluator-core-library-a-tool-that-allows-developers-to-check-if-a-content-security-policy-csp-serves-as-mitigation-against-xss-attacks.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-csp-evaluator-core-library-a-tool-that-allows-developers-to-check-if-a-content-security-policy-csp-serves-as-mitigation-against-xss-attacks.html",
+      "bytes": 28918,
+      "sha256": "14800de84f6711c21e309a62dfdf37e66d7347a12a9a062583919e9b5e04d99e"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-d3.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-d3.html",
+      "bytes": 17722,
+      "sha256": "076e2efdb2e4241d91ce035c82efd3dfa8d03259a94eeebf63f4c3e1576f1c02"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-dav1d-is-an-av1-decoder.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-dav1d-is-an-av1-decoder.html",
+      "bytes": 18448,
+      "sha256": "011adbe73f1f4519f875935713bcb938d9ea45d23ba3662b0fcfa38144ee8c99"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-dawn.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-dawn.html",
+      "bytes": 18589,
+      "sha256": "f628f3f45a428527dabe2d9d22f444736986fbac47b3b0f16587a152e094f1b7"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-devtools-frontend.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-devtools-frontend.html",
+      "bytes": 18670,
+      "sha256": "9f0d9bcfc9d4b1d1f12833fa77cae19fd5c083d81da80ec34fef1f0fffd55761"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-dragonbox.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-dragonbox.html",
+      "bytes": 18398,
+      "sha256": "d9c02d82d6a0990afa5b7a2b9c55cab1868e7ee2baa85ce10809c20cd4a083d5"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-emoji-segmenter.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-emoji-segmenter.html",
+      "bytes": 28285,
+      "sha256": "904145e08628d696ee57c0ff49ae16290defdef60091fa3ce3525fc0a5875d1e"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-expat-xml-parser.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-expat-xml-parser.html",
+      "bytes": 18235,
+      "sha256": "bf17a8b73d97aeb8ff56e5936a2a805ca1ef7ee3167e42d82860808452a9beaf"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-fast-float.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-fast-float.html",
+      "bytes": 18143,
+      "sha256": "f79e532d959fbacda7fda0eb3ee3e1acd52c6d4c5e6598563d0f0aea609e7ad2"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-ffmpeg.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-ffmpeg.html",
+      "bytes": 62841,
+      "sha256": "9389d34d596d3a1e50e6a5b8981fe7d03ca2e34b5ae18c0f32941966a4e286b4"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-fft.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-fft.html",
+      "bytes": 18135,
+      "sha256": "4ab3bd6ee9988e8aebe32878d174c54d2c33f83b4ece593b455199550186ed86"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-fiat-crypto-synthesizing-correct-by-construction-code-for-cryptographic-primitives.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-fiat-crypto-synthesizing-correct-by-construction-code-for-cryptographic-primitives.html",
+      "bytes": 18073,
+      "sha256": "b3ff72de57e23db2d1f5d3e1ead58fd463911f15a50f241e8dc5e79ff1b1a736"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-flac.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-flac.html",
+      "bytes": 18542,
+      "sha256": "a15654a87bd299d502a5254b0306b13270b7c81bd9694a9c4e327864420f7400"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-flatbuffers.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-flatbuffers.html",
+      "bytes": 28241,
+      "sha256": "f437f1ea8c403baac6aa44dc84b07026b86daef7c5c8104e3f8e33c5dbea8d87"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-fontconfig.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-fontconfig.html",
+      "bytes": 25938,
+      "sha256": "3e0f29bcf802c73e3be6136cdee358c4293e131eede96ed30d81be550d057aac"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-fp16.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-fp16.html",
+      "bytes": 18187,
+      "sha256": "bb47ddbc59645b81c55062b67391077872bde457b4c49e49f9186b207e5a077c"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-general-purpose-fft-fast-fourier-cosine-sine-transform-package.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-general-purpose-fft-fast-fourier-cosine-sine-transform-package.html",
+      "bytes": 17599,
+      "sha256": "0d9165fa0ae0df2593a5f748be125cbd61badc7475eda76e810b502c685efc69"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-google-double-conversion.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-google-double-conversion.html",
+      "bytes": 18656,
+      "sha256": "1e731f0d46c8e12d4e47273249160820669d1b9c79e4a889469662d2111aa7d0"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-google-glog-x27-s-symbolization-library.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-google-glog-x27-s-symbolization-library.html",
+      "bytes": 18764,
+      "sha256": "70ccfed1813be1c76fdfd1edac62edaaeeaad1a6a4e5a85fa6981dd0a652f6ad"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-harfbuzz.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-harfbuzz.html",
+      "bytes": 19020,
+      "sha256": "e9af3611b2e3a06d6f7293b67ae1177c256d23da621b7f50e3fa2f19dee4e6a8"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-headers-for-the-windows-10-webauthn-api-webauthn-dll.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-headers-for-the-windows-10-webauthn-api-webauthn-dll.html",
+      "bytes": 18377,
+      "sha256": "f40e67c843d5ff35e4a57fea1e524e5e3d7b863e06942af2d5a0a0fe87086ee9"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-highway-c-library-for-simd.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-highway-c-library-for-simd.html",
+      "bytes": 28343,
+      "sha256": "7e6af93678ea636c5bf2df043f6362967b62ddf6f09102dea99e6945ccddc586"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-hunspell.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-hunspell.html",
+      "bytes": 43552,
+      "sha256": "68aa2a66a3c5b8b9f958177e7af0c6a73cce17c3a2d6198ffc30f32824060a83"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-icu.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-icu.html",
+      "bytes": 42518,
+      "sha256": "fc3f885c3af303fadb0e0e8f8f7b7758e2fd7f92ac9c54a51fe143064e9ce76e"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-implementation-of-webdriver-bidi-standard.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-implementation-of-webdriver-bidi-standard.html",
+      "bytes": 28436,
+      "sha256": "872d5ba4e178b96ba242d5ff1970c6c9e9f71b1f895ba4219252533d2f990366"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-in-line-a-law-and-u-law-conversion-routines.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-in-line-a-law-and-u-law-conversion-routines.html",
+      "bytes": 17655,
+      "sha256": "1e68ebcf9fa4dcdac4dd4a4b4e811fb670d430b7b5049d9637e6c8aa7371b76f"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-ink-stroke-modeler.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-ink-stroke-modeler.html",
+      "bytes": 28299,
+      "sha256": "d02590f55451d014add234315adfdcfdcd0b50fbb08165a3056c1d7f30b6afa8"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-ink.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-ink.html",
+      "bytes": 28213,
+      "sha256": "7012057d07c937e69da0354fc91df94d89bbdf31e5ae4c0ab4703e441c9b8782"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-inspector-protocol.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-inspector-protocol.html",
+      "bytes": 18673,
+      "sha256": "85593bfc00e58dde0b9f088de1c1ec084869dff3e20882f7c4908186c68ed21a"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-intl-messageformat.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-intl-messageformat.html",
+      "bytes": 18652,
+      "sha256": "a940439c41df5ca19bc344b7ec39fcf135e6c74f7d93a16cccbbd1dc42249e2c"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-ipcz.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-ipcz.html",
+      "bytes": 18576,
+      "sha256": "d90199b48db90ef613d04cb711c3a7b84244ebe5e5f275ec7ecaecacc63930d4"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-json5.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-json5.html",
+      "bytes": 18175,
+      "sha256": "27f2b3a75d1a3eef908319eb87239314781774b4465a4d381587608a4f9f6402"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-jsoncpp.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-jsoncpp.html",
+      "bytes": 19743,
+      "sha256": "91eba0c389e1b4bffb7547dc7b95a56a3ff2a9924fdbb29a63b4bbf87b67f10f"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-legacy-javascript.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-legacy-javascript.html",
+      "bytes": 28325,
+      "sha256": "756025fb451b0c263272768493f0e381aa3667b4e1aaa660efa359ed3ff067b3"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-leveldb-a-fast-persistent-key-value-store.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-leveldb-a-fast-persistent-key-value-store.html",
+      "bytes": 18697,
+      "sha256": "2fdf87ac9b46c8ee5df752670500eb24beadd788204a2132464c383e6de7f6fc"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-libaddressinput.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-libaddressinput.html",
+      "bytes": 28281,
+      "sha256": "ed0368f8ee395ba681f5bb502136aeb1e29f29c188967535cb5bf76353261478"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-libavif-library-for-encoding-and-decoding-avif-files.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-libavif-library-for-encoding-and-decoding-avif-files.html",
+      "bytes": 38276,
+      "sha256": "482daf4c726aee814b3b0f8c7452cf184021eaccc6a9dbdbc59e77fc6c2c3632"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-libgav1.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-libgav1.html",
+      "bytes": 28249,
+      "sha256": "6a0b7be43d40328149f6619a60e7cb5901873fc0a0ce5147186d3e4759573eb2"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-libpng.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-libpng.html",
+      "bytes": 22437,
+      "sha256": "23347e420370eff501fd44299d768de44fe5a5134e600b851c625e750c96715f"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-libsrtp.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-libsrtp.html",
+      "bytes": 18642,
+      "sha256": "5724350fc4b3ea060c461df85744cf08ffcab4742c55b1485114f5c580b63793"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-libtess2.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-libtess2.html",
+      "bytes": 18631,
+      "sha256": "18c9981f0cad07e49eb28a6e28826197d21bbd0055483228f7957fd7bb1d4bca"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-libvpx.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-libvpx.html",
+      "bytes": 20055,
+      "sha256": "3f7d2b866241bbb944769b10eb33f449da4d9c4a4d2e4aad786c7d69be3118ce"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-libxml.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-libxml.html",
+      "bytes": 18337,
+      "sha256": "6f4c4409607591a4282060488efd0c26bdcad055ea81fc47181636f2d5285382"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-libxslt.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-libxslt.html",
+      "bytes": 20037,
+      "sha256": "f3077595439aa28727027ff0b5dcf83e0249c53aa11393a48149b0566b2bae53"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-libyuv.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-libyuv.html",
+      "bytes": 18550,
+      "sha256": "6a279fe3594ffbfe8a0f2dcc4fb304667ac79b3bb732de12c70e6d97e43817a6"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-lighthouse-i18n-js.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-lighthouse-i18n-js.html",
+      "bytes": 28281,
+      "sha256": "d0840602dad1820e9b9f41bd30d100fde94425bbd2c94913fc5814919660a89d"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-lighthouse.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-lighthouse.html",
+      "bytes": 28249,
+      "sha256": "b21eda69b71deb8658d4fd78a91365d4c0840d09c8f5d7f5a9768c6e3d75ee78"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-lit.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-lit.html",
+      "bytes": 18514,
+      "sha256": "ffb80a7d637a1bf26b7b77b3d7930aa8a3c18d96179223ba200410e7476197bb"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-lzma-sdk.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-lzma-sdk.html",
+      "bytes": 17280,
+      "sha256": "f22d086e3a2643b4ff1bd756aaf85f6b43358d519a524dbd3869c8b39b7bb6aa"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-marked.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-marked.html",
+      "bytes": 19671,
+      "sha256": "961b36c009b20d7db8d22f487ab2f7c35768ad5d9d250216b0faa4f13162cc46"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-material-color-utilities.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-material-color-utilities.html",
+      "bytes": 28348,
+      "sha256": "d0fd782b1123548d1c258f795f1742ceff295a2dc11a1bf62b6aad65d5a4d2d5"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-metrics-protos.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-metrics-protos.html",
+      "bytes": 18574,
+      "sha256": "e0deb767f99cd6a683ff8a99b4821113210d0f1474bf3f770b58093d0d8d7a61"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-minigbm.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-minigbm.html",
+      "bytes": 18624,
+      "sha256": "e92dd865c85f8733ce5e6d9fa53e5be67a7f7979494e9c9ca4050d090074cae6"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-mitt.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-mitt.html",
+      "bytes": 18097,
+      "sha256": "8d992a8fb66453b57d6a1307f7341db1f185c12a3a9250b7e89ddc151c773928"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-modp-base64-decoder.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-modp-base64-decoder.html",
+      "bytes": 18790,
+      "sha256": "b1ed70e16caaa86b618b87651c76ce17ef85cf4276b45be392b2871cec098e4a"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-nvidia-control-x-extension-library.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-nvidia-control-x-extension-library.html",
+      "bytes": 18360,
+      "sha256": "b816b5cea66790efc3c62edf541d261d9a37c121f28f2a18cab6a149aa142657"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-one-euro-filter.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-one-euro-filter.html",
+      "bytes": 18644,
+      "sha256": "a3e37fe1ccd4f94e7c16a9be0305aaa37742458aaeb4e9a0306265485281203d"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-opus.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-opus.html",
+      "bytes": 18976,
+      "sha256": "3b9ecc3141b5ff189a1a9d07dd8445e09633fcdffd61ad914fefc66d7d31629f"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-ots-opentype-sanitizer.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-ots-opentype-sanitizer.html",
+      "bytes": 18609,
+      "sha256": "ea0959e44e3a7d00ad255cfce5970be72e9b3bceb3f579c61a753c8f83e9b5a2"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-paul-hsieh-x27-s-superfasthash.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-paul-hsieh-x27-s-superfasthash.html",
+      "bytes": 18700,
+      "sha256": "f7f58aba801af279afe2fb505129a60044d64781ac5e67221e1a16538ce3603e"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-pdfium.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-pdfium.html",
+      "bytes": 30291,
+      "sha256": "c883f94be9979746c2287444e36e558c68b8aa7a178252dbdfe7b18c06166a03"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-perfetto.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-perfetto.html",
+      "bytes": 31588,
+      "sha256": "435b733d563201a6bd9375bc9ee6fd5e70dede3983d54402225017e7b5b47acd"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-pffft-a-pretty-fast-fft.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-pffft-a-pretty-fast-fft.html",
+      "bytes": 19076,
+      "sha256": "e6bc1ea15f45f2d55fdcf06e0b91186247a833ecaf1c06eddea8e96a25f50f68"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-polymer.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-polymer.html",
+      "bytes": 18606,
+      "sha256": "48332ae7ae16a27d8ff0b9bce3dbb78bc1cbdd0a7631b846633ec53cae210c62"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-private-join-and-compute-subset.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-private-join-and-compute-subset.html",
+      "bytes": 28370,
+      "sha256": "d5c09c56eb6c37af70ebac17f55f5214ab1284b408ef06b5c101ec8f3f20ba29"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-protocol-buffers-javascript.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-protocol-buffers-javascript.html",
+      "bytes": 18684,
+      "sha256": "59766af34ed8a85c53b51c75fda4d493ebafa8d4b0fddfb8bd99ec43de0cc903"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-protocol-buffers.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-protocol-buffers.html",
+      "bytes": 18812,
+      "sha256": "23c6924b3dc0e818cf03b5487c59bff46d8c1679977ce8cf6e744266f8a7a12f"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-puppeteer-core.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-puppeteer-core.html",
+      "bytes": 28293,
+      "sha256": "7b27fb495f02780adb16f7ebf327c9e48d674350441b39a90fdc2e3d3af79d5b"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-puppeteer-replay.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-puppeteer-replay.html",
+      "bytes": 28285,
+      "sha256": "6378d814ffd450bdff90fe0110527dd185659790f45967045f05ac9df6ed67f7"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-quiche.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-quiche.html",
+      "bytes": 18593,
+      "sha256": "fdc547a90ecda7b1be75788aa7cae8313f045eb99a58192078244906a0250bfa"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-rapidhash.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-rapidhash.html",
+      "bytes": 18810,
+      "sha256": "bfc6e3fa03f389306c4054381f2edf2cb3ca4d523ddd838a9d4f642ba53dd8e2"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-re2-an-efficient-principled-regular-expression-library.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-re2-an-efficient-principled-regular-expression-library.html",
+      "bytes": 18838,
+      "sha256": "67edc34c19b712283e62a4ac6f9c407a21ed283b805686a703cf23e572aca476"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-recurrent-neural-network-for-audio-noise-reduction.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-recurrent-neural-network-for-audio-noise-reduction.html",
+      "bytes": 18828,
+      "sha256": "1d3214045c29b42a098909e0907a3dc37d31931f8b132e9d2cab7b36dcf9d6b4"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-search-engines-resources.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-search-engines-resources.html",
+      "bytes": 18623,
+      "sha256": "9d4f3d8858c96dd1acdd0b6faf5477de972c6f57b5c4d06f6ed98f25cd3a3125"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-selenium-atoms.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-selenium-atoms.html",
+      "bytes": 28291,
+      "sha256": "032f2bcc326798d6f48256d38be3218b42f50de88990cb862176d3a6868cd897"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-simdutf-unicode-transcoder.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-simdutf-unicode-transcoder.html",
+      "bytes": 18198,
+      "sha256": "63d15ff520874983241893c08cd47df89691f2f8716abecf7cae4520cab88889"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-sizzle.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-sizzle.html",
+      "bytes": 18098,
+      "sha256": "7fe41b8d8532f9ceef574f387dc40f6a5ec99cb33ff8eb6d9a64b3c037822051"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-snappy-a-fast-compressor-decompressor.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-snappy-a-fast-compressor-decompressor.html",
+      "bytes": 19859,
+      "sha256": "c4b5fe4713bd28b78693d653f297fa79116cd2142f56b87b709e527eb4f73da2"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-source-map-scopes-codec.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-source-map-scopes-codec.html",
+      "bytes": 18618,
+      "sha256": "4f4e53b8272873456fa268a4703866d8aaae24c3f60dafdcea1301bb44299d4b"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-speech-dispatcher.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-speech-dispatcher.html",
+      "bytes": 44109,
+      "sha256": "6527a96407b324b515292d05240f98fb47fa548a6865a3e17dea97e68a2e355b"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-spir-v-headers.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-spir-v-headers.html",
+      "bytes": 28284,
+      "sha256": "ef2a2a36786298bc8881a2b7cbd6a51556c01a32455cd561bd2ea69c85608ad0"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-spir-v-tools.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-spir-v-tools.html",
+      "bytes": 28272,
+      "sha256": "6ff47af396525c5bf8a78b13e2d8bfa7525416945fd104016d9a233d2f6c9a13"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-spl-sqrt-floor.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-spl-sqrt-floor.html",
+      "bytes": 18054,
+      "sha256": "a095c8215c03a7f5a19c427c346eaf04d9f6b76c43a50d9786910e0bf3106909"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-sqlite.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-sqlite.html",
+      "bytes": 17260,
+      "sha256": "f09fd78dde48e76ed8002e42d5dd2ae2db9d3f3343019e0da50b9e75fbab5af5"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-the-chromium-project.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-the-chromium-project.html",
+      "bytes": 18689,
+      "sha256": "69bf9c6fd939aa40bbf04997f7c8b0bf7a1c54f4e7697e75a40325aec04d58c9"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-the-diff-match-and-patch-libraries-offer-robust-algorithms-to-perform-the-operations-required-for-synchronizing-plain-text.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-the-diff-match-and-patch-libraries-offer-robust-algorithms-to-perform-the-operations-required-for-synchronizing-plain-text.html",
+      "bytes": 28845,
+      "sha256": "99bc696a8fc19dd61560b57cd83eb47cfa4b14ab03f426750a9d789f3fb0c1e8"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-the-itu-g-722-codec-encode-and-decode-part.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-the-itu-g-722-codec-encode-and-decode-part.html",
+      "bytes": 17842,
+      "sha256": "4062500d83ae8f58225c024c1861d54efa0cbd98f3649731edb4bc9d5de743a3"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-third-party-web.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-third-party-web.html",
+      "bytes": 18176,
+      "sha256": "cef279a11d236c3725477e449e2ebafd938f80c31357e4e9faf20ed928b7c16a"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-uri-template-parser.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-uri-template-parser.html",
+      "bytes": 28308,
+      "sha256": "ebbe1fc24398404a51c955f9dbc4a14e24747391716e611a712525800e1c431b"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-url-pattern-library.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-url-pattern-library.html",
+      "bytes": 18210,
+      "sha256": "3693e0a6a0366e381c0e1b97c995dd2efcd4aad7ac8e5b405a19f61591b6ac99"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-v8-fork-of-fdlibm.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-v8-fork-of-fdlibm.html",
+      "bytes": 17358,
+      "sha256": "33b7dfee897eac3e7fa3d3de63416c758e01e4d1dbc8dd41d1db90fc8ad68aa6"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-volk-meta-loader-for-vulkan-api.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-volk-meta-loader-for-vulkan-api.html",
+      "bytes": 18224,
+      "sha256": "78d64b06f0ee844c7f40273a4df818816370ca32e8712dd693e21dc35441028e"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-vscode-web-custom-data.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-vscode-web-custom-data.html",
+      "bytes": 18210,
+      "sha256": "41e0ffafc009632e2a73025cc96fe3d70b44636daf9f8c2eb901d75b5efc4e9b"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-vulkan-api-headers.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-vulkan-api-headers.html",
+      "bytes": 28301,
+      "sha256": "b957a8bd35d63cc6929240914cf867f4a90cb804187febdaefe61e69fb6aff4f"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-vulkan-loader-components.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-vulkan-loader-components.html",
+      "bytes": 29159,
+      "sha256": "ec471cde781ab0a0aaaabf2cdb3e303a8c80d0f05e379c0e7efde155224dcd0e"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-vulkanmemoryallocator.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-vulkanmemoryallocator.html",
+      "bytes": 18244,
+      "sha256": "d915c42378187d266ab8fec9dfa4e75747aea2cabef60a1d41b3353d6a24e571"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-wasmparser.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-wasmparser.html",
+      "bytes": 27042,
+      "sha256": "4e5a0ccb2abaf5c71bdf4b60ccd918fd40f99ad6ce5711838b4d30a9e0e7f483"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-web-vitals.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-web-vitals.html",
+      "bytes": 28241,
+      "sha256": "cef00523c0e229765df22ec124a5ff57e3f87a548fa6f6db98e58ee3c47cb1cd"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-webkit.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-webkit.html",
+      "bytes": 69316,
+      "sha256": "83cbbe47eb41ba29fa525be03089d7952496a1bc8fcbcb3839fef308ced95a60"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-webm-container-parser-and-writer.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-webm-container-parser-and-writer.html",
+      "bytes": 20137,
+      "sha256": "6bb15e064aac35805866c346d41603eccd3107b684713f231a2bc9c5f1b32745"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-webp-image-encoder-decoder.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-webp-image-encoder-decoder.html",
+      "bytes": 20102,
+      "sha256": "fef7fbe0c9493956593b1a0ada4dda79530d2fcb096d4950b31c5754acbbd083"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-webrtc.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-webrtc.html",
+      "bytes": 18519,
+      "sha256": "c10fcd0f962e0ea301e0ae11d793f848d3187b48758dacec46285435917143da"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-wicked-good-xpath.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-wicked-good-xpath.html",
+      "bytes": 18212,
+      "sha256": "65d85accea6708bf91444fe70a03fc0c8e5d5ad96ab72ae4535c0af6d640cb27"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-woff2.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-woff2.html",
+      "bytes": 18102,
+      "sha256": "94a7cd1bb471d10f3c5a07d0a7e98a228ceedb662fe733a4687177f51fbc087d"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-wuffs-wrangling-untrusted-file-formats-safely.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-wuffs-wrangling-untrusted-file-formats-safely.html",
+      "bytes": 28448,
+      "sha256": "2221b32e11f7a86b6eeb80525d15eabbac3f922212f9c77b58cc8b124898cef6"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-xdg-user-dirs.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-xdg-user-dirs.html",
+      "bytes": 18150,
+      "sha256": "1bd87cba7b729b773c3f2b5ecd748f7c97458417ba9ff3eafc1ecad2fea99a3c"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-zlib.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-zlib.html",
+      "bytes": 17904,
+      "sha256": "ca20b58a64fa9cf040725be87650f23041efe50e7f0ada8b9e96cf63a758cba0"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-zod.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-zod.html",
+      "bytes": 18067,
+      "sha256": "d2c8480102e3ed6a3272373750667bca9dfe3c85d58dd402ddc79c8137030b1f"
+    },
+    {
+      "file": "Qt/attributions/qtwebengine-3rdparty-zstandard.html",
+      "source": "https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-zstandard.html",
+      "bytes": 18592,
+      "sha256": "393ccc79c45162c4782abb269f5db22a2b25b58e11efa20102498a4b3c15d148"
+    },
+    {
+      "file": "FreeType/LICENSE.TXT",
+      "source": "https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/LICENSE.TXT",
+      "bytes": 2149,
+      "sha256": "bd36c8b474855fa294c2ec5c184544478ef3720aad37d65a6296a4f264fd2d3b"
+    },
+    {
+      "file": "FreeType/docs/FTL.TXT",
+      "source": "https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/docs/FTL.TXT",
+      "bytes": 6743,
+      "sha256": "5a5ee54c5001bbad1cdc1a57cc3dd4c42199b2da09d39c7ee41fab002d02967f"
+    },
+    {
+      "file": "FreeType/docs/GPLv2.TXT",
+      "source": "https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/docs/GPLv2.TXT",
+      "bytes": 17994,
+      "sha256": "c4120c6752c910c299e3bd9cb3a46ff262c268303ca2069b61f92f10a5656c18"
+    },
+    {
+      "file": "FreeType/src/bdf/README",
+      "source": "https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/src/bdf/README",
+      "bytes": 5972,
+      "sha256": "7984455e7e5a9faba3797c8bf095fbe10cc846316b7320aff8c58402e22b82fe"
+    },
+    {
+      "file": "FreeType/src/pcf/README",
+      "source": "https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/src/pcf/README",
+      "bytes": 3311,
+      "sha256": "18d9782898d9eac04476e2f744678137b2a889689ed3e923e052fc396a86f86b"
+    },
+    {
+      "file": "FreeType/src/gzip/zlib.h",
+      "source": "https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/src/gzip/zlib.h",
+      "bytes": 97499,
+      "sha256": "c86a25c27f74cb97b8fa07b175f479f063d5064ace9995b4684063643c81cf1b"
+    },
+    {
+      "file": "FreeType/src/base/fthash.c",
+      "source": "https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/src/base/fthash.c",
+      "bytes": 8406,
+      "sha256": "693e5a54b3ce30140975a94a3369dbe706eb1f280c69e80da426d39cc45b94ef"
+    },
+    {
+      "file": "FreeType/include/freetype/internal/fthash.h",
+      "source": "https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/include/freetype/internal/fthash.h",
+      "bytes": 4055,
+      "sha256": "023d88d49d29ecf3833db7717a3f7ae223c17ec2012bdb5bf33bb67abaf616c4"
+    },
+    {
+      "file": "FreeType/src/autofit/ft-hb-ft.c",
+      "source": "https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/src/autofit/ft-hb-ft.c",
+      "bytes": 3315,
+      "sha256": "84dd5ddff1cec222e1755b4962faf45836238dfa3a46854dabd969eb4e50f8be"
+    },
+    {
+      "file": "FreeType/src/autofit/ft-hb-decls.h",
+      "source": "https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/src/autofit/ft-hb-decls.h",
+      "bytes": 5350,
+      "sha256": "ed05eec3b5657f98a0c106fa4aa2e5a4bc7f0864e5d34bd5989eee6d8b718bcf"
+    },
+    {
+      "file": "FreeType/src/autofit/ft-hb-types.h",
+      "source": "https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/src/autofit/ft-hb-types.h",
+      "bytes": 4139,
+      "sha256": "f106bf7cc41f52cd70907266a74a293c57bc5f71285b01c36bf198ad8b1c6234"
+    },
+    {
+      "file": "FreeType/src/autofit/hb-script-list.h",
+      "source": "https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/src/autofit/hb-script-list.h",
+      "bytes": 19854,
+      "sha256": "0627d9f6a59a8b09e562e8aeaf414300899308725350beeb50b62b8657399576"
+    },
+    {
+      "file": "GNU/GFDL-1.3.txt",
+      "source": "https://raw.githubusercontent.com/qt/qtbase/v6.11.2/LICENSES/GFDL-1.3-no-invariants-only.txt",
+      "bytes": 22955,
+      "sha256": "110535522396708cea37c72a802c5e7e81391139f5f7985631c93ef242b206a4"
+    },
+    {
+      "file": "Hypit/0.2.10/LICENSE",
+      "localSource": "/Users/bytedance/Downloads/国产资产作业/hypit/LICENSE",
+      "bytes": 3299,
+      "sha256": "ed7bd598743c93dd27349eab6921e4e86884c785a33aef8ea2caeb541df8b912"
+    },
+    {
+      "file": "GNU/LGPL-3.0.txt",
+      "localSource": "/opt/homebrew/opt/ffmpeg/COPYING.LGPLv3",
+      "bytes": 7651,
+      "sha256": "da7eabb7bafdf7d3ae5e9f223aa5bdc1eece45ac569dc21b3b037520b4464768"
+    },
+    {
+      "file": "GNU/GPL-3.0.txt",
+      "localSource": "/opt/homebrew/opt/ffmpeg/COPYING.GPLv3",
+      "bytes": 35147,
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+    },
+    {
+      "file": "Qt/LICENSE.Chromium",
+      "localSource": "/opt/homebrew/opt/qtwebengine/LICENSE.Chromium",
+      "bytes": 1481,
+      "sha256": "f34787ef0342c614b667186a6ec2f5d6b9d650e30142a2788a589a89743e88e9"
+    },
+    {
+      "file": "Homebrew/brotli/1.2.0/LICENSE",
+      "localSource": "/opt/homebrew/opt/brotli/LICENSE",
+      "bytes": 1084,
+      "sha256": "3d180008e36922a4e8daec11c34c7af264fed5962d07924aea928c38e8663c94"
+    },
+    {
+      "file": "Homebrew/brotli/1.2.0/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/brotli/sbom.spdx.json",
+      "bytes": 2589,
+      "sha256": "b203eb0ec4e9cc3fcb1325eb43dae30fcf1f09a83f7eefb869beb4a3566d37c6"
+    },
+    {
+      "file": "Homebrew/dbus/1.16.2_1/AUTHORS",
+      "localSource": "/opt/homebrew/opt/dbus/AUTHORS",
+      "bytes": 10813,
+      "sha256": "a56f6628c407e46ec72eb5512591b4c6204e7c0854c15ed0af4daad807edb84f"
+    },
+    {
+      "file": "Homebrew/dbus/1.16.2_1/COPYING",
+      "localSource": "/opt/homebrew/opt/dbus/COPYING",
+      "bytes": 1134,
+      "sha256": "150e5d08e1cb5e62b65967d7931acad2c42d98ec1bbb584bebb01921cbc853c2"
+    },
+    {
+      "file": "Homebrew/dbus/1.16.2_1/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/dbus/sbom.spdx.json",
+      "bytes": 1385,
+      "sha256": "4a16f1a23963a761cbabc7217b6c1365e685023c0e0d39884049f8f1303a1c7e"
+    },
+    {
+      "file": "Homebrew/double-conversion/3.4.0/AUTHORS",
+      "localSource": "/opt/homebrew/opt/double-conversion/AUTHORS",
+      "bytes": 476,
+      "sha256": "02f8e5babc63a87d460219a74b97e15046d198ed3bab061e3d46b4f44ea77a9d"
+    },
+    {
+      "file": "Homebrew/double-conversion/3.4.0/COPYING",
+      "localSource": "/opt/homebrew/opt/double-conversion/COPYING",
+      "bytes": 1527,
+      "sha256": "4af93c12062c58058378de2397dc1c92bbff9ddfb1d583a01c84127557ce97ca"
+    },
+    {
+      "file": "Homebrew/double-conversion/3.4.0/LICENSE",
+      "localSource": "/opt/homebrew/opt/double-conversion/LICENSE",
+      "bytes": 1527,
+      "sha256": "4af93c12062c58058378de2397dc1c92bbff9ddfb1d583a01c84127557ce97ca"
+    },
+    {
+      "file": "Homebrew/double-conversion/3.4.0/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/double-conversion/sbom.spdx.json",
+      "bytes": 1314,
+      "sha256": "d86c6d1847e9025a2d7845f48a5a6160b1220f96d07800372c9216c0a5f3a35b"
+    },
+    {
+      "file": "Homebrew/ffmpeg/9.0.2/COPYING.GPLv2",
+      "localSource": "/opt/homebrew/opt/ffmpeg/COPYING.GPLv2",
+      "bytes": 18092,
+      "sha256": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643"
+    },
+    {
+      "file": "Homebrew/ffmpeg/9.0.2/COPYING.GPLv3",
+      "localSource": "/opt/homebrew/opt/ffmpeg/COPYING.GPLv3",
+      "bytes": 35147,
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+    },
+    {
+      "file": "Homebrew/ffmpeg/9.0.2/COPYING.LGPLv2.1",
+      "localSource": "/opt/homebrew/opt/ffmpeg/COPYING.LGPLv2.1",
+      "bytes": 26517,
+      "sha256": "246041b6ecf9bc32d718a62c57877c78b5eb397b6467e74ed7ae2626ab189c30"
+    },
+    {
+      "file": "Homebrew/ffmpeg/9.0.2/COPYING.LGPLv3",
+      "localSource": "/opt/homebrew/opt/ffmpeg/COPYING.LGPLv3",
+      "bytes": 7651,
+      "sha256": "da7eabb7bafdf7d3ae5e9f223aa5bdc1eece45ac569dc21b3b037520b4464768"
+    },
+    {
+      "file": "Homebrew/ffmpeg/9.0.2/LICENSE.md",
+      "localSource": "/opt/homebrew/opt/ffmpeg/LICENSE.md",
+      "bytes": 4346,
+      "sha256": "2e1d16c72fd74e12063776371da757322f8b77589386532f4fd8634bde7de1af"
+    },
+    {
+      "file": "Homebrew/ffmpeg/9.0.2/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/ffmpeg/sbom.spdx.json",
+      "bytes": 17251,
+      "sha256": "11f38b3887c9cd770ccfe57ed77c6187b76183100348f4d23feb2f4f8437dc7d"
+    },
+    {
+      "file": "Homebrew/freetype/2.14.3/LICENSE.TXT",
+      "localSource": "/opt/homebrew/opt/freetype/LICENSE.TXT",
+      "bytes": 2149,
+      "sha256": "bd36c8b474855fa294c2ec5c184544478ef3720aad37d65a6296a4f264fd2d3b"
+    },
+    {
+      "file": "Homebrew/freetype/2.14.3/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/freetype/sbom.spdx.json",
+      "bytes": 3657,
+      "sha256": "1bca4de5971e5791833c09f052d78f615bcabe59f6a5485e4f110af6868421ba"
+    },
+    {
+      "file": "Homebrew/gettext/1.0/AUTHORS",
+      "localSource": "/opt/homebrew/opt/gettext/AUTHORS",
+      "bytes": 2637,
+      "sha256": "167b04ed012e59c2d2cfc87d420d8c8a8f5c528ef1fd068598b36d57f39db203"
+    },
+    {
+      "file": "Homebrew/gettext/1.0/COPYING",
+      "localSource": "/opt/homebrew/opt/gettext/COPYING",
+      "bytes": 35151,
+      "sha256": "e79e9c8a0c85d735ff98185918ec94ed7d175efc377012787aebcf3b80f0d90b"
+    },
+    {
+      "file": "Homebrew/gettext/1.0/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/gettext/sbom.spdx.json",
+      "bytes": 3722,
+      "sha256": "486ca5294d749573636522fa9a7dc78a7103fd85d31beb5d6f18936284a679c3"
+    },
+    {
+      "file": "Homebrew/glib/2.90.0/LGPL-2.1-or-later.txt",
+      "localSource": "/opt/homebrew/opt/glib/LGPL-2.1-or-later.txt",
+      "bytes": 25967,
+      "sha256": "fa6f36630bb1e0c571d34b2bbdf188d08495c9dbf58f28cac112f303fc1f58fb"
+    },
+    {
+      "file": "Homebrew/glib/2.90.0/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/glib/sbom.spdx.json",
+      "bytes": 7121,
+      "sha256": "d405860414d159faf093d8feae5f7657a21dbbe058530bb763d2964e142fe36f"
+    },
+    {
+      "file": "Homebrew/graphite2/1.3.15/COPYING",
+      "localSource": "/opt/homebrew/opt/graphite2/COPYING",
+      "bytes": 1235,
+      "sha256": "2c272829ff23f182c8bf7ea12fedea69b0ae148663123ed5240c117cb129c9c1"
+    },
+    {
+      "file": "Homebrew/graphite2/1.3.15/LICENSE",
+      "localSource": "/opt/homebrew/opt/graphite2/LICENSE",
+      "bytes": 29228,
+      "sha256": "cab46cd45adbfea4b1d0f14b033c70062c73074fa0b56532c2f351576ddf455e"
+    },
+    {
+      "file": "Homebrew/graphite2/1.3.15/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/graphite2/sbom.spdx.json",
+      "bytes": 1576,
+      "sha256": "1426cc8f137d48c6c14e812b62dc90379e1b372082d8afaa8dba8bcb1621b6ff"
+    },
+    {
+      "file": "Homebrew/harfbuzz/14.4.0/AUTHORS",
+      "localSource": "/opt/homebrew/opt/harfbuzz/AUTHORS",
+      "bytes": 201,
+      "sha256": "19bfe8f5ed100636cd24ab0c90a3f71c21d8b02d9ba00719447a0faab364d49f"
+    },
+    {
+      "file": "Homebrew/harfbuzz/14.4.0/COPYING",
+      "localSource": "/opt/homebrew/opt/harfbuzz/COPYING",
+      "bytes": 1971,
+      "sha256": "ba8f810f2455c2f08e2d56bb49b72f37fcf68f1f4fade38977cfd7372050ad64"
+    },
+    {
+      "file": "Homebrew/harfbuzz/14.4.0/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/harfbuzz/sbom.spdx.json",
+      "bytes": 23624,
+      "sha256": "03c6cd16805ac002435c33239ef86ddb8e161f04a17dd094df78cf8db206532c"
+    },
+    {
+      "file": "Homebrew/icu4c@78/78.3/LICENSE",
+      "localSource": "/opt/homebrew/opt/icu4c@78/LICENSE",
+      "bytes": 27718,
+      "sha256": "e55522d81edc687a341a4411e0776e54ca654e90147f354a90458aaced4116af"
+    },
+    {
+      "file": "Homebrew/icu4c@78/78.3/license.html",
+      "localSource": "/opt/homebrew/opt/icu4c@78/license.html",
+      "bytes": 622,
+      "sha256": "c62d7697c03979f5056d28b338fafc7a1152820f7b379adf4a9d88cd37160f96"
+    },
+    {
+      "file": "Homebrew/icu4c@78/78.3/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/icu4c@78/sbom.spdx.json",
+      "bytes": 2634,
+      "sha256": "dae7243b33030f65377ee399c3516e9ac0bd7082145caed900094057ff99090d"
+    },
+    {
+      "file": "Homebrew/jasper/4.2.9/COPYRIGHT.txt",
+      "localSource": "/opt/homebrew/opt/jasper/COPYRIGHT.txt",
+      "bytes": 134,
+      "sha256": "8e7a235e1054c846c353b81fcbfec043130f7cbeea37b31e71c1077d387edb6e"
+    },
+    {
+      "file": "Homebrew/jasper/4.2.9/LICENSE.txt",
+      "localSource": "/opt/homebrew/opt/jasper/LICENSE.txt",
+      "bytes": 2744,
+      "sha256": "4ad1bb42aff888c4403d792e6e2c5f1716d6c279fea70b296333c9d577d30b81"
+    },
+    {
+      "file": "Homebrew/jasper/4.2.9/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/jasper/sbom.spdx.json",
+      "bytes": 1253,
+      "sha256": "0f131a1444e2c8e89e12fe73916288646a3f234e3f1b237cd05d0a894c4fc133"
+    },
+    {
+      "file": "Homebrew/jpeg-turbo/3.2.0/LICENSE.md",
+      "localSource": "/opt/homebrew/opt/jpeg-turbo/LICENSE.md",
+      "bytes": 6077,
+      "sha256": "ba6bceebcba0fdd35488477c2cca8c4632ce82c74dbfbc87d886ce6fc4433579"
+    },
+    {
+      "file": "Homebrew/jpeg-turbo/3.2.0/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/jpeg-turbo/sbom.spdx.json",
+      "bytes": 3172,
+      "sha256": "193ba875d342957afcacf7dd1d0c435fc03e3f25be5f29a413eb9d000f723828"
+    },
+    {
+      "file": "Homebrew/jpeg-turbo/3.2.0/share/doc/libjpeg-turbo/LICENSE.md",
+      "localSource": "/opt/homebrew/opt/jpeg-turbo/share/doc/libjpeg-turbo/LICENSE.md",
+      "bytes": 6077,
+      "sha256": "ba6bceebcba0fdd35488477c2cca8c4632ce82c74dbfbc87d886ce6fc4433579"
+    },
+    {
+      "file": "Homebrew/jpeg-turbo/3.2.0/share/doc/libjpeg-turbo/README.ijg",
+      "localSource": "/opt/homebrew/opt/jpeg-turbo/share/doc/libjpeg-turbo/README.ijg",
+      "bytes": 12799,
+      "sha256": "75815e3bf6484201a3c3d17a1bbf10f2e8e3237f84df10a2357ea896db2a81d6"
+    },
+    {
+      "file": "Homebrew/libb2/0.98.1/COPYING",
+      "localSource": "/opt/homebrew/opt/libb2/COPYING",
+      "bytes": 6556,
+      "sha256": "6a1ee543e5282cd9061881edf462e6fdab181f328da71fc2c9a6950a80e94d01"
+    },
+    {
+      "file": "Homebrew/libb2/0.98.1/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/libb2/sbom.spdx.json",
+      "bytes": 1390,
+      "sha256": "24417f3d9f1c94e6cbc663a26a134e5de32cad90324a5fac89b8628844de41b0"
+    },
+    {
+      "file": "Homebrew/libmng/2.0.3_1/LICENSE",
+      "localSource": "/opt/homebrew/opt/libmng/LICENSE",
+      "bytes": 4622,
+      "sha256": "ba280734838eb3f22a85b92a7e62de357d4d4c325029dce723b0cb125c417c35"
+    },
+    {
+      "file": "Homebrew/libmng/2.0.3_1/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/libmng/sbom.spdx.json",
+      "bytes": 1403,
+      "sha256": "32f8d539a328fdfa1401a97891f6bc291735c2b9ea5d50367cacf38132c0a1b2"
+    },
+    {
+      "file": "Homebrew/libpng/1.6.58/AUTHORS",
+      "localSource": "/opt/homebrew/opt/libpng/AUTHORS",
+      "bytes": 1773,
+      "sha256": "0c777e9f2a67bd4058ab91050eb7a56106c92ed038ba8fe5f54c83344f2d93ca"
+    },
+    {
+      "file": "Homebrew/libpng/1.6.58/LICENSE",
+      "localSource": "/opt/homebrew/opt/libpng/LICENSE",
+      "bytes": 5345,
+      "sha256": "bdb0a645ea18c60507d0368379b1ac5474b92255fcc2d115e07486a7672ba526"
+    },
+    {
+      "file": "Homebrew/libpng/1.6.58/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/libpng/sbom.spdx.json",
+      "bytes": 2624,
+      "sha256": "66ce91991b39763fc2aba0604b7afad2bcc654451952d74164904537bd76da3b"
+    },
+    {
+      "file": "Homebrew/libtiff/4.7.2/LICENSE.md",
+      "localSource": "/opt/homebrew/opt/libtiff/LICENSE.md",
+      "bytes": 2416,
+      "sha256": "0e27c2382d7b8147972bbb746e04059a1152c8d0fda9d03ef1399d1a433c4ade"
+    },
+    {
+      "file": "Homebrew/libtiff/4.7.2/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/libtiff/sbom.spdx.json",
+      "bytes": 10153,
+      "sha256": "e2a65f5f084b2f879455a52f3cd772552e53966fd78523f35a7d04839a1caf22"
+    },
+    {
+      "file": "Homebrew/libtiff/4.7.2/share/doc/tiff-4.7.2/LICENSE.md",
+      "localSource": "/opt/homebrew/opt/libtiff/share/doc/tiff-4.7.2/LICENSE.md",
+      "bytes": 2416,
+      "sha256": "0e27c2382d7b8147972bbb746e04059a1152c8d0fda9d03ef1399d1a433c4ade"
+    },
+    {
+      "file": "Homebrew/libtiff/4.7.2/share/doc/tiff-4.7.2/manual/_sources/project/license.rst.txt",
+      "localSource": "/opt/homebrew/opt/libtiff/share/doc/tiff-4.7.2/manual/_sources/project/license.rst.txt",
+      "bytes": 1181,
+      "sha256": "02e86af3b805e0f2075ebb5ac512831f6ab2a97ddeb186de076c418956418ba1"
+    },
+    {
+      "file": "Homebrew/libtiff/4.7.2/share/doc/tiff-4.7.2/manual/project/license.html",
+      "localSource": "/opt/homebrew/opt/libtiff/share/doc/tiff-4.7.2/manual/project/license.html",
+      "bytes": 5663,
+      "sha256": "6c9436f8e9f58a79e044949e360291b9c910715fad31cdaed66bc61b0dcf33e6"
+    },
+    {
+      "file": "Homebrew/little-cms2/2.19.1/AUTHORS",
+      "localSource": "/opt/homebrew/opt/little-cms2/AUTHORS",
+      "bytes": 1010,
+      "sha256": "4847d97cd41e980794939b1d2694bd8f67b92856ec80e95c2fcfc34066f0df93"
+    },
+    {
+      "file": "Homebrew/little-cms2/2.19.1/LICENSE",
+      "localSource": "/opt/homebrew/opt/little-cms2/LICENSE",
+      "bytes": 1080,
+      "sha256": "6dbd60437f8ef91d8de1f08ad75882547fd4931bfcc3566a0735f28db1484d31"
+    },
+    {
+      "file": "Homebrew/little-cms2/2.19.1/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/little-cms2/sbom.spdx.json",
+      "bytes": 11284,
+      "sha256": "e6a395c11d9a2520212afdb83dbae4a572cad33a7ab3b236ba2a12ecb0a766ce"
+    },
+    {
+      "file": "Homebrew/lz4/1.10.0/LICENSE",
+      "localSource": "/opt/homebrew/opt/lz4/LICENSE",
+      "bytes": 646,
+      "sha256": "4bc9c403f6b679cc076dee210e0e21c27b4e8f6d3fb43d85364c76657bfaaac5"
+    },
+    {
+      "file": "Homebrew/lz4/1.10.0/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/lz4/sbom.spdx.json",
+      "bytes": 2568,
+      "sha256": "70429866b217afb5c9c56e356c857420eb75987086b9a1373af313026fb01406"
+    },
+    {
+      "file": "Homebrew/md4c/0.5.3/LICENSE.md",
+      "localSource": "/opt/homebrew/opt/md4c/LICENSE.md",
+      "bytes": 1096,
+      "sha256": "d30937367d5413e7eaa218b1640b8946ff76fd34d97152f6979fd96169d5d0fc"
+    },
+    {
+      "file": "Homebrew/md4c/0.5.3/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/md4c/sbom.spdx.json",
+      "bytes": 1203,
+      "sha256": "3a3fb265dc2536647dc2bf1c2f85963598b3a51fa7c1dd01a20239adf3b258ed"
+    },
+    {
+      "file": "Homebrew/openssl@3/3.6.4/AUTHORS.md",
+      "localSource": "/opt/homebrew/opt/openssl@3/AUTHORS.md",
+      "bytes": 1022,
+      "sha256": "b9f638dfc06b59c2d3b808186c3b30f713805a5db390f5b77b1703ac58acb83e"
+    },
+    {
+      "file": "Homebrew/openssl@3/3.6.4/LICENSE.txt",
+      "localSource": "/opt/homebrew/opt/openssl@3/LICENSE.txt",
+      "bytes": 10175,
+      "sha256": "7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a"
+    },
+    {
+      "file": "Homebrew/openssl@3/3.6.4/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/openssl@3/sbom.spdx.json",
+      "bytes": 4196,
+      "sha256": "6eeec64811ae03e58d0d74514cb3b38ffbe269a3709306ac8de3d5bec8a8f5c8"
+    },
+    {
+      "file": "Homebrew/pcre2/10.48/AUTHORS.md",
+      "localSource": "/opt/homebrew/opt/pcre2/AUTHORS.md",
+      "bytes": 4232,
+      "sha256": "412ace3355a4d6a4d835c350a7df172903811eafda7b13500dacf58429ee757e"
+    },
+    {
+      "file": "Homebrew/pcre2/10.48/COPYING",
+      "localSource": "/opt/homebrew/opt/pcre2/COPYING",
+      "bytes": 97,
+      "sha256": "99272c55f3dcfa07a8a7e15a5c1a33096e4727de74241d65fa049fccfdd59507"
+    },
+    {
+      "file": "Homebrew/pcre2/10.48/LICENCE.md",
+      "localSource": "/opt/homebrew/opt/pcre2/LICENCE.md",
+      "bytes": 4011,
+      "sha256": "197d8a73ffee0d6b09adba2f9c677b5f5aede24edf89258a68e48248d010d811"
+    },
+    {
+      "file": "Homebrew/pcre2/10.48/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/pcre2/sbom.spdx.json",
+      "bytes": 3046,
+      "sha256": "50ee28c88ff250135540dadace2f26158f9cb36eb831e021563a542b83457ce5"
+    },
+    {
+      "file": "Homebrew/pcre2/10.48/share/doc/pcre2/COPYING",
+      "localSource": "/opt/homebrew/opt/pcre2/share/doc/pcre2/COPYING",
+      "bytes": 97,
+      "sha256": "99272c55f3dcfa07a8a7e15a5c1a33096e4727de74241d65fa049fccfdd59507"
+    },
+    {
+      "file": "Homebrew/pcre2/10.48/share/doc/pcre2/LICENCE.md",
+      "localSource": "/opt/homebrew/opt/pcre2/share/doc/pcre2/LICENCE.md",
+      "bytes": 4011,
+      "sha256": "197d8a73ffee0d6b09adba2f9c677b5f5aede24edf89258a68e48248d010d811"
+    },
+    {
+      "file": "Homebrew/qtbase/6.11.2/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/qtbase/sbom.spdx.json",
+      "bytes": 36189,
+      "sha256": "dbad62cbf34bf359ec36619bc8034ddad20826d8d5b8c7ea9ecff7fa290d5521"
+    },
+    {
+      "file": "Homebrew/qtbase/6.11.2/share/qt/sbom/qtbase-6.11.2.spdx",
+      "localSource": "/opt/homebrew/opt/qtbase/share/qt/sbom/qtbase-6.11.2.spdx",
+      "bytes": 668769,
+      "sha256": "02d99399ddab30104c069a77f1b12ec0171a4949b8d57916dd2ad4907d79c686"
+    },
+    {
+      "file": "Homebrew/qtdeclarative/6.11.2/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/qtdeclarative/sbom.spdx.json",
+      "bytes": 38723,
+      "sha256": "3fb4ac008d6222af9a0e973c836d88541222f0b4b96b4ef9b18de7935eb4ae26"
+    },
+    {
+      "file": "Homebrew/qtdeclarative/6.11.2/share/qt/sbom/qtdeclarative-6.11.2.spdx",
+      "localSource": "/opt/homebrew/opt/qtdeclarative/share/qt/sbom/qtdeclarative-6.11.2.spdx",
+      "bytes": 1246527,
+      "sha256": "cf9889e313b84594cae7e2104815ead021f69c864a7bbf1d4d709ea827dad198"
+    },
+    {
+      "file": "Homebrew/qtimageformats/6.11.2/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/qtimageformats/sbom.spdx.json",
+      "bytes": 43700,
+      "sha256": "cfd84c66b29dd01eccec67169dfe12dcbb8430bc84da413710055bf1e642ef8c"
+    },
+    {
+      "file": "Homebrew/qtimageformats/6.11.2/share/qt/sbom/qtimageformats-6.11.2.spdx",
+      "localSource": "/opt/homebrew/opt/qtimageformats/share/qt/sbom/qtimageformats-6.11.2.spdx",
+      "bytes": 31932,
+      "sha256": "7590193696b60f49c242bc9dbff5d7bc09b12b2ab152c8db7e5f14051e603d9a"
+    },
+    {
+      "file": "Homebrew/qtpositioning/6.11.2/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/qtpositioning/sbom.spdx.json",
+      "bytes": 40929,
+      "sha256": "de181d1b8d2031d6b3e6c2b7fa5b763649a284eb13c2f70ef498f3ed56e03300"
+    },
+    {
+      "file": "Homebrew/qtpositioning/6.11.2/share/qt/sbom/qtpositioning-6.11.2.spdx",
+      "localSource": "/opt/homebrew/opt/qtpositioning/share/qt/sbom/qtpositioning-6.11.2.spdx",
+      "bytes": 47819,
+      "sha256": "0ae99f886d9b6aa4f389867dce3c616b04866dc1c3b56cee95f317c9abbc0b84"
+    },
+    {
+      "file": "Homebrew/qtserialport/6.11.2/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/qtserialport/sbom.spdx.json",
+      "bytes": 37480,
+      "sha256": "76709bcf76160471df7bb44b751b4f90bd8577a6f9d323a5c1e0135db1c81336"
+    },
+    {
+      "file": "Homebrew/qtserialport/6.11.2/share/qt/sbom/qtserialport-6.11.2.spdx",
+      "localSource": "/opt/homebrew/opt/qtserialport/share/qt/sbom/qtserialport-6.11.2.spdx",
+      "bytes": 9757,
+      "sha256": "d180aaf9cbd8b2aeb27b4d73c242026212085305d18f43169eff87704b3f2200"
+    },
+    {
+      "file": "Homebrew/qtshadertools/6.11.2/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/qtshadertools/sbom.spdx.json",
+      "bytes": 37930,
+      "sha256": "8c3661e4d35b06316d3c363c802e10d9e246a80b58ba2818657a943d28551e37"
+    },
+    {
+      "file": "Homebrew/qtshadertools/6.11.2/share/qt/sbom/qtshadertools-6.11.2.spdx",
+      "localSource": "/opt/homebrew/opt/qtshadertools/share/qt/sbom/qtshadertools-6.11.2.spdx",
+      "bytes": 23753,
+      "sha256": "c7cbdd08635294725264842034cb869bff20df0875083e16d9d22cf823a6d002"
+    },
+    {
+      "file": "Homebrew/qtsvg/6.11.2/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/qtsvg/sbom.spdx.json",
+      "bytes": 37130,
+      "sha256": "224f0890af2021c03066f943c4783ba55b6ab720a677b9d7a1b189ba92adca74"
+    },
+    {
+      "file": "Homebrew/qtsvg/6.11.2/share/qt/sbom/qtsvg-6.11.2.spdx",
+      "localSource": "/opt/homebrew/opt/qtsvg/share/qt/sbom/qtsvg-6.11.2.spdx",
+      "bytes": 26480,
+      "sha256": "f478a5da9854207ef6841b00d719b517c0a1e99f78fdb62f40ec03cb9dbfd6bb"
+    },
+    {
+      "file": "Homebrew/qtvirtualkeyboard/6.11.2/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/qtvirtualkeyboard/sbom.spdx.json",
+      "bytes": 47866,
+      "sha256": "d0f269b7d3c47ea495945b3eb0eac8e86993a76d2ef9725151ebb8d0d723e057"
+    },
+    {
+      "file": "Homebrew/qtvirtualkeyboard/6.11.2/share/qt/sbom/qtvirtualkeyboard-6.11.2.spdx",
+      "localSource": "/opt/homebrew/opt/qtvirtualkeyboard/share/qt/sbom/qtvirtualkeyboard-6.11.2.spdx",
+      "bytes": 116176,
+      "sha256": "665bef9a4f0a34668196f73eead70d016d4c1061edf82c14fa005636cbd27f40"
+    },
+    {
+      "file": "Homebrew/qtwebchannel/6.11.2/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/qtwebchannel/sbom.spdx.json",
+      "bytes": 39726,
+      "sha256": "14a5999ebf5c4807d2318e31d8f0649d740a0aae877eed83b88979ddb7f00e02"
+    },
+    {
+      "file": "Homebrew/qtwebchannel/6.11.2/share/qt/sbom/qtwebchannel-6.11.2.spdx",
+      "localSource": "/opt/homebrew/opt/qtwebchannel/share/qt/sbom/qtwebchannel-6.11.2.spdx",
+      "bytes": 16952,
+      "sha256": "d9118b4ea566c986842a4eb54c10d3442f71a9c890c53e2f490f65d20a061e86"
+    },
+    {
+      "file": "Homebrew/qtwebengine/6.11.2/LICENSE.Chromium",
+      "localSource": "/opt/homebrew/opt/qtwebengine/LICENSE.Chromium",
+      "bytes": 1481,
+      "sha256": "f34787ef0342c614b667186a6ec2f5d6b9d650e30142a2788a589a89743e88e9"
+    },
+    {
+      "file": "Homebrew/qtwebengine/6.11.2/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/qtwebengine/sbom.spdx.json",
+      "bytes": 47503,
+      "sha256": "15041d2b9df2d689addd9fc4c0175d8bae2c259181cdc7c3c038b1a18e6c7293"
+    },
+    {
+      "file": "Homebrew/qtwebengine/6.11.2/share/qt/sbom/qtpdf-6.11.2.spdx",
+      "localSource": "/opt/homebrew/opt/qtwebengine/share/qt/sbom/qtpdf-6.11.2.spdx",
+      "bytes": 29698,
+      "sha256": "0495a54ad26f9bfbf83a71f20283fcc61df192cc6a9348ef9fcaee93aa9ee6d5"
+    },
+    {
+      "file": "Homebrew/qtwebengine/6.11.2/share/qt/sbom/qtwebengine-6.11.2.spdx",
+      "localSource": "/opt/homebrew/opt/qtwebengine/share/qt/sbom/qtwebengine-6.11.2.spdx",
+      "bytes": 82143,
+      "sha256": "55896a8316550d90f75787b4fb56b64596debb635798b51ea34cd172321a4428"
+    },
+    {
+      "file": "Homebrew/webp/1.6.0/AUTHORS",
+      "localSource": "/opt/homebrew/opt/webp/AUTHORS",
+      "bytes": 3279,
+      "sha256": "f251be89fd442bd9d701360730aea163cc8e2076ff03528f59267dc2c4f8b60a"
+    },
+    {
+      "file": "Homebrew/webp/1.6.0/COPYING",
+      "localSource": "/opt/homebrew/opt/webp/COPYING",
+      "bytes": 1496,
+      "sha256": "5aec868f669e384a22372a4e8a1a6cd7d44c64cd451f960ca69cc170d1e13acf"
+    },
+    {
+      "file": "Homebrew/webp/1.6.0/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/webp/sbom.spdx.json",
+      "bytes": 1239,
+      "sha256": "7978e825da5fd59f7466625693b18716f97421f61fcaa72c7793f1fbeaf83b87"
+    },
+    {
+      "file": "Homebrew/xz/5.8.4/AUTHORS",
+      "localSource": "/opt/homebrew/opt/xz/AUTHORS",
+      "bytes": 2146,
+      "sha256": "01e6df90d71d591f4307db3f397a5a4fac93b18533f5a3862156f1a0a7dc8610"
+    },
+    {
+      "file": "Homebrew/xz/5.8.4/COPYING",
+      "localSource": "/opt/homebrew/opt/xz/COPYING",
+      "bytes": 3119,
+      "sha256": "616a3ad264ce29b8f1cb97e53037b139d406899ca8d1f799651e17bfa09830b8"
+    },
+    {
+      "file": "Homebrew/xz/5.8.4/COPYING.0BSD",
+      "localSource": "/opt/homebrew/opt/xz/COPYING.0BSD",
+      "bytes": 607,
+      "sha256": "0b01625d853911cd0e2e088dcfb743261034a091bb379246cb25a14cc4c74bf1"
+    },
+    {
+      "file": "Homebrew/xz/5.8.4/COPYING.GPLv2",
+      "localSource": "/opt/homebrew/opt/xz/COPYING.GPLv2",
+      "bytes": 17984,
+      "sha256": "edaef632cbb643e4e7a221717a6c441a4c1a7c918e6e4d56debc3d8739b233f6"
+    },
+    {
+      "file": "Homebrew/xz/5.8.4/COPYING.GPLv3",
+      "localSource": "/opt/homebrew/opt/xz/COPYING.GPLv3",
+      "bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    },
+    {
+      "file": "Homebrew/xz/5.8.4/COPYING.LGPLv2.1",
+      "localSource": "/opt/homebrew/opt/xz/COPYING.LGPLv2.1",
+      "bytes": 26419,
+      "sha256": "20e50fe7aae3e56378ebf0417d9de904f55a0e61e4df315333e632a4d3555d95"
+    },
+    {
+      "file": "Homebrew/xz/5.8.4/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/xz/sbom.spdx.json",
+      "bytes": 3015,
+      "sha256": "6bf4629b5c2508b0d719e6be6d88ac0a43340872222176c503b513b0cb433556"
+    },
+    {
+      "file": "Homebrew/xz/5.8.4/share/doc/xz/COPYING",
+      "localSource": "/opt/homebrew/opt/xz/share/doc/xz/COPYING",
+      "bytes": 3119,
+      "sha256": "616a3ad264ce29b8f1cb97e53037b139d406899ca8d1f799651e17bfa09830b8"
+    },
+    {
+      "file": "Homebrew/xz/5.8.4/share/doc/xz/COPYING.0BSD",
+      "localSource": "/opt/homebrew/opt/xz/share/doc/xz/COPYING.0BSD",
+      "bytes": 607,
+      "sha256": "0b01625d853911cd0e2e088dcfb743261034a091bb379246cb25a14cc4c74bf1"
+    },
+    {
+      "file": "Homebrew/xz/5.8.4/share/doc/xz/COPYING.GPLv2",
+      "localSource": "/opt/homebrew/opt/xz/share/doc/xz/COPYING.GPLv2",
+      "bytes": 17984,
+      "sha256": "edaef632cbb643e4e7a221717a6c441a4c1a7c918e6e4d56debc3d8739b233f6"
+    },
+    {
+      "file": "Homebrew/zstd/1.5.7_1/COPYING",
+      "localSource": "/opt/homebrew/opt/zstd/COPYING",
+      "bytes": 18091,
+      "sha256": "f9c375a1be4a41f7b70301dd83c91cb89e41567478859b77eef375a52d782505"
+    },
+    {
+      "file": "Homebrew/zstd/1.5.7_1/LICENSE",
+      "localSource": "/opt/homebrew/opt/zstd/LICENSE",
+      "bytes": 1549,
+      "sha256": "7055266497633c9025b777c78eb7235af13922117480ed5c674677adc381c9d8"
+    },
+    {
+      "file": "Homebrew/zstd/1.5.7_1/sbom.spdx.json",
+      "localSource": "/opt/homebrew/opt/zstd/sbom.spdx.json",
+      "bytes": 4661,
+      "sha256": "48d6d18cbd41d5d0f12e2903d6005e297975756034ef8a292559089b7b694e0b"
+    }
+  ],
+  "scope": "Attribution/notice inputs and SBOM; not an authorization or complete source-distribution audit"
+}

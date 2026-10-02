@@ -112,6 +112,7 @@ QWidget *MainWindow::buildProjectPanel() {
     auto *body = new QWidget; auto *layout = new QVBoxLayout(body);
     layout->setContentsMargins(0,0,0,0);
     m_documentTitle = new QLabel(QStringLiteral("新建标题卡工程，或打开已保存的工程。"));
+    m_documentTitle->setTextFormat(Qt::PlainText);
     m_documentTitle->setWordWrap(true); layout->addWidget(m_documentTitle);
     layout->addWidget(m_componentTree, 2);
     layout->addWidget(new QLabel(QStringLiteral("图片素材 · 双击复制相对路径")));
@@ -178,13 +179,16 @@ QWidget *MainWindow::buildTaskPanel() {
     m_taskLog = new QPlainTextEdit; m_taskLog->setReadOnly(true); m_taskLog->setMaximumBlockCount(2000);
     auto *body=new QWidget;auto *layout=new QVBoxLayout(body);layout->setContentsMargins(0,0,0,0);
     m_exportSummary=new QLabel(QStringLiteral("尚无导出任务。编辑完成后点击“导出 MP4…”。"));m_exportSummary->setWordWrap(true);
+    m_exportSummary->setTextFormat(Qt::PlainText);
     layout->addWidget(m_exportSummary);
     auto *buttons=new QHBoxLayout;
     m_cancelExport=new QPushButton(QStringLiteral("取消构建"));m_stopExport=new QPushButton(QStringLiteral("停止观察"));m_resumeExport=new QPushButton(QStringLiteral("恢复观察"));
-    for(auto *button:{m_cancelExport,m_stopExport,m_resumeExport}){button->setEnabled(false);buttons->addWidget(button);}
+    m_clearExportCache=new QPushButton(QStringLiteral("清理当前终态缓存"));
+    for(auto *button:{m_cancelExport,m_stopExport,m_resumeExport,m_clearExportCache}){button->setEnabled(false);buttons->addWidget(button);}
     buttons->addStretch();layout->addLayout(buttons);layout->addWidget(m_taskLog,1);
     connect(m_cancelExport,&QPushButton::clicked,this,&MainWindow::cancelExportRequested);
     connect(m_stopExport,&QPushButton::clicked,this,&MainWindow::stopExportObservationRequested);
+    connect(m_clearExportCache,&QPushButton::clicked,this,&MainWindow::clearExportCacheRequested);
     connect(m_resumeExport,&QPushButton::clicked,this,&MainWindow::resumeExportRequested);
     return withTitle(QStringLiteral("任务与日志"), body);
 }
@@ -200,6 +204,7 @@ void MainWindow::showExportTask(const domain::ExportTask &task) {
     m_cancelExport->setEnabled(task.active&&!task.buildId.isEmpty()&&task.phase!="cancelling");
     m_stopExport->setEnabled(observing);
     m_resumeExport->setEnabled(task.phase=="stopped"&&(task.active||!task.buildId.isEmpty()));
+    m_clearExportCache->setEnabled(!task.active&&(task.phase=="complete"||task.phase=="failed"||task.phase=="cancelled")&&!task.buildId.isEmpty());
     m_exportAction->setEnabled(m_hasDocument&&m_editorReady&&!m_editorBusy&&!m_exportActive);
 }
 void MainWindow::showSnapshot(const domain::Snapshot &snapshot) {

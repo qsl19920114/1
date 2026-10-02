@@ -1,0 +1,8 @@
+{
+  "format": "qvw.license-hash-verification@1",
+  "verdict": "PASS",
+  "records": 248,
+  "qtAttributionPages": 126,
+  "allBundledFilesMatchSha256AndSize": true,
+  "scope": "Attribution/notice inputs and SBOM; not an authorization or complete source-distribution audit"
+}

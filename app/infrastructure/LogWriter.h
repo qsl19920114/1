@@ -8,9 +8,9 @@ namespace qvw::infra {
 
 /// Appends one structured line per event to a log file.
 ///
-/// Every external command must be recorded with its full argument list and exit
-/// code: PROJECT_PLAN §8 requires that a failed CLI call can never be reported
-/// as success, and the log is the only durable record of what actually ran.
+/// External commands retain an arguments array and exit code. Oversized values
+/// are marked truncated with their original argument count; records are bounded
+/// to 64 KiB and files rotate at 5 MiB with two backups.
 class LogWriter {
 public:
     explicit LogWriter(QString filePath);
@@ -29,6 +29,8 @@ public:
 
 private:
     void append(const QString &level, const QString &message, QJsonObject fields = {});
+    bool rotate(qint64 incomingBytes);
+    void fail(const QString &message);
 
     QString m_filePath;
     bool m_ready = false;

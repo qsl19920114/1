@@ -47,3 +47,17 @@ include(proposals.cmake)
 add_executable(proposal_e2e_test integration/ProposalE2ETest.cpp)
 target_link_libraries(proposal_e2e_test PRIVATE qvw_controllers Qt6::Test)
 target_compile_definitions(proposal_e2e_test PRIVATE QVW_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
+include(release.cmake)
+
+# Opt-in real GUI walkthrough; records only its own application window.
+add_executable(walkthrough_demo integration/WalkthroughDemo.cpp)
+target_link_libraries(walkthrough_demo PRIVATE qvw_ui qvw_controllers Qt6::Test)
+target_compile_definitions(walkthrough_demo PRIVATE QVW_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
+
+if(UNIX)
+  add_executable(startup_early_close_test integration/StartupEarlyCloseTest.cpp)
+  target_link_libraries(startup_early_close_test PRIVATE qvw_ui qvw_controllers)
+  target_compile_definitions(startup_early_close_test PRIVATE QVW_APP_VERSION="${PROJECT_VERSION}")
+  add_test(NAME startup_early_close COMMAND startup_early_close_test)
+  set_tests_properties(startup_early_close PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen" TIMEOUT 15)
+endif()

@@ -1,5 +1,6 @@
 #include "MediaValidation.h"
 #include "infrastructure/JsonProcess.h"
+#include "infrastructure/RuntimePaths.h"
 #include <QDir>
 #include <QFileInfo>
 #include <QJsonArray>
@@ -31,12 +32,13 @@ class MediaValidation::State {
 public:
     MediaValidation *owner;infra::JsonProcess probe;QPointer<QProcess> decode;QTimer deadline;
     QString path,ffmpeg;domain::CanvasSpace expected;QByteArray output,diagnostics;bool active=false;quint64 generation=0;
+    QProcessEnvironment environment=infra::RuntimePaths::processEnvironment();
     explicit State(MediaValidation *o):owner(o),probe(o){deadline.setSingleShot(true);}
     void dispose(QProcess *p){deadline.stop();decode=nullptr;p->disconnect(owner);if(p->state()!=QProcess::NotRunning){p->kill();p->waitForFinished(500);}p->deleteLater();}
     void fail(const QString &text){if(!active)return;active=false;probe.cancel();if(decode){auto *p=decode.data();const auto program=p->program();const auto args=p->arguments();dispose(p);const auto gen=generation;emit owner->commandFinished(program,args,-1);if(gen!=generation)return;}emit owner->failed(text);}
     bool consume(QProcess *p){p->setReadChannel(QProcess::StandardOutput);output+=p->read(64*1024-output.size()+1);p->setReadChannel(QProcess::StandardError);diagnostics+=p->read(64*1024-diagnostics.size()+1);if(output.size()>64*1024||diagnostics.size()>64*1024){fail(QStringLiteral("全片解码输出超过 64 KiB 上限。"));return false;}return true;}
     void startDecode() {
-        if(!active)return;auto *p=new QProcess(owner);decode=p;output.clear();diagnostics.clear();p->setProgram(ffmpeg);p->setArguments({"-v","error","-xerror","-i",path,"-f","null","-"});p->setWorkingDirectory(QFileInfo(path).absolutePath());
+        if(!active)return;auto *p=new QProcess(owner);decode=p;output.clear();diagnostics.clear();p->setProcessEnvironment(environment);p->setProgram(ffmpeg);p->setArguments({"-v","error","-xerror","-i",path,"-f","null","-"});p->setWorkingDirectory(QFileInfo(path).absolutePath());
         QObject::connect(p,&QProcess::readyReadStandardOutput,owner,[this,p]{if(decode==p)consume(p);});
         QObject::connect(p,&QProcess::readyReadStandardError,owner,[this,p]{if(decode==p)consume(p);});
         QObject::connect(p,&QProcess::errorOccurred,owner,[this,p](QProcess::ProcessError error){if(decode==p&&error==QProcess::FailedToStart)fail(QStringLiteral("ffmpeg 无法启动：%1").arg(p->errorString()));});
@@ -65,4 +67,5 @@ bool MediaValidation::start(const QString &path,const domain::CanvasSpace &expec
     return m->probe.start(ffprobe,{"-v","error","-show_streams","-show_format","-of","json",path},QFileInfo(path).absolutePath(),30000);
 }
 void MediaValidation::cancel(){++m->generation;m->active=false;m->probe.cancel();if(m->decode){auto *p=m->decode.data();const auto program=p->program();const auto args=p->arguments();m->dispose(p);emit commandFinished(program,args,-1);}m->deadline.stop();}
+void MediaValidation::setEnvironment(const QProcessEnvironment &environment){if(!m->active){m->environment=environment;m->probe.setEnvironment(environment);}}
 }

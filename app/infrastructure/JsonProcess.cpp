@@ -1,4 +1,5 @@
 #include "JsonProcess.h"
+#include "RuntimePaths.h"
 #include <QJsonDocument>
 #include <QPointer>
 #include <QProcess>
@@ -11,6 +12,7 @@ public:
     QPointer<QProcess> process;
     QTimer timer;
     QByteArray output, diagnostics;
+    QProcessEnvironment environment = RuntimePaths::processEnvironment();
     quint64 generation=0;
     explicit State(JsonProcess *o):owner(o) { timer.setSingleShot(true); }
     void dispose(QProcess *p) {
@@ -40,7 +42,7 @@ JsonProcess::~JsonProcess(){cancel();delete m;}
 bool JsonProcess::start(const QString &program,const QStringList &arguments,const QString &cwd,int deadlineMs) {
     if(m->process||deadlineMs<=0)return false;
     ++m->generation;auto *p=new QProcess(this);m->process=p;m->output.clear();m->diagnostics.clear();
-    p->setProgram(program);p->setArguments(arguments);p->setWorkingDirectory(cwd);p->setProcessChannelMode(QProcess::SeparateChannels);
+    p->setProcessEnvironment(m->environment);p->setProgram(program);p->setArguments(arguments);p->setWorkingDirectory(cwd);p->setProcessChannelMode(QProcess::SeparateChannels);
     connect(p,&QProcess::readyReadStandardOutput,this,[this,p]{if(m->process==p)m->consume(p);});
     connect(p,&QProcess::readyReadStandardError,this,[this,p]{if(m->process==p)m->consume(p);});
     connect(p,&QProcess::errorOccurred,this,[this,p](QProcess::ProcessError error){
@@ -66,4 +68,5 @@ void JsonProcess::cancel() {
     emit commandFinished(program,arguments,-1);
 }
 bool JsonProcess::isRunning() const{return m->process;}
+void JsonProcess::setEnvironment(const QProcessEnvironment &environment){if(!m->process)m->environment=environment;}
 }

@@ -1,0 +1,25 @@
+Test project /private/tmp/qvw-m6-infra-build-canonical
+      Start  1: runtime_paths
+ 1/10 Test  #1: runtime_paths ....................   Passed    2.50 sec
+      Start  2: log_rotation
+ 2/10 Test  #2: log_rotation .....................   Passed    0.13 sec
+      Start  3: export_cache
+ 3/10 Test  #3: export_cache .....................   Passed    5.58 sec
+      Start  4: infrastructure_regression
+ 4/10 Test  #4: infrastructure_regression ........   Passed    0.42 sec
+      Start  5: hypitprobe_regression
+ 5/10 Test  #5: hypitprobe_regression ............   Passed    3.14 sec
+      Start  6: jsonprocess_regression
+ 6/10 Test  #6: jsonprocess_regression ...........   Passed    1.04 sec
+      Start  7: exportworkspace_regression
+ 7/10 Test  #7: exportworkspace_regression .......   Passed    1.00 sec
+      Start  8: mediavalidation_regression
+ 8/10 Test  #8: mediavalidation_regression .......   Passed    3.57 sec
+      Start  9: exportcontroller_regression
+ 9/10 Test  #9: exportcontroller_regression ......   Passed   48.08 sec
+      Start 10: studioprocess_regression
+10/10 Test #10: studioprocess_regression .........   Passed   34.06 sec
+
+100% tests passed out of 10
+
+Total Test time (real) =  99.68 sec

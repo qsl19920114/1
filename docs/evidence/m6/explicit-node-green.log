@@ -1,0 +1,15 @@
+********* Start testing of RuntimePathsTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : RuntimePathsTest::initTestCase()
+PASS   : RuntimePathsTest::explicitNodeExecutableIsUsed()
+PASS   : RuntimePathsTest::projectConfigPropagatesExplicitNodeToStudio()
+PASS   : RuntimePathsTest::cleanupTestCase()
+Totals: 4 passed, 0 failed, 0 skipped, 0 blacklisted, 783ms
+********* Finished testing of RuntimePathsTest *********
+********* Start testing of ExportCacheTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : ExportCacheTest::initTestCase()
+PASS   : ExportCacheTest::explicitNodeExecutableRunsCli()
+PASS   : ExportCacheTest::cleanupTestCase()
+Totals: 3 passed, 0 failed, 0 skipped, 0 blacklisted, 415ms
+********* Finished testing of ExportCacheTest *********

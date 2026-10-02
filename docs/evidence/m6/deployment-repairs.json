@@ -1,0 +1,14 @@
+[
+  {
+    "source": "/opt/homebrew/opt/qt/lib/QtSvg.framework/Versions/A/QtSvg",
+    "deployed": "Contents/Frameworks/QtSvg.framework/Versions/A/QtSvg"
+  },
+  {
+    "source": "/opt/homebrew/opt/qt/lib/QtVirtualKeyboardQml.framework/Versions/A/QtVirtualKeyboardQml",
+    "deployed": "Contents/Frameworks/QtVirtualKeyboardQml.framework/Versions/A/QtVirtualKeyboardQml"
+  },
+  {
+    "source": "/opt/homebrew/opt/qt/lib/QtVirtualKeyboard.framework/Versions/A/QtVirtualKeyboard",
+    "deployed": "Contents/Frameworks/QtVirtualKeyboard.framework/Versions/A/QtVirtualKeyboard"
+  }
+]

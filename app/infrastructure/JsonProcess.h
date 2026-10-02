@@ -2,6 +2,7 @@
 #include <QObject>
 #include <QJsonObject>
 #include <QStringList>
+#include <QProcessEnvironment>
 
 namespace qvw::infra {
 class JsonProcess : public QObject {
@@ -12,6 +13,7 @@ public:
     bool start(const QString &program, const QStringList &arguments, const QString &cwd, int deadlineMs = 30000);
     void cancel();
     bool isRunning() const;
+    void setEnvironment(const QProcessEnvironment &environment);
 signals:
     void result(const QJsonObject &object, int exitCode);
     void failed(const QString &message);

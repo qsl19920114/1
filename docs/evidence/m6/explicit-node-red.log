@@ -1,0 +1,26 @@
+********* Start testing of RuntimePathsTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : RuntimePathsTest::initTestCase()
+FAIL!  : RuntimePathsTest::explicitNodeExecutableIsUsed() 'result.ok()' returned FALSE. (Hypit 自检失败（exit=65）：)
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/RuntimePathsTest.cpp(28)]
+PASS   : RuntimePathsTest::cleanupTestCase()
+Totals: 2 passed, 1 failed, 0 skipped, 0 blacklisted, 531ms
+********* Finished testing of RuntimePathsTest *********
+********* Start testing of ExportCacheTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : ExportCacheTest::initTestCase()
+FAIL!  : ExportCacheTest::explicitNodeExecutableRunsCli() '!QFileInfo::exists(f.frozen.workspace)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(53)]
+PASS   : ExportCacheTest::cleanupTestCase()
+Totals: 2 passed, 1 failed, 0 skipped, 0 blacklisted, 9357ms
+********* Finished testing of ExportCacheTest *********
+********* Start testing of RuntimePathsTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : RuntimePathsTest::initTestCase()
+FAIL!  : RuntimePathsTest::projectConfigPropagatesExplicitNodeToStudio() Compared values are not the same
+   Actual   (initialized.size()): 0
+   Expected (1)                 : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/RuntimePathsTest.cpp(29)]
+PASS   : RuntimePathsTest::cleanupTestCase()
+Totals: 2 passed, 1 failed, 0 skipped, 0 blacklisted, 6197ms
+********* Finished testing of RuntimePathsTest *********

@@ -1,0 +1,15 @@
+Test project /private/tmp/qvw-m6-infra-build-canonical
+    Start  1: runtime_paths
+1/5 Test  #1: runtime_paths ....................   Passed    2.92 sec
+    Start  3: export_cache
+2/5 Test  #3: export_cache .....................   Passed    6.26 sec
+    Start  5: hypitprobe_regression
+3/5 Test  #5: hypitprobe_regression ............   Passed    3.20 sec
+    Start  9: exportcontroller_regression
+4/5 Test  #9: exportcontroller_regression ......   Passed   49.75 sec
+    Start 10: studioprocess_regression
+5/5 Test #10: studioprocess_regression .........   Passed   33.73 sec
+
+100% tests passed out of 5
+
+Total Test time (real) =  95.94 sec

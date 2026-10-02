@@ -1,0 +1,17 @@
+********* Start testing of LogRotationTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : LogRotationTest::initTestCase()
+QWARN  : LogRotationTest::crossProcessRotationWindowDoesNotDisableWriter() 日志锁竞争超过 100 毫秒，本条记录未保存；后续可重试：/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/log_rotation_test-rfDhKY/log.jsonl
+PASS   : LogRotationTest::crossProcessRotationWindowDoesNotDisableWriter()
+PASS   : LogRotationTest::recoversAfterWriterCrashesFollowingRename()
+QWARN  : LogRotationTest::constructorLockContentionCanRecover() 日志正在被其他实例使用，暂缓初始化：/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/log_rotation_test-GeUiAj/log.jsonl
+PASS   : LogRotationTest::constructorLockContentionCanRecover()
+PASS   : LogRotationTest::concurrentProcessesRotateAndAppendValidRecords()
+PASS   : LogRotationTest::messagesAreBounded()
+PASS   : LogRotationTest::argumentsAreBoundedAndRemainAnArray()
+PASS   : LogRotationTest::rotatesFiveMiBWithTwoBackups()
+QWARN  : LogRotationTest::rotationFailureIsVisible() 日志备份路径不安全，无法轮转：/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/log_rotation_test-fxbMEf/log.jsonl.2
+PASS   : LogRotationTest::rotationFailureIsVisible()
+PASS   : LogRotationTest::cleanupTestCase()
+Totals: 10 passed, 0 failed, 0 skipped, 0 blacklisted, 4158ms
+********* Finished testing of LogRotationTest *********

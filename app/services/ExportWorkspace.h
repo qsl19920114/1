@@ -10,5 +10,8 @@ public:
     static bool saveTask(const domain::Project &,const domain::ExportTask &,QString *error);
     static bool loadTask(const domain::Project &,domain::ExportTask *,QString *error);
     static bool validateRecovered(const domain::Project &,const domain::ExportTask &,FrozenExport *,QString *error);
+    static bool validateFinishedCache(const domain::Project &,const domain::ExportTask &,FrozenExport *,QString *error);
+    // Call only after this task's independent Worker has reported stopped.
+    static bool removeFinishedCache(const domain::Project &,const domain::ExportTask &,QString *error);
 };
 }

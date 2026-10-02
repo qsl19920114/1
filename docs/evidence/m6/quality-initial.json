@@ -1,0 +1,35 @@
+[
+  {
+    "title": "自动使用 Node 会破坏合法的 shell 启动器配置",
+    "file": "app/infrastructure/HypitProbe.cpp",
+    "start_line": 59,
+    "end_line": 61,
+    "severity": "P1",
+    "category": "LOGIC",
+    "confidence": 9,
+    "rationale": "当用户沿用 hypit.launcher=\"hypit\" 且 PATH 中存在 Node 时，loadAppConfig 新增的解析逻辑会自动填充 nodePath，即使用户未声明 tools.node。这里随后执行 node <distribution>/hypit version --json。固定版本 Hypit 自带的根目录 hypit 是 POSIX shell 脚本（上游 hypit:1–11，内部再 exec node bin/hypit.mjs），不能被 Node 当作 JavaScript 解析，因此原先直接执行该启动器可用的配置现在必然版本自检失败，无法打开工程。docs/API_CONTRACT.md:13–20 也记录了 ./hypit 的真实可用启动契约。StudioProcess 和 ExportController 使用相同的 nodePath 判断，具有同一根因。",
+    "suggestion": "保留可执行 shell 启动器的直接执行方式；只有确认 launcher 是 Node 脚本时才将显式或解析出的 Node 作为 program。将工具解析结果与启动器执行模式分开，并增加加载配置后使用官方 shell launcher 的回归覆盖。"
+  },
+  {
+    "title": "多实例日志轮转会永久停止另一实例的日志",
+    "file": "app/infrastructure/LogWriter.cpp",
+    "start_line": 45,
+    "end_line": 47,
+    "severity": "P2",
+    "category": "CONCURRENCY",
+    "confidence": 9,
+    "rationale": "默认日志在 AppConfig.cpp:38–40/126 和 main.cpp:68–72 固定为相同 AppDataLocation/workbench.jsonl，应用没有单实例约束或跨进程文件锁。多个应用实例共用该文件时，实例 A 在 rotate 的 QFile::rename(m_filePath, first) 后、append 重新创建当前日志文件前存在缺文件窗口。实例 B 此时进入这里会因 !current.isFile() 调用 fail，将自己的 m_ready 永久设为 false；此后 append 第 68 行持续提前返回，即使 A 已重建文件，B 的外部命令和错误日志也再不记录。这是新增轮转引入的合法并发时序。",
+    "suggestion": "使用 QLockFile 等跨进程锁覆盖检查大小、轮转和追加的完整操作，或为每个实例使用独立日志文件；避免将其他实例正常轮转造成的短暂缺文件直接转为永久停写状态。"
+  },
+  {
+    "title": "启动验证未完成时关闭窗口仍返回 PASS",
+    "file": "app/main.cpp",
+    "start_line": 247,
+    "end_line": 250,
+    "severity": "P2",
+    "category": "BUSINESS_SEMANTICS",
+    "confidence": 9,
+    "rationale": "以 --verify-startup 启动后，在自检或预览验证完成前关闭唯一窗口。默认 Qt lastWindowClosed 会 quit，app.exec() 返回 0；aboutToQuit 仅停止计时器并清理 Studio，cleanupStopped 可为 true。finalCode 与报告 verdict 只根据退出码，因此 Snapshot、pageLoaded、compiledCompositionReady 或 imagesReady 为 false 时仍写出 PASS 并退出 0。搬移脚本另有布尔值断言能拦截这一情况，但 CLI 自身的成功结果违反真实启动验证语义。",
+    "suggestion": "设置独立的 verificationSucceeded 标志，仅在真实 Snapshot、页面、composition、非空图片集合均通过的成功分支设置；verify 模式退出 0 时若没有此标志，应改为非零并写出提前结束的 FAIL 原因。"
+  }
+]

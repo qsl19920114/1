@@ -15,6 +15,8 @@ public:
     bool start(const QString &launcher, const QString &workspace, const QString &run,
                const QString &runtime, int requestedPort = 5599);
     void stop();
+    void setEnvironment(const QProcessEnvironment &environment);
+    void setNodePath(const QString &path, bool explicitlyConfigured = false);
     bool isRunning() const;
     qint64 processId() const;
 
@@ -40,6 +42,8 @@ private:
     bool m_failed = false;
     bool m_stopping = false;
     qint64 m_ownedGroup = 0;
+    QString m_nodePath;
+    bool m_nodeExplicit = false;
 };
 
 }

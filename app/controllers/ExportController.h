@@ -17,6 +17,7 @@ public:
     void cancelBuild();
     void stopObserving();
     void resume();
+    Q_INVOKABLE void clearFinishedCache();
     bool isBusy() const;
     const domain::ExportTask &task() const;
     void setMediaTools(QString ffprobe,QString ffmpeg);
@@ -26,6 +27,7 @@ signals:
     void completed(const QString &path);
     void failed(const QString &message);
     void message(const QString &message);
+    void cacheCleared();
 private:
     class State;State *m;
 };

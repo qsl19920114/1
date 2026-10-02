@@ -1,5 +1,6 @@
 #include "ExportController.h"
 #include "infrastructure/JsonProcess.h"
+#include "infrastructure/RuntimePaths.h"
 #include "services/ExportWorkspace.h"
 #include "services/MediaValidation.h"
 #include <QDir>
@@ -11,7 +12,6 @@
 #include <QSet>
 #include <QRegularExpression>
 #include <QSaveFile>
-#include <QStandardPaths>
 #include <QTimer>
 #include <cmath>
 
@@ -48,9 +48,77 @@ public:
     domain::Project project;domain::ExportTask task;services::FrozenExport frozen;
     infra::JsonProcess process;services::MediaValidation validation;QTimer poll;
     QElapsedTimer resultWait;
-    QString command,ffprobe=QStandardPaths::findExecutable("ffprobe"),ffmpeg=QStandardPaths::findExecutable("ffmpeg");
-    bool busy=false,lastPublishedBusy=false,pendingCancel=false,cancelIssued=false;quint64 generation=0;
-    State(ExportController *o,infra::AppConfig c,infra::LogWriter &l):owner(o),config(std::move(c)),log(l),process(o),validation(o){poll.setSingleShot(true);poll.setInterval(1000);}
+    QString command,ffprobe,ffmpeg;
+    bool busy=false,lastPublishedBusy=false,pendingCancel=false,cancelIssued=false,clearing=false;quint64 generation=0;
+    State(ExportController *o,infra::AppConfig c,infra::LogWriter &l):owner(o),config(std::move(c)),log(l),process(o),validation(o){poll.setSingleShot(true);poll.setInterval(1000);configureTools();}
+    void configureTools() {
+        process.setEnvironment(config.processEnvironment);
+        validation.setEnvironment(config.processEnvironment);
+        ffprobe=config.ffprobePath.isEmpty()?infra::RuntimePaths::resolveTool("ffprobe",config.processEnvironment):config.ffprobePath;
+        ffmpeg=config.ffmpegPath.isEmpty()?infra::RuntimePaths::resolveTool("ffmpeg",config.processEnvironment):config.ffmpegPath;
+    }
+    void cleanupFailed(const QString &error) {
+        process.cancel();command.clear();clearing=false;busy=false;log.warn(error);
+        if(publish(false))emit owner->failed(error);
+    }
+    bool sendCleanup(const QString &operation) {
+        if(!clearing||!busy)return false;
+        QString error;services::FrozenExport checked;
+        if(!services::ExportWorkspace::validateFinishedCache(project,task,&checked,&error)){cleanupFailed(error);return false;}
+        if(!QFileInfo(config.launcherPath).isFile()||!QFileInfo(config.launcherPath).isExecutable()||!QFileInfo(config.distributionPath).isDir()) {
+            cleanupFailed(QStringLiteral("Hypit 启动器或发行目录无效，缓存已保留。"));return false;
+        }
+        command=operation;
+        QStringList arguments;
+        if(operation=="cleanup-status")arguments<<"status"<<task.buildId;
+        else if(operation=="cleanup-activity")arguments<<"activity";
+        else arguments<<"runtime"<<"down";
+        arguments<<"--workspace"<<checked.workspace<<"--runtime"<<checked.runtime<<"--json";
+        const auto invocation=infra::RuntimePaths::hypitInvocation(config.launcherPath,config.nodePath,config.nodeExplicit,arguments);
+        if(!invocation.ok()){cleanupFailed(invocation.error);return false;}
+        if(!process.start(invocation.program,invocation.arguments,config.distributionPath,30000)) {
+            cleanupFailed(QStringLiteral("无法启动缓存终态确认命令，缓存已保留。"));return false;
+        }
+        return true;
+    }
+    void cleanupResult(const QString &operation,const QJsonObject &object,int code) {
+        if(operation=="cleanup-status") {
+            const auto build=object["build"].toObject(),work=build["work"].toObject(),result=build["result"].toObject();
+            const auto outcome=work["outcome"].toString();
+            const bool validCode=(outcome=="failed"&&(code==0||code==1))||(outcome!="failed"&&code==0);
+            if(object["format"]!="hypit.cli-status@1"||build["id"]!=task.buildId||work["state"]!="done"
+                ||!QStringList{"complete","failed","cancelled"}.contains(outcome)||result["state"]!=outcome
+                ||build.contains("attention")||!validCode) {
+                cleanupFailed(QStringLiteral("未确认当前 Build 的一致终态，缓存已保留。"));return;
+            }
+            sendCleanup("cleanup-activity");return;
+        }
+        if(operation=="cleanup-activity") {
+            if(code!=0||object["format"]!="hypit.cli-activity@1"||!object["builds"].isArray()
+                ||(object.contains("omittedBuilds")&&(!object["omittedBuilds"].isDouble()||object["omittedBuilds"].toDouble()!=0))
+                ||object.contains("next")||!QStringList{"running","stopped"}.contains(object["worker"].toString())) {
+                cleanupFailed(QStringLiteral("无法完整确认独立 Runtime 的活动情况，缓存已保留。"));return;
+            }
+            for(const auto &item:object["builds"].toArray()) {
+                const auto build=item.toObject(),work=build["work"].toObject();
+                if(!item.isObject()||build["id"]!=task.buildId||work["state"]!="done"
+                    ||!QStringList{"complete","failed","cancelled"}.contains(work["outcome"].toString())||build.contains("attention")) {
+                    cleanupFailed(QStringLiteral("独立 Runtime 仍有活动、未知或其他 Build，缓存已保留。"));return;
+                }
+            }
+            sendCleanup("cleanup-down");return;
+        }
+        if(operation=="cleanup-down") {
+            if(code!=0||object["format"]!="hypit.cli-runtime-down@1"||object["worker"]!="stopped") {
+                cleanupFailed(QStringLiteral("未确认当前独立 Worker 停止，缓存已保留。"));return;
+            }
+            QString error;if(!services::ExportWorkspace::removeFinishedCache(project,task,&error)){cleanupFailed(error);return;}
+            const auto gen=generation;const auto cleared=task.buildId;
+            clearing=false;busy=false;task={};frozen={};log.info(QStringLiteral("已清理当前终态 Build 的冻结缓存：%1").arg(cleared));
+            if(!publish(false)||gen!=generation)return;
+            emit owner->cacheCleared();if(gen==generation)emit owner->message(QStringLiteral("当前终态导出缓存已清理。"));
+        }
+    }
     bool publish(bool persist=true) {
         const auto gen=generation;
         bool persisted=true;
@@ -84,7 +152,9 @@ public:
         arguments<<"--workspace"<<frozen.workspace;
         if(operation!="get"&&operation!="builds")arguments<<"--runtime"<<frozen.runtime;
         arguments<<"--json";
-        if(!process.start(config.launcherPath,arguments,config.distributionPath,operation=="plan"||operation=="build"?120000:30000)){fail(QStringLiteral("已有导出命令正在运行。"),task.active);return false;}
+        const auto invocation=infra::RuntimePaths::hypitInvocation(config.launcherPath,config.nodePath,config.nodeExplicit,arguments);
+        if(!invocation.ok()){fail(invocation.error,task.active);return false;}
+        if(!process.start(invocation.program,invocation.arguments,config.distributionPath,operation=="plan"||operation=="build"?120000:30000)){fail(QStringLiteral("已有导出命令正在运行。"),task.active);return false;}
         return true;
     }
     void requestCancel() {
@@ -119,6 +189,7 @@ public:
     }
     void onResult(const QJsonObject &object,int code) {
         if(!busy)return;const auto operation=command;command.clear();
+        if(clearing){cleanupResult(operation,object,code);return;}
         // Pinned output.ts:1047-1056 uses one error object for exceptions,
         // including author package syntax errors before a Plan can be built.
         if(object["format"]=="hypit.cli-error@1") {
@@ -179,13 +250,13 @@ ExportController::ExportController(infra::AppConfig config,infra::LogWriter &log
     connect(&m->process,&infra::JsonProcess::commandFinished,this,[this](const QString &program,const QStringList &args,int code){m->log.command(program,args,code);});
     connect(&m->validation,&services::MediaValidation::commandFinished,this,[this](const QString &program,const QStringList &args,int code){m->log.command(program,args,code);});
     connect(&m->process,&infra::JsonProcess::result,this,[this](const QJsonObject &object,int code){m->onResult(object,code);});
-    connect(&m->process,&infra::JsonProcess::failed,this,[this](const QString &error){if(m->busy)m->fail(error,m->task.active);});
+    connect(&m->process,&infra::JsonProcess::failed,this,[this](const QString &error){if(m->clearing)m->cleanupFailed(error);else if(m->busy)m->fail(error,m->task.active);});
     connect(&m->validation,&services::MediaValidation::failed,this,[this](const QString &error){if(m->busy)m->fail(error);});
     connect(&m->validation,&services::MediaValidation::validated,this,[this]{m->deliver();});
     connect(&m->poll,&QTimer::timeout,this,[this]{if(m->busy)m->send("status");});
 }
 ExportController::~ExportController(){stopObserving();delete m;}
-void ExportController::setConfig(infra::AppConfig config){if(!m->busy)m->config=std::move(config);}
+void ExportController::setConfig(infra::AppConfig config){if(!m->busy){m->config=std::move(config);m->configureTools();}}
 void ExportController::setMediaTools(QString ffprobe,QString ffmpeg){if(!m->busy){m->ffprobe=std::move(ffprobe);m->ffmpeg=std::move(ffmpeg);}}
 void ExportController::setProject(domain::Project project) {
     clearProject();m->project=std::move(project);QString error;domain::ExportTask loaded;
@@ -211,6 +282,7 @@ void ExportController::stopObserving() {
     const bool planning=m->busy&&m->task.phase=="planning"&&m->task.buildId.isEmpty();
     ++m->generation;m->poll.stop();m->process.cancel();m->validation.cancel();m->command.clear();
     if(!m->busy)return;m->busy=false;
+    if(m->clearing){m->clearing=false;m->publish(false);return;}
     if(m->task.phase!="complete"&&m->task.phase!="failed"&&m->task.phase!="cancelled")m->task.phase="stopped";
     if(m->publish()&&planning)emit message(QStringLiteral("导出计划观察已停止，尚未提交 Build；可以开始新的导出。"));
 }
@@ -224,12 +296,25 @@ void ExportController::resume() {
     ++m->generation;m->resultWait.invalidate();m->busy=true;m->pendingCancel=false;m->cancelIssued=false;m->task.phase=m->task.buildId.isEmpty()?"stopped":"working";m->task.active=true;m->task.error.clear();if(m->publish())m->send(m->task.buildId.isEmpty()?QStringLiteral("activity"):QStringLiteral("status"));
 }
 void ExportController::cancelBuild() {
+    if(m->clearing){emit failed(QStringLiteral("正在确认并清理终态缓存，请等待结束。"));return;}
     if(!m->busy){if(m->task.active){resume();if(m->busy){m->pendingCancel=true;m->requestCancel();}}return;}
     if(m->task.phase=="planning"||m->task.phase=="getting"||m->task.phase=="validating") {
         ++m->generation;m->process.cancel();m->validation.cancel();m->poll.stop();m->command.clear();m->task.phase="cancelled";m->task.active=false;m->task.error.clear();m->busy=false;m->publish();return;
     }
     if(m->task.buildId.isEmpty()){m->pendingCancel=true;return;}
     m->requestCancel();
+}
+void ExportController::clearFinishedCache() {
+    if(m->busy||m->task.active||!QStringList{"complete","failed","cancelled"}.contains(m->task.phase)||!buildId(m->task.buildId)) {
+        emit failed(QStringLiteral("只可清理当前已有 Build ID 的终态缓存；活动或未知任务需先恢复观察。"));return;
+    }
+    QString error;services::FrozenExport checked;
+    if(m->project.rootPath.isEmpty()||!services::ExportWorkspace::validateFinishedCache(m->project,m->task,&checked,&error)) {
+        emit failed(error.isEmpty()?QStringLiteral("没有可以安全清理的终态缓存。"):error);return;
+    }
+    if(m->task.hypitVersion!=m->config.expectedHypitVersion){emit failed(QStringLiteral("清理需要任务固定的 Hypit 版本，缓存已保留。"));return;}
+    ++m->generation;m->clearing=true;m->busy=true;m->frozen=checked;
+    if(m->publish(false))m->sendCleanup("cleanup-status");
 }
 bool ExportController::isBusy() const{return m->busy;}
 const domain::ExportTask &ExportController::task() const{return m->task;}

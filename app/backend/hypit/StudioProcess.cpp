@@ -1,4 +1,5 @@
 #include "StudioProcess.h"
+#include "infrastructure/RuntimePaths.h"
 
 #include <QDir>
 #include <QFileInfo>
@@ -12,6 +13,7 @@ namespace qvw::backend::hypit {
 
 StudioProcess::StudioProcess(QObject *parent) : QObject(parent)
 {
+    m_process.setProcessEnvironment(infra::RuntimePaths::processEnvironment());
     m_startupTimer.setSingleShot(true);
     m_startupTimer.setInterval(30000);
 #ifdef Q_OS_UNIX
@@ -66,6 +68,8 @@ bool StudioProcess::start(const QString &launcher, const QString &workspace,
     QString error;
     if (launcher.trimmed().isEmpty() || !programInfo.isFile() || !programInfo.isExecutable())
         error = tr("Studio launcher is not an executable file: %1").arg(launcher);
+    else if (!m_nodePath.isEmpty() && (!QFileInfo(m_nodePath).isFile() || !QFileInfo(m_nodePath).isExecutable()))
+        error = tr("Node is not an executable file: %1").arg(m_nodePath);
     else if (workspace.trimmed().isEmpty() || !workspaceInfo.isDir() || !workspaceInfo.isReadable())
         error = tr("Studio workspace is not a readable directory: %1").arg(workspace);
     else if (run.trimmed().isEmpty() || !runInfo.isFile() || !runInfo.isReadable())
@@ -86,11 +90,18 @@ bool StudioProcess::start(const QString &launcher, const QString &workspace,
     m_ownedGroup = 0;
     m_stdout.clear();
     m_stderr.clear();
-    m_process.setProgram(programInfo.absoluteFilePath());
-    m_process.setArguments({QStringLiteral("studio"), QStringLiteral("--run"), runInfo.absoluteFilePath(),
+    QStringList arguments{QStringLiteral("studio"), QStringLiteral("--run"), runInfo.absoluteFilePath(),
                             QStringLiteral("--workspace"), workspaceInfo.absoluteFilePath(),
                             QStringLiteral("--runtime"), runtimeInfo.absoluteFilePath(),
-                            QStringLiteral("--port"), QString::number(requestedPort)});
+                            QStringLiteral("--port"), QString::number(requestedPort)};
+    const auto invocation = infra::RuntimePaths::hypitInvocation(programInfo.absoluteFilePath(), m_nodePath, m_nodeExplicit, arguments);
+    if (!invocation.ok()) {
+        m_active = false;
+        emit failed(invocation.error);
+        return false;
+    }
+    m_process.setProgram(invocation.program);
+    m_process.setArguments(invocation.arguments);
     m_process.setWorkingDirectory(workspaceInfo.absoluteFilePath());
     // Upstream start.ts:61 uses INIT_CWD in preference to cwd; every supplied
     // path is absolute, so an inherited package-manager cwd cannot rebase it.
@@ -212,5 +223,17 @@ bool StudioProcess::isRunning() const
 qint64 StudioProcess::processId() const
 {
     return m_process.processId();
+}
+void StudioProcess::setEnvironment(const QProcessEnvironment &environment)
+{
+    if (!m_active && m_process.state() == QProcess::NotRunning)
+        m_process.setProcessEnvironment(environment);
+}
+void StudioProcess::setNodePath(const QString &path, bool explicitlyConfigured)
+{
+    if (!m_active && m_process.state() == QProcess::NotRunning) {
+        m_nodePath = path;
+        m_nodeExplicit = explicitlyConfigured;
+    }
 }
 }

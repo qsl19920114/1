@@ -1,0 +1,60 @@
+{
+    "buildId": "bld_20261002T043735902Z_F154D33041",
+    "elapsedMs": 44197,
+    "film": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables/校园光影-演示成片.mp4",
+    "frames": 212,
+    "inputsAndFilmKept": true,
+    "model": "local simulation; real Studio mutation",
+    "nominalFps": 5,
+    "ownedStudioStopped": true,
+    "project": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables/演示工程 20261002-043713-698/workbench.qvw.json",
+    "recording": "continuous own Qt MainWindow; scripted production UI signals",
+    "reopenedFingerprint": "6e388697d44b5361705dae42c5381825a844a7d5044644a755d23f53cdb990a3",
+    "screenshotsForAcceptance": false,
+    "stages": [
+        {
+            "action": "1 / 环境诊断与原创模板新建",
+            "atMs": 33
+        },
+        {
+            "action": "2 / 原创工程就绪，导入本地 PNG 素材",
+            "atMs": 6677
+        },
+        {
+            "action": "3 / 原生属性：修改标题、主题色并绑定已导入图片",
+            "atMs": 7959
+        },
+        {
+            "action": "4 / 撤销图片绑定，随后重做；后端确认后才推进历史",
+            "atMs": 10228
+        },
+        {
+            "action": "5 / 本地模拟提案：确认前源码与画面保持原值",
+            "atMs": 13076
+        },
+        {
+            "action": "6 / 显式确认提案，通过共同编辑链写回真实工程",
+            "atMs": 16279
+        },
+        {
+            "action": "7 / 导出：冻结输入、plan、build、精确 Output 与媒体校验",
+            "atMs": 17903
+        },
+        {
+            "action": "8 / 清理自有终态缓存，保留工程输入与已交付成片",
+            "atMs": 32477
+        },
+        {
+            "action": "9 / 关闭 Studio，再打开同一工程验证持久化",
+            "atMs": 35634
+        },
+        {
+            "action": "10 / 已完成：真实 MP4、工程可重开；模型生成明确为模拟",
+            "atMs": 40849
+        }
+    ],
+    "terminalCacheDeleted": true,
+    "verdict": "PASS",
+    "video": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables/完整操作演示.mp4",
+    "videoFullDecode": true
+}

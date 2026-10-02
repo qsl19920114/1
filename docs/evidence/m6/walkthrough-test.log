@@ -1,0 +1,52 @@
+********* Start testing of WalkthroughDemo *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : WalkthroughDemo::initTestCase()
+QINFO  : WalkthroughDemo::recordCreationToReopen() 正在检查 Hypit 配置：/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/config/version-lock.json
+QINFO  : WalkthroughDemo::recordCreationToReopen() Hypit 0.2.10 自检通过（/Users/bytedance/Downloads/国产资产作业/hypit）
+QINFO  : WalkthroughDemo::recordCreationToReopen() 正在打开工程：/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables/演示工程 20261002-043713-698/main.svrun
+QINFO  : WalkthroughDemo::recordCreationToReopen() 已创建工程：/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables/演示工程 20261002-043713-698/workbench.qvw.json
+QINFO  : WalkthroughDemo::recordCreationToReopen() Project            /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables/演示工程 20261002-043713-698
+QINFO  : WalkthroughDemo::recordCreationToReopen() Run                /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables/演示工程 20261002-043713-698/main.svrun
+QINFO  : WalkthroughDemo::recordCreationToReopen() Runtime Profile    /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables/演示工程 20261002-043713-698/hypit.runtime.json
+QINFO  : WalkthroughDemo::recordCreationToReopen() Runtime selection  command argument (this session only)
+QINFO  : WalkthroughDemo::recordCreationToReopen()
+QINFO  : WalkthroughDemo::recordCreationToReopen() ➜  Local:   http://localhost:5780/
+QINFO  : WalkthroughDemo::recordCreationToReopen() Studio 已就绪：http://localhost:5780/（PID 77468）
+QINFO  : WalkthroughDemo::recordCreationToReopen() ➜  Network: use --host to expose
+QINFO  : WalkthroughDemo::recordCreationToReopen() Comments           http://localhost:5780/#comments
+QINFO  : WalkthroughDemo::recordCreationToReopen() 已读取真实会话：revision 1，轨道 1，可写字段 5
+QWARN  : WalkthroughDemo::recordCreationToReopen() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : WalkthroughDemo::recordCreationToReopen() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QINFO  : WalkthroughDemo::recordCreationToReopen() 图片已导入并保存：assets/87f664a9b95e1efc99bd3977cf2fef29de369c5be61658eec7df1dc34fd0330f.png；选中素材和组件后，点击“应用到选中组件的图片”。
+QWARN  : WalkthroughDemo::recordCreationToReopen() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : WalkthroughDemo::recordCreationToReopen() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : WalkthroughDemo::recordCreationToReopen() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : WalkthroughDemo::recordCreationToReopen() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : WalkthroughDemo::recordCreationToReopen() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QINFO  : WalkthroughDemo::recordCreationToReopen() 提案已确认，正在通过属性编辑器验证与应用。
+QWARN  : WalkthroughDemo::recordCreationToReopen() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QINFO  : WalkthroughDemo::recordCreationToReopen() 工程元数据已保存；源文件由编辑操作保存，不触发导出。
+QINFO  : WalkthroughDemo::recordCreationToReopen() 导出计划：目标 final.video；3 项本地请求，0 项付费请求；预检通过。
+QINFO  : WalkthroughDemo::recordCreationToReopen() 当前终态导出缓存已清理。
+QINFO  : WalkthroughDemo::recordCreationToReopen() Studio process exited with code 143.
+QINFO  : WalkthroughDemo::recordCreationToReopen() Studio 已退出，exit=143
+QINFO  : WalkthroughDemo::recordCreationToReopen() 正在打开工程：/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables/演示工程 20261002-043713-698/main.svrun
+QINFO  : WalkthroughDemo::recordCreationToReopen() 已打开工程：/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables/演示工程 20261002-043713-698/workbench.qvw.json
+QINFO  : WalkthroughDemo::recordCreationToReopen() Project            /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables/演示工程 20261002-043713-698
+QINFO  : WalkthroughDemo::recordCreationToReopen() Run                /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables/演示工程 20261002-043713-698/main.svrun
+QINFO  : WalkthroughDemo::recordCreationToReopen() Runtime Profile    /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables/演示工程 20261002-043713-698/hypit.runtime.json
+QINFO  : WalkthroughDemo::recordCreationToReopen() Runtime selection  command argument (this session only)
+QINFO  : WalkthroughDemo::recordCreationToReopen()
+QINFO  : WalkthroughDemo::recordCreationToReopen() ➜  Local:   http://localhost:5780/
+QINFO  : WalkthroughDemo::recordCreationToReopen() Studio 已就绪：http://localhost:5780/（PID 82945）
+QINFO  : WalkthroughDemo::recordCreationToReopen() ➜  Network: use --host to expose
+QINFO  : WalkthroughDemo::recordCreationToReopen() Comments           http://localhost:5780/#comments
+QINFO  : WalkthroughDemo::recordCreationToReopen() 已读取真实会话：revision 1，轨道 1，可写字段 5
+QWARN  : WalkthroughDemo::recordCreationToReopen() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : WalkthroughDemo::recordCreationToReopen() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QINFO  : WalkthroughDemo::recordCreationToReopen() Studio process exited with code 143.
+QINFO  : WalkthroughDemo::recordCreationToReopen() Studio 已退出，exit=143
+PASS   : WalkthroughDemo::recordCreationToReopen()
+PASS   : WalkthroughDemo::cleanupTestCase()
+Totals: 3 passed, 0 failed, 0 skipped, 0 blacklisted, 44461ms
+********* Finished testing of WalkthroughDemo *********

@@ -2,6 +2,7 @@
 #include "domain/Snapshot.h"
 #include <QObject>
 #include <QStringList>
+#include <QProcessEnvironment>
 namespace qvw::services {
 class MediaValidation:public QObject {
     Q_OBJECT
@@ -10,6 +11,7 @@ public:
     ~MediaValidation() override;
     bool start(const QString &path,const domain::CanvasSpace &expected,const QString &ffprobe,const QString &ffmpeg);
     void cancel();
+    void setEnvironment(const QProcessEnvironment &environment);
 signals:
     void validated();
     void failed(const QString &message);

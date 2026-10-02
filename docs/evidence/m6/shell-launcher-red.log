@@ -1,0 +1,22 @@
+********* Start testing of RuntimePathsTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : RuntimePathsTest::initTestCase()
+FAIL!  : RuntimePathsTest::loadedDefaultNodePreservesExecutableShellLauncher() 'result.ok()' returned FALSE. (Hypit 自检失败（exit=1）：/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/runtime_paths_test-bUojDo/distribution/hypit:2
+printf '%s' '{"version":"0.2.10"}'
+       ^^^^
+
+SyntaxError: Unexpected string
+    at wrapSafe (node:internal/modules/cjs/loader:1762:18)
+    at Module._compile (node:internal/modules/cjs/loader:1803:20)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1969:10)
+    at Module.load (node:internal/modules/cjs/loader:1552:32)
+    at Module._load (node:internal/modules/cjs/loader:1354:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+    at node:internal/main/run_main_module:33:47
+
+Node.js v25.8.2)
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/RuntimePathsTest.cpp(29)]
+PASS   : RuntimePathsTest::cleanupTestCase()
+Totals: 2 passed, 1 failed, 0 skipped, 0 blacklisted, 130ms
+********* Finished testing of RuntimePathsTest *********

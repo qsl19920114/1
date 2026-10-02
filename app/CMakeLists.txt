@@ -21,7 +21,7 @@ add_library(qvw_backend STATIC
   backend/hypit/StudioProcess.cpp
 )
 target_include_directories(qvw_backend PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-target_link_libraries(qvw_backend PUBLIC qvw_domain Qt6::Network)
+target_link_libraries(qvw_backend PUBLIC qvw_domain qvw_infra Qt6::Network)
 
 # Config, logging and the startup self-check. Depends on nothing above it, so it
 # stays usable from tests without pulling in the UI.
@@ -30,6 +30,7 @@ add_library(qvw_infra STATIC
   infrastructure/HypitProbe.cpp
   infrastructure/LogWriter.cpp
   infrastructure/JsonProcess.cpp
+  infrastructure/RuntimePaths.cpp
 )
 target_include_directories(qvw_infra PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(qvw_infra PUBLIC Qt6::Core)
@@ -52,9 +53,22 @@ target_link_libraries(qvw_controllers PUBLIC qvw_backend qvw_infra qvw_services)
 
 qt_add_executable(qt_video_workbench main.cpp)
 target_link_libraries(qt_video_workbench PRIVATE qvw_ui qvw_controllers)
-target_compile_definitions(qt_video_workbench PRIVATE QVW_TEMPLATE_DIR="${PROJECT_SOURCE_DIR}/templates")
+target_compile_definitions(qt_video_workbench PRIVATE QVW_APP_VERSION="${PROJECT_VERSION}")
 
 set_target_properties(qt_video_workbench PROPERTIES
-  MACOSX_BUNDLE FALSE
+  MACOSX_BUNDLE ${APPLE}
+  MACOSX_BUNDLE_GUI_IDENTIFIER "edu.qvw.workbench"
+  MACOSX_BUNDLE_BUNDLE_NAME "Qt Video Workbench"
+  MACOSX_BUNDLE_BUNDLE_VERSION "${PROJECT_VERSION}"
+  MACOSX_BUNDLE_SHORT_VERSION_STRING "${PROJECT_VERSION}"
   OUTPUT_NAME qt-video-workbench
 )
+if(APPLE)
+  set(qvw_resource_directory "$<TARGET_BUNDLE_DIR:qt_video_workbench>/Contents/Resources")
+else()
+  set(qvw_resource_directory "$<TARGET_FILE_DIR:qt_video_workbench>/resources")
+endif()
+add_custom_command(TARGET qt_video_workbench POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E make_directory "${qvw_resource_directory}/templates"
+  COMMAND ${CMAKE_COMMAND} -E copy_directory "${PROJECT_SOURCE_DIR}/templates" "${qvw_resource_directory}/templates"
+  COMMENT "Copy original templates beside application runtime")

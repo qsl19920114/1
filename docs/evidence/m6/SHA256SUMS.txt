@@ -1,0 +1,1 @@
+b4affaaac14ab44a153058fbee2986ff8c8021e7e6550aa95e940fcd31fb09c3  QtVideoWorkbench-1.0.0-macOS-arm64.zip

@@ -1,6 +1,6 @@
 # Qt 视频创作工作台
 
-Qt 6 Widgets 视频工程应用。版本 **0.6.0 / M5**：原创图片标题卡、工程和素材管理、原生属性编辑、撤销/重做、受保护源码编辑，真实 Studio 预览，以及经过媒体校验的 MP4 导出。进度见 [STATUS.md](STATUS.md)。
+Qt 6 Widgets 视频工程应用。版本 **1.0.0**：原创图片标题卡、工程和素材管理、原生属性编辑、撤销/重做、受保护源码编辑、真实 Studio 预览、经过媒体校验的 MP4 导出，以及明确确认的受约束提案。进度见 [STATUS.md](STATUS.md)。
 
 ## 构建与启动
 
@@ -9,7 +9,7 @@ Qt 6 Widgets 视频工程应用。版本 **0.6.0 / M5**：原创图片标题卡�
 ```bash
 cmake -S . -B build -DCMAKE_PREFIX_PATH=/opt/homebrew/opt/qt
 cmake --build build -j4
-./build/app/qt-video-workbench
+./build/app/qt-video-workbench.app/Contents/MacOS/qt-video-workbench
 ```
 
 ### 创作流程
@@ -32,7 +32,7 @@ cmake --build build -j4
 也可直接指定工程清单：
 
 ```bash
-./build/app/qt-video-workbench --project="/绝对路径/校园社团介绍/workbench.qvw.json"
+./build/app/qt-video-workbench.app/Contents/MacOS/qt-video-workbench --project="/绝对路径/校园社团介绍/workbench.qvw.json"
 ```
 
 “打开 Run…”保留高级入口，选择既有 `.svrun`、workspace 和本地 Runtime。命令行对应 `--run`、`--workspace`、`--runtime`；与 `--project`、离线 `--session` 互斥。
@@ -54,7 +54,9 @@ cmake --build build -j4
 - `--config` 或“选择配置”切换版本锁；`--log` 指定 JSONL 日志路径，默认在 Qt AppDataLocation。
 - Runtime 只接受已验证的本地 media/hyperframes Provider。关闭工程会结束应用启动的 Studio 进程组。
 
-当前开发版从构建时指定的仓库 `templates/` 读取可信模板；独立发布包及 Windows 进程树管理属于 M6，尚未验收。
+模板随应用复制到相对资源目录，macOS 为 `Contents/Resources/templates`，不依赖编译机的绝对模板路径。发布包内默认配置优先；外部 Hypit、Node、FFmpeg/ffprobe 和渲染浏览器仍须准备。详细布局见 [使用指南](docs/USER_GUIDE.md)。
+
+日志每条有界，文件超过5MiB时轮转，保留两份备份。“清理当前终态缓存”先核对精确Build终态、独立Runtime活动与Worker停止，再删除自有UUID冻结目录和当前任务记录；工程输入和成片保留。
 
 ## 验证（不截图）
 
@@ -65,16 +67,26 @@ node --test tests/template/title-card.test.mjs
 ./build/tests/editor_e2e_test
 ./build/tests/export_e2e_test
 ./build/tests/proposal_e2e_test
+./build/tests/walkthrough_demo
 ```
 
 各项 E2E 需本机监听端口权限及实际 Hypit 依赖。工程测试覆盖创建、导入、迁移重开；编辑测试覆盖原生写入、数值转换、撤销/重做、真实409/422、源码恢复及重开一致。它们核对编译预览与实际图片响应，不依赖截图。
+
+CTest中的官方启动器契约用例需要同级`../hypit/hypit`固定版本脚本，用于核对真实wrapper；该文件仅复制到临时测试目录，不进入本仓库。其余大多数单测使用本地进程/HTTP fixture。
 
 M4真实导出涵盖输入冻结、停止与同ID恢复、取消和编译失败不交付；实际成片为1280×720、30fps、8秒H.264。见 [M4证据](docs/evidence/m4/README.md)。
 
 结果见 [M3证据](docs/evidence/m3/README.md) 和 [M2证据](docs/evidence/m2/README.md)。旧 `--selftest --out` 和 M1 截图脚本仅保留为兼容工具，不作为当前验收步骤。
 
-## 后续开发
+## 主平台交付
 
-下一阶段 M5：受约束编辑提案（真实模型可选，默认模拟）；M6：稳定性及主平台独立发布包。
+```bash
+python3 scripts/release/collect_licenses.py
+python3 scripts/release/package_macos.py
+```
+
+产物位于 `.workbench/release-macos-arm64/`，包括.app、ZIP、SHA256和链接检查清单。包为本地ad hoc签名，未公证。Qt运行库随包；上述视频执行依赖为外部组件。Windows、另一台无Qt机器和真实模型未验收。
+
+完整操作视频与真实成片位于 `.workbench/deliverables/`。演示驱动通过生产界面信号执行真实操作，并连续录制本应用窗口；视频不作为截图门禁。复现与结果见 [测试报告](docs/TEST_REPORT.md)、[演示说明](docs/DEMO_GUIDE.md)、[第三方说明](docs/THIRD_PARTY.md)。
 
 依据：[开发计划](PROJECT_PLAN.md)、[任务状态](tasks.json)、[Studio契约](docs/API_CONTRACT.md)、[原创模板契约](docs/TEMPLATE_CONTRACT.md)、[测试计划](docs/TEST_PLAN.md)。Hypit 许可证按固定版本保留与复核，详见计划§10。

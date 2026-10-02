@@ -1,0 +1,17 @@
+********* Start testing of LogRotationTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : LogRotationTest::initTestCase()
+QWARN  : LogRotationTest::crossProcessRotationWindowDoesNotDisableWriter() 日志文件路径已改变或不安全：/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/log_rotation_test-WzUgBb/log.jsonl
+FAIL!  : LogRotationTest::crossProcessRotationWindowDoesNotDisableWriter() 'log.isReady()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/LogRotationTest.cpp(18)]
+QWARN  : LogRotationTest::crossProcessRotationWindowDoesNotDisableWriter() QProcess: Destroyed while process ("/private/tmp/qvw-m6-infra-build-canonical/log_rotation_test") is still running.
+QWARN  : LogRotationTest::recoversAfterWriterCrashesFollowingRename() 日志文件路径已改变或不安全：/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/log_rotation_test-IIsCQn/log.jsonl
+FAIL!  : LogRotationTest::recoversAfterWriterCrashesFollowingRename() 'log.isReady()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/LogRotationTest.cpp(19)]
+FAIL!  : LogRotationTest::constructorLockContentionCanRecover() '!log.lastError().isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/LogRotationTest.cpp(20)]
+QWARN  : LogRotationTest::constructorLockContentionCanRecover() QProcess: Destroyed while process ("/private/tmp/qvw-m6-infra-build-canonical/log_rotation_test") is still running.
+PASS   : LogRotationTest::concurrentProcessesRotateAndAppendValidRecords()
+PASS   : LogRotationTest::cleanupTestCase()
+Totals: 3 passed, 3 failed, 0 skipped, 0 blacklisted, 771ms
+********* Finished testing of LogRotationTest *********

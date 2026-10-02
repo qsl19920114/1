@@ -1,0 +1,45 @@
+[  2%] Built target qvw_domain_autogen_timestamp_deps
+[  2%] Built target qvw_infra_autogen_timestamp_deps
+[  2%] Built target qt_video_workbench_qmlimportscan
+[  4%] Built target qvw_domain_autogen
+[  6%] Automatic MOC for target qvw_infra
+[ 16%] Built target qvw_domain
+[ 16%] Built target qvw_ui_autogen_timestamp_deps
+[ 18%] Built target qvw_ui_autogen
+[ 26%] Built target qvw_ui
+[ 26%] Built target qvw_infra_autogen
+[ 28%] Building CXX object app/CMakeFiles/qvw_infra.dir/qvw_infra_autogen/mocs_compilation.cpp.o
+[ 34%] Building CXX object app/CMakeFiles/qvw_infra.dir/infrastructure/AppConfig.cpp.o
+[ 34%] Building CXX object app/CMakeFiles/qvw_infra.dir/infrastructure/HypitProbe.cpp.o
+[ 34%] Building CXX object app/CMakeFiles/qvw_infra.dir/infrastructure/LogWriter.cpp.o
+[ 36%] Building CXX object app/CMakeFiles/qvw_infra.dir/infrastructure/JsonProcess.cpp.o
+[ 38%] Building CXX object app/CMakeFiles/qvw_infra.dir/infrastructure/RuntimePaths.cpp.o
+[ 40%] Linking CXX static library libqvw_infra.a
+[ 40%] Built target qvw_infra
+[ 40%] Built target qvw_backend_autogen_timestamp_deps
+[ 40%] Built target qvw_services_autogen_timestamp_deps
+[ 44%] Built target qvw_services_autogen
+[ 44%] Automatic MOC for target qvw_backend
+[ 46%] Building CXX object app/CMakeFiles/qvw_services.dir/services/MediaValidation.cpp.o
+[ 46%] Built target qvw_backend_autogen
+[ 48%] Building CXX object app/CMakeFiles/qvw_backend.dir/qvw_backend_autogen/mocs_compilation.cpp.o
+[ 51%] Building CXX object app/CMakeFiles/qvw_backend.dir/backend/hypit/StudioProcess.cpp.o
+[ 53%] Linking CXX static library libqvw_services.a
+[ 67%] Built target qvw_services
+[ 69%] Linking CXX static library libqvw_backend.a
+[ 75%] Built target qvw_backend
+[ 75%] Built target qvw_controllers_autogen_timestamp_deps
+[ 77%] Automatic MOC for target qvw_controllers
+[ 77%] Built target qvw_controllers_autogen
+[ 83%] Building CXX object app/CMakeFiles/qvw_controllers.dir/qvw_controllers_autogen/mocs_compilation.cpp.o
+[ 83%] Building CXX object app/CMakeFiles/qvw_controllers.dir/controllers/ExportController.cpp.o
+[ 83%] Building CXX object app/CMakeFiles/qvw_controllers.dir/controllers/ProjectController.cpp.o
+[ 85%] Linking CXX static library libqvw_controllers.a
+[ 91%] Built target qvw_controllers
+[ 91%] Built target qt_video_workbench_autogen_timestamp_deps
+[ 93%] Automatic MOC for target qt_video_workbench
+[ 93%] Built target qt_video_workbench_autogen
+[ 95%] Building CXX object app/CMakeFiles/qt_video_workbench.dir/main.cpp.o
+[ 97%] Linking CXX executable qt-video-workbench.app/Contents/MacOS/qt-video-workbench
+Copy original templates beside application runtime
+[100%] Built target qt_video_workbench

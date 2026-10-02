@@ -9,6 +9,8 @@
 namespace qvw::controllers {
 ProjectController::ProjectController(infra::AppConfig config, infra::LogWriter &log, QObject *parent)
     : QObject(parent), m_config(std::move(config)), m_log(log) {
+    m_studio.setEnvironment(m_config.processEnvironment);
+    m_studio.setNodePath(m_config.nodePath, m_config.nodeExplicit);
     connect(&m_probe, &infra::HypitProbe::completed, this, [this](const infra::ProbeResult &result) {
         report(result.message);
         m_available = result.ok();
@@ -51,7 +53,7 @@ void ProjectController::initialize() {
     m_probe.start(m_config, m_log);
 }
 void ProjectController::configure(const infra::AppConfig &config) {
-    closeProject(); m_probe.cancel(); m_config = config; initialize();
+    closeProject(); m_probe.cancel(); m_config = config; m_studio.setEnvironment(m_config.processEnvironment); m_studio.setNodePath(m_config.nodePath, m_config.nodeExplicit); initialize();
 }
 void ProjectController::openProject(const QString &workspace, const QString &run, const QString &runtime, int port) {
     if (!m_available) { emit failed(QStringLiteral("请先完成 Hypit 自检。")); return; }

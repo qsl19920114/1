@@ -1,0 +1,9 @@
+Test project /private/tmp/qvw-m6-infra-build-canonical
+    Start 1: runtime_paths
+1/2 Test #1: runtime_paths ....................   Passed    1.09 sec
+    Start 2: log_rotation
+2/2 Test #2: log_rotation .....................   Passed    0.08 sec
+
+100% tests passed out of 2
+
+Total Test time (real) =   1.19 sec

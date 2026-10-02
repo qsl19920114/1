@@ -70,7 +70,28 @@
     },
     "G6": {
       "milestone": "M6",
-      "verdict": "NOT_REACHED"
+      "verdict": "PASS",
+      "definition": "课程主平台发布验证：bundle资源与Qt使用相对部署，外部视频依赖明确，搬移后真实预览与退出清理通过，交付材料齐全",
+      "reason": "21/21回归、真实完整创作演示、9种搬移场景符合预期；82个Mach-O、签名和248份许可输入核对通过；最终规格与质量复审PASS。",
+      "verifiedPlatform": "macOS 15.7.7 arm64; package minimum target 15.0; Qt 6.11.2",
+      "evidence": [
+        "docs/evidence/m6/ctest-final.log",
+        "docs/evidence/m6/walkthrough.json",
+        "docs/evidence/m6/relocation.json",
+        "docs/evidence/m6/link-audit.json",
+        "docs/evidence/m6/release.json",
+        "docs/evidence/m6/license-verification.json",
+        "docs/evidence/m6/spec-review.md",
+        "docs/evidence/m6/quality-review.md",
+        "docs/evidence/m6/quality-review.json"
+      ],
+      "boundaries": [
+        "Hypit 0.2.10、Node、FFmpeg/ffprobe及Runtime所选渲染浏览器为外部依赖",
+        "ad hoc本地签名，未公证",
+        "真实模型未配置，提案生成仅本地模拟",
+        "Windows、另一台无Qt机器及公开再分发授权/完整源码分发审核未验收"
+      ],
+      "promotedAt": "2026-10-02"
     }
   },
   "tasks": [
@@ -637,46 +658,81 @@
       "id": "T029",
       "milestone": "M6",
       "title": "路径/任务安全、日志有界与终态缓存清理",
-      "status": "pending",
+      "status": "done",
       "dependsOn": [
         "T028"
       ],
       "acceptance": [
         "活动或未知Build不可删除，只清理自有终态冻结目录",
         "配置与日志有界，不删除工程输入"
+      ],
+      "evidence": [
+        "docs/evidence/m6/ctest-final.log",
+        "docs/evidence/m6/export-cache-green.log",
+        "docs/evidence/m6/log-concurrency-green.log",
+        "docs/evidence/m6/walkthrough.json",
+        "docs/evidence/m6/spec-review.md",
+        "docs/evidence/m6/quality-review.md",
+        "docs/evidence/m6/quality-review.json"
       ]
     },
     {
       "id": "T030",
       "milestone": "M6",
       "title": "macOS bundle 资源与 Qt/WebEngine 部署",
-      "status": "pending",
+      "status": "done",
       "dependsOn": [
         "T029"
       ],
       "acceptance": [
         "无绝对模板路径，声明外部Hypit/Node/媒体依赖",
         "递归链接签名检查、许可材料与ZIP"
+      ],
+      "evidence": [
+        "docs/evidence/m6/build-release-quality.log",
+        "docs/evidence/m6/package-final.log",
+        "docs/evidence/m6/link-audit.json",
+        "docs/evidence/m6/helper-entitlements.txt",
+        "docs/evidence/m6/license-materials.json",
+        "docs/evidence/m6/license-verification.json",
+        "docs/evidence/m6/artifact-verification.json",
+        "docs/evidence/m6/release.json",
+        "docs/evidence/m6/SHA256SUMS.txt",
+        "docs/evidence/m6/spec-review.md",
+        "docs/evidence/m6/quality-review.md",
+        "docs/evidence/m6/quality-review.json"
       ]
     },
     {
       "id": "T031",
       "milestone": "M6",
       "title": "搬移后的真实启动与预览验证",
-      "status": "pending",
+      "status": "done",
       "dependsOn": [
         "T030"
       ],
       "acceptance": [
         "中文空格路径、非仓库CWD、最小初始PATH",
         "bundle模板创建、Snapshot/预览/图片及清理"
+      ],
+      "evidence": [
+        "docs/evidence/m6/relocation.json",
+        "docs/evidence/m6/relocated-default.json",
+        "docs/evidence/m6/relocated-explicit.json",
+        "docs/evidence/m6/relocated-shell.json",
+        "docs/evidence/m6/relocated-shell-explicit.json",
+        "docs/evidence/m6/early-close-red.log",
+        "docs/evidence/m6/early-close-green.log",
+        "docs/evidence/m6/spec-review.md",
+        "docs/evidence/m6/quality-review.md",
+        "docs/evidence/m6/quality-review.json"
       ]
     },
     {
       "id": "T032",
       "milestone": "M6",
       "title": "使用指南、完整演示与最终交付",
-      "status": "pending",
+      "status": "done",
       "dependsOn": [
         "T031"
       ],
@@ -684,7 +740,22 @@
         "真实操作视频、成片、运行包、校验和",
         "原创复用边界与未验收能力明确"
       ],
-      "gate": "G6"
+      "gate": "G6",
+      "evidence": [
+        "docs/evidence/m6/walkthrough.json",
+        "docs/evidence/m6/walkthrough-test.log",
+        "docs/evidence/m6/demo-ffprobe.json",
+        "docs/evidence/m6/film-ffprobe.json",
+        "docs/evidence/m6/release.json",
+        "docs/evidence/m6/SHA256SUMS.txt",
+        "docs/evidence/m6/spec-review.md",
+        "docs/evidence/m6/quality-review.md",
+        "docs/evidence/m6/quality-review.json",
+        "docs/USER_GUIDE.md",
+        "docs/THIRD_PARTY.md",
+        "docs/DEMO_GUIDE.md",
+        "docs/TEST_REPORT.md"
+      ]
     }
   ]
 }

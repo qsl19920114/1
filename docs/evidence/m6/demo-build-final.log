@@ -1,0 +1,24 @@
+[  0%] Built target qvw_infra_autogen_timestamp_deps
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  3%] Built target qvw_domain_autogen
+[  3%] Built target qvw_infra_autogen
+[ 12%] Built target qvw_domain
+[ 12%] Built target qvw_ui_autogen_timestamp_deps
+[ 12%] Built target qvw_ui_autogen
+[ 28%] Built target qvw_infra
+[ 28%] Built target qvw_services_autogen_timestamp_deps
+[ 28%] Built target qvw_backend_autogen_timestamp_deps
+[ 37%] Built target qvw_ui
+[ 40%] Built target qvw_backend_autogen
+[ 43%] Built target qvw_services_autogen
+[ 62%] Built target qvw_services
+[ 75%] Built target qvw_backend
+[ 75%] Built target qvw_controllers_autogen_timestamp_deps
+[ 78%] Built target qvw_controllers_autogen
+[ 90%] Built target qvw_controllers
+[ 90%] Built target walkthrough_demo_autogen_timestamp_deps
+[ 93%] Automatic MOC for target walkthrough_demo
+[ 93%] Built target walkthrough_demo_autogen
+[ 96%] Building CXX object tests/CMakeFiles/walkthrough_demo.dir/integration/WalkthroughDemo.cpp.o
+[100%] Linking CXX executable walkthrough_demo
+[100%] Built target walkthrough_demo

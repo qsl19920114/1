@@ -1,0 +1,86 @@
+Test project /private/tmp/qvw-m6-infra-build-canonical
+    Start 3: export_cache
+1/1 Test #3: export_cache .....................***Failed    2.46 sec
+********* Start testing of ExportCacheTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : ExportCacheTest::initTestCase()
+QWARN  : ExportCacheTest::clearsOnlyKnownTerminalWorkspace(complete) QMetaObject::invokeMethod: No such method qvw::controllers::ExportController::clearFinishedCache()
+FAIL!  : ExportCacheTest::clearsOnlyKnownTerminalWorkspace(complete) 'clear(c)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(44)]
+QWARN  : ExportCacheTest::clearsOnlyKnownTerminalWorkspace(failed) QMetaObject::invokeMethod: No such method qvw::controllers::ExportController::clearFinishedCache()
+FAIL!  : ExportCacheTest::clearsOnlyKnownTerminalWorkspace(failed) 'clear(c)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(44)]
+QWARN  : ExportCacheTest::clearsOnlyKnownTerminalWorkspace(cancelled) QMetaObject::invokeMethod: No such method qvw::controllers::ExportController::clearFinishedCache()
+FAIL!  : ExportCacheTest::clearsOnlyKnownTerminalWorkspace(cancelled) 'clear(c)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(44)]
+QWARN  : ExportCacheTest::refusesUnknownOrActiveRecord(working) QMetaObject::invokeMethod: No such method qvw::controllers::ExportController::clearFinishedCache()
+FAIL!  : ExportCacheTest::refusesUnknownOrActiveRecord(working) 'clear(c)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(46)]
+QWARN  : ExportCacheTest::refusesUnknownOrActiveRecord(stopped) QMetaObject::invokeMethod: No such method qvw::controllers::ExportController::clearFinishedCache()
+FAIL!  : ExportCacheTest::refusesUnknownOrActiveRecord(stopped) 'clear(c)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(46)]
+QWARN  : ExportCacheTest::refusesUnknownOrActiveRecord(getting) QMetaObject::invokeMethod: No such method qvw::controllers::ExportController::clearFinishedCache()
+FAIL!  : ExportCacheTest::refusesUnknownOrActiveRecord(getting) 'clear(c)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(46)]
+QWARN  : ExportCacheTest::refusesUnknownOrActiveRecord(validating) QMetaObject::invokeMethod: No such method qvw::controllers::ExportController::clearFinishedCache()
+FAIL!  : ExportCacheTest::refusesUnknownOrActiveRecord(validating) 'clear(c)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(46)]
+QWARN  : ExportCacheTest::refusesUnknownOrActiveRecord(active complete) QMetaObject::invokeMethod: No such method qvw::controllers::ExportController::clearFinishedCache()
+FAIL!  : ExportCacheTest::refusesUnknownOrActiveRecord(active complete) 'clear(c)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(46)]
+QWARN  : ExportCacheTest::refusesUnconfirmedBackend(active) QMetaObject::invokeMethod: No such method qvw::controllers::ExportController::clearFinishedCache()
+FAIL!  : ExportCacheTest::refusesUnconfirmedBackend(active) 'clear(c)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(48)]
+QWARN  : ExportCacheTest::refusesUnconfirmedBackend(wrongid) QMetaObject::invokeMethod: No such method qvw::controllers::ExportController::clearFinishedCache()
+FAIL!  : ExportCacheTest::refusesUnconfirmedBackend(wrongid) 'clear(c)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(48)]
+QWARN  : ExportCacheTest::refusesUnconfirmedBackend(missing) QMetaObject::invokeMethod: No such method qvw::controllers::ExportController::clearFinishedCache()
+FAIL!  : ExportCacheTest::refusesUnconfirmedBackend(missing) 'clear(c)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(48)]
+QWARN  : ExportCacheTest::refusesUnconfirmedBackend(attention) QMetaObject::invokeMethod: No such method qvw::controllers::ExportController::clearFinishedCache()
+FAIL!  : ExportCacheTest::refusesUnconfirmedBackend(attention) 'clear(c)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(48)]
+QWARN  : ExportCacheTest::refusesUnconfirmedBackend(otheractive) QMetaObject::invokeMethod: No such method qvw::controllers::ExportController::clearFinishedCache()
+FAIL!  : ExportCacheTest::refusesUnconfirmedBackend(otheractive) 'clear(c)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(48)]
+QWARN  : ExportCacheTest::refusesUnconfirmedBackend(currentactive) QMetaObject::invokeMethod: No such method qvw::controllers::ExportController::clearFinishedCache()
+FAIL!  : ExportCacheTest::refusesUnconfirmedBackend(currentactive) 'clear(c)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(48)]
+QWARN  : ExportCacheTest::refusesUnconfirmedBackend(otherdone) QMetaObject::invokeMethod: No such method qvw::controllers::ExportController::clearFinishedCache()
+FAIL!  : ExportCacheTest::refusesUnconfirmedBackend(otherdone) 'clear(c)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(48)]
+QWARN  : ExportCacheTest::refusesUnconfirmedBackend(omitted) QMetaObject::invokeMethod: No such method qvw::controllers::ExportController::clearFinishedCache()
+FAIL!  : ExportCacheTest::refusesUnconfirmedBackend(omitted) 'clear(c)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(48)]
+QWARN  : ExportCacheTest::refusesUnconfirmedBackend(malformed) QMetaObject::invokeMethod: No such method qvw::controllers::ExportController::clearFinishedCache()
+FAIL!  : ExportCacheTest::refusesUnconfirmedBackend(malformed) 'clear(c)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(48)]
+QWARN  : ExportCacheTest::refusesUnconfirmedBackend(downfail) QMetaObject::invokeMethod: No such method qvw::controllers::ExportController::clearFinishedCache()
+FAIL!  : ExportCacheTest::refusesUnconfirmedBackend(downfail) 'clear(c)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(48)]
+QWARN  : ExportCacheTest::refusesSymlinkInsideRuntime() QMetaObject::invokeMethod: No such method qvw::controllers::ExportController::clearFinishedCache()
+FAIL!  : ExportCacheTest::refusesSymlinkInsideRuntime() 'clear(c)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(49)]
+QWARN  : ExportCacheTest::rejectsTamperedMarker() QMetaObject::invokeMethod: No such method qvw::controllers::ExportController::clearFinishedCache()
+FAIL!  : ExportCacheTest::rejectsTamperedMarker() 'clear(c)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(50)]
+FAIL!  : ExportCacheTest::rejectsUnknownRecordPhase() '!services::ExportWorkspace::loadTask(f.project,&loaded,&f.error)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(51)]
+QWARN  : ExportCacheTest::refusesEmptyBuildId() QMetaObject::invokeMethod: No such method qvw::controllers::ExportController::clearFinishedCache()
+FAIL!  : ExportCacheTest::refusesEmptyBuildId() 'clear(c)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(52)]
+QWARN  : ExportCacheTest::projectSwitchDuringBusySignalCannotDeleteOldCache() QMetaObject::invokeMethod: No such method qvw::controllers::ExportController::clearFinishedCache()
+FAIL!  : ExportCacheTest::projectSwitchDuringBusySignalCannotDeleteOldCache() 'clear(c)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportCacheTest.cpp(53)]
+PASS   : ExportCacheTest::cleanupTestCase()
+Totals: 2 passed, 23 failed, 0 skipped, 0 blacklisted, 1618ms
+********* Finished testing of ExportCacheTest *********
+
+
+0% tests passed, 1 tests failed out of 1
+
+Total Test time (real) =   2.47 sec
+
+The following tests FAILED:
+	  3 - export_cache (Failed)
+Errors while running CTest

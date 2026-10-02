@@ -2,7 +2,7 @@
 
 更新：2026-10-02，以 tasks.json、源码及真实证据为准。
 
-**版本0.6.0；G0–G5 = PASS；T001–T028 完成。下一阶段 M6：稳定与主平台发布。**
+**版本1.0.0；开发计划M0–M6及门禁G0–G6全部完成，T001–T032均为done。最终规格和质量复审PASS。**
 
 ## 已实现
 
@@ -14,6 +14,19 @@ M5新增单项提案Schema、严格类型/可写字段/版本/工程绑定/图�
 
 M5：17套CTest通过（105.83s），最终真实ProposalE2E通过（2.590s），确认前实际源码不变，真实标题/图片回读及撤销、失效拒绝与Studio清理。展示修复后根构建通过。规格复审关闭多行摘要P2，质量复审PASS，无剩余确定P0–P2。证据见docs/evidence/m5/。
 
-M0–M4历史证据保留，实际导出样例为`.workbench/deliverables/校园摄影社-验证成片.mp4`。后续按docs/plans/2026-10-02-m6-release.md推进，不截图验收。
+M6加入bundle相对模板/配置、应用级工具定位与显式Node执行、日志限制/轮转、自有终态缓存清理、无截图启动验证、Qt/WebEngine部署和本地签名、实际第三方材料及ZIP校验和。工程输入和已交付成片保留；未知/活动任务拒绝清理。
 
-已验证macOS15.7.7 arm64、Qt6.11.2、Hypit0.2.10、Node25.8.2。独立发布包、Windows和真实模型仍未验收。
+### M6 本轮验证
+
+- 21套CTest全部通过，123.03秒；三项质量问题的RED/GREEN回归通过。
+- 真实完整创作演示通过（44.461秒），连续录制42.4秒；真实8秒、1280×720、30fps H.264成片，终态缓存删除和重开一致。
+- 82个实际Mach-O链接检查、资源和深度严格签名通过；包内248份许可/归属材料与manifest匹配。
+- 中文空格路径、非仓库CWD和最小初始PATH下，默认配置新建、显式custom-node重开及官方shell默认/显式Node四种配置均读到真实Snapshot/编译预览/已加载图片，退出后自有Studio不存在。缺Hypit、错误版本、缺Node/ffmpeg/ffprobe均正确非零FAIL。
+
+首次部署、helper加载及首轮质量问题的失败证据保留；三项质量缺陷均已关闭，最终规格/质量复审PASS，仅最终通过结果计入门禁。证据见[索引](docs/evidence/m6/README.md)与[测试报告](docs/TEST_REPORT.md)。
+
+## 本地交付
+
+`.workbench/release-macos-arm64/`包含.app、ZIP、SHA256、使用及第三方说明；`.workbench/deliverables/`包含完整操作视频、真实成片和可重开工程。依赖和演示复现见[使用指南](docs/USER_GUIDE.md)、[演示说明](docs/DEMO_GUIDE.md)。M0–M5证据保留。
+
+实际平台macOS15.7.7 arm64、Qt6.11.2，包最低构建目标15.0。Qt随包；Hypit0.2.10、Node、FFmpeg/ffprobe和渲染浏览器为外部依赖。本地ad hoc签名、未公证；Windows、另一台无Qt机器、真实模型及公开再分发授权/完整源码审核未验收。
