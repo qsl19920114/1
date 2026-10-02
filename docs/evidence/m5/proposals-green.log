@@ -1,0 +1,9 @@
+Test project /tmp/qvw-m5-proposal-build
+    Start 16: proposal_service
+1/2 Test #16: proposal_service .................   Passed    0.81 sec
+    Start 17: proposal_controller
+2/2 Test #17: proposal_controller ..............   Passed    0.98 sec
+
+100% tests passed out of 2
+
+Total Test time (real) =   1.86 sec

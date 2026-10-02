@@ -22,9 +22,14 @@ EditorController 串行执行预检 GET、写入、确认 GET。预检同时核�
 
 单文件 Source 编辑只允许 `source.files` 白名单。SourceEditGuard 保存磁盘预像并校验工程路径；PUT 202 后，只有相同 revision 的明确编译失败才恢复预像。恢复前再次检查文件仍为本次写入，外部变化不覆盖。该内容检查不是跨进程文件锁；多编辑器竞态仍由版本与回读检测处理。合法增删 import 可以改变编译依赖文件集合。
 
-M4 再实现 build/status/get 与可解码验证；此前不把 plan 或 HTTP 成功显示为导出成功。
-# M4 导出链
+## M4 导出链
 
 `ExportController` 持有单项导出状态；`JsonProcess` 仅观察有界异步CLI，取消进程不代表取消Worker任务。`ExportWorkspace` 将当前工程冻结为独立UUID目录，核对Snapshot源码预像与所有复制输入hash，任务记录保存源版本/指纹/固定Hypit版本/精确Build ID。未知提交保留active状态，只查询独立Runtime的唯一Build，无法确定时拒绝新提交。
 
 plan要求本地Runtime、完整providers、本地请求计数与预检通过；status把Work和Result分开，已完成Work但Result尚未保存继续观察。get只取当前Build的final.video。`MediaValidation`先ffprobe后全片decode，最后QSaveFile原子交付。停止或关闭保留Worker及记录，取消指定Build后继续查终态；本项目不以CLI exit0显示成片成功。
+
+## M5 提案边界
+
+`IProposalProvider`只返回单项属性提案；默认`DemoProposalProvider`为显式模拟，不发模型请求。外部JSON来源不由其自述决定，导入后统一标来源未核验。`ProposalService`严格核对schema、值类型、真实可写字段、revision/源码指纹，以及图片素材白名单。
+
+`ProposalController`管理待确认提案；生成不写入，确认时重新校验，随后只调用现有`EditorController::edit`。快照、工程、就绪状态或编辑过程变化会使旧提案失效。界面以纯文本显示当前值/拟修改值/来源，避免把不可信提案内容作为HTML。

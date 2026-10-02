@@ -11,6 +11,8 @@
 #include <QDialogButtonBox>
 #include <QFileDialog>
 #include <QFileInfo>
+#include <QFile>
+#include <QGroupBox>
 #include <QDir>
 #include <QFormLayout>
 #include <QHeaderView>
@@ -144,7 +146,33 @@ QWidget *MainWindow::buildInspectorPanel() {
     m_inspectorTable->header()->setSectionResizeMode(2, QHeaderView::Stretch);
     m_inspectorTable->setColumnWidth(1, 55); m_inspectorTable->setColumnWidth(3, 65);
     m_inspectorTable->setRootIsDecorated(false);
-    return withTitle(QStringLiteral("原生属性"), m_inspectorTable);
+    auto *body=new QWidget;auto *layout=new QVBoxLayout(body);layout->setContentsMargins(0,0,0,0);
+    layout->addWidget(m_inspectorTable,3);
+    auto *proposals=new QGroupBox(QStringLiteral("编辑提案 · 本地模拟"));auto *form=new QVBoxLayout(proposals);
+    auto *scope=new QLabel(QStringLiteral("模拟支持：标题改为…、主题色改为#RRGGBB、图片使用第1张。确认后才修改；未连接真实模型。"));
+    scope->setWordWrap(true);scope->setTextFormat(Qt::PlainText);form->addWidget(scope);
+    m_proposalRequest=new QLineEdit;m_proposalRequest->setMaxLength(4096);
+    m_proposalRequest->setPlaceholderText(QStringLiteral("例如：标题改为校园摄影社"));form->addWidget(m_proposalRequest);
+    auto *generate=new QHBoxLayout;m_generateProposal=new QPushButton(QStringLiteral("生成模拟提案"));m_importProposal=new QPushButton(QStringLiteral("导入提案 JSON…"));
+    m_generateProposal->setEnabled(false);m_importProposal->setEnabled(false);generate->addWidget(m_generateProposal);generate->addWidget(m_importProposal);form->addLayout(generate);
+    m_proposalSummary=new QPlainTextEdit;m_proposalSummary->setReadOnly(true);m_proposalSummary->setMaximumHeight(160);
+    m_proposalSummary->setPlainText(QStringLiteral("尚无待确认提案。"));form->addWidget(m_proposalSummary);
+    auto *actions=new QHBoxLayout;m_confirmProposal=new QPushButton(QStringLiteral("确认修改"));m_confirmProposal->setEnabled(false);
+    auto *discard=new QPushButton(QStringLiteral("放弃提案"));actions->addWidget(m_confirmProposal);actions->addWidget(discard);form->addLayout(actions);
+    connect(m_generateProposal,&QPushButton::clicked,this,[this]{emit demoProposalRequested(m_proposalRequest->text());});
+    connect(m_importProposal,&QPushButton::clicked,this,[this]{
+        const auto path=QFileDialog::getOpenFileName(this,QStringLiteral("导入外部提案（来源未核验）"),{},"JSON (*.json)");
+        if(path.isEmpty())return;QFile file(path);
+        if(!QFileInfo(path).isFile()||!file.open(QIODevice::ReadOnly)||file.size()>65536){appendLog(QStringLiteral("提案文件无法读取或超过64KiB。"));return;}
+        const auto data=file.read(65537);if(data.size()>65536){appendLog(QStringLiteral("提案超过64KiB。"));return;}emit importProposalRequested(data);
+    });
+    connect(m_confirmProposal,&QPushButton::clicked,this,&MainWindow::confirmProposalRequested);
+    connect(discard,&QPushButton::clicked,this,&MainWindow::discardProposalRequested);
+    layout->addWidget(proposals,2);return withTitle(QStringLiteral("原生属性与提案"),body);
+}
+void MainWindow::showProposal(const QString &summary,bool pending) {
+    m_hasProposal=pending;m_proposalSummary->setPlainText(summary.isEmpty()?QStringLiteral("尚无待确认提案。"):summary);
+    m_confirmProposal->setEnabled(pending&&m_hasDocument&&m_editorReady&&!m_editorBusy);
 }
 QWidget *MainWindow::buildTaskPanel() {
     m_taskLog = new QPlainTextEdit; m_taskLog->setReadOnly(true); m_taskLog->setMaximumBlockCount(2000);
@@ -251,6 +279,9 @@ void MainWindow::appendLog(const QString &line) { m_taskLog->appendPlainText(lin
 void MainWindow::setEditorState(bool ready,bool busy,bool canUndo,bool canRedo) {
     const bool readinessChanged=m_editorReady!=ready;
     m_editorReady=ready;m_editorBusy=busy;
+    m_generateProposal->setEnabled(m_hasDocument&&ready&&!busy);
+    m_importProposal->setEnabled(m_hasDocument&&ready&&!busy);
+    m_confirmProposal->setEnabled(m_hasProposal&&m_hasDocument&&ready&&!busy);
     m_exportAction->setEnabled(m_hasDocument&&ready&&!busy&&!m_exportActive);
     m_inspectorTable->setEnabled(ready&&!busy);
     m_undoAction->setEnabled(ready&&!busy&&canUndo);m_redoAction->setEnabled(ready&&!busy&&canRedo);
@@ -291,6 +322,7 @@ void MainWindow::sourceDialog() {
 }
 void MainWindow::showDocument(const domain::Project &project) {
     m_hasDocument=true;
+    m_generateProposal->setEnabled(m_editorReady&&!m_editorBusy);m_importProposal->setEnabled(m_editorReady&&!m_editorBusy);
     m_exportAction->setEnabled(m_editorReady&&!m_editorBusy&&!m_exportActive);
     setWindowTitle(QStringLiteral("%1 — Qt 视频工作台").arg(project.name));
     m_documentTitle->setText(QStringLiteral("%1\n模板：%2").arg(project.name,project.templateId));
@@ -306,6 +338,7 @@ void MainWindow::showDocument(const domain::Project &project) {
 }
 void MainWindow::clearDocument() {
     m_hasDocument=false;m_exportAction->setEnabled(false);
+    m_generateProposal->setEnabled(false);m_importProposal->setEnabled(false);showProposal({},false);
     setWindowTitle(QStringLiteral("Qt 视频工作台"));
     m_documentTitle->setText(QStringLiteral("新建标题卡工程，或打开已保存的工程。"));
     m_assetTree->clear(); m_saveAction->setEnabled(false); m_importAction->setEnabled(false);

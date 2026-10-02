@@ -1,0 +1,40 @@
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  0%] Built target qvw_infra_autogen_timestamp_deps
+[  4%] Built target qvw_domain_autogen
+[  9%] Built target qvw_infra_autogen
+[ 28%] Built target qvw_domain
+[ 47%] Built target qvw_infra
+[ 47%] Built target qvw_services_autogen_timestamp_deps
+[ 52%] Built target qvw_services_autogen
+[ 85%] Built target qvw_services
+[ 85%] Built target proposal_service_test_autogen_timestamp_deps
+[ 90%] Automatic MOC for target proposal_service_test
+[ 90%] Built target proposal_service_test_autogen
+[ 95%] Building CXX object tests/CMakeFiles/proposal_service_test.dir/unit/ProposalServiceTest.cpp.o
+/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp:34:102: warning: ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]
+   34 |     QDir(p.rootPath).mkpath(QFileInfo(relative).path());QFile f(QDir(p.rootPath).filePath(relative));f.open(QIODevice::WriteOnly);f.write("image");
+      |                                                                                                      ^~~~~~ ~~~~~~~~~~~~~~~~~~~~
+1 warning generated.
+[ 95%] Linking CXX executable proposal_service_test
+[100%] Built target proposal_service_test
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  0%] Built target qvw_infra_autogen_timestamp_deps
+[  3%] Built target qvw_domain_autogen
+[  6%] Built target qvw_infra_autogen
+[ 18%] Built target qvw_domain
+[ 31%] Built target qvw_infra
+[ 31%] Built target qvw_backend_autogen_timestamp_deps
+[ 31%] Built target qvw_services_autogen_timestamp_deps
+[ 34%] Built target qvw_backend_autogen
+[ 37%] Built target qvw_services_autogen
+[ 50%] Built target qvw_backend
+[ 71%] Built target qvw_services
+[ 71%] Built target qvw_controllers_autogen_timestamp_deps
+[ 75%] Built target qvw_controllers_autogen
+[ 90%] Built target qvw_controllers
+[ 90%] Built target proposal_controller_test_autogen_timestamp_deps
+[ 93%] Automatic MOC for target proposal_controller_test
+[ 93%] Built target proposal_controller_test_autogen
+[ 93%] Building CXX object tests/CMakeFiles/proposal_controller_test.dir/unit/ProposalControllerTest.cpp.o
+[ 96%] Linking CXX executable proposal_controller_test
+[100%] Built target proposal_controller_test

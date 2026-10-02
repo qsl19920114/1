@@ -1,0 +1,12 @@
+{
+    "confirmedThroughRealEditor": true,
+    "imageWhitelist": true,
+    "ownedStudioStopped": true,
+    "provider": "local-demo-simulated",
+    "realModelVerified": false,
+    "screenshots": false,
+    "staleProposalInvalidated": true,
+    "unchangedBeforeConfirmation": true,
+    "undo": true,
+    "verdict": "PASS"
+}

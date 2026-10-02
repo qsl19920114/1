@@ -58,7 +58,15 @@
     },
     "G5": {
       "milestone": "M5",
-      "verdict": "NOT_REACHED"
+      "verdict": "PASS",
+      "definition": "受约束提案核对/确认，共同编辑链，越权/过期拦截，模拟和真实模型分清",
+      "reason": "严格schema、来源覆盖与工程绑定负向测试通过；真实Studio确认前源码不变，确认标题/图片回读与撤销，外部编辑失效；仅本地模拟生成，真实模型未配置。",
+      "evidence": [
+        "docs/evidence/m5/ctest-final.log",
+        "docs/evidence/m5/e2e.json",
+        "docs/evidence/m5/quality-review.json"
+      ],
+      "realModel": "NOT_CONFIGURED_NOT_VERIFIED"
     },
     "G6": {
       "milestone": "M6",
@@ -556,46 +564,61 @@
       "id": "T025",
       "milestone": "M5",
       "title": "受约束单操作 EditProposal 与严格校验",
-      "status": "pending",
+      "status": "done",
       "dependsOn": [
         "T024"
       ],
       "acceptance": [
         "Schema白名单、当前可写字段/类型、图片仅登记素材",
         "拒绝畸形、越权、Source/Shell及过期输入"
+      ],
+      "evidence": [
+        "docs/evidence/m5/ctest-final.log",
+        "docs/evidence/m5/e2e.json",
+        "docs/evidence/m5/quality-review.json"
       ]
     },
     {
       "id": "T026",
       "milestone": "M5",
       "title": "原生确认提案与共同执行链",
-      "status": "pending",
+      "status": "done",
       "dependsOn": [
         "T025"
       ],
       "acceptance": [
         "确认前不修改，确认时核对版本/指纹",
         "关闭重开和快照变化失效，成功进入已有历史"
+      ],
+      "evidence": [
+        "docs/evidence/m5/ctest-final.log",
+        "docs/evidence/m5/e2e.json",
+        "docs/evidence/m5/quality-review.json"
       ]
     },
     {
       "id": "T027",
       "milestone": "M5",
       "title": "可替换 Provider 与明确模拟演示",
-      "status": "pending",
+      "status": "done",
       "dependsOn": [
         "T026"
       ],
       "acceptance": [
         "标题/颜色/已导入图片的模拟提案标注",
         "外部JSON来源未核验，真实模型未配置不宣称接入"
+      ],
+      "evidence": [
+        "docs/evidence/m5/ctest-final.log",
+        "docs/evidence/m5/e2e.json",
+        "docs/evidence/m5/quality-review.json"
       ]
     },
     {
       "id": "T028",
       "milestone": "M5",
       "title": "提案负向与真实确认撤销验证",
-      "status": "pending",
+      "status": "done",
       "dependsOn": [
         "T027"
       ],
@@ -603,7 +626,12 @@
         "真实Studio确认前源码不变，确认后回读及撤销",
         "模拟与真实执行证据分开"
       ],
-      "gate": "G5"
+      "gate": "G5",
+      "evidence": [
+        "docs/evidence/m5/ctest-final.log",
+        "docs/evidence/m5/e2e.json",
+        "docs/evidence/m5/quality-review.json"
+      ]
     },
     {
       "id": "T029",

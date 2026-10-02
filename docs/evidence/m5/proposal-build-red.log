@@ -1,0 +1,21 @@
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  0%] Built target qvw_infra_autogen_timestamp_deps
+[  3%] Built target qvw_domain_autogen
+[  6%] Built target qvw_infra_autogen
+[ 18%] Built target qvw_domain
+[ 31%] Built target qvw_infra
+[ 31%] Built target qvw_backend_autogen_timestamp_deps
+[ 31%] Built target qvw_services_autogen_timestamp_deps
+[ 34%] Built target qvw_backend_autogen
+[ 37%] Built target qvw_services_autogen
+[ 59%] Built target qvw_services
+[ 71%] Built target qvw_backend
+[ 71%] Built target qvw_controllers_autogen_timestamp_deps
+[ 75%] Built target qvw_controllers_autogen
+[ 90%] Built target qvw_controllers
+[ 90%] Built target proposal_controller_test_autogen_timestamp_deps
+[ 93%] Automatic MOC for target proposal_controller_test
+[ 93%] Built target proposal_controller_test_autogen
+[ 93%] Building CXX object tests/CMakeFiles/proposal_controller_test.dir/unit/ProposalControllerTest.cpp.o
+[ 96%] Linking CXX executable proposal_controller_test
+[100%] Built target proposal_controller_test

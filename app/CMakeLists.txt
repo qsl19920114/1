@@ -8,6 +8,7 @@
 add_library(qvw_domain STATIC
   domain/InspectorField.cpp
   domain/Snapshot.cpp
+  domain/EditProposal.cpp
 )
 target_include_directories(qvw_domain PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(qvw_domain PUBLIC Qt6::Core)
@@ -33,7 +34,7 @@ add_library(qvw_infra STATIC
 target_include_directories(qvw_infra PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(qvw_infra PUBLIC Qt6::Core)
 
-add_library(qvw_services STATIC services/ProjectStore.cpp services/AssetService.cpp services/SourceEditGuard.cpp services/ExportWorkspace.cpp services/MediaValidation.cpp)
+add_library(qvw_services STATIC services/ProjectStore.cpp services/AssetService.cpp services/SourceEditGuard.cpp services/ExportWorkspace.cpp services/MediaValidation.cpp services/ProposalService.cpp services/ProposalProvider.cpp)
 target_include_directories(qvw_services PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(qvw_services PUBLIC qvw_domain qvw_infra Qt6::Gui)
 
@@ -45,7 +46,7 @@ add_library(qvw_ui STATIC
 target_include_directories(qvw_ui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(qvw_ui PUBLIC qvw_domain Qt6::Widgets Qt6::WebEngineWidgets)
 
-add_library(qvw_controllers STATIC controllers/ProjectController.cpp controllers/DocumentController.cpp controllers/EditorController.cpp controllers/ExportController.cpp)
+add_library(qvw_controllers STATIC controllers/ProjectController.cpp controllers/DocumentController.cpp controllers/EditorController.cpp controllers/ExportController.cpp controllers/ProposalController.cpp)
 target_include_directories(qvw_controllers PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(qvw_controllers PUBLIC qvw_backend qvw_infra qvw_services)
 

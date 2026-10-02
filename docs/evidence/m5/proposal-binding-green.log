@@ -1,0 +1,107 @@
+UpdateCTestConfiguration  from :/tmp/qvw-m5-proposal-build/DartConfiguration.tcl
+Parse Config file:/tmp/qvw-m5-proposal-build/DartConfiguration.tcl
+Test project /tmp/qvw-m5-proposal-build
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 16
+    Start 16: proposal_service
+
+16: Test command: /tmp/qvw-m5-proposal-build/tests/proposal_service_test
+16: Working Directory: /tmp/qvw-m5-proposal-build/tests
+16: Test timeout computed to be: 1500
+16: ********* Start testing of ProposalServiceTest *********
+16: Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+16: PASS   : ProposalServiceTest::initTestCase()
+16: PASS   : ProposalServiceTest::strictRoundTripOverridesSelfClaimedOrigin()
+16: PASS   : ProposalServiceTest::schemaFailures(missing-entityId)
+16: PASS   : ProposalServiceTest::schemaFailures(missing-fieldId)
+16: PASS   : ProposalServiceTest::schemaFailures(missing-format)
+16: PASS   : ProposalServiceTest::schemaFailures(missing-origin)
+16: PASS   : ProposalServiceTest::schemaFailures(missing-revision)
+16: PASS   : ProposalServiceTest::schemaFailures(missing-sourceFingerprint)
+16: PASS   : ProposalServiceTest::schemaFailures(missing-value)
+16: PASS   : ProposalServiceTest::schemaFailures(unknown-operations)
+16: PASS   : ProposalServiceTest::schemaFailures(unknown-Source)
+16: PASS   : ProposalServiceTest::schemaFailures(unknown-Shell)
+16: PASS   : ProposalServiceTest::schemaFailures(unknown-path)
+16: PASS   : ProposalServiceTest::schemaFailures(unknown-extra)
+16: PASS   : ProposalServiceTest::schemaFailures(type-format)
+16: PASS   : ProposalServiceTest::schemaFailures(type-sourceFingerprint)
+16: PASS   : ProposalServiceTest::schemaFailures(type-entityId)
+16: PASS   : ProposalServiceTest::schemaFailures(type-fieldId)
+16: PASS   : ProposalServiceTest::schemaFailures(type-origin)
+16: PASS   : ProposalServiceTest::schemaFailures(revision-[
+16:     -1
+16: ]
+16: )
+16: PASS   : ProposalServiceTest::schemaFailures(revision-[
+16:     1.2
+16: ]
+16: )
+16: PASS   : ProposalServiceTest::schemaFailures(revision-[
+16:     "7"
+16: ]
+16: )
+16: PASS   : ProposalServiceTest::schemaFailures(revision-[
+16:     2147483648
+16: ]
+16: )
+16: PASS   : ProposalServiceTest::schemaFailures(format)
+16: PASS   : ProposalServiceTest::schemaFailures(fingerprint)
+16: PASS   : ProposalServiceTest::schemaFailures(empty-entity)
+16: PASS   : ProposalServiceTest::schemaFailures(long-field)
+16: PASS   : ProposalServiceTest::schemaFailures(long-origin)
+16: PASS   : ProposalServiceTest::schemaFailures(invalid-value-5)
+16: PASS   : ProposalServiceTest::schemaFailures(invalid-value-4)
+16: PASS   : ProposalServiceTest::schemaFailures(invalid-value-0)
+16: PASS   : ProposalServiceTest::schemaFailures(invalid-value-3)
+16: PASS   : ProposalServiceTest::schemaFailures(array)
+16: PASS   : ProposalServiceTest::schemaFailures(malformed)
+16: PASS   : ProposalServiceTest::schemaFailures(over-64k)
+16: PASS   : ProposalServiceTest::validatesCurrentWritableFieldAndVersion()
+16: PASS   : ProposalServiceTest::numberBooleanSelectAndColorAreTyped()
+16: PASS   : ProposalServiceTest::numberControlCannotCoerceBooleanCurrentValue()
+16: PASS   : ProposalServiceTest::imageMustBeRegisteredExistingAndSafe()
+16: PASS   : ProposalServiceTest::demoUsesDeclaredBindingsAndLabelsSimulation()
+16: PASS   : ProposalServiceTest::cleanupTestCase()
+16: Totals: 41 passed, 0 failed, 0 skipped, 0 blacklisted, 16ms
+16: ********* Finished testing of ProposalServiceTest *********
+1/2 Test #16: proposal_service .................   Passed    0.69 sec
+test 17
+    Start 17: proposal_controller
+
+17: Test command: /tmp/qvw-m5-proposal-build/tests/proposal_controller_test
+17: Working Directory: /tmp/qvw-m5-proposal-build/tests
+17: Test timeout computed to be: 1500
+17: ********* Start testing of ProposalControllerTest *********
+17: Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+17: PASS   : ProposalControllerTest::initTestCase()
+17: PASS   : ProposalControllerTest::confirmationUsesEditorHistoryAndNeverWritesEarly()
+17: PASS   : ProposalControllerTest::importedJsonAlwaysHasUnverifiedOrigin()
+17: PASS   : ProposalControllerTest::snapshotChangeProjectSwitchAndCloseInvalidate()
+17: PASS   : ProposalControllerTest::malformedStaleReadonlyAndMissingProjectCannotPropose()
+17: PASS   : ProposalControllerTest::anotherProjectCannotReuseEditorsVersionAndFingerprint()
+17: PASS   : ProposalControllerTest::busyCreationAndConfirmationCannotWrite()
+17: PASS   : ProposalControllerTest::unreadyStateInvalidatesEvenWhenOldSnapshotIsRetained()
+17: PASS   : ProposalControllerTest::imageRemovedBeforeConfirmationIsRejected()
+17: PASS   : ProposalControllerTest::reentrantClearOnConsumedSignalPreventsConfirmation()
+17: PASS   : ProposalControllerTest::reentrantSnapshotOnConsumedSignalPreventsConfirmation()
+17: PASS   : ProposalControllerTest::providerCannotPublishAfterReentrantCloseOrChooseDemoOrigin()
+17: PASS   : ProposalControllerTest::editorConflictAndRejectionRemainEditorFailures(409)
+17: PASS   : ProposalControllerTest::editorConflictAndRejectionRemainEditorFailures(422)
+17: PASS   : ProposalControllerTest::cleanupTestCase()
+17: Totals: 15 passed, 0 failed, 0 skipped, 0 blacklisted, 596ms
+17: ********* Finished testing of ProposalControllerTest *********
+2/2 Test #17: proposal_controller ..............   Passed    1.12 sec
+
+The following tests passed:
+	proposal_service
+	proposal_controller
+
+100% tests passed out of 2
+
+Total Test time (real) =   1.87 sec

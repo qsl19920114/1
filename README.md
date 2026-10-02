@@ -1,6 +1,6 @@
 # Qt 视频创作工作台
 
-Qt 6 Widgets 视频工程应用。版本 **0.5.0 / M4**：原创图片标题卡、工程和素材管理、原生属性编辑、撤销/重做、受保护源码编辑，真实 Studio 预览，以及经过媒体校验的 MP4 导出。进度见 [STATUS.md](STATUS.md)。
+Qt 6 Widgets 视频工程应用。版本 **0.6.0 / M5**：原创图片标题卡、工程和素材管理、原生属性编辑、撤销/重做、受保护源码编辑，真实 Studio 预览，以及经过媒体校验的 MP4 导出。进度见 [STATUS.md](STATUS.md)。
 
 ## 构建与启动
 
@@ -37,6 +37,14 @@ cmake --build build -j4
 
 “打开 Run…”保留高级入口，选择既有 `.svrun`、workspace 和本地 Runtime。命令行对应 `--run`、`--workspace`、`--runtime`；与 `--project`、离线 `--session` 互斥。
 
+## 编辑提案
+
+右侧“编辑提案 · 本地模拟”支持 `标题改为校园摄影社`、`主题色改为#e47735`、`图片使用第1张`。生成后核对当前值、拟修改值及来源，再点击“确认修改”；放弃或过期提案不修改工程。确认写入与原生编辑共用控制器，成功后可撤销。
+
+可导入64KiB以内的单项提案JSON。Schema为 `qvw.edit-proposal@1`，必须包含当前revision、sourceFingerprint（SHA256的64个十六进制字符）、真实entityId/fieldId、简单值及origin。来源由导入入口确定；JSON自称“真实模型”不能提高可信度。未知键、多项操作、Source/Shell、不可写字段、过期版本和工程外图片均拒绝。
+
+默认Provider为本地受限规则演示，界面明确标“模拟”；未发模型请求。真实模型为可选扩展，本轮未配置、未验收。
+
 ## 工程、素材与配置
 
 - 清单仅存元数据与工程内相对路径；源文件仍是编辑事实，不维护第二套时间线。
@@ -56,6 +64,7 @@ node --test tests/template/title-card.test.mjs
 ./build/tests/project_e2e_test
 ./build/tests/editor_e2e_test
 ./build/tests/export_e2e_test
+./build/tests/proposal_e2e_test
 ```
 
 各项 E2E 需本机监听端口权限及实际 Hypit 依赖。工程测试覆盖创建、导入、迁移重开；编辑测试覆盖原生写入、数值转换、撤销/重做、真实409/422、源码恢复及重开一致。它们核对编译预览与实际图片响应，不依赖截图。

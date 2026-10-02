@@ -1,6 +1,6 @@
 # M6 本机许可证输入盘点
 
-日期：2026-10-02。仅做本地文件、缓存 bottle 清单、Mach-O 链接和 Qt WebEngine 资源的只读研究；没有下载、构建、运行 Qt 应用、复制许可到发布包或修改上游。本文记录可用材料和缺口，**不表示公开分发授权审核通过**。
+日期：2026-10-02。仅做本地文件、缓存 bottle 清单、Mach-O 链接、Qt WebEngine 资源及官方网站/固定版本源码的只读研究；没有下载源码归档或发布包、构建、运行 Qt 应用、复制许可到发布包或修改上游。本文记录可用材料、官方收集地址和缺口，**不表示公开分发授权审核通过**。
 
 ## 1. 本机材料能否收齐
 
@@ -8,11 +8,11 @@
 
 目前不能据此声称所有材料完整。主要缺口为：
 
-1. **Qt 6.11.2 所含 Chromium 的完整多组件 notices 未找到。** QtWebEngine 的 SBOM 明确注明其消费的第三方依赖未列全。仅顶层 LICENSE.Chromium 或其他浏览器的 notices 无法补成准确清单。
+1. **本机未找到 Qt 6.11.2 所含 Chromium 的完整多组件 notices。** QtWebEngine 的 SBOM 明确注明其消费的第三方依赖未列全。官方 Qt 6.11.2 文档现已核对有多组件归属索引及全文页面，后续可按第 3 节收集；本次还未复制这些页面形成发布输入。仅顶层 LICENSE.Chromium 或其他浏览器的 notices 无法补成准确清单。
 2. **FreeType 2.14.3 的 FTL.TXT/GPLv2.TXT 及部分模块许可未随本机 bottle 安装。** `LICENSE.TXT` 是许可选择说明，引用这些文件；不能把说明文件当作所有被引用文本均已复制。
 3. 若最终需要按许可条件提供相应源码、构建材料或其他说明，本机的已安装二进制/bottle/SBOM 本身不能作为这些源码材料已具备的证据。
 
-后续优先实际尝试 QtWebEngine 内置 credits 页面取证；不可用时记录缺口，按对应 Qt/Chromium 版本从官方源码补齐。FreeType 可以后续从官方 2.14.3 源码收集。本研究不执行这些下载或取证运行。
+固定 Qt 源码已确认版本页面为 `chrome://qt/`，WebUI 工厂未注册 credits 页面。后续按官方 Qt 6.11.2 许可索引收集归属页面，不需要为此给生产应用增加内页提取入口。FreeType 可以后续按官方镜像的 `VER-2-14-3` tag 收集缺失的小文件，第 5 节列有已核对地址。本研究不执行这些收集或 Qt 运行取证。
 
 ## 2. Qt 模块范围与材料
 
@@ -64,34 +64,55 @@ LGPLv3 本身明确包含 GPLv3 的条款并加补充许可，因此不能只复
 
 PAK 的当前本机格式为 version 5；条目表使用 little endian uint16 ID + uint32 offset。Brotli 条目以 `1e 9b` 开头，随后 6 bytes little endian 的未压缩长度，数据从 offset 8 开始。本次用本机 libbrotlidec 对每条资源解码，只检查内容，没有修改或导出 PAK。
 
-本机 QtWebEngineCore Mach-O 中未找到原样 `chrome://credits`、`CreditsUI`、`ChromeUICredits`、`credits.html` 或 `license.html` 字符串；Headers/share/probes 中也未发现该入口的已验证契约。这些负向搜索**不能证明页面一定不可用**，但目前没有足够证据承诺它存在。
+本机 QtWebEngineCore Mach-O 中未找到原样 `chrome://credits`、`CreditsUI`、`ChromeUICredits`、`credits.html` 或 `license.html` 字符串；Headers/share/probes 中也未发现该入口的已验证契约。负向字符串搜索本身不能证明页面一定不可用；下述固定版本源码进一步说明了 Qt 注册的实际入口。
 
 本机其他完整 notices 来源及限制：
 
 - `~/.cache/hyperframes/chrome/chrome-headless-shell/mac_arm-152.0.7928.2/chrome-headless-shell-mac-arm64/LICENSE.headless_shell`：1855737 bytes、34832 行；SHA-256 `fa3c4920c528c1cb14b4bfb480b1e8a71add17585b4776ce1f258cd14587b00b`。属于外部 Chrome Headless Shell 152.0.7928.2，不能替代 Qt 内部 Chromium 的准确版本/组件 notices。
 - `/Applications/Visual Studio Code.app/Contents/Resources/LICENSES.chromium.html`：19926309 bytes；以及 Trae CN 的同名文件：15101917 bytes。属于各自应用的 Chromium 分发，不能直接贴成 Qt 6.11.2 notices。
 
-### 后续由 root 执行的真实取证方案
+### 固定 Qt 6.11.2 的内页与源码对象
 
-使用**本机 Qt 6.11.2 的 QWebEnginePage**，保持 renderer/helper 正常运行，不使用外部 Chrome：
+以下源码链接均固定到 `v6.11.2`，Chromium 子仓库固定到该 tag 的 gitlink 对象 `5170777d28bee1ce92cc693a0dbf2ad01492e5cf`：
 
-1. 记录 `qVersion()`、`qWebEngineVersion()`、`qWebEngineChromiumVersion()`、`qWebEngineChromiumSecurityPatchVersion()`；后三个函数已在本机 `QtWebEngineCore.framework/Headers/qtwebenginecoreglobal.h:23–26` 核对存在。
-2. 连接 `QWebEnginePage::loadingChanged`，记录 status、URL、errorDomain、errorCode、errorString；设置有界超时，再 `load(QUrl("chrome://credits/"))`。
-3. 在成功加载后用 `runJavaScript` 取 `{url:location.href,title:document.title,text:document.body.innerText}`，并用 `toHtml` 保存原始 HTML。QWebEnginePage 本机头文件已核对这两个 API 与 loadFinished/loadingChanged。
-4. 验证最终 URL 确为请求的内置 credits 页面，内容不是空白、通用错误页、重定向页或只有 Chromium 顶层版权。记录字节数、文本 SHA-256、组件标题数量和多种完整许可文本的存在；对少量开头/中间/结尾内容人工核对。仅 `loadFinished(true)` 不能证明 notices 完整。
-5. 成功时按实际内置页面导出 body.innerText + HTML，并记录它对应本机 Qt/Chromium 版本。失败时把 URL、错误码、正文及退出码作为“不可用/未取得”的证据，继续保留缺口；不能用外部浏览器 notices 把该步骤标为通过。
+- [WebUI 工厂](https://code.qt.io/cgit/qt/qtwebengine.git/plain/src/core/net/webui_controller_factory_qt.cpp?h=v6.11.2) 的 `GetWebUIFactoryFunction` 注册 `VersionUIQt` 以及若干内部诊断页面，未注册 `CreditsUI` 或 credits host，未匹配页面返回空 factory。
+- [Chromium URL 常量](https://code.qt.io/cgit/qt/qtwebengine-chromium.git/plain/chromium/chrome/common/webui_url_constants.h?id=5170777d28bee1ce92cc693a0dbf2ad01492e5cf) 将 `kChromeUIVersionQtHost` 定义为 `qt`，因此对应页面为 `chrome://qt/`。
+- [VersionUIQt 实现](https://code.qt.io/cgit/qt/qtwebengine.git/plain/src/core/net/version_ui_qt.cpp?h=v6.11.2) 提供 Qt WebEngine、Chromium、security patch、V8 和命令行等版本信息；它不是多组件 notices 页面。
+- [固定 Chromium 的 VERSION](https://code.qt.io/cgit/qt/qtwebengine-chromium.git/plain/chromium/chrome/VERSION?id=5170777d28bee1ce92cc693a0dbf2ad01492e5cf) 为 `140.0.7339.225`。这是已读源码对象的 base version；本机运行库的版本和 security patch 信息仍应由运行时 API 单独记录，不能将源码记录写成已完成运行取证。
 
-JavaScript 取证表达式：
+后续记录本机 `qVersion()`、`qWebEngineVersion()`、`qWebEngineChromiumVersion()`、`qWebEngineChromiumSecurityPatchVersion()` 即可固定实际二进制对象。后三个函数已在本机 `QtWebEngineCore.framework/Headers/qtwebenginecoreglobal.h:23–26` 核对存在。若另做 `chrome://credits/` 探索，应使用本机 Qt 的 `QWebEnginePage`，记录实际加载错误和正文，不能使用外部 Chrome 代替；它不是此次归属文件收集的必要步骤。
 
-```javascript
-JSON.stringify({
-  url: location.href,
-  title: document.title,
-  text: document.body ? document.body.innerText : ""
-})
-```
+### 官方已发布的 Qt 6.11.2 多组件归属页面
 
-如内页不存在，后续精确源码收集应依据上述 API 实际报告的 Chromium 版本、Qt 6.11.2 的源代码版本与构建信息，不能使用浏览器 152 的版本替代。当前研究没有执行该内页加载或导出。
+已实际访问 [Qt WebEngine Licensing](https://doc.qt.io/qt-6.11/qtwebengine-licensing.html)，其页面 title 明确为 **Qt WebEngine Licensing | Qt WebEngine | Qt 6.11.2**。2026-10-02 的索引有 **187 个包含组件链接的表格行、126 个去重后的 `qtwebengine-3rdparty-*.html` URL**。同名/重复组件行应保留在原始索引中；不要按组件显示名称删去许可不同的内容。
+
+抽查结果：
+
+| 官方归属页面 | 实际内容 |
+|---|---|
+| [Chromium License](https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-chromium-global.html) | 单个 Chromium 总 BSD 文本，`pre` 1535 字符；不是所有组件的合并 credits |
+| [The Chromium Project](https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-the-chromium-project.html) | 单个 Chromium 总 BSD 文本，`pre` 1545 字符；也不是所有组件的合并 credits |
+| [BoringSSL](https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-boringssl.html) | 13328 字符的许可 `pre`，含 Apache 2.0 及其他许可段落 |
+| [WebKit](https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-webkit.html) | 51928 字符的许可 `pre`，含版权、BSD 和 GNU 文本 |
+| [ffmpeg](https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-ffmpeg.html) | 45454 字符的许可 `pre`；这是 Qt Chromium 中该组件的材料，与外部 Homebrew FFmpeg 分开记录 |
+
+最小后续收集方法：
+
+1. 用 `curl --fail --location` 保存上述 licensing 原始 HTML，记录最终 URL、收集时间、字节数、SHA-256 和文档 patch title。
+2. 解析该 HTML 的链接，解析相对 URL 后仅保留匹配 `https://doc.qt.io/qt-6.11/qtwebengine-3rdparty-[^/?#]+.html` 的 URL；按 URL 去重，保存每个页面的原始 HTML，沿用原 basename，生成 source URL/hash 索引。当前参考数量为 126；数量或 title 变化时应先核对原因。
+3. 对所有页面检查请求成功、存在许可内容和 Qt 6.11.2 title，并抽查上述三份较长的多许可页面；仅 HTTP 200 不能排除通用错误页。将原索引及 126 份页面一起保留，使本地相对组件链接可访问。
+4. 完整官方索引覆盖多平台文档材料，不能据此声称每个组件都在本机 macOS 二进制里。它可以提供版本对应的归属材料集合；本机实际部署组件与版本仍根据最终 Mach-O/SBOM/运行信息记录。本次没有重新生成本机构建的 GN 依赖清单，因此不宣称此索引是本机精确闭包。
+5. HTML 中有源码生成时已有的实体文字，例如 WebKit 的 `&#x27;`。保留原始 HTML 为证据；若附加纯文本，应记录提取和实体解码过程，保留原始文件，不静默修改许可证正文。
+
+这些 HTML 的页脚另有 Qt 文档自身的 GFDL 1.3 声明。保存整页时保留页脚及来源，并把配套 [GNU FDL 1.3 原文](https://www.gnu.org/licenses/fdl-1.3.txt) 作为文档材料输入；该文档声明与各组件许可分别记录，不作为 Qt 二进制许可选择。
+
+### 官方生成机制与准确性边界
+
+- [Qt API 的 CMakeLists](https://code.qt.io/cgit/qt/qtwebengine.git/plain/src/core/api/CMakeLists.txt?h=v6.11.2) 调用 `add_code_attributions_target`，目标为 `generate_chromium_attributions`，输出 `chromium_attributions.qdoc`，GN target 为 `:QtWebEngineCore`，依赖 `run_core_GnDone`。
+- [QtGnCredits.cmake](https://code.qt.io/cgit/qt/qtwebengine.git/plain/cmake/QtGnCredits.cmake?h=v6.11.2) 调用 Chromium `tools/licenses/licenses.py` 的 `credits` 命令，显式传入文件/条目模板、GN binary、GN target、GN out directory 和额外 third-party directories。
+- [Qt 条目模板](https://code.qt.io/cgit/qt/qtwebengine.git/plain/src/core/doc/about_credits_entry.tmpl?h=v6.11.2) 生成 `qtwebengine-3rdparty-<name>.html` 的 QDoc attribution 页面，将组件名称、来源、许可类型和完整许可正文写入 `badcode`。文件模板只是汇总 entries；生成的归属页面与运行时 `chrome://credits/` 是不同产物。
+- [固定版本 licenses.py](https://code.qt.io/cgit/qt/qtwebengine-chromium.git/plain/chromium/tools/licenses/licenses.py?id=5170777d28bee1ce92cc693a0dbf2ad01492e5cf) 从 README.chromium 等元数据引用的实际 License File 读取正文，加入 Chromium 顶层 LICENSE，跳过 `Shipped: no`，仅在名称和生成内容均相同时跳过重复项。传 GN target 时通过 GN 依赖选目录；解析某目录许可元数据出错时脚本也有跳过分支。因此官方生成机制及页面取得均不自动证明本机构建所有许可义务已处理。
+- [QtWebEngineSbomHelpers.cmake](https://code.qt.io/cgit/qt/qtwebengine.git/plain/cmake/QtWebEngineSbomHelpers.cmake?h=v6.11.2) 另有 Chromium SPDX 生成和安装路径；缺 `spdx-tools` 时可以跳过 Chromium SBOM。它解释了 Qt 模块 SBOM 与完整 Chromium 材料不能直接等同的原因。
 
 ## 4. 候选 Homebrew dylib 的复制输入
 
@@ -148,6 +169,29 @@ JSON.stringify({
 
 外部 Headless Shell 的 LICENSE.headless_shell:9203 起有完整通用 FreeType Project LICENSE（2006-Jan-27）；它可以提供“本机有该文本”的线索，但不证明已覆盖此 FreeType 2.14.3 构建及其模块归属。最终建议从对应 2.14.3 官方源码收集上述文件，并在索引中记录实际来源。
 
+### 已核对的官方 tag 原文地址
+
+[FreeType 下载说明](https://freetype.org/download.html) 指向其 GitLab 主仓库；本次访问 GitLab 时出现 Anubis 人机验证，未尝试绕过。[freetype/freetype 的 GitHub 仓库](https://github.com/freetype/freetype/tree/VER-2-14-3) 自述为该仓库的官方镜像，`VER-2-14-3` 的 README 明确标识 FreeType 2.14.3。下面的文件均已在该 tag 的 GitHub 文件页核对实际存在、能读取完整内容，并取得原始文件链接；不是依据文件名猜出的路径。
+
+| 原文件路径 | 对应版本原文 URL |
+|---|---|
+| LICENSE.TXT | [raw LICENSE.TXT](https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/LICENSE.TXT) |
+| docs/FTL.TXT | [raw FTL.TXT](https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/docs/FTL.TXT) |
+| docs/GPLv2.TXT | [raw GPLv2.TXT](https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/docs/GPLv2.TXT) |
+| src/bdf/README | [raw BDF README](https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/src/bdf/README) |
+| src/pcf/README | [raw PCF README](https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/src/pcf/README) |
+| src/gzip/zlib.h | [raw zlib.h](https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/src/gzip/zlib.h) |
+| src/base/fthash.c | [raw fthash.c](https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/src/base/fthash.c) |
+| include/freetype/internal/fthash.h | [raw fthash.h](https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/include/freetype/internal/fthash.h) |
+| src/autofit/ft-hb-ft.c | [raw ft-hb-ft.c](https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/src/autofit/ft-hb-ft.c) |
+| src/autofit/ft-hb-decls.h | [raw ft-hb-decls.h](https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/src/autofit/ft-hb-decls.h) |
+| src/autofit/ft-hb-types.h | [raw ft-hb-types.h](https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/src/autofit/ft-hb-types.h) |
+| src/autofit/hb-script-list.h | [raw hb-script-list.h](https://raw.githubusercontent.com/freetype/freetype/VER-2-14-3/src/autofit/hb-script-list.h) |
+
+FTL 原文为 2006-Jan-27 的全文，包含指定的文档归属格式和完整分发条件；收集时原样保留，而不是从另一浏览器截取一个同名段落。BDF/PCF README、fthash 源文件和四份 HarfBuzz 来源文件保留具体作者版权与许可段落；`zlib.h` 的开头保留 zlib 版权与条件。为减少手动截取遗漏，后续可直接保存这些小文件的完整原文及对应原目录层级，它们不构成下载整个 FreeType 源码包。
+
+本次 `raw.githubusercontent.com` 的 LICENSE.TXT 导航能显示全文，但同域 `page.fetch` 曾失败；其他条目通过 GitHub 文件页读取并核对 raw 链接。后续收集脚本仍须逐项验证原文下载成功、内容完整、hash 及来源，并将失败留作实际缺口。仅列出上述 URL 不表示已收齐发布材料，也不表示为 FreeType 的双许可作了选择。
+
 ## 6. 最小后续复制方案
 
 这是给 root 后续收集脚本的输入建议，不是已执行步骤：
@@ -161,11 +205,16 @@ Contents/Resources/licenses/
   GNU/LGPL-2.1.txt            # 本机 GLib 通用文本
   Qt/6.11.2/LICENSE.Chromium  # 顶层文本；明确不是所有 notices
   Qt/6.11.2/sbom/             # 实际部署模块的 Qt SPDX 与 Homebrew SBOM
-  Qt/6.11.2/Chromium-notices.txt/html  # 仅真实取证/准确来源取得后放入
+  Qt/6.11.2/attributions/qtwebengine-licensing.html
+  Qt/6.11.2/attributions/qtwebengine-3rdparty-*.html  # 按官方索引实际收集
+  Documentation/GFDL-1.3.txt # 保存官方文档整页时的文档许可输入
+  Homebrew/freetype/2.14.3/<原目录层级>/<上述官方原文件>
   Homebrew/<formula>/<version>/<原文件名>
   GAPS.md                    # 尚未取得的版本对应 notices/源码材料
 ```
 
 索引应区分随包 runtime、仅外部运行依赖、构建工具和参考文本来源。保留本机目录下实际的 LICENSE/COPYING/AUTHORS 文件，并对它们引用的其他文件逐项记录“取得/缺失”。只有文件名不含 LICENSE 的 `README.ijg` 也必须进入复制清单。
+
+[m6-license-sources.json](m6-license-sources.json) 是本研究核对的官方地址输入清单，包含 126 条 Qt 归属 URL 和 12 条 FreeType tag 文件地址；它不表示文件已经下载或进入发布包。后续实际收集材料放入 ignored `.workbench`，逐项记录状态、来源和 hash，再进入最终 bundle。
 
 先根据正式 app 的递归 Mach-O 清单确定真实 formula/version，再按本表收集并核对缺口。复制许可证文本和 SBOM 不等于把所有义务、源码材料或商业授权自动处理完毕；最终发布说明应准确写出本机已取得的材料及仍未完成的部分。

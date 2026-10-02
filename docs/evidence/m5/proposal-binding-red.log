@@ -1,0 +1,94 @@
+Test project /tmp/qvw-m5-proposal-build
+    Start 16: proposal_service
+1/2 Test #16: proposal_service .................***Failed    0.68 sec
+********* Start testing of ProposalServiceTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : ProposalServiceTest::initTestCase()
+PASS   : ProposalServiceTest::strictRoundTripOverridesSelfClaimedOrigin()
+PASS   : ProposalServiceTest::schemaFailures(missing-entityId)
+PASS   : ProposalServiceTest::schemaFailures(missing-fieldId)
+PASS   : ProposalServiceTest::schemaFailures(missing-format)
+PASS   : ProposalServiceTest::schemaFailures(missing-origin)
+PASS   : ProposalServiceTest::schemaFailures(missing-revision)
+PASS   : ProposalServiceTest::schemaFailures(missing-sourceFingerprint)
+PASS   : ProposalServiceTest::schemaFailures(missing-value)
+PASS   : ProposalServiceTest::schemaFailures(unknown-operations)
+PASS   : ProposalServiceTest::schemaFailures(unknown-Source)
+PASS   : ProposalServiceTest::schemaFailures(unknown-Shell)
+PASS   : ProposalServiceTest::schemaFailures(unknown-path)
+PASS   : ProposalServiceTest::schemaFailures(unknown-extra)
+PASS   : ProposalServiceTest::schemaFailures(type-format)
+PASS   : ProposalServiceTest::schemaFailures(type-sourceFingerprint)
+PASS   : ProposalServiceTest::schemaFailures(type-entityId)
+PASS   : ProposalServiceTest::schemaFailures(type-fieldId)
+PASS   : ProposalServiceTest::schemaFailures(type-origin)
+PASS   : ProposalServiceTest::schemaFailures(revision-[
+    -1
+]
+)
+PASS   : ProposalServiceTest::schemaFailures(revision-[
+    1.2
+]
+)
+PASS   : ProposalServiceTest::schemaFailures(revision-[
+    "7"
+]
+)
+PASS   : ProposalServiceTest::schemaFailures(revision-[
+    2147483648
+]
+)
+PASS   : ProposalServiceTest::schemaFailures(format)
+PASS   : ProposalServiceTest::schemaFailures(fingerprint)
+PASS   : ProposalServiceTest::schemaFailures(empty-entity)
+PASS   : ProposalServiceTest::schemaFailures(long-field)
+PASS   : ProposalServiceTest::schemaFailures(long-origin)
+PASS   : ProposalServiceTest::schemaFailures(invalid-value-5)
+PASS   : ProposalServiceTest::schemaFailures(invalid-value-4)
+PASS   : ProposalServiceTest::schemaFailures(invalid-value-0)
+PASS   : ProposalServiceTest::schemaFailures(invalid-value-3)
+PASS   : ProposalServiceTest::schemaFailures(array)
+PASS   : ProposalServiceTest::schemaFailures(malformed)
+PASS   : ProposalServiceTest::schemaFailures(over-64k)
+PASS   : ProposalServiceTest::validatesCurrentWritableFieldAndVersion()
+PASS   : ProposalServiceTest::numberBooleanSelectAndColorAreTyped()
+FAIL!  : ProposalServiceTest::numberControlCannotCoerceBooleanCurrentValue() '!services::ProposalService::validate(p,s,project(dir.path()),&error)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(99)]
+PASS   : ProposalServiceTest::imageMustBeRegisteredExistingAndSafe()
+PASS   : ProposalServiceTest::demoUsesDeclaredBindingsAndLabelsSimulation()
+PASS   : ProposalServiceTest::cleanupTestCase()
+Totals: 40 passed, 1 failed, 0 skipped, 0 blacklisted, 16ms
+********* Finished testing of ProposalServiceTest *********
+
+    Start 17: proposal_controller
+2/2 Test #17: proposal_controller ..............***Failed    0.99 sec
+********* Start testing of ProposalControllerTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : ProposalControllerTest::initTestCase()
+PASS   : ProposalControllerTest::confirmationUsesEditorHistoryAndNeverWritesEarly()
+PASS   : ProposalControllerTest::importedJsonAlwaysHasUnverifiedOrigin()
+PASS   : ProposalControllerTest::snapshotChangeProjectSwitchAndCloseInvalidate()
+PASS   : ProposalControllerTest::malformedStaleReadonlyAndMissingProjectCannotPropose()
+FAIL!  : ProposalControllerTest::anotherProjectCannotReuseEditorsVersionAndFingerprint() '!p.pending()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalControllerTest.cpp(100)]
+PASS   : ProposalControllerTest::busyCreationAndConfirmationCannotWrite()
+PASS   : ProposalControllerTest::unreadyStateInvalidatesEvenWhenOldSnapshotIsRetained()
+PASS   : ProposalControllerTest::imageRemovedBeforeConfirmationIsRejected()
+PASS   : ProposalControllerTest::reentrantClearOnConsumedSignalPreventsConfirmation()
+PASS   : ProposalControllerTest::reentrantSnapshotOnConsumedSignalPreventsConfirmation()
+PASS   : ProposalControllerTest::providerCannotPublishAfterReentrantCloseOrChooseDemoOrigin()
+PASS   : ProposalControllerTest::editorConflictAndRejectionRemainEditorFailures(409)
+PASS   : ProposalControllerTest::editorConflictAndRejectionRemainEditorFailures(422)
+PASS   : ProposalControllerTest::cleanupTestCase()
+Totals: 14 passed, 1 failed, 0 skipped, 0 blacklisted, 575ms
+********* Finished testing of ProposalControllerTest *********
+
+
+0% tests passed, 2 tests failed out of 2
+
+Total Test time (real) =   1.72 sec
+
+The following tests FAILED:
+	 16 - proposal_service (Failed)
+	 17 - proposal_controller (Failed)
+Errors while running CTest

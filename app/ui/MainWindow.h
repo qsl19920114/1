@@ -12,6 +12,7 @@ class QWebEngineView;
 class QWebEngineProfile;
 class QAction;
 class QPushButton;
+class QLineEdit;
 namespace qvw::ui {
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -26,6 +27,7 @@ public:
     void setBackendAvailable(bool ready);
     void showDocument(const domain::Project &project);
     void clearDocument();
+    void showProposal(const QString &summary,bool pending);
     void setEditorState(bool ready,bool busy,bool canUndo,bool canRedo);
     void showExportTask(const domain::ExportTask &task);
     QWebEngineView *previewView() const { return m_webView; }
@@ -43,6 +45,10 @@ signals:
     void cancelExportRequested();
     void stopExportObservationRequested();
     void resumeExportRequested();
+    void demoProposalRequested(const QString &request);
+    void importProposalRequested(const QByteArray &json);
+    void confirmProposalRequested();
+    void discardProposalRequested();
     void closeRequested();
     void refreshRequested();
     void configurationRequested(const QString &path);
@@ -87,6 +93,12 @@ private:
     QPushButton *m_resumeExport = nullptr;
     bool m_hasDocument = false;
     bool m_exportActive = false;
+    QLineEdit *m_proposalRequest = nullptr;
+    QPlainTextEdit *m_proposalSummary = nullptr;
+    QPushButton *m_generateProposal = nullptr;
+    QPushButton *m_importProposal = nullptr;
+    QPushButton *m_confirmProposal = nullptr;
+    bool m_hasProposal = false;
     QUrl m_previewUrl;
     domain::Snapshot m_snapshot;
 };

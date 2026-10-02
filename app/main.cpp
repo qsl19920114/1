@@ -3,6 +3,7 @@
 #include "controllers/DocumentController.h"
 #include "controllers/EditorController.h"
 #include "controllers/ExportController.h"
+#include "controllers/ProposalController.h"
 #include "infrastructure/AppConfig.h"
 #include "infrastructure/LogWriter.h"
 #include "ui/MainWindow.h"
@@ -24,7 +25,7 @@ int main(int argc, char **argv) {
     QStringList arguments;
     for (int i = 0; i < argc; ++i) arguments.append(QString::fromLocal8Bit(argv[i]));
     QApplication app(argc, argv);
-    app.setApplicationName("Qt Video Workbench"); app.setApplicationVersion("0.5.0");
+    app.setApplicationName("Qt Video Workbench"); app.setApplicationVersion("0.6.0");
     QCommandLineParser parser;
     parser.setApplicationDescription(QStringLiteral("Qt 视频工作台：打开本地 Hypit Run 与 Studio 会话"));
     parser.addHelpOption(); parser.addVersionOption();
@@ -60,6 +61,7 @@ int main(int argc, char **argv) {
     qvw::controllers::ProjectController controller(loaded.config, log);
     qvw::controllers::DocumentController document;
     qvw::controllers::EditorController editor;
+    qvw::controllers::ProposalController proposals(editor);
     qvw::controllers::ExportController exporter(loaded.config,log);
     qvw::ui::MainWindow window;
     window.appendLog(QStringLiteral("日志：%1").arg(log.filePath()));
@@ -96,6 +98,13 @@ int main(int argc, char **argv) {
     QObject::connect(&controller, &qvw::controllers::ProjectController::projectClosed, &editor, &qvw::controllers::EditorController::clear);
     QObject::connect(&editor, &qvw::controllers::EditorController::snapshotReady, &window, &qvw::ui::MainWindow::showSnapshot);
     QObject::connect(&editor, &qvw::controllers::EditorController::stateChanged, &window, &qvw::ui::MainWindow::setEditorState);
+    QObject::connect(&window,&qvw::ui::MainWindow::demoProposalRequested,&proposals,&qvw::controllers::ProposalController::generateDemo);
+    QObject::connect(&window,&qvw::ui::MainWindow::importProposalRequested,&proposals,&qvw::controllers::ProposalController::importJson);
+    QObject::connect(&window,&qvw::ui::MainWindow::confirmProposalRequested,&proposals,&qvw::controllers::ProposalController::confirm);
+    QObject::connect(&window,&qvw::ui::MainWindow::discardProposalRequested,&proposals,&qvw::controllers::ProposalController::discard);
+    QObject::connect(&proposals,&qvw::controllers::ProposalController::proposalChanged,&window,&qvw::ui::MainWindow::showProposal);
+    QObject::connect(&proposals,&qvw::controllers::ProposalController::message,&window,[&](const QString &text){window.appendLog(text);log.info(text);});
+    QObject::connect(&proposals,&qvw::controllers::ProposalController::failed,&window,[&](const QString &text){window.appendLog(QStringLiteral("提案未执行：%1").arg(text));log.warn(text);});
     QObject::connect(&window, &qvw::ui::MainWindow::editRequested, &editor, &qvw::controllers::EditorController::edit);
     QObject::connect(&window, &qvw::ui::MainWindow::sourceEditRequested, &editor, &qvw::controllers::EditorController::replaceSource);
     QObject::connect(&window, &qvw::ui::MainWindow::undoRequested, &editor, &qvw::controllers::EditorController::undo);
@@ -137,6 +146,8 @@ int main(int argc, char **argv) {
     QObject::connect(&document, &qvw::controllers::DocumentController::projectChanged, &window, &qvw::ui::MainWindow::showDocument);
     QObject::connect(&document, &qvw::controllers::DocumentController::documentClosed, &window, &qvw::ui::MainWindow::clearDocument);
     QObject::connect(&document, &qvw::controllers::DocumentController::documentClosed, &exporter, &qvw::controllers::ExportController::clearProject);
+    QObject::connect(&document,&qvw::controllers::DocumentController::documentClosed,&proposals,&qvw::controllers::ProposalController::clearProject);
+    QObject::connect(&document,&qvw::controllers::DocumentController::projectChanged,&proposals,&qvw::controllers::ProposalController::setProject);
     QObject::connect(&document, &qvw::controllers::DocumentController::projectLoaded, &exporter, &qvw::controllers::ExportController::setProject);
     QObject::connect(&document, &qvw::controllers::DocumentController::projectLoaded, &controller, [&](const qvw::domain::Project &project) {
         controller.openDocument(project,port);

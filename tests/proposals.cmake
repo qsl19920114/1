@@ -1,0 +1,7 @@
+add_executable(proposal_service_test unit/ProposalServiceTest.cpp)
+target_link_libraries(proposal_service_test PRIVATE qvw_services Qt6::Test)
+add_test(NAME proposal_service COMMAND proposal_service_test)
+
+add_executable(proposal_controller_test unit/ProposalControllerTest.cpp)
+target_link_libraries(proposal_controller_test PRIVATE qvw_controllers Qt6::Test)
+add_test(NAME proposal_controller COMMAND proposal_controller_test)

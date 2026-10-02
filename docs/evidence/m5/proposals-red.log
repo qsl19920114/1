@@ -1,0 +1,142 @@
+Test project /tmp/qvw-m5-proposal-build
+    Start 16: proposal_service
+1/2 Test #16: proposal_service .................***Failed    0.08 sec
+********* Start testing of ProposalServiceTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : ProposalServiceTest::initTestCase()
+FAIL!  : ProposalServiceTest::strictRoundTripOverridesSelfClaimedOrigin() 'services::ProposalService::parseJson(QJsonDocument(json(s)).toJson(),domain::ProposalOrigin::ExternalUnverified,&p,&error)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(43)]
+FAIL!  : ProposalServiceTest::schemaFailures(missing-entityId) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(missing-fieldId) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(missing-format) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(missing-origin) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(missing-revision) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(missing-sourceFingerprint) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(missing-value) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(unknown-operations) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(unknown-Source) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(unknown-Shell) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(unknown-path) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(unknown-extra) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(type-format) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(type-sourceFingerprint) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(type-entityId) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(type-fieldId) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(type-origin) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(revision-[
+    -1
+]
+) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(revision-[
+    1.2
+]
+) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(revision-[
+    "7"
+]
+) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(revision-[
+    2147483648
+]
+) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(format) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(fingerprint) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(empty-entity) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(long-field) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(long-origin) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(invalid-value-5) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(invalid-value-4) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(invalid-value-0) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(invalid-value-3) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(array) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(malformed) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::schemaFailures(over-64k) '!error.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(74)]
+FAIL!  : ProposalServiceTest::validatesCurrentWritableFieldAndVersion() 'services::ProposalService::validate(p,s,projectValue,&error)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(78)]
+FAIL!  : ProposalServiceTest::numberBooleanSelectAndColorAreTyped() 'services::ProposalService::validate(p,s,projectValue,&error)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(90)]
+FAIL!  : ProposalServiceTest::imageMustBeRegisteredExistingAndSafe() 'services::ProposalService::validate(p,s,projectValue,&error)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(99)]
+FAIL!  : ProposalServiceTest::demoUsesDeclaredBindingsAndLabelsSimulation() 'provider.generate("标题改为校园",s,projectValue,&p,&error)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp(110)]
+PASS   : ProposalServiceTest::cleanupTestCase()
+Totals: 2 passed, 38 failed, 0 skipped, 0 blacklisted, 21ms
+********* Finished testing of ProposalServiceTest *********
+
+    Start 17: proposal_controller
+2/2 Test #17: proposal_controller ..............***Failed    0.75 sec
+********* Start testing of ProposalControllerTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : ProposalControllerTest::initTestCase()
+FAIL!  : ProposalControllerTest::confirmationUsesEditorHistoryAndNeverWritesEarly() 'proposals.pending()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalControllerTest.cpp(72)]
+FAIL!  : ProposalControllerTest::importedJsonAlwaysHasUnverifiedOrigin() 'p.pending()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalControllerTest.cpp(80)]
+FAIL!  : ProposalControllerTest::snapshotChangeProjectSwitchAndCloseInvalidate() 'p.pending()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalControllerTest.cpp(85)]
+FAIL!  : ProposalControllerTest::malformedStaleReadonlyAndMissingProjectCannotPropose() Compared values are not the same
+   Actual   (fail.size()): 0
+   Expected (4)          : 4
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalControllerTest.cpp(95)]
+FAIL!  : ProposalControllerTest::busyCreationAndConfirmationCannotWrite() 'p.pending()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalControllerTest.cpp(99)]
+FAIL!  : ProposalControllerTest::unreadyStateInvalidatesEvenWhenOldSnapshotIsRetained() 'p.pending()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalControllerTest.cpp(104)]
+FAIL!  : ProposalControllerTest::imageRemovedBeforeConfirmationIsRejected() 'p.pending()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalControllerTest.cpp(111)]
+FAIL!  : ProposalControllerTest::reentrantClearOnConsumedSignalPreventsConfirmation() 'p.pending()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalControllerTest.cpp(116)]
+FAIL!  : ProposalControllerTest::reentrantSnapshotOnConsumedSignalPreventsConfirmation() 'p.pending()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalControllerTest.cpp(121)]
+FAIL!  : ProposalControllerTest::providerCannotPublishAfterReentrantCloseOrChooseDemoOrigin() 'p.pending()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalControllerTest.cpp(126)]
+FAIL!  : ProposalControllerTest::editorConflictAndRejectionRemainEditorFailures(409) 'p.pending()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalControllerTest.cpp(132)]
+FAIL!  : ProposalControllerTest::editorConflictAndRejectionRemainEditorFailures(422) 'p.pending()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalControllerTest.cpp(132)]
+PASS   : ProposalControllerTest::cleanupTestCase()
+Totals: 2 passed, 12 failed, 0 skipped, 0 blacklisted, 23ms
+********* Finished testing of ProposalControllerTest *********
+
+
+0% tests passed, 2 tests failed out of 2
+
+Total Test time (real) =   0.88 sec
+
+The following tests FAILED:
+	 16 - proposal_service (Failed)
+	 17 - proposal_controller (Failed)
+Errors while running CTest

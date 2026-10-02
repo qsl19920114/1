@@ -17,6 +17,8 @@ public:
     void redo();
     void replaceSource(QString path,QString text);
     bool isBusy() const { return m_phase!=Phase::Idle; }
+    bool isReady() const { return m_ready; }
+    const QString &workspace() const { return m_workspace; }
     const domain::Snapshot &snapshot() const { return m_snapshot; }
     void setTimeoutMs(int timeout);
 signals:

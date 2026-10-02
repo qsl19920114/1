@@ -1,0 +1,7 @@
+********* Start testing of ProposalE2ETest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : ProposalE2ETest::initTestCase()
+PASS   : ProposalE2ETest::explicitConfirmationUsesRealEditorHistory()
+PASS   : ProposalE2ETest::cleanupTestCase()
+Totals: 3 passed, 0 failed, 0 skipped, 0 blacklisted, 2590ms
+********* Finished testing of ProposalE2ETest *********

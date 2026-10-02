@@ -1,0 +1,112 @@
+{
+  "format": "qt-video-workbench.quality-review@1",
+  "reviewedAt": "2026-10-02",
+  "base": "d5b5321",
+  "scope": "All tracked + untracked M5 source, UI, main, tests, CMake and changed explanatory documents; M6 research and build artifacts excluded",
+  "verdict": "PASS",
+  "deliverable": true,
+  "unresolvedFindings": [],
+  "resolvedFindings": [],
+  "files": [
+    "CMakeLists.txt",
+    "README.md",
+    "app/CMakeLists.txt",
+    "app/controllers/EditorController.h",
+    "app/main.cpp",
+    "app/ui/MainWindow.cpp",
+    "app/ui/MainWindow.h",
+    "docs/ARCHITECTURE.md",
+    "docs/TEST_PLAN.md",
+    "tests/CMakeLists.txt",
+    "app/controllers/ProposalController.cpp",
+    "app/controllers/ProposalController.h",
+    "app/domain/EditProposal.cpp",
+    "app/domain/EditProposal.h",
+    "app/services/ProposalProvider.cpp",
+    "app/services/ProposalProvider.h",
+    "app/services/ProposalService.cpp",
+    "app/services/ProposalService.h",
+    "tests/integration/ProposalE2ETest.cpp",
+    "tests/proposals.cmake",
+    "tests/unit/ProposalControllerTest.cpp",
+    "tests/unit/ProposalServiceTest.cpp"
+  ],
+  "fileCount": 22,
+  "addedLines": 738,
+  "deletedLines": 8,
+  "diffLines": 746,
+  "reviewedFileSha256": {
+    "CMakeLists.txt": "d8879b87e6d3d35b1c65e0fc86f1976fd26f5997d43cafd7d5ec31ee11b26deb",
+    "README.md": "c2cce09ab8e854e0e61bbbfaf85fb501aa64dc9d94d3599db54e637c5f670e48",
+    "app/CMakeLists.txt": "63dd4fbc5addb1ba46d1b9138dae7d048dc7eb89d5a2890e733bd9a8d2ff3fec",
+    "app/controllers/EditorController.h": "90dbd079aad3c20599367bd8091f1853345f8e4a2cb3e29bf74931c6a43603c4",
+    "app/main.cpp": "14fef780d4bbd74cbe332dfca1e4766483f42bbc36f06ce65751ede38a5b4a5a",
+    "app/ui/MainWindow.cpp": "12b79d3a1b744e1c471372773b31cb2604c52a52eb6924b3f20d7c02032e5b16",
+    "app/ui/MainWindow.h": "7d1fcc8d996f472e780d01bd311867f8cefabb78454592ccfdf77984dd574d1d",
+    "docs/ARCHITECTURE.md": "2edc8806170955f31a59b492e02c1bf6b32813bac0ace4a27dbb3ecd8d944f08",
+    "docs/TEST_PLAN.md": "3835a837a5b89c12f1297e32a0374445fd21ddb49f6beeecb4d3aa2a2e66b940",
+    "tests/CMakeLists.txt": "592fc98da3cf4c754c38b14534d70ac7b94ec183024c4593444d821188925980",
+    "app/controllers/ProposalController.cpp": "746c4f0bbd2d4d5bf94a073a9e7a20657a129328c5cf2b59ac17c2448a068ba4",
+    "app/controllers/ProposalController.h": "5cd21269d76bd3c9e9ac4529792704fa6b8984d6c79d80f2248a285a30d5dc35",
+    "app/domain/EditProposal.cpp": "7300c37443a9ae1b03c793e4ec9a80965fab7309438f2f6144be7dd3193839df",
+    "app/domain/EditProposal.h": "bb9c19aadc34b66d0c3ab4079a0f5d595fdd326535202d79260aa07c220ed97a",
+    "app/services/ProposalProvider.cpp": "0117b9a3964a57498c36be0baf47c05d883d30f5fb9e7bac81f4997049dd0e0d",
+    "app/services/ProposalProvider.h": "8b3c85a944772c21b795a0054afa981bdc7d2a388b98080a49530dcea08ce454",
+    "app/services/ProposalService.cpp": "af9d4ec02338ef35e1052df2354965abb74a1df90dd7e1e2b03fd615c54f7e06",
+    "app/services/ProposalService.h": "934a3f6c9b476697aa28444da2f285b108ea439ea4fd8718d1ea140bde0ca9bd",
+    "tests/integration/ProposalE2ETest.cpp": "3ad8088efa3ec617c6b03e61adab8fac0edf4f36255bb9b16315475d0d54b30c",
+    "tests/proposals.cmake": "d414daa9da312f165a1a43e395c7dd7a0ae4c1f93e8310fc1cc50bf3dfa06d10",
+    "tests/unit/ProposalControllerTest.cpp": "c6d641b56a1306fbca2306f056d947645e52a99acc8acc10d4b2573e853b67ce",
+    "tests/unit/ProposalServiceTest.cpp": "c7cdf8d4fb5c0c02bb3a9eade02d6230dc449b81adafb3228d1b3587f75b0cc9"
+  },
+  "dimensions": [
+    "逻辑",
+    "业务语义",
+    "安全",
+    "并发",
+    "健壮性",
+    "性能"
+  ],
+  "coverage": [
+    "Strict single-operation schema, exact key whitelist, byte limits, entry-assigned origin, real writable field resolution and typed values",
+    "Registered PNG/JPEG asset whitelist, safe project-relative path resolution, existence/readability and symlink rejection",
+    "Current canonical editor workspace/project binding, readiness, idle state, revision and SHA256 source fingerprint validation at create and confirm",
+    "Generation guards for reentrant signals/provider callbacks, consume-before-edit, one confirmation, project/snapshot/readiness invalidation",
+    "Only EditorController::edit performs proposal mutation; existing preflight, 409/422 recovery and undo history preserved",
+    "Plain-text complete multiline summary, bounded proposal/file/network inputs, document projectChanged/closed wiring and UI readiness controls",
+    "CMake inclusion of all new production/unit/integration files and meaningful negative/unit/real-editor E2E assertions"
+  ],
+  "workflow": {
+    "skill": "bits-code-guard",
+    "groups": 2,
+    "mode": "Parallel domain/service review and controller/UI/integration review, followed by cross-group contract validation",
+    "start": "start.py called; best-effort telemetry skipped because DNS/network was unavailable",
+    "finish": "finish.py invoked as the mandatory final workflow step; telemetry is best-effort",
+    "temporaryDirectory": "/tmp/qvw-m5-quality"
+  },
+  "verification": {
+    "reviewerRanRegressionTests": false,
+    "reviewerModifiedProductionCode": false,
+    "reviewerSentExternalComments": false,
+    "reviewerOpenedReport": false,
+    "existingFullRegression": {
+      "evidence": "docs/evidence/m5/ctest-final.log",
+      "result": "PASS: 17/17 CTest targets, 105.83 s"
+    },
+    "existingRealE2E": {
+      "evidence": [
+        "docs/evidence/m5/e2e.log",
+        "docs/evidence/m5/e2e.json"
+      ],
+      "result": "PASS: 3 QtTest cases, 2590 ms; simulated proposal generation with real Studio/editor writes, title/image confirmation, undo, and invalidation after manual edit"
+    },
+    "finalUiBuild": {
+      "evidence": "docs/evidence/m5/build.log",
+      "result": "PASS: root reported final full incremental build exit 0 after removing summary block cap; log confirms qt_video_workbench and inspector_controls_test rebuilt successfully"
+    },
+    "lightweightNumericDisplayProbe": "QtCore probe confirmed QVariant(double).toString() roundtrips 1.2345678901234567, 18.000000000000004, 9007199254740991, 1e-200 and DBL_MAX exactly"
+  },
+  "limitations": [
+    "Real model provider is intentionally unconfigured and unverified; default provider remains explicitly simulated. No screenshots or packaging/platform acceptance are claimed by this review."
+  ]
+}

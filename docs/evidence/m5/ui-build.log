@@ -1,0 +1,13 @@
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  0%] Automatic MOC for target qvw_domain
+[  0%] Built target qvw_domain_autogen
+[ 12%] Building CXX object app/CMakeFiles/qvw_domain.dir/domain/EditProposal.cpp.o
+[ 25%] Linking CXX static library libqvw_domain.a
+[ 50%] Built target qvw_domain
+[ 50%] Built target qvw_ui_autogen_timestamp_deps
+[ 62%] Automatic MOC for target qvw_ui
+[ 62%] Built target qvw_ui_autogen
+[ 87%] Building CXX object app/CMakeFiles/qvw_ui.dir/ui/MainWindow.cpp.o
+[ 87%] Building CXX object app/CMakeFiles/qvw_ui.dir/qvw_ui_autogen/mocs_compilation.cpp.o
+[ 87%] Linking CXX static library libqvw_ui.a
+[100%] Built target qvw_ui
