@@ -1,0 +1,18 @@
+{
+  "verdict": "PASS",
+  "videos": 4,
+  "linksVerified": 11,
+  "recordingSeconds": 118.5,
+  "filmSeconds": [
+    8.0,
+    8.0,
+    8.0
+  ],
+  "allMediaHashesMatchProducingDemo": true,
+  "visuallyInspected": [
+    "actual exported second-character frame",
+    "recorded Qt player frame560",
+    "third-character poster"
+  ],
+  "delivery": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m14"
+}

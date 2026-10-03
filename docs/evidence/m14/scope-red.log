@@ -1,0 +1,10 @@
+********* Start testing of AgentPanelTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : AgentPanelTest::initTestCase()
+FAIL!  : AgentPanelTest::characterGoalRevokesApprovalAndScopeUsesReadableLabel() Compared values are not the same
+   Actual   (panel.findChild<QLabel*>("agentTaskScope")->text()): "\u5F53\u524D\u8303\u56F4\uFF1A/private/work/project/main.svml::output::cover.track:cover"
+   Expected (QString("当前范围：人物卡片"))                              : "\u5F53\u524D\u8303\u56F4\uFF1A\u4EBA\u7269\u5361\u7247"
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentPanelTest.cpp(106)]
+PASS   : AgentPanelTest::cleanupTestCase()
+Totals: 2 passed, 1 failed, 0 skipped, 0 blacklisted, 120ms
+********* Finished testing of AgentPanelTest *********

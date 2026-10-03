@@ -25,6 +25,7 @@ public:
 public slots:
     bool composeGoal(const QString &goal);
     bool composeAssetGoal(const QString &name, const QString &binding);
+    bool composeCharacterGoal(const QString &name, const QString &binding);
     void showPublicMessage(const QString &text);
 signals:
     void generateRequested(const QString &goal);
@@ -45,6 +46,8 @@ private:
     domain::PreviewVersion m_previewVersion;
     domain::ExportTask m_export;
     QString m_selectedEntity;
+    QString m_selectedLabel;
+    void updateScopeLabel();
     bool m_available = false;
     bool m_composing = true;
     bool m_detailsExpanded = false;

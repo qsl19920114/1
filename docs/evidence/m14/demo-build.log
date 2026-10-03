@@ -1,0 +1,30 @@
+[  0%] Built target qvw_infra_autogen_timestamp_deps
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  0%] Built target qvw_domain_autogen
+[  0%] Built target qvw_infra_autogen
+[  7%] Built target qvw_domain
+[ 18%] Built target qvw_infra
+[ 18%] Built target qvw_ui_autogen_timestamp_deps
+[ 18%] Built target qvw_services_autogen_timestamp_deps
+[ 18%] Built target qvw_backend_autogen_timestamp_deps
+[ 22%] Built target qvw_ui_autogen
+[ 22%] Built target qvw_backend_autogen
+[ 25%] Built target qvw_services_autogen
+[ 40%] Built target qvw_ui
+[ 48%] Built target qvw_backend
+[ 62%] Built target qvw_services
+[ 62%] Built target qvw_controllers_autogen_timestamp_deps
+[ 66%] Built target qvw_controllers_autogen
+[ 77%] Built target qvw_controllers
+[ 77%] Built target qvw_agent_autogen_timestamp_deps
+[ 77%] Built target qvw_agent_autogen
+[ 92%] Built target qvw_agent
+[ 92%] Built target qvw_workflow_autogen_timestamp_deps
+[ 92%] Built target qvw_workflow_autogen
+[ 96%] Built target qvw_workflow
+[ 96%] Built target character_showcase_demo_autogen_timestamp_deps
+[ 96%] Automatic MOC for target character_showcase_demo
+[ 96%] Built target character_showcase_demo_autogen
+[ 96%] Building CXX object tests/CMakeFiles/character_showcase_demo.dir/integration/CharacterShowcaseDemo.cpp.o
+[100%] Linking CXX executable character_showcase_demo
+[100%] Built target character_showcase_demo

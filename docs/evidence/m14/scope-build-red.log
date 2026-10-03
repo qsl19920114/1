@@ -1,0 +1,14 @@
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  0%] Automatic MOC for target qvw_domain
+[  0%] Built target qvw_domain_autogen
+[ 25%] Built target qvw_domain
+[ 25%] Built target qvw_ui_autogen_timestamp_deps
+[ 37%] Automatic MOC for target qvw_ui
+[ 37%] Built target qvw_ui_autogen
+[ 87%] Built target qvw_ui
+[ 87%] Built target agent_panel_test_autogen_timestamp_deps
+[ 87%] Automatic MOC for target agent_panel_test
+[ 87%] Built target agent_panel_test_autogen
+[100%] Building CXX object tests/CMakeFiles/agent_panel_test.dir/unit/AgentPanelTest.cpp.o
+[100%] Linking CXX executable agent_panel_test
+[100%] Built target agent_panel_test

@@ -1,0 +1,13 @@
+{
+  "verdict": "PASS",
+  "version": "1.6.0",
+  "archive": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/release-macos-arm64-1.6.0/FrameLab-1.6.0-macOS-arm64.zip",
+  "archiveSha256": "f018e5249b1b8bae09549c34e2a15d1e96b547aef1a60fc5c0b31a3277c0e702",
+  "archiveExecutableMatchesBundle": true,
+  "executableSha256": "e0be306afe177c494a127f9992b13456f92879db8b215c82890040452ce795fb",
+  "verifiedLicenseFiles": 248,
+  "machOBinaries": 82,
+  "artifact": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m14/runs/20261003-225819/03-插画人物.mp4",
+  "artifactSha256": "eafed21e2d268b273f92e3c35ba3282122ce7eec63814cdc0896d288036a3188",
+  "project": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m14/runs/20261003-225819/人物素材工程/workbench.qvw.json"
+}

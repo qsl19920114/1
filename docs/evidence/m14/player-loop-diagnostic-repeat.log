@@ -1,0 +1,14 @@
+********* Start testing of MediaPlayerTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : MediaPlayerTest::initTestCase()
+QINFO  : MediaPlayerTest::realPlaybackAndNativeControls() Before stop after loop: true 0.032896 false ""
+QINFO  : MediaPlayerTest::realPlaybackAndNativeControls() Before stop after loop: true 0.024748 false ""
+QINFO  : MediaPlayerTest::realPlaybackAndNativeControls() Before stop after loop: true 0.030134 false ""
+QINFO  : MediaPlayerTest::realPlaybackAndNativeControls() Before stop after loop: true 0.011152 false ""
+QINFO  : MediaPlayerTest::realPlaybackAndNativeControls() Before stop after loop: false 0 false ""
+FAIL!  : MediaPlayerTest::realPlaybackAndNativeControls() 'player.findChild<QPushButton*>("mediaStop")->isEnabled()' returned FALSE. (Stop must remain available during loop seek/buffering)
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/MediaPlayerTest.cpp(81)]
+2026-10-03 22:48:55.196 media_player_test[9653:25934521] error messaging the mach port for IMKCFRunLoopWakeUpReliable
+PASS   : MediaPlayerTest::cleanupTestCase()
+Totals: 2 passed, 1 failed, 0 skipped, 0 blacklisted, 3645ms
+********* Finished testing of MediaPlayerTest *********

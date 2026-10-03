@@ -202,6 +202,23 @@
         "docs/evidence/m13/packaged-native.json",
         "docs/evidence/m13/delivery-integrity.json"
       ]
+    },
+    "G14": {
+      "milestone": "M14",
+      "definition": "Qt原生播放器、人物素材AI编辑及真实多成片演示与1.6交付",
+      "verdict": "PASS",
+      "reason": "37/37回归、2次真实模型/批准/人物替换、3成片和118.5秒实际录像通过；播放器关闭/循环修复与审查、展示页、1.6搬移启动及包完整性通过。",
+      "evidence": [
+        "docs/evidence/m14/ctest-final.log",
+        "docs/evidence/m14/character-showcase.json",
+        "docs/evidence/m14/player-final.log",
+        "docs/evidence/m14/materials/provenance.json",
+        "docs/evidence/m14/showcase-delivery.json",
+        "docs/evidence/m14/spec-review.md",
+        "docs/evidence/m14/quality-review-summary.md",
+        "docs/evidence/m14/packaged-native.json",
+        "docs/evidence/m14/delivery-integrity.json"
+      ]
     }
   },
   "tasks": [
@@ -1255,6 +1272,87 @@
         "docs/evidence/m13/quality-review-summary.md",
         "docs/evidence/m13/packaged-native.json",
         "docs/evidence/m13/delivery-integrity.json"
+      ]
+    },
+    {
+      "id": "T056",
+      "milestone": "M14",
+      "title": "可复用Qt原生媒体播放器",
+      "status": "done",
+      "dependsOn": [
+        "T055"
+      ],
+      "evidence": [
+        "docs/evidence/m14/ctest-final.log",
+        "docs/evidence/m14/character-showcase.json",
+        "docs/evidence/m14/player-final.log",
+        "docs/evidence/m14/materials/provenance.json",
+        "docs/evidence/m14/showcase-delivery.json",
+        "docs/evidence/m14/spec-review.md",
+        "docs/evidence/m14/quality-review-summary.md",
+        "docs/evidence/m14/packaged-native.json",
+        "docs/evidence/m14/delivery-integrity.json"
+      ]
+    },
+    {
+      "id": "T057",
+      "milestone": "M14",
+      "title": "人物素材AI交接及可读范围",
+      "status": "done",
+      "dependsOn": [
+        "T055"
+      ],
+      "evidence": [
+        "docs/evidence/m14/ctest-final.log",
+        "docs/evidence/m14/character-showcase.json",
+        "docs/evidence/m14/player-final.log",
+        "docs/evidence/m14/materials/provenance.json",
+        "docs/evidence/m14/showcase-delivery.json",
+        "docs/evidence/m14/spec-review.md",
+        "docs/evidence/m14/quality-review-summary.md",
+        "docs/evidence/m14/packaged-native.json",
+        "docs/evidence/m14/delivery-integrity.json"
+      ]
+    },
+    {
+      "id": "T058",
+      "milestone": "M14",
+      "title": "真实人物替换多成片与操作录像",
+      "status": "done",
+      "dependsOn": [
+        "T056",
+        "T057"
+      ],
+      "evidence": [
+        "docs/evidence/m14/ctest-final.log",
+        "docs/evidence/m14/character-showcase.json",
+        "docs/evidence/m14/player-final.log",
+        "docs/evidence/m14/materials/provenance.json",
+        "docs/evidence/m14/showcase-delivery.json",
+        "docs/evidence/m14/spec-review.md",
+        "docs/evidence/m14/quality-review-summary.md",
+        "docs/evidence/m14/packaged-native.json",
+        "docs/evidence/m14/delivery-integrity.json"
+      ]
+    },
+    {
+      "id": "T059",
+      "milestone": "M14",
+      "title": "最终审查回归及1.6交付",
+      "status": "done",
+      "dependsOn": [
+        "T058"
+      ],
+      "evidence": [
+        "docs/evidence/m14/ctest-final.log",
+        "docs/evidence/m14/character-showcase.json",
+        "docs/evidence/m14/player-final.log",
+        "docs/evidence/m14/materials/provenance.json",
+        "docs/evidence/m14/showcase-delivery.json",
+        "docs/evidence/m14/spec-review.md",
+        "docs/evidence/m14/quality-review-summary.md",
+        "docs/evidence/m14/packaged-native.json",
+        "docs/evidence/m14/delivery-integrity.json"
       ]
     }
   ]

@@ -1,0 +1,23 @@
+test_archive_boundaries_and_exact_bytes (__main__.MaterialExtractionTest) ... FAIL
+test_output_symlinks_rejected (__main__.MaterialExtractionTest) ... FAIL
+
+======================================================================
+FAIL: test_archive_boundaries_and_exact_bytes (__main__.MaterialExtractionTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/docs/evidence/m14/materials/verify_materials.py", line 16, in setUp
+    self.assertTrue(SCRIPT.is_file(), 'material preparation command must exist')
+AssertionError: False is not true : material preparation command must exist
+
+======================================================================
+FAIL: test_output_symlinks_rejected (__main__.MaterialExtractionTest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/docs/evidence/m14/materials/verify_materials.py", line 16, in setUp
+    self.assertTrue(SCRIPT.is_file(), 'material preparation command must exist')
+AssertionError: False is not true : material preparation command must exist
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+FAILED (failures=2)

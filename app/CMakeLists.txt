@@ -50,6 +50,8 @@ add_library(qvw_ui STATIC
   ui/InspectorControls.cpp
   ui/StudioTransport.cpp
   ui/MediaPlayerDialog.cpp
+  ui/MediaPlayerWidget.cpp
+  ui/MediaPlayerWidget.h
   ui/AgentPanel.cpp
   ui/PlanReviewPanel.cpp
 )

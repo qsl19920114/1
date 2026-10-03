@@ -1,0 +1,20 @@
+********* Start testing of MediaPlayerTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : MediaPlayerTest::initTestCase()
+QINFO  : MediaPlayerTest::realPlaybackAndNativeControls() Before stop after loop: true 0.078209 false ""
+QINFO  : MediaPlayerTest::realPlaybackAndNativeControls() Before stop after loop: true 0.032908 false ""
+QINFO  : MediaPlayerTest::realPlaybackAndNativeControls() Before stop after loop: true 0.034762 false ""
+QINFO  : MediaPlayerTest::realPlaybackAndNativeControls() Before stop after loop: true 0.015034 false ""
+QINFO  : MediaPlayerTest::realPlaybackAndNativeControls() Before stop after loop: true 0.014172 false ""
+QINFO  : MediaPlayerTest::realPlaybackAndNativeControls() Before stop after loop: true 0.081073 false ""
+QINFO  : MediaPlayerTest::realPlaybackAndNativeControls() Before stop after loop: true 0.059321 false ""
+QINFO  : MediaPlayerTest::realPlaybackAndNativeControls() Before stop after loop: true 0.045252 false ""
+QINFO  : MediaPlayerTest::realPlaybackAndNativeControls() Before stop after loop: true 0.036542 false ""
+QINFO  : MediaPlayerTest::realPlaybackAndNativeControls() Before stop after loop: true 0.020154 false ""
+QINFO  : MediaPlayerTest::realPlaybackAndNativeControls() Before stop after loop: true 0.015034 false ""
+QINFO  : MediaPlayerTest::realPlaybackAndNativeControls() Before stop after loop: true 0.000214 false ""
+2026-10-03 22:48:39.019 media_player_test[8736:25931874] error messaging the mach port for IMKCFRunLoopWakeUpReliable
+PASS   : MediaPlayerTest::realPlaybackAndNativeControls()
+PASS   : MediaPlayerTest::cleanupTestCase()
+Totals: 3 passed, 0 failed, 0 skipped, 0 blacklisted, 7448ms
+********* Finished testing of MediaPlayerTest *********

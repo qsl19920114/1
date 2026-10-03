@@ -156,14 +156,9 @@ QWidget *MainWindow::buildProjectPanel() {
     m_previewAsset=new QPushButton("放大预览素材");m_previewAsset->setObjectName("previewAsset");connect(m_previewAsset,&QPushButton::clicked,this,&MainWindow::previewSelectedAsset);assetLayout->addWidget(m_previewAsset);
 
     m_applyAssetButton=new QPushButton(QStringLiteral("替换选中组件素材"));m_applyAssetButton->setObjectName("applyAsset");m_applyAssetButton->setProperty("primary",true);connect(m_applyAssetButton,&QPushButton::clicked,this,&MainWindow::applySelectedAsset);assetLayout->addWidget(m_applyAssetButton);m_handoffAssetButton=new QPushButton("交给 Agent 调整");m_handoffAssetButton->setObjectName("handoffAssetToAgent");m_handoffAssetButton->setToolTip("把所选素材与当前组件交给 Agent，生成方案并确认后再修改。");assetLayout->addWidget(m_handoffAssetButton);
-    connect(m_handoffAssetButton,&QPushButton::clicked,this,[this]{
-        if(!m_handoffAssetButton->isEnabled()||compatibleAssetField().isEmpty())return;
-        const auto selected=m_assetTree->selectedItems();if(selected.size()!=1)return;
-        const auto binding=selected.first()->data(0,Qt::UserRole).toString();
-        for(const auto &asset:m_document.assets)if("./"+asset.path==binding){
-            if(m_agentPanel->composeAssetGoal(asset.originalName,binding)){m_rightPanel->show();m_inspectorTabs->setCurrentIndex(0);statusBar()->showMessage("素材目标已准备，点击生成方案并审阅后执行。",5000);}return;
-        }
-    });m_cancelImport=new QPushButton("取消导入");m_cancelImport->hide();assetLayout->addWidget(m_cancelImport);connect(m_cancelImport,&QPushButton::clicked,this,&MainWindow::cancelImportRequested);m_libraryTabs->addTab(assets,"素材");
+    connect(m_handoffAssetButton,&QPushButton::clicked,this,[this]{prepareSelectedAssetGoal(false);});
+    m_characterAssetButton=new QPushButton("AI 替换人物素材");m_characterAssetButton->setObjectName("handoffCharacterToAgent");m_characterAssetButton->setToolTip("把用户选择的人物图片或视频替换到当前组件，保留版式与动画。需生成、审阅和确认；不执行视频人物重生成。");assetLayout->addWidget(m_characterAssetButton);
+    connect(m_characterAssetButton,&QPushButton::clicked,this,[this]{prepareSelectedAssetGoal(true);});m_cancelImport=new QPushButton("取消导入");m_cancelImport->hide();assetLayout->addWidget(m_cancelImport);connect(m_cancelImport,&QPushButton::clicked,this,&MainWindow::cancelImportRequested);m_libraryTabs->addTab(assets,"素材");
     m_componentTree=new QTreeWidget;m_componentTree->setObjectName("components");m_componentTree->setHeaderLabels({"组件","帧范围"});m_componentTree->header()->setSectionResizeMode(0,QHeaderView::Stretch);m_libraryTabs->addTab(m_componentTree,"组件");
     auto *examples=new QWidget;auto *sampleLayout=new QVBoxLayout(examples);sampleLayout->addWidget(copyLabel(QStringLiteral("Hypit 官方示例 · 可播放查看，再创建横屏作品。来源与原始成片保持可追溯。")));
     m_sampleTree=new QTreeWidget;m_sampleTree->setObjectName("samples");m_sampleTree->setHeaderLabels({"示例"});m_sampleTree->setRootIsDecorated(false);m_sampleTree->header()->setSectionResizeMode(QHeaderView::Stretch);sampleLayout->addWidget(m_sampleTree,1);
@@ -242,11 +237,20 @@ void MainWindow::updateActions() {
     m_undoAction->setEnabled(edit&&m_canUndo);m_redoAction->setEnabled(edit&&m_canRedo);
     m_sourceAction->setEnabled(edit&&!m_snapshot.sourceFiles.isEmpty());m_refreshAction->setEnabled(!busy&&!m_previewUrl.isEmpty());m_inspectorTable->setEnabled(edit);
     const auto selectedCount=m_assetTree->selectedItems().size();m_assetSelection->setText(QString("已选择 %1 个素材 · 替换时请选择一个").arg(selectedCount));m_previewAsset->setEnabled(selectedCount==1);
-    const auto field=compatibleAssetField();m_applyAssetButton->setEnabled(m_hasDocument&&edit&&!m_exportActive&&!field.isEmpty());m_handoffAssetButton->setEnabled(m_hasDocument&&m_backendReady&&edit&&!m_exportActive&&!m_agentRestoring&&!field.isEmpty());
+    const auto field=compatibleAssetField();m_applyAssetButton->setEnabled(m_hasDocument&&edit&&!m_exportActive&&!field.isEmpty());m_handoffAssetButton->setEnabled(m_hasDocument&&m_backendReady&&edit&&!m_exportActive&&!m_agentRestoring&&!field.isEmpty());m_characterAssetButton->setEnabled(m_handoffAssetButton->isEnabled());
     m_applyAssetButton->setToolTip(field.isEmpty()?QStringLiteral("请选择素材，以及含兼容图片或视频属性的组件。"):QStringLiteral("通过编辑事务更新组件；完成后记录撤销历史。"));
     m_generateProposal->setEnabled(m_hasDocument&&edit&&!m_proposalRequest->text().trimmed().isEmpty());m_importProposal->setEnabled(m_hasDocument&&edit);m_confirmProposal->setEnabled(m_hasProposal&&m_hasDocument&&edit);m_discardProposal->setEnabled(m_hasProposal&&!busy);
     const auto *sample=m_sampleTree->currentItem();const bool validSample=sample&&!sample->data(0,Qt::UserRole).toString().isEmpty();m_samplePreview->setEnabled(validSample);m_sampleUse->setEnabled(validSample&&sample->data(0,Qt::UserRole+1).toBool()&&canSwitch);
     m_backendStatus->setText(m_importBusy?QStringLiteral("正在校验素材…"):m_editorBusy?QStringLiteral("正在保存修改…"):m_editorReady?QStringLiteral("可以编辑"):m_hasDocument?QStringLiteral("正在准备预览…"):m_backendReady?QStringLiteral("本地环境就绪"):!m_backendError.isEmpty()?QStringLiteral("环境未就绪"):QStringLiteral("检查创作环境…"));
+}
+void MainWindow::prepareSelectedAssetGoal(bool character) {
+    if(!m_handoffAssetButton->isEnabled()||compatibleAssetField().isEmpty())return;
+    const auto selected=m_assetTree->selectedItems();if(selected.size()!=1)return;
+    const auto binding=selected.first()->data(0,Qt::UserRole).toString();
+    for(const auto &asset:m_document.assets)if("./"+asset.path==binding){
+        const bool prepared=character?m_agentPanel->composeCharacterGoal(asset.originalName,binding):m_agentPanel->composeAssetGoal(asset.originalName,binding);
+        if(prepared){m_rightPanel->show();m_inspectorTabs->setCurrentIndex(0);statusBar()->showMessage(character?"人物素材目标已准备，生成方案并审阅确认后替换。":"素材目标已准备，点击生成方案并审阅后执行。",5000);}return;
+    }
 }
 QString MainWindow::compatibleAssetField() const {
     const auto selected=m_assetTree->selectedItems();const auto *asset=selected.size()==1?selected.first():nullptr;const auto *item=m_componentTree->currentItem();

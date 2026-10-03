@@ -133,3 +133,14 @@ target_compile_definitions(creation_efficiency_e2e_test PRIVATE QVW_SOURCE_DIR="
 add_executable(agent_workbench_demo integration/AgentWorkbenchDemo.cpp)
 target_link_libraries(agent_workbench_demo PRIVATE qvw_workflow Qt6::Test)
 target_compile_definitions(agent_workbench_demo PRIVATE QVW_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
+
+add_executable(media_player_test unit/MediaPlayerTest.cpp)
+target_link_libraries(media_player_test PRIVATE qvw_ui Qt6::Test)
+target_compile_definitions(media_player_test PRIVATE QVW_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
+add_test(NAME media_player COMMAND media_player_test)
+set_tests_properties(media_player PROPERTIES TIMEOUT 90)
+
+# Explicit opt-in: two real Codex requests, character films and actual Qt recording.
+add_executable(character_showcase_demo integration/CharacterShowcaseDemo.cpp)
+target_link_libraries(character_showcase_demo PRIVATE qvw_workflow Qt6::Test)
+target_compile_definitions(character_showcase_demo PRIVATE QVW_SOURCE_DIR="${PROJECT_SOURCE_DIR}")

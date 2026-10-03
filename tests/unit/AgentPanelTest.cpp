@@ -102,6 +102,11 @@ private slots:
         QSignalSpy generated(&panel,&ui::AgentPanel::generateRequested),approved(&panel,&ui::AgentPanel::approveRequested),stopped(&panel,&ui::AgentPanel::stopRequested);QVERIFY(panel.composeAssetGoal("本地图片","./assets/a.png"));QCOMPARE(stopped.size(),1);QCOMPARE(generated.size(),0);QCOMPARE(approved.size(),0);QVERIFY(panel.findChild<QCheckBox*>("agentScope")->isChecked());QVERIFY(!panel.findChild<QPushButton*>("planApprove")->isEnabled());
         status.phase="restoring";panel.showStatus(status);QVERIFY(!panel.composeAssetGoal("图片","./assets/b.png"));
     }
+    void characterGoalRevokesApprovalAndScopeUsesReadableLabel(){
+        ui::AgentPanel panel;panel.setAvailable(true);QVERIFY(!panel.composeCharacterGoal("人物","./assets/a.png"));const QString id="/private/work/project/main.svml::output::cover.track:cover";panel.setSelection(id,"人物卡片");QVERIFY(panel.composeCharacterGoal("人物","./assets/a.png"));QCOMPARE(panel.findChild<QLabel*>("agentTaskScope")->text(),QString("当前范围：人物卡片"));QCOMPARE(panel.findChild<QLabel*>("agentTaskScope")->toolTip(),id);QVERIFY(!panel.composeCharacterGoal("人物","./assets/../bad.png"));domain::AgentStatus status;status.phase="review";status.canApprove=true;status.taskId="task";status.scope=id;panel.showStatus(status);panel.showPlan(editPlan(),snapshot());
+        auto *scope=panel.findChild<QLabel*>("agentTaskScope");QCOMPARE(scope->text(),QString("任务范围：人物卡片"));QCOMPARE(scope->toolTip(),id);
+        QSignalSpy stop(&panel,&ui::AgentPanel::stopRequested),generated(&panel,&ui::AgentPanel::generateRequested),approved(&panel,&ui::AgentPanel::approveRequested);QVERIFY(panel.composeCharacterGoal("用户选择人物","./assets/a.png"));QCOMPARE(stop.size(),1);QCOMPARE(generated.size(),0);QCOMPARE(approved.size(),0);QVERIFY(!panel.findChild<QPushButton*>("planApprove")->isEnabled());QVERIFY(panel.findChild<QCheckBox*>("agentScope")->isChecked());status.phase="thinking";panel.showStatus(status);QVERIFY(!panel.composeCharacterGoal("人物","./assets/a.png"));
+    }
     void composeGoalUsesTheControllersUtf8ByteLimit_data() {
         QTest::addColumn<QString>("goal");
         QTest::newRow("ascii-5000-bytes") << QString(5000, QChar('x'));

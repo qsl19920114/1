@@ -84,7 +84,7 @@ AgentPanel::AgentPanel(QWidget *parent):QWidget(parent) {
         if (!paths.isEmpty() && m_images->isEnabled()) emit imagesRequested(paths);
     });
     connect(m_scope, &QCheckBox::toggled, this, [this](bool checked) {
-        if (m_status.taskId.isEmpty()) m_taskScope->setText(checked ? QStringLiteral("当前范围：%1").arg(m_selectedEntity) : QStringLiteral("当前范围：当前工程"));
+        if (m_status.taskId.isEmpty()) updateScopeLabel();
         emit scopeChanged(checked ? m_selectedEntity : QString());
     });
     connect(m_review, &PlanReviewPanel::approveRequested, this, &AgentPanel::approveRequested);
@@ -100,8 +100,7 @@ void AgentPanel::showStatus(const domain::AgentStatus &status) {
     if (status.phase != m_status.phase || newTask) m_composing = status.phase == "idle" || status.phase == "clarify";
     m_status = status; m_phase->setText(phaseText(status.phase)); m_phase->setToolTip(status.phase);
     if (newTask && !status.goal.isEmpty()) m_goal->setPlainText(status.goal);
-    m_taskScope->setText(QStringLiteral("%1：%2").arg(status.taskId.isEmpty() ? QStringLiteral("当前范围") : QStringLiteral("任务范围"),
-        status.scope.isEmpty() ? QStringLiteral("当前工程") : status.scope));
+    updateScopeLabel();
     m_progress->setText(status.total > 0 ? QStringLiteral("已完成 %1 / %2 项").arg(status.completed).arg(status.total) : QString()); m_progress->setVisible(status.total > 0);
     m_message->setText(status.message); m_message->setVisible(!status.message.isEmpty());
     m_events->setPlainText(status.events.mid(qMax(qsizetype(0), status.events.size() - 200)).join('\n').right(65536)); updateActions(); updateVersions();
@@ -124,6 +123,18 @@ bool AgentPanel::composeAssetGoal(const QString &name,const QString &binding) {
     if(!composeGoal(QStringLiteral("请将当前选中组件的兼容素材属性替换为以下工程素材：%1。只修改该素材绑定，保留文案、时长、颜色和其他组件；不要猜测素材画面内容。").arg(material)))return false;
     m_scope->setChecked(true);return true;
 }
+bool AgentPanel::composeCharacterGoal(const QString &name,const QString &binding) {
+    if(m_selectedEntity.isEmpty()||!binding.startsWith("./assets/")||binding.contains(".."))return false;
+    const auto material=QString::fromUtf8(QJsonDocument(QJsonObject{{"name",name},{"bindingValue",binding}}).toJson(QJsonDocument::Compact));
+    if(!composeGoal(QStringLiteral("将当前组件的人物素材替换为用户选定的工程素材：%1。仅修改当前组件的兼容图片或视频绑定；保留版式、文案、颜色、时长、入场动画和所有其他组件。这是素材替换，不是视频换脸或重新生成；不要猜测素材画面内容。").arg(material)))return false;
+    m_scope->setChecked(true);return true;
+}
+void AgentPanel::updateScopeLabel() {
+    const auto scope=m_status.taskId.isEmpty()?(m_scope->isChecked()?m_selectedEntity:QString()):m_status.scope;
+    const auto label=scope==m_selectedEntity&&!m_selectedLabel.isEmpty()?m_selectedLabel:scope.section("::",-1).section('/',-1);
+    m_taskScope->setText(QStringLiteral("%1：%2").arg(m_status.taskId.isEmpty()?QStringLiteral("当前范围"):QStringLiteral("任务范围"),scope.isEmpty()?QStringLiteral("当前工程"):label));
+    m_taskScope->setToolTip(scope);
+}
 void AgentPanel::showPublicMessage(const QString &text) {
     if (m_status.phase != "thinking" || text.isEmpty()) return;
     m_publicOutput->setPlainText(text.left(65536));
@@ -144,7 +155,7 @@ void AgentPanel::showAssets(const domain::AgentAssets &assets) {
     m_assets->setVisible(!assets.isEmpty()); m_review->showAssets(assets); updateActions();
 }
 void AgentPanel::setSelection(const QString &entityId, const QString &label) {
-    const auto previous = m_selectedEntity; m_selectedEntity = entityId;
+    const auto previous = m_selectedEntity; m_selectedEntity = entityId; m_selectedLabel = label; updateScopeLabel();
     m_selection->setText(QStringLiteral("Qt 选中：%1").arg(entityId.isEmpty() ? QStringLiteral("无") : (label.isEmpty() ? entityId : label)));
     if (previous != entityId) emit selectionChanged(entityId);
     if (m_scope->isChecked()) { if (entityId.isEmpty()) m_scope->setChecked(false); else if (previous != entityId) emit scopeChanged(entityId); }

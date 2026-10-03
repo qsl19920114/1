@@ -1,0 +1,11 @@
+Verified /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/character-showcase/materials/portrait-baseline.png: 1152x2048, b1aa6b53ab48b719246087b74a717253e4073ddca5a0f425e6545c9a4d06c7d1
+Verified /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/character-showcase/materials/portrait-variant-1.png: 1152x2048, 20cda1b21e6a7d819f0d136db4fbdb5088d0c4efc123c8ee76056dbdf87efed9
+Verified /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/character-showcase/materials/portrait-variant-2.png: 1024x1536, 863b674f742db1d1cf8fd5a8bfce02e0f95678a0b51833f07d74a852de0cb6d0
+Provenance: /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/docs/evidence/m14/materials/provenance.json
+77682d59cf6ed00c51fd70b4b17019c690daeba8018848ddf17fe2b1319a96ed .workbench/character-showcase/materials/catalog.json
+b1aa6b53ab48b719246087b74a717253e4073ddca5a0f425e6545c9a4d06c7d1 .workbench/character-showcase/materials/portrait-baseline.png
+20cda1b21e6a7d819f0d136db4fbdb5088d0c4efc123c8ee76056dbdf87efed9 .workbench/character-showcase/materials/portrait-variant-1.png
+863b674f742db1d1cf8fd5a8bfce02e0f95678a0b51833f07d74a852de0cb6d0 .workbench/character-showcase/materials/portrait-variant-2.png
+72cfffc6e156dc32ac09a09c031bbc044e2d30a1df9ebdd1b925bfcae19ed8d4 .workbench/character-showcase/materials/provenance.json
+72cfffc6e156dc32ac09a09c031bbc044e2d30a1df9ebdd1b925bfcae19ed8d4 docs/evidence/m14/materials/provenance.json
+PASS: all three PNGs, both local JSON files and tracked provenance byte-identical after repeat preparation.

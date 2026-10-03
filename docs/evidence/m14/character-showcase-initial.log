@@ -1,0 +1,10 @@
+********* Start testing of CharacterShowcaseDemo *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : CharacterShowcaseDemo::initTestCase()
+QINFO  : CharacterShowcaseDemo::realCharacterVariantsAndPlayer() 1 / Qt 内嵌 AI · 人物素材替换演示，保留版式与动画
+2026-10-03 22:51:57.994 character_showcase_demo[18989:25954414] error messaging the mach port for IMKCFRunLoopWakeUpReliable
+FAIL!  : CharacterShowcaseDemo::realCharacterVariantsAndPlayer() 'editErrors.isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/integration/CharacterShowcaseDemo.cpp(95)]
+PASS   : CharacterShowcaseDemo::cleanupTestCase()
+Totals: 2 passed, 1 failed, 0 skipped, 0 blacklisted, 4542ms
+********* Finished testing of CharacterShowcaseDemo *********

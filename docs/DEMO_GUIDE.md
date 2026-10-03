@@ -1,6 +1,12 @@
 # 演示与提交材料
 
-## 最新交付：1.5 Qt × Agent 实验
+## 最新交付：1.6 人物素材与播放器
+
+打开 `.workbench/deliverables-m14/index.html` 查看约2分钟的真实Qt操作录像和3份8秒人物成片。人物顺序为原始白帽主持人、黑帽主持人、虚构插画人物；保留同一版式、文案与入场动画。流程为选择人物素材→AI准备目标→真实Codex生成→审阅确认→Hypit编译/预览→导出；最后演示新Qt播放器。
+
+源视频位于 `videos/walkthrough.mp4`、`videos/character-1.mp4` 至 `character-3.mp4`。封面来自各实际视频帧。人物是上游素材复用，不是本轮重新生成。当前工程由 `.workbench/启动FrameLab.command` 打开；复现和来源见 [人物演示说明](CHARACTER_SHOWCASE.md)。旧实验报告保留如下。
+
+## 上一交付：1.5 Qt × Agent 实验
 
 - `.workbench/deliverables-m13/index.html`：本地实验报告与7个可播放视频。
 - `.workbench/deliverables-m13/experiment-report.docx`：可编辑 Word 报告；姓名、学号自行填写。

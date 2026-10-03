@@ -101,6 +101,7 @@ private:
     void newDocumentDialog(const QString &samplePath={});
     void updateActions();
     QString compatibleAssetField() const;
+    void prepareSelectedAssetGoal(bool character);
     void useSelectedSample();
     void sourceDialog();
     void applySelectedAsset();
@@ -127,6 +128,7 @@ private:
     QAction *m_sourceAction=nullptr;
     QPushButton *m_applyAssetButton=nullptr;
     QPushButton *m_handoffAssetButton=nullptr;
+    QPushButton *m_characterAssetButton=nullptr;
     QTreeWidget *m_assetTree = nullptr;
     QLabel *m_documentTitle = nullptr;
     QAction *m_newAction = nullptr;

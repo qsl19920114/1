@@ -1,0 +1,12 @@
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  0%] Built target qvw_domain_autogen
+[ 22%] Built target qvw_domain
+[ 22%] Built target qvw_ui_autogen_timestamp_deps
+[ 33%] Built target qvw_ui_autogen
+[ 77%] Built target qvw_ui
+[ 77%] Built target media_player_test_autogen_timestamp_deps
+[ 88%] Automatic MOC for target media_player_test
+[ 88%] Built target media_player_test_autogen
+[ 88%] Building CXX object tests/CMakeFiles/media_player_test.dir/unit/MediaPlayerTest.cpp.o
+[ 88%] Linking CXX executable media_player_test
+[100%] Built target media_player_test

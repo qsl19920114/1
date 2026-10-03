@@ -1,0 +1,9 @@
+********* Start testing of MediaPlayerTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : MediaPlayerTest::initTestCase()
+PASS   : MediaPlayerTest::unavailableMediaDisablesNativePlayback()
+PASS   : MediaPlayerTest::realPlaybackAndNativeControls()
+PASS   : MediaPlayerTest::corruptMediaReportsActualError()
+PASS   : MediaPlayerTest::closeWhileFullscreenDestroysPlayer()
+Received signal 11 (SIGSEGV), code SEGV_ACCERR, at instruction address 0x0000000101856f30, accessing address 0x0000000000000010
+         fullscreenEscapeAndCloseCleanup function time: 1259ms, total time: 10126ms
