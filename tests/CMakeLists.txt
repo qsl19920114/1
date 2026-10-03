@@ -117,3 +117,14 @@ add_executable(asset_library_test unit/AssetLibraryTest.cpp)
 target_link_libraries(asset_library_test PRIVATE qvw_controllers Qt6::Test)
 target_compile_definitions(asset_library_test PRIVATE QVW_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
 add_test(NAME asset_library COMMAND asset_library_test)
+
+include(history-efficiency.cmake)
+
+add_executable(import_results_panel_test unit/ImportResultsPanelTest.cpp)
+target_link_libraries(import_results_panel_test PRIVATE qvw_ui Qt6::Test)
+add_test(NAME import_results_panel COMMAND import_results_panel_test)
+set_tests_properties(import_results_panel PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen")
+
+add_executable(creation_efficiency_e2e_test integration/CreationEfficiencyE2ETest.cpp)
+target_link_libraries(creation_efficiency_e2e_test PRIVATE qvw_ui qvw_controllers Qt6::Test)
+target_compile_definitions(creation_efficiency_e2e_test PRIVATE QVW_SOURCE_DIR="${PROJECT_SOURCE_DIR}")

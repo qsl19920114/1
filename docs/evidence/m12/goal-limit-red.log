@@ -1,0 +1,94 @@
+Test project /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build
+    Start 27: agent_panel
+1/2 Test #27: agent_panel ......................***Failed    0.75 sec
+********* Start testing of AgentPanelTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : AgentPanelTest::initTestCase()
+PASS   : AgentPanelTest::composingAgainHidesPreviousTaskActions()
+PASS   : AgentPanelTest::reusedGoalRevokesReviewAndWaitsForExplicitGeneration()
+FAIL!  : AgentPanelTest::composeGoalUsesTheControllersUtf8ByteLimit(ascii-5000-bytes) 'panel.composeGoal(goal)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentPanelTest.cpp(110)]
+FAIL!  : AgentPanelTest::composeGoalUsesTheControllersUtf8ByteLimit(ascii-8192-bytes) 'panel.composeGoal(goal)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentPanelTest.cpp(110)]
+PASS   : AgentPanelTest::composeGoalUsesTheControllersUtf8ByteLimit(chinese-8190-bytes)
+PASS   : AgentPanelTest::composeGoalUsesTheControllersUtf8ByteLimit(exact-whitespace-and-newlines)
+PASS   : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(unavailable)
+PASS   : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(thinking)
+PASS   : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(applying)
+PASS   : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(creating)
+PASS   : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(undoing)
+PASS   : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(empty)
+PASS   : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(ascii-8193-bytes)
+FAIL!  : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(chinese-8193-bytes) '!accepted' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentPanelTest.cpp(128)]
+PASS   : AgentPanelTest::reviewCanReturnToGoalWithoutExecutingOrKeepingApproval()
+PASS   : AgentPanelTest::stagesShowOnlyRelevantActionsAndKeepRealCounts()
+PASS   : AgentPanelTest::reviewSummarizesEscapedChangesAndExactImpactsBeforeEditing()
+PASS   : AgentPanelTest::actualSelectionChangesWithoutRestrictingRequestScope()
+PASS   : AgentPanelTest::multilineGoalUsesCurrentCodexAndExplicitScope()
+PASS   : AgentPanelTest::creationEditsCardsAndOrderWithIntegerFrames()
+PASS   : AgentPanelTest::editReviewKeepsActualFieldIdsAndPrimitiveTypes()
+PASS   : AgentPanelTest::clarificationAndUnknownFieldsCannotBeApproved()
+PASS   : AgentPanelTest::realProgressLocksMutationAndKeepsStopAvailable()
+PASS   : AgentPanelTest::stalePlanIsVisibleAndVersionsCompareFingerprint()
+PASS   : AgentPanelTest::assetsShowLocalThumbnailsWithoutPaths()
+QWARN  : AgentPanelTest::createConfirmationEmitsEditedPlanAndExplicitNewPath() This plugin does not support propagateSizeHints()
+PASS   : AgentPanelTest::createConfirmationEmitsEditedPlanAndExplicitNewPath()
+QWARN  : AgentPanelTest::creationRejectsExistingDestinationAndInvalidTotals() This plugin does not support propagateSizeHints()
+QWARN  : AgentPanelTest::creationRejectsExistingDestinationAndInvalidTotals() This plugin does not support propagateSizeHints()
+PASS   : AgentPanelTest::creationRejectsExistingDestinationAndInvalidTotals()
+PASS   : AgentPanelTest::unverifiedExportDoesNotLookLikeACompletedArtifact()
+PASS   : AgentPanelTest::restoredTaskDisplaysItsGoalAndActualScope()
+PASS   : AgentPanelTest::generatingAfterRestoreUsesVisibleScopeBeforeGoal(unchecked-clears-restored-ending-scope)
+PASS   : AgentPanelTest::generatingAfterRestoreUsesVisibleScopeBeforeGoal(checked-uses-real-intro-selection)
+QWARN  : AgentPanelTest::staleWhileCreationDialogIsOpenRevokesConfirmation() This plugin does not support propagateSizeHints()
+PASS   : AgentPanelTest::staleWhileCreationDialogIsOpenRevokesConfirmation()
+QWARN  : AgentPanelTest::taskPanelFitsWorkbenchWidth() This plugin does not support propagateSizeHints()
+PASS   : AgentPanelTest::taskPanelFitsWorkbenchWidth()
+PASS   : AgentPanelTest::newerSnapshotAdvancesEngineeringVersionAfterManualEdit()
+PASS   : AgentPanelTest::compiledSnapshotDoesNotConfirmVisualPreviewVersion()
+PASS   : AgentPanelTest::visualPreviewVersionMustMatchCurrentCompiledSnapshot()
+PASS   : AgentPanelTest::idleWithoutTaskClearsPreviousReview(create)
+PASS   : AgentPanelTest::idleWithoutTaskClearsPreviousReview(edit)
+PASS   : AgentPanelTest::idleWithoutTaskClearsPreviousReview(clarify)
+QWARN  : AgentPanelTest::closingTaskDismissesPendingCreationDialog() This plugin does not support propagateSizeHints()
+PASS   : AgentPanelTest::closingTaskDismissesPendingCreationDialog()
+PASS   : AgentPanelTest::cleanupTestCase()
+Totals: 39 passed, 3 failed, 0 skipped, 0 blacklisted, 218ms
+********* Finished testing of AgentPanelTest *********
+
+    Start 35: history_panel
+2/2 Test #35: history_panel ....................***Failed    0.65 sec
+********* Start testing of HistoryPanelTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : HistoryPanelTest::initTestCase()
+PASS   : HistoryPanelTest::currentProjectFilterAndLiveUpdatesPreserveVisibleSelection()
+PASS   : HistoryPanelTest::reusesOnlyTheFullStructuredGoalAndHonorsAvailability()
+FAIL!  : HistoryPanelTest::reusableGoalsUseTheControllersUtf8ByteLimit(ascii-5000-bytes) 'reuse->isEnabled()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/HistoryPanelTest.cpp(59)]
+FAIL!  : HistoryPanelTest::reusableGoalsUseTheControllersUtf8ByteLimit(ascii-8192-bytes) 'reuse->isEnabled()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/HistoryPanelTest.cpp(59)]
+PASS   : HistoryPanelTest::reusableGoalsUseTheControllersUtf8ByteLimit(chinese-8190-bytes)
+PASS   : HistoryPanelTest::reusableGoalsUseTheControllersUtf8ByteLimit(exact-whitespace-and-newlines)
+PASS   : HistoryPanelTest::legacyOrInvalidGoalsCannotBeReused(legacy-missing)
+PASS   : HistoryPanelTest::legacyOrInvalidGoalsCannotBeReused(empty)
+PASS   : HistoryPanelTest::legacyOrInvalidGoalsCannotBeReused(wrong-type)
+FAIL!  : HistoryPanelTest::legacyOrInvalidGoalsCannotBeReused(ascii-8193-bytes) 'reuse->toolTip().contains("8192")' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/HistoryPanelTest.cpp(72)]
+FAIL!  : HistoryPanelTest::legacyOrInvalidGoalsCannotBeReused(chinese-8193-bytes) '!reuse->isEnabled()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/HistoryPanelTest.cpp(71)]
+PASS   : HistoryPanelTest::searchesAllUserFacingFieldsCaseInsensitively()
+PASS   : HistoryPanelTest::filtersExplicitAndLegacyKindsWithoutGuessingFromTitles()
+PASS   : HistoryPanelTest::cleanupTestCase()
+Totals: 11 passed, 4 failed, 0 skipped, 0 blacklisted, 163ms
+********* Finished testing of HistoryPanelTest *********
+
+
+0% tests passed, 2 tests failed out of 2
+
+Total Test time (real) =   1.45 sec
+
+The following tests FAILED:
+	 27 - agent_panel (Failed)
+	 35 - history_panel (Failed)
+Errors while running CTest

@@ -8,6 +8,8 @@
 namespace qvw::infra {
 namespace {
 constexpr qint64 maxBytes=4*1024*1024;
+constexpr qint64 maxRecordBytes=64*1024;
+constexpr qint64 maxHistoryBytes=3*1024*1024;
 bool fail(QString *error,const QString &message){if(error)*error=message;return false;}
 bool safePath(const QString &path){auto info=QFileInfo(path);if(info.exists()&& !info.isFile())return false;while(!info.filePath().isEmpty()){if(info.isSymLink()){
 #ifdef Q_OS_MAC
@@ -26,7 +28,13 @@ bool WorkspaceStore::load(QString *error){
  const auto doc=QJsonDocument::fromJson(file.read(maxBytes+1));const auto obj=doc.object();
  if(!doc.isObject()||obj["format"]!="framelab.workspace@1"||!obj["recent"].isArray()||!obj["history"].isArray()||!obj["layout"].isObject())return fail(error,"工作区记录格式无效，已使用默认布局。");
  QJsonArray recent,history;for(const auto &v:obj["recent"].toArray()){auto r=v.toObject();if(!r["path"].isString()||!QDir::isAbsolutePath(r["path"].toString()))continue;recent.append(r);if(recent.size()==12)break;}
- for(const auto &v:obj["history"].toArray()){if(!v.isObject()||v.toObject()["id"].toString().isEmpty()||QJsonDocument(v.toObject()).toJson(QJsonDocument::Compact).size()>16384)continue;history.append(v);if(history.size()==200)break;}
+ qint64 historyBytes=2;
+ for(const auto &v:obj["history"].toArray()){
+  const auto bytes=QJsonDocument(v.toObject()).toJson(QJsonDocument::Compact).size();
+  if(!v.isObject()||v.toObject()["id"].toString().isEmpty()||bytes>maxRecordBytes)continue;
+  const auto added=bytes+(history.isEmpty()?0:1);if(historyBytes+added>maxHistoryBytes)break;
+  history.append(v);historyBytes+=added;if(history.size()==200)break;
+ }
  m_layout=obj["layout"].toObject();m_recent=recent;m_history=history;if(error)error->clear();return true;
 }
 bool WorkspaceStore::save(QString *error) const {
@@ -41,9 +49,13 @@ int WorkspaceStore::frame(const QString &manifest) const {for(const auto &v:m_re
 void WorkspaceStore::setFrame(const QString &manifest,int frame){for(int i=0;i<m_recent.size();++i){auto r=m_recent[i].toObject();if(r["path"]==manifest){r["frame"]=qMax(0,frame);m_recent.replace(i,r);return;}}}
 void WorkspaceStore::record(QJsonObject record){
  if(record["id"].toString().isEmpty())return;record["time"]=QDateTime::currentDateTime().toString(Qt::ISODate);
- if(QJsonDocument(record).toJson(QJsonDocument::Compact).size()>16384){record["detail"]=record["detail"].toString().left(2000);record.remove("events");}
- if(QJsonDocument(record).toJson(QJsonDocument::Compact).size()>16384)return;
+ if(QJsonDocument(record).toJson(QJsonDocument::Compact).size()>maxRecordBytes){record["detail"]=record["detail"].toString().left(2000);record.remove("events");}
+ if(QJsonDocument(record).toJson(QJsonDocument::Compact).size()>maxRecordBytes)record["detail"]=QString();
+ if(QJsonDocument(record).toJson(QJsonDocument::Compact).size()>maxRecordBytes)return;
  for(int i=m_history.size()-1;i>=0;--i)if(m_history[i].toObject()["id"]==record["id"])m_history.removeAt(i);
- m_history.prepend(record);while(m_history.size()>200)m_history.removeLast();
+ m_history.prepend(record);qint64 historyBytes=QJsonDocument(m_history).toJson(QJsonDocument::Compact).size();
+ while(m_history.size()>200||historyBytes>maxHistoryBytes){
+  historyBytes-=QJsonDocument(m_history.last().toObject()).toJson(QJsonDocument::Compact).size()+(m_history.size()>1?1:0);m_history.removeLast();
+ }
 }
 }

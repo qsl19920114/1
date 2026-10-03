@@ -1,0 +1,61 @@
+[  0%] Built target qvw_infra_autogen_timestamp_deps
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  0%] Built target qvw_domain_autogen
+[  5%] Automatic MOC for target qvw_infra
+[ 15%] Built target qvw_domain
+[ 15%] Built target qvw_infra_autogen
+[ 30%] Built target qvw_infra
+[ 30%] Built target qvw_services_autogen_timestamp_deps
+[ 30%] Built target qvw_backend_autogen_timestamp_deps
+[ 30%] Automatic MOC for target qvw_backend
+[ 35%] Automatic MOC for target qvw_services
+[ 35%] Built target qvw_backend_autogen
+[ 35%] Built target qvw_services_autogen
+[ 50%] Built target qvw_backend
+[ 70%] Built target qvw_services
+[ 70%] Built target qvw_controllers_autogen_timestamp_deps
+[ 75%] Automatic MOC for target qvw_controllers
+[ 75%] Built target qvw_controllers_autogen
+[ 90%] Built target qvw_controllers
+[ 90%] Built target asset_library_test_autogen_timestamp_deps
+[ 95%] Automatic MOC for target asset_library_test
+[ 95%] Built target asset_library_test_autogen
+[ 95%] Building CXX object tests/CMakeFiles/asset_library_test.dir/unit/AssetLibraryTest.cpp.o
+/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AssetLibraryTest.cpp:116:380: error: no member named 'importReportReady' in 'qvw::controllers::DocumentController'
+  116 |   QTemporaryDir dir;controllers::DocumentController doc;QVERIFY(doc.create(QString(QVW_SOURCE_DIR)+"/templates/title-card",dir.filePath("project"),"retry"));QImage image(10,10,QImage::Format_RGB32);image.fill(Qt::red);const auto good=dir.filePath("good.png"),missing=dir.filePath("missing.png");QVERIFY(image.save(good));QSignalSpy reports(&doc,&controllers::DocumentController::importReportReady),finished(&doc,&controllers::DocumentController::importBatchFinished);QVERIFY(doc.importFiles({good,missing}));QTRY_COMPARE(finished.count(),1);const auto report=reports.last()[0].toJsonObject();QCOMPARE(report["entries"].toArray()[0].toObject()["state"].toString(),QString("imported"));QCOMPARE(report["entries"].toArray()[1].toObject()["state"].toString(),QString("failed"));
+      |                                                                                                                                                                                                                                                                                                                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AssetLibraryTest.cpp:117:139: error: no member named 'retryIncompleteImports' in 'qvw::controllers::DocumentController'
+  117 |   image.fill(Qt::blue);QVERIFY(image.save(missing));QSignalSpy imported(&doc,&controllers::DocumentController::assetImported);QVERIFY(doc.retryIncompleteImports());QTRY_COMPARE(finished.count(),2);QCOMPARE(imported.count(),1);QCOMPARE(finished.last()[1].toInt(),1);QCOMPARE(doc.project().assets.size(),2);QVERIFY(!doc.retryIncompleteImports());
+      |                                                                                                                                       ~~~ ^
+/opt/homebrew/opt/qt/lib/QtTest.framework/Headers/qtestcase.h:67:43: note: expanded from macro 'QVERIFY'
+   67 |     if (!QTest::qVerify(static_cast<bool>(statement), #statement, "", __FILE__, __LINE__))\
+      |                                           ^~~~~~~~~
+/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AssetLibraryTest.cpp:117:319: error: no member named 'retryIncompleteImports' in 'qvw::controllers::DocumentController'
+  117 |   image.fill(Qt::blue);QVERIFY(image.save(missing));QSignalSpy imported(&doc,&controllers::DocumentController::assetImported);QVERIFY(doc.retryIncompleteImports());QTRY_COMPARE(finished.count(),2);QCOMPARE(imported.count(),1);QCOMPARE(finished.last()[1].toInt(),1);QCOMPARE(doc.project().assets.size(),2);QVERIFY(!doc.retryIncompleteImports());
+      |                                                                                                                                                                                                                                                                                                                           ~~~ ^
+/opt/homebrew/opt/qt/lib/QtTest.framework/Headers/qtestcase.h:67:43: note: expanded from macro 'QVERIFY'
+   67 |     if (!QTest::qVerify(static_cast<bool>(statement), #statement, "", __FILE__, __LINE__))\
+      |                                           ^~~~~~~~~
+/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AssetLibraryTest.cpp:120:626: error: no member named 'retryIncompleteImports' in 'qvw::controllers::DocumentController'
+  120 |   QTemporaryDir dir;controllers::DocumentController doc;QVERIFY(doc.create(QString(QVW_SOURCE_DIR)+"/templates/title-card",dir.filePath("project"),"retry"));QImage image(10,10,QImage::Format_RGB32);image.fill(Qt::red);const auto first=dir.filePath("first.png"),second=dir.filePath("second.png");QVERIFY(image.save(first));image.fill(Qt::blue);QVERIFY(image.save(second));const auto connection=connect(&doc,&controllers::DocumentController::importProgress,&doc,[&]{doc.cancelVideoImport();});QSignalSpy finished(&doc,&controllers::DocumentController::importBatchFinished);QVERIFY(doc.importFiles({first,second}));QVERIFY(!doc.retryIncompleteImports());QTRY_COMPARE(finished.count(),1);disconnect(connection);QVERIFY(doc.retryIncompleteImports());QTRY_COMPARE(finished.count(),2);QCOMPARE(finished.last()[1].toInt(),1);QCOMPARE(doc.project().assets.size(),2);
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ~~~ ^
+/opt/homebrew/opt/qt/lib/QtTest.framework/Headers/qtestcase.h:67:43: note: expanded from macro 'QVERIFY'
+   67 |     if (!QTest::qVerify(static_cast<bool>(statement), #statement, "", __FILE__, __LINE__))\
+      |                                           ^~~~~~~~~
+/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AssetLibraryTest.cpp:120:720: error: no member named 'retryIncompleteImports' in 'qvw::controllers::DocumentController'
+  120 |   QTemporaryDir dir;controllers::DocumentController doc;QVERIFY(doc.create(QString(QVW_SOURCE_DIR)+"/templates/title-card",dir.filePath("project"),"retry"));QImage image(10,10,QImage::Format_RGB32);image.fill(Qt::red);const auto first=dir.filePath("first.png"),second=dir.filePath("second.png");QVERIFY(image.save(first));image.fill(Qt::blue);QVERIFY(image.save(second));const auto connection=connect(&doc,&controllers::DocumentController::importProgress,&doc,[&]{doc.cancelVideoImport();});QSignalSpy finished(&doc,&controllers::DocumentController::importBatchFinished);QVERIFY(doc.importFiles({first,second}));QVERIFY(!doc.retryIncompleteImports());QTRY_COMPARE(finished.count(),1);disconnect(connection);QVERIFY(doc.retryIncompleteImports());QTRY_COMPARE(finished.count(),2);QCOMPARE(finished.last()[1].toInt(),1);QCOMPARE(doc.project().assets.size(),2);
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ~~~ ^
+/opt/homebrew/opt/qt/lib/QtTest.framework/Headers/qtestcase.h:67:43: note: expanded from macro 'QVERIFY'
+   67 |     if (!QTest::qVerify(static_cast<bool>(statement), #statement, "", __FILE__, __LINE__))\
+      |                                           ^~~~~~~~~
+/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AssetLibraryTest.cpp:121:215: error: no member named 'retryIncompleteImports' in 'qvw::controllers::DocumentController'
+  121 |   QVERIFY(doc.importFiles({dir.filePath("absent.png")}));QTRY_COMPARE(finished.count(),3);doc.close();QVERIFY(doc.create(QString(QVW_SOURCE_DIR)+"/templates/title-card",dir.filePath("other"),"other"));QVERIFY(!doc.retryIncompleteImports());QCOMPARE(doc.project().assets.size(),0);
+      |                                                                                                                                                                                                                   ~~~ ^
+/opt/homebrew/opt/qt/lib/QtTest.framework/Headers/qtestcase.h:67:43: note: expanded from macro 'QVERIFY'
+   67 |     if (!QTest::qVerify(static_cast<bool>(statement), #statement, "", __FILE__, __LINE__))\
+      |                                           ^~~~~~~~~
+6 errors generated.
+make[3]: *** [tests/CMakeFiles/asset_library_test.dir/unit/AssetLibraryTest.cpp.o] Error 1
+make[2]: *** [tests/CMakeFiles/asset_library_test.dir/all] Error 2
+make[1]: *** [tests/CMakeFiles/asset_library_test.dir/rule] Error 2
+make: *** [asset_library_test] Error 2

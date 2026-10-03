@@ -2,6 +2,8 @@
 #include "services/ProjectStore.h"
 #include "services/AssetService.h"
 #include <QtTest>
+#include <QJsonObject>
+#include <QJsonArray>
 #include <QTemporaryDir>
 #include <QImage>
 #include <QFile>
@@ -31,6 +33,11 @@ else:
 class AssetLibraryTest:public QObject {
  Q_OBJECT
 private slots:
+ void recoveryResetCannotPublishClosedProject(){
+  QTemporaryDir dir;controllers::DocumentController doc;QSignalSpy loaded(&doc,&controllers::DocumentController::projectLoaded),changed(&doc,&controllers::DocumentController::projectChanged);
+  bool closed=false;connect(&doc,&controllers::DocumentController::importReportReady,&doc,[&](const QJsonObject &r){if(r.isEmpty()&&!closed){closed=true;doc.close();}});
+  doc.create(QString(QVW_SOURCE_DIR)+"/templates/title-card",dir.filePath("project"),"closed");QVERIFY(closed);QCOMPARE(loaded.size(),0);QCOMPARE(changed.size(),0);
+ }
  void missingOriginalCanBeRestoredButDifferentContentCannot(){
   QTemporaryDir dir;controllers::DocumentController doc;QVERIFY(doc.create(QString(QVW_SOURCE_DIR)+"/templates/title-card",dir.filePath("project"),"repair"));QImage image(10,10,QImage::Format_RGB32);image.fill(Qt::red);const auto original=dir.filePath("original.png");QVERIFY(image.save(original));QVERIFY(doc.importImage(original));const auto asset=doc.project().assets.last();const auto path=QDir(doc.project().rootPath).filePath(asset.path);QVERIFY(QFile::remove(path));domain::Project inspected;QVector<domain::Asset> missing;QString error;QVERIFY(!services::ProjectStore::load(doc.project().manifestPath(),&inspected,&error));
   QVERIFY(services::ProjectStore::inspectMissingAssets(doc.project().manifestPath(),&inspected,&missing,&error));QCOMPARE(missing.size(),1);image.fill(Qt::blue);const auto changed=dir.filePath("changed.png");QVERIFY(image.save(changed));QVERIFY(!services::AssetService::restoreMissing(inspected,asset,changed,&error));QVERIFY(!QFileInfo::exists(path));QVERIFY2(services::AssetService::restoreMissing(inspected,asset,original,&error),qPrintable(error));QVERIFY(services::ProjectStore::load(inspected.manifestPath(),&inspected,&error));QVERIFY(!services::AssetService::restoreMissing(inspected,asset,changed,&error));
@@ -108,6 +115,15 @@ private slots:
   QTemporaryDir dir;controllers::DocumentController doc;QVERIFY(doc.create(QString(QVW_SOURCE_DIR)+"/templates/title-card",dir.filePath("project"),"failure"));QImage image(10,10,QImage::Format_RGB32);image.fill(Qt::green);const auto still=dir.filePath("still.png"),video=dir.filePath("movie.mp4");QVERIFY(image.save(still));QVERIFY(writeBytes(video,"fake video"));
   doc.setMediaTools(fakeProbe(dir.filePath("probe")),python(dir.filePath("decode"),"import sys\nsys.exit(1)"),QProcessEnvironment::systemEnvironment());
   QSignalSpy finished(&doc,&controllers::DocumentController::importBatchFinished),state(&doc,&controllers::DocumentController::videoImportStateChanged);QVERIFY(doc.importFiles({video,still}));QTRY_COMPARE_WITH_TIMEOUT(finished.size(),1,5000);QCOMPARE(finished[0][0].toInt(),1);QCOMPARE(finished[0][2].toStringList().size(),1);QCOMPARE(doc.project().assets.size(),1);QCOMPARE(state.size(),2);
+ }
+
+ void retryOnlyIncompleteFilesAfterRepairingSource(){
+  QTemporaryDir dir;controllers::DocumentController doc;QVERIFY(doc.create(QString(QVW_SOURCE_DIR)+"/templates/title-card",dir.filePath("project"),"retry"));QImage image(10,10,QImage::Format_RGB32);image.fill(Qt::red);const auto good=dir.filePath("good.png"),missing=dir.filePath("missing.png");QVERIFY(image.save(good));QSignalSpy reports(&doc,&controllers::DocumentController::importReportReady),finished(&doc,&controllers::DocumentController::importBatchFinished);QVERIFY(doc.importFiles({good,missing}));QTRY_COMPARE(finished.count(),1);const auto report=reports.last()[0].toJsonObject();QCOMPARE(report["entries"].toArray()[0].toObject()["state"].toString(),QString("imported"));QCOMPARE(report["entries"].toArray()[1].toObject()["state"].toString(),QString("failed"));
+  image.fill(Qt::blue);QVERIFY(image.save(missing));QSignalSpy imported(&doc,&controllers::DocumentController::assetImported);QVERIFY(doc.retryIncompleteImports());QTRY_COMPARE(finished.count(),2);QCOMPARE(imported.count(),1);QCOMPARE(finished.last()[1].toInt(),1);QCOMPARE(doc.project().assets.size(),2);QVERIFY(!doc.retryIncompleteImports());
+ }
+ void cancelledQueueCanContinueAndProjectSwitchClearsRecovery(){
+  QTemporaryDir dir;controllers::DocumentController doc;QVERIFY(doc.create(QString(QVW_SOURCE_DIR)+"/templates/title-card",dir.filePath("project"),"retry"));QImage image(10,10,QImage::Format_RGB32);image.fill(Qt::red);const auto first=dir.filePath("first.png"),second=dir.filePath("second.png");QVERIFY(image.save(first));image.fill(Qt::blue);QVERIFY(image.save(second));const auto connection=connect(&doc,&controllers::DocumentController::importProgress,&doc,[&]{doc.cancelVideoImport();});QSignalSpy finished(&doc,&controllers::DocumentController::importBatchFinished);QVERIFY(doc.importFiles({first,second}));QVERIFY(!doc.retryIncompleteImports());QTRY_COMPARE(finished.count(),1);disconnect(connection);QVERIFY(doc.retryIncompleteImports());QTRY_COMPARE(finished.count(),2);QCOMPARE(finished.last()[1].toInt(),1);QCOMPARE(doc.project().assets.size(),2);
+  QVERIFY(doc.importFiles({dir.filePath("absent.png")}));QTRY_COMPARE(finished.count(),3);doc.close();QVERIFY(doc.create(QString(QVW_SOURCE_DIR)+"/templates/title-card",dir.filePath("other"),"other"));QVERIFY(!doc.retryIncompleteImports());QCOMPARE(doc.project().assets.size(),0);
  }
 
 };

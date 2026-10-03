@@ -103,6 +103,14 @@ void AgentPanel::showStatus(const domain::AgentStatus &status) {
     m_message->setText(status.message); m_message->setVisible(!status.message.isEmpty());
     m_events->setPlainText(status.events.mid(qMax(qsizetype(0), status.events.size() - 200)).join('\n').right(65536)); updateActions(); updateVersions();
 }
+bool AgentPanel::composeGoal(const QString &goal) {
+    if (!m_available || busyPhase(m_status.phase) || m_status.phase == "restoring" || goal.trimmed().isEmpty() || goal.toUtf8().size() > 8192) return false;
+    if (m_status.canApprove || m_status.phase == "review") emit stopRequested();
+    m_status.canApprove = false;
+    m_review->clearPlan(); m_publicOutput->clear(); m_composing = true;
+    m_scope->setChecked(false); m_goal->setPlainText(goal);
+    updateActions(); m_goal->setFocus(Qt::OtherFocusReason); return true;
+}
 void AgentPanel::showPublicMessage(const QString &text) {
     if (m_status.phase != "thinking" || text.isEmpty()) return;
     m_publicOutput->setPlainText(text.left(65536));
@@ -160,16 +168,16 @@ void AgentPanel::updateActions() {
     m_goal->setEnabled(editable); m_images->setEnabled(editable); m_scope->setEnabled(editable && !m_selectedEntity.isEmpty());
     m_generate->setEnabled(editable && !m_goal->toPlainText().trimmed().isEmpty());
     m_review->setEditingEnabled(editable && m_status.phase != "stale"); m_review->setApprovalEnabled(editable && !m_composing && m_status.canApprove && m_status.phase != "stale");
-    m_stop->setEnabled(busy); m_retry->setEnabled(editable && m_status.canRetry && (m_status.phase == "failed" || m_status.phase == "paused"));
-    m_repair->setEnabled(editable && (m_status.phase == "failed" || m_status.phase == "paused" || m_status.phase == "stale"));
-    m_undo->setEnabled(editable && m_status.canUndo); m_restore->setEnabled(editable);
+    m_stop->setEnabled(busy); m_retry->setEnabled(editable && !m_composing && m_status.canRetry && (m_status.phase == "failed" || m_status.phase == "paused"));
+    m_repair->setEnabled(editable && !m_composing && (m_status.phase == "failed" || m_status.phase == "paused" || m_status.phase == "stale"));
+    m_undo->setEnabled(editable && !m_composing && m_status.canUndo); m_restore->setEnabled(editable && (m_status.phase == "idle" || !m_composing));
     const auto phase = m_status.phase;
     const bool review = phase == "review" || phase == "stale" || phase == "clarify";
     const bool failed = phase == "failed" || phase == "paused" || phase == "stale";
     const bool result = phase == "complete" || phase == "completed" || phase == "cancelled" || failed;
     const bool compose = m_composing && !busy;
     m_stage->setText(phase == "thinking" ? QStringLiteral("1 目标 → 正在生成方案")
-        : review ? QStringLiteral("2 审阅方案 → 确认后执行")
+        : review && !compose ? QStringLiteral("2 审阅方案 → 确认后执行")
         : busy ? QStringLiteral("3 执行 → 等待逐项确认")
         : result && !compose ? QStringLiteral("4 结果 → 继续创作") : QStringLiteral("1 目标 → 2 审阅 → 3 执行 → 4 结果"));
     m_goal->setVisible(compose); m_selection->setVisible(compose && !m_selectedEntity.isEmpty());
@@ -177,8 +185,8 @@ void AgentPanel::updateActions() {
     m_assetSummary->setVisible(compose); m_assets->setVisible(compose && m_assets->count() > 0); m_generate->setVisible(compose);
     m_review->setVisible(review && (!compose || phase == "clarify")); m_stop->setVisible(busy);
     m_revise->setVisible(phase == "review" && !compose); m_revise->setEnabled(editable && phase == "review");
-    m_retry->setVisible(failed && m_status.canRetry); m_repair->setVisible(failed);
-    m_undo->setVisible(result && m_status.canUndo); m_restore->setVisible(phase == "idle" || failed);
+    m_retry->setVisible(!compose && failed && m_status.canRetry); m_repair->setVisible(!compose && failed);
+    m_undo->setVisible(!compose && result && m_status.canUndo); m_restore->setVisible(phase == "idle" || (!compose && failed));
     m_continue->setVisible(result && !compose); m_publicOutput->setVisible((phase == "thinking" || m_detailsExpanded) && !m_publicOutput->toPlainText().isEmpty());
 }
 }

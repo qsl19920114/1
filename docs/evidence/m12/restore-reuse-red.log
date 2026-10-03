@@ -1,0 +1,16 @@
+********* Start testing of AgentPanelTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : AgentPanelTest::initTestCase()
+PASS   : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(unavailable)
+PASS   : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(thinking)
+PASS   : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(applying)
+PASS   : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(creating)
+PASS   : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(undoing)
+FAIL!  : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(restoring) '!accepted' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentPanelTest.cpp(128)]
+PASS   : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(empty)
+PASS   : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(ascii-8193-bytes)
+PASS   : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(chinese-8193-bytes)
+PASS   : AgentPanelTest::cleanupTestCase()
+Totals: 10 passed, 1 failed, 0 skipped, 0 blacklisted, 122ms
+********* Finished testing of AgentPanelTest *********

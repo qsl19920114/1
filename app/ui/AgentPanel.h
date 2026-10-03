@@ -22,6 +22,7 @@ public:
     void setVersions(const domain::Snapshot &, const domain::ExportTask &);
     void setPreviewVersion(const domain::PreviewVersion &);
 public slots:
+    bool composeGoal(const QString &goal);
     void showPublicMessage(const QString &text);
 signals:
     void generateRequested(const QString &goal);

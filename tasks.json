@@ -171,6 +171,21 @@
         "docs/evidence/m11/delivery-integrity.json"
       ],
       "reason": "六项优化完成，34套回归、实际混合素材/恢复/定位/导出、真实公开模型输出、独立审查及1.3搬移启动和交付完整性通过。"
+    },
+    "G12": {
+      "milestone": "M12",
+      "definition": "完整目标查找复用、素材筛选和仅未完成项导入恢复；真实编辑导出及打包交付",
+      "verdict": "PASS",
+      "reason": "最终36/36 CTest（184.03秒）、真实Qt/Hypit联调3/3、规格与质量复审通过；两项质量发现已修复；1.4.0搬移原生启动、82个Mach-O/严格本地签名/248份许可材料和ZIP一致性通过。",
+      "evidence": [
+        "docs/evidence/m12/ctest-quality-final.log",
+        "docs/evidence/m12/goal-limit-green.log",
+        "docs/evidence/m12/efficiency-e2e.json",
+        "docs/evidence/m12/spec-review.md",
+        "docs/evidence/m12/quality-review_summary.md",
+        "docs/evidence/m12/packaged-native.json",
+        "docs/evidence/m12/delivery-integrity.json"
+      ]
     }
   },
   "tasks": [
@@ -1073,6 +1088,80 @@
         "docs/evidence/m11/quality-review_summary.md",
         "docs/evidence/m11/packaged-native.json",
         "docs/evidence/m11/delivery-integrity.json"
+      ]
+    },
+    {
+      "id": "T048",
+      "milestone": "M12",
+      "title": "历史搜索筛选与完整目标复用",
+      "status": "done",
+      "dependsOn": [
+        "T047"
+      ],
+      "evidence": [
+        "docs/evidence/m12/ctest-quality-final.log",
+        "docs/evidence/m12/goal-limit-green.log",
+        "docs/evidence/m12/efficiency-e2e.json",
+        "docs/evidence/m12/spec-review.md",
+        "docs/evidence/m12/quality-review_summary.md",
+        "docs/evidence/m12/packaged-native.json",
+        "docs/evidence/m12/delivery-integrity.json"
+      ]
+    },
+    {
+      "id": "T049",
+      "milestone": "M12",
+      "title": "素材名称类型筛选与可见选择保护",
+      "status": "done",
+      "dependsOn": [
+        "T047"
+      ],
+      "evidence": [
+        "docs/evidence/m12/ctest-quality-final.log",
+        "docs/evidence/m12/goal-limit-green.log",
+        "docs/evidence/m12/efficiency-e2e.json",
+        "docs/evidence/m12/spec-review.md",
+        "docs/evidence/m12/quality-review_summary.md",
+        "docs/evidence/m12/packaged-native.json",
+        "docs/evidence/m12/delivery-integrity.json"
+      ]
+    },
+    {
+      "id": "T050",
+      "milestone": "M12",
+      "title": "导入逐项结果与未完成项恢复",
+      "status": "done",
+      "dependsOn": [
+        "T047"
+      ],
+      "evidence": [
+        "docs/evidence/m12/ctest-quality-final.log",
+        "docs/evidence/m12/goal-limit-green.log",
+        "docs/evidence/m12/efficiency-e2e.json",
+        "docs/evidence/m12/spec-review.md",
+        "docs/evidence/m12/quality-review_summary.md",
+        "docs/evidence/m12/packaged-native.json",
+        "docs/evidence/m12/delivery-integrity.json"
+      ]
+    },
+    {
+      "id": "T051",
+      "milestone": "M12",
+      "title": "最终回归、审查和1.4.0交付",
+      "status": "done",
+      "dependsOn": [
+        "T048",
+        "T049",
+        "T050"
+      ],
+      "evidence": [
+        "docs/evidence/m12/ctest-quality-final.log",
+        "docs/evidence/m12/goal-limit-green.log",
+        "docs/evidence/m12/efficiency-e2e.json",
+        "docs/evidence/m12/spec-review.md",
+        "docs/evidence/m12/quality-review_summary.md",
+        "docs/evidence/m12/packaged-native.json",
+        "docs/evidence/m12/delivery-integrity.json"
       ]
     }
   ]

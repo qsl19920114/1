@@ -1,0 +1,30 @@
+Test project /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build
+    Start 32: product_experience
+1/4 Test #32: product_experience ...............   Passed    1.20 sec
+    Start 33: workspace_store
+2/4 Test #33: workspace_store ..................***Failed    0.41 sec
+********* Start testing of WorkspaceStoreTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : WorkspaceStoreTest::initTestCase()
+PASS   : WorkspaceStoreTest::roundTripBoundedHistory()
+FAIL!  : WorkspaceStoreTest::longStructuredGoalSurvivesSave() Compared values are not the same
+   Actual   (store.history().size()): 0
+   Expected (1)                     : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/WorkspaceStoreTest.cpp(18)]
+PASS   : WorkspaceStoreTest::corruptInputAndSymlink()
+PASS   : WorkspaceStoreTest::cleanupTestCase()
+Totals: 4 passed, 1 failed, 0 skipped, 0 blacklisted, 23ms
+********* Finished testing of WorkspaceStoreTest *********
+
+    Start 34: asset_library
+3/4 Test #34: asset_library ....................   Passed    4.47 sec
+    Start 36: import_results_panel
+4/4 Test #36: import_results_panel .............   Passed    0.67 sec
+
+75% tests passed, 1 tests failed out of 4
+
+Total Test time (real) =   6.82 sec
+
+The following tests FAILED:
+	 33 - workspace_store (Failed)
+Errors while running CTest

@@ -69,6 +69,64 @@ class AgentPanelTest : public QObject {
     Q_OBJECT
 private slots:
     void initTestCase() { QApplication::setFont(QFont("PingFang SC")); }
+    void composingAgainHidesPreviousTaskActions() {
+        ui::AgentPanel panel; panel.setAvailable(true);
+        domain::AgentStatus status; status.taskId = "old-task"; status.phase = "failed"; status.canRetry = true; status.canUndo = true;
+        panel.showStatus(status); panel.findChild<QPushButton *>("agentContinue")->click();
+        for (const auto &name : {"agentRetry", "agentRepair", "agentUndo", "agentRestore"})
+            QVERIFY2(panel.findChild<QPushButton *>(name)->isHidden(), name);
+    }
+    void reusedGoalRevokesReviewAndWaitsForExplicitGeneration() {
+        ui::AgentPanel panel; panel.setAvailable(true); panel.setSelection("ending", "结尾");
+        auto *scope = panel.findChild<QCheckBox *>("agentScope"); scope->setChecked(true);
+        domain::AgentStatus status; status.taskId = "old-task"; status.phase = "thinking";
+        panel.showStatus(status); panel.showPublicMessage("旧方案公开输出");
+        status.phase = "review"; status.canApprove = true; panel.showStatus(status); panel.showPlan(editPlan(), snapshot());
+        QSignalSpy stopped(&panel, &ui::AgentPanel::stopRequested), generated(&panel, &ui::AgentPanel::generateRequested);
+        QSignalSpy approved(&panel, &ui::AgentPanel::approveRequested), retry(&panel, &ui::AgentPanel::retryRequested);
+        connect(&panel, &ui::AgentPanel::stopRequested, &panel, [&] { status.phase = "paused"; status.canApprove = false; panel.showStatus(status); });
+        const QString goal = "完整的历史目标\n保留最后一段与留白";
+        bool accepted = false;
+        QVERIFY(QMetaObject::invokeMethod(&panel, "composeGoal", Q_RETURN_ARG(bool, accepted), Q_ARG(QString, goal)));
+        QVERIFY(accepted); QCOMPARE(stopped.count(), 1); QCOMPARE(generated.count(), 0); QCOMPARE(approved.count(), 0); QCOMPARE(retry.count(), 0);
+        QCOMPARE(panel.findChild<QPlainTextEdit *>("agentGoal")->toPlainText(), goal); QVERIFY(!scope->isChecked());
+        QVERIFY(panel.findChild<QPlainTextEdit *>("agentPublicOutput")->toPlainText().isEmpty());
+        QVERIFY(panel.findChild<ui::PlanReviewPanel *>("agentPlanReview")->editedPlan().isEmpty());
+        auto *confirm = panel.findChild<QPushButton *>("planApprove"); QVERIFY(!confirm->isEnabled()); confirm->click(); QCOMPARE(approved.count(), 0);
+        for (const auto &name : {"agentRetry", "agentRepair", "agentUndo", "agentRestore"}) QVERIFY(panel.findChild<QPushButton *>(name)->isHidden());
+        panel.showStatus(status); QCOMPARE(panel.findChild<QPlainTextEdit *>("agentGoal")->toPlainText(), goal);
+        panel.findChild<QPushButton *>("agentGenerate")->click(); QCOMPARE(generated.count(), 1); QCOMPARE(generated.first().first().toString(), goal);
+    }
+    void composeGoalUsesTheControllersUtf8ByteLimit_data() {
+        QTest::addColumn<QString>("goal");
+        QTest::newRow("ascii-5000-bytes") << QString(5000, QChar('x'));
+        QTest::newRow("ascii-8192-bytes") << QString(8192, QChar('x'));
+        QTest::newRow("chinese-8190-bytes") << QString(2730, QChar(u'长'));
+        QTest::newRow("exact-whitespace-and-newlines") << QString("  保留原始目标\n与换行  ");
+    }
+    void composeGoalUsesTheControllersUtf8ByteLimit() {
+        QFETCH(QString, goal); ui::AgentPanel panel; panel.setAvailable(true);
+        QSignalSpy generated(&panel, &ui::AgentPanel::generateRequested), approved(&panel, &ui::AgentPanel::approveRequested);
+        QVERIFY(panel.composeGoal(goal)); QCOMPARE(panel.findChild<QPlainTextEdit *>("agentGoal")->toPlainText(), goal);
+        QCOMPARE(generated.count(), 0); QCOMPARE(approved.count(), 0);
+    }
+    void reusedGoalRejectsUnavailableBusyAndInvalidInput_data() {
+        QTest::addColumn<bool>("available"); QTest::addColumn<QString>("phase"); QTest::addColumn<QString>("goal");
+        QTest::newRow("unavailable") << false << QString("idle") << QString("历史目标");
+        for (const auto &phase : {"thinking", "applying", "creating", "undoing", "restoring"}) QTest::newRow(phase) << true << QString(phase) << QString("历史目标");
+        QTest::newRow("empty") << true << QString("idle") << QString("  \n ");
+        QTest::newRow("ascii-8193-bytes") << true << QString("idle") << QString(8193, QChar('x'));
+        QTest::newRow("chinese-8193-bytes") << true << QString("idle") << QString(2731, QChar(u'长'));
+    }
+    void reusedGoalRejectsUnavailableBusyAndInvalidInput() {
+        QFETCH(bool, available); QFETCH(QString, phase); QFETCH(QString, goal);
+        ui::AgentPanel panel; panel.setAvailable(available); domain::AgentStatus status; status.phase = phase; panel.showStatus(status);
+        auto *input = panel.findChild<QPlainTextEdit *>("agentGoal"); input->setPlainText("已有草稿");
+        QSignalSpy stopped(&panel, &ui::AgentPanel::stopRequested), generated(&panel, &ui::AgentPanel::generateRequested), approved(&panel, &ui::AgentPanel::approveRequested);
+        bool accepted = true;
+        QVERIFY(QMetaObject::invokeMethod(&panel, "composeGoal", Q_RETURN_ARG(bool, accepted), Q_ARG(QString, goal)));
+        QVERIFY(!accepted); QCOMPARE(input->toPlainText(), QString("已有草稿")); QCOMPARE(stopped.count(), 0); QCOMPARE(generated.count(), 0); QCOMPARE(approved.count(), 0);
+    }
     void reviewCanReturnToGoalWithoutExecutingOrKeepingApproval() {
         ui::AgentPanel panel; panel.setAvailable(true); panel.showAssets(assets());
         auto *goal = panel.findChild<QPlainTextEdit *>("agentGoal"); goal->setPlainText("原目标");

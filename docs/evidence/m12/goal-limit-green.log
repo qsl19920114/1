@@ -1,0 +1,106 @@
+UpdateCTestConfiguration  from :/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build/DartConfiguration.tcl
+Parse Config file:/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build/DartConfiguration.tcl
+Test project /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build
+Constructing a list of tests
+Done constructing a list of tests
+Updating test list for fixtures
+Added 0 tests to meet fixture requirements
+Checking test dependency graph...
+Checking test dependency graph end
+test 27
+    Start 27: agent_panel
+
+27: Test command: /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build/tests/agent_panel_test
+27: Working Directory: /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build/tests
+27: Environment variables:
+27:  QT_QPA_PLATFORM=offscreen
+27: Test timeout computed to be: 1500
+27: ********* Start testing of AgentPanelTest *********
+27: Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+27: PASS   : AgentPanelTest::initTestCase()
+27: PASS   : AgentPanelTest::composingAgainHidesPreviousTaskActions()
+27: PASS   : AgentPanelTest::reusedGoalRevokesReviewAndWaitsForExplicitGeneration()
+27: PASS   : AgentPanelTest::composeGoalUsesTheControllersUtf8ByteLimit(ascii-5000-bytes)
+27: PASS   : AgentPanelTest::composeGoalUsesTheControllersUtf8ByteLimit(ascii-8192-bytes)
+27: PASS   : AgentPanelTest::composeGoalUsesTheControllersUtf8ByteLimit(chinese-8190-bytes)
+27: PASS   : AgentPanelTest::composeGoalUsesTheControllersUtf8ByteLimit(exact-whitespace-and-newlines)
+27: PASS   : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(unavailable)
+27: PASS   : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(thinking)
+27: PASS   : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(applying)
+27: PASS   : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(creating)
+27: PASS   : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(undoing)
+27: PASS   : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(empty)
+27: PASS   : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(ascii-8193-bytes)
+27: PASS   : AgentPanelTest::reusedGoalRejectsUnavailableBusyAndInvalidInput(chinese-8193-bytes)
+27: PASS   : AgentPanelTest::reviewCanReturnToGoalWithoutExecutingOrKeepingApproval()
+27: PASS   : AgentPanelTest::stagesShowOnlyRelevantActionsAndKeepRealCounts()
+27: PASS   : AgentPanelTest::reviewSummarizesEscapedChangesAndExactImpactsBeforeEditing()
+27: PASS   : AgentPanelTest::actualSelectionChangesWithoutRestrictingRequestScope()
+27: PASS   : AgentPanelTest::multilineGoalUsesCurrentCodexAndExplicitScope()
+27: PASS   : AgentPanelTest::creationEditsCardsAndOrderWithIntegerFrames()
+27: PASS   : AgentPanelTest::editReviewKeepsActualFieldIdsAndPrimitiveTypes()
+27: PASS   : AgentPanelTest::clarificationAndUnknownFieldsCannotBeApproved()
+27: PASS   : AgentPanelTest::realProgressLocksMutationAndKeepsStopAvailable()
+27: PASS   : AgentPanelTest::stalePlanIsVisibleAndVersionsCompareFingerprint()
+27: PASS   : AgentPanelTest::assetsShowLocalThumbnailsWithoutPaths()
+27: QWARN  : AgentPanelTest::createConfirmationEmitsEditedPlanAndExplicitNewPath() This plugin does not support propagateSizeHints()
+27: PASS   : AgentPanelTest::createConfirmationEmitsEditedPlanAndExplicitNewPath()
+27: QWARN  : AgentPanelTest::creationRejectsExistingDestinationAndInvalidTotals() This plugin does not support propagateSizeHints()
+27: QWARN  : AgentPanelTest::creationRejectsExistingDestinationAndInvalidTotals() This plugin does not support propagateSizeHints()
+27: PASS   : AgentPanelTest::creationRejectsExistingDestinationAndInvalidTotals()
+27: PASS   : AgentPanelTest::unverifiedExportDoesNotLookLikeACompletedArtifact()
+27: PASS   : AgentPanelTest::restoredTaskDisplaysItsGoalAndActualScope()
+27: PASS   : AgentPanelTest::generatingAfterRestoreUsesVisibleScopeBeforeGoal(unchecked-clears-restored-ending-scope)
+27: PASS   : AgentPanelTest::generatingAfterRestoreUsesVisibleScopeBeforeGoal(checked-uses-real-intro-selection)
+27: QWARN  : AgentPanelTest::staleWhileCreationDialogIsOpenRevokesConfirmation() This plugin does not support propagateSizeHints()
+27: PASS   : AgentPanelTest::staleWhileCreationDialogIsOpenRevokesConfirmation()
+27: QWARN  : AgentPanelTest::taskPanelFitsWorkbenchWidth() This plugin does not support propagateSizeHints()
+27: PASS   : AgentPanelTest::taskPanelFitsWorkbenchWidth()
+27: PASS   : AgentPanelTest::newerSnapshotAdvancesEngineeringVersionAfterManualEdit()
+27: PASS   : AgentPanelTest::compiledSnapshotDoesNotConfirmVisualPreviewVersion()
+27: PASS   : AgentPanelTest::visualPreviewVersionMustMatchCurrentCompiledSnapshot()
+27: PASS   : AgentPanelTest::idleWithoutTaskClearsPreviousReview(create)
+27: PASS   : AgentPanelTest::idleWithoutTaskClearsPreviousReview(edit)
+27: PASS   : AgentPanelTest::idleWithoutTaskClearsPreviousReview(clarify)
+27: QWARN  : AgentPanelTest::closingTaskDismissesPendingCreationDialog() This plugin does not support propagateSizeHints()
+27: PASS   : AgentPanelTest::closingTaskDismissesPendingCreationDialog()
+27: PASS   : AgentPanelTest::cleanupTestCase()
+27: Totals: 42 passed, 0 failed, 0 skipped, 0 blacklisted, 233ms
+27: ********* Finished testing of AgentPanelTest *********
+1/2 Test #27: agent_panel ......................   Passed    0.93 sec
+test 35
+    Start 35: history_panel
+
+35: Test command: /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build/tests/history_panel_test
+35: Working Directory: /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build/tests
+35: Environment variables:
+35:  QT_QPA_PLATFORM=offscreen
+35: Test timeout computed to be: 1500
+35: ********* Start testing of HistoryPanelTest *********
+35: Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+35: PASS   : HistoryPanelTest::initTestCase()
+35: PASS   : HistoryPanelTest::currentProjectFilterAndLiveUpdatesPreserveVisibleSelection()
+35: PASS   : HistoryPanelTest::reusesOnlyTheFullStructuredGoalAndHonorsAvailability()
+35: PASS   : HistoryPanelTest::reusableGoalsUseTheControllersUtf8ByteLimit(ascii-5000-bytes)
+35: PASS   : HistoryPanelTest::reusableGoalsUseTheControllersUtf8ByteLimit(ascii-8192-bytes)
+35: PASS   : HistoryPanelTest::reusableGoalsUseTheControllersUtf8ByteLimit(chinese-8190-bytes)
+35: PASS   : HistoryPanelTest::reusableGoalsUseTheControllersUtf8ByteLimit(exact-whitespace-and-newlines)
+35: PASS   : HistoryPanelTest::legacyOrInvalidGoalsCannotBeReused(legacy-missing)
+35: PASS   : HistoryPanelTest::legacyOrInvalidGoalsCannotBeReused(empty)
+35: PASS   : HistoryPanelTest::legacyOrInvalidGoalsCannotBeReused(wrong-type)
+35: PASS   : HistoryPanelTest::legacyOrInvalidGoalsCannotBeReused(ascii-8193-bytes)
+35: PASS   : HistoryPanelTest::legacyOrInvalidGoalsCannotBeReused(chinese-8193-bytes)
+35: PASS   : HistoryPanelTest::searchesAllUserFacingFieldsCaseInsensitively()
+35: PASS   : HistoryPanelTest::filtersExplicitAndLegacyKindsWithoutGuessingFromTitles()
+35: PASS   : HistoryPanelTest::cleanupTestCase()
+35: Totals: 15 passed, 0 failed, 0 skipped, 0 blacklisted, 173ms
+35: ********* Finished testing of HistoryPanelTest *********
+2/2 Test #35: history_panel ....................   Passed    0.64 sec
+
+The following tests passed:
+	agent_panel
+	history_panel
+
+100% tests passed out of 2
+
+Total Test time (real) =   1.63 sec

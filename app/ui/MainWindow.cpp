@@ -1,6 +1,7 @@
 #include "ui/AssetTree.h"
 #include <QImageReader>
 #include "ui/HistoryPanel.h"
+#include "ui/ImportResultsPanel.h"
 #include <QJsonObject>
 #include <QJsonArray>
 #include "ui/SceneStrip.h"
@@ -142,6 +143,11 @@ QWidget *MainWindow::buildProjectPanel() {
     m_libraryTabs=new QTabWidget;
     auto *assets=new QWidget;auto *assetLayout=new QVBoxLayout(assets);
     assetLayout->addWidget(copyLabel(QStringLiteral("拖入或批量导入图片/视频，双击放大预览。选择一个素材后可替换当前组件。视频使用前8秒，原音静音。")));
+    m_assetSearch=new QLineEdit;m_assetSearch->setObjectName("assetSearch");m_assetSearch->setPlaceholderText("搜索素材名称…");m_assetSearch->setClearButtonEnabled(true);assetLayout->addWidget(m_assetSearch);
+    auto *filters=new QHBoxLayout;m_assetType=new QComboBox;m_assetType->setObjectName("assetType");m_assetType->addItem("全部素材","all");m_assetType->addItem("图片","image");m_assetType->addItem("视频","video");filters->addWidget(m_assetType);
+    auto *clearFilter=new QPushButton("重置筛选");filters->addWidget(clearFilter);assetLayout->addLayout(filters);m_assetCount=copyLabel({});m_assetCount->setObjectName("assetCount");assetLayout->addWidget(m_assetCount);
+    connect(m_assetSearch,&QLineEdit::textChanged,this,&MainWindow::filterAssets);connect(m_assetType,&QComboBox::currentIndexChanged,this,&MainWindow::filterAssets);
+    connect(clearFilter,&QPushButton::clicked,this,[this]{m_assetSearch->clear();m_assetType->setCurrentIndex(0);});
     auto *assetTree=new AssetTree;m_assetTree=assetTree;connect(assetTree,&AssetTree::filesDropped,this,[this](const QStringList &paths){if(m_importAction->isEnabled())emit importFilesRequested(paths);else statusBar()->showMessage("请打开工程并等待当前操作完成后导入。",5000);});
     m_assetTree->setIconSize({52,38});m_assetTree->setObjectName("assets");m_assetTree->setHeaderLabels({"素材","尺寸"});m_assetTree->setRootIsDecorated(false);m_assetTree->header()->setSectionResizeMode(0,QHeaderView::Stretch);m_assetTree->header()->setSectionResizeMode(1,QHeaderView::ResizeToContents);assetLayout->addWidget(m_assetTree,1);
     connect(m_assetTree,&QTreeWidget::itemDoubleClicked,this,[this]{previewSelectedAsset();});
@@ -182,7 +188,7 @@ QWidget *MainWindow::buildPreviewPanel() {
     m_spaceSummary=copyLabel("预览由 Hypit 提供 · 本地素材创作");layout->addWidget(m_spaceSummary);return body;
 }
 QWidget *MainWindow::buildInspectorPanel() {
-    auto *tabs=new QTabWidget;
+    auto *tabs=new QTabWidget;m_inspectorTabs=tabs;
     m_agentPanel=new AgentPanel;m_agentPanel->setObjectName("agentPanel");tabs->addTab(m_agentPanel,"Agent 创作");
     m_inspectorTable=new QTreeWidget;m_inspectorTable->setHeaderLabels({"属性","类型","当前值","状态"});m_inspectorTable->header()->setSectionResizeMode(0,QHeaderView::ResizeToContents);m_inspectorTable->header()->setSectionResizeMode(2,QHeaderView::Stretch);m_inspectorTable->setColumnHidden(1,true);m_inspectorTable->setColumnWidth(3,65);m_inspectorTable->setRootIsDecorated(false);tabs->addTab(m_inspectorTable,"属性");
     auto *proposals=new QWidget;auto *form=new QVBoxLayout(proposals);form->addWidget(copyLabel("本地模拟提案\n支持：标题改为…、主题色改为#RRGGBB、图片使用第1张。确认后才修改；未连接真实模型。"));
@@ -203,6 +209,11 @@ QWidget *MainWindow::buildTaskPanel() {
     for(auto *button:{m_playFilm,m_revealFilm,m_cancelExport,m_stopExport,m_resumeExport,m_clearExportCache}){button->setEnabled(false);buttons->addWidget(button);}buttons->addStretch();layout->addLayout(buttons);layout->addStretch();m_taskTabs->addTab(exportBody,"导出任务");
     m_taskLog=new QPlainTextEdit;m_taskLog->setReadOnly(true);m_taskLog->setMaximumBlockCount(2000);m_taskTabs->addTab(m_taskLog,"运行日志");
     m_history=new HistoryPanel;m_taskTabs->addTab(m_history,"工作历史");connect(m_history,&HistoryPanel::openProjectRequested,this,[this](const QString &path){if(m_documentOpenAction->isEnabled())emit openDocumentRequested(path);else statusBar()->showMessage("请等待当前操作结束后打开工程。",4000);});
+    connect(m_history,&HistoryPanel::reuseGoalRequested,this,[this](const QString &goal){
+        if(m_agentPanel->composeGoal(goal)){m_rightPanel->show();m_inspectorTabs->setCurrentIndex(0);statusBar()->showMessage("目标已填入，请生成并审阅新方案。",5000);}
+    });
+    m_importResults=new ImportResultsPanel;m_taskTabs->addTab(m_importResults,"素材导入");
+    connect(m_importResults,&ImportResultsPanel::retryRequested,this,[this]{if(m_importAction->isEnabled())emit retryImportRequested();});
     connect(m_cancelExport,&QPushButton::clicked,this,&MainWindow::cancelExportRequested);connect(m_stopExport,&QPushButton::clicked,this,&MainWindow::stopExportObservationRequested);connect(m_resumeExport,&QPushButton::clicked,this,&MainWindow::resumeExportRequested);connect(m_clearExportCache,&QPushButton::clicked,this,&MainWindow::clearExportCacheRequested);
     connect(m_playFilm,&QPushButton::clicked,this,[this]{if(m_exportTask.phase!="complete"||!QFileInfo(m_exportTask.destination).isFile()){showError("成片不可读，请检查导出路径。");return;}(new MediaPlayerDialog(m_exportTask.destination,"FrameLab · 成片播放",this))->show();});
     connect(m_revealFilm,&QPushButton::clicked,this,[this]{if(m_exportTask.phase=="complete"&&QFileInfo(m_exportTask.destination).isFile())QDesktopServices::openUrl(QUrl::fromLocalFile(QFileInfo(m_exportTask.destination).absolutePath()));});return m_taskTabs;
@@ -212,11 +223,12 @@ void MainWindow::updateActions() {
     const bool observing=QStringList{"planning","submitting","working","cancelling","getting","validating"}.contains(m_exportTask.phase);
     const bool canSwitch=m_backendReady&&!busy&&!observing;
     m_agentPanel->setAvailable(m_backendReady&&!m_editorBusy&&!m_importBusy&&!observing);
+    m_history->setAvailable(canSwitch&&!m_agentRestoring);
     m_newAction->setEnabled(canSwitch);m_documentOpenAction->setEnabled(canSwitch);m_openAction->setEnabled(canSwitch);
     m_welcomeNew->setEnabled(canSwitch);m_welcomeOpen->setEnabled(canSwitch);
     m_configAction->setEnabled(!busy&&!observing);
     m_closeAction->setEnabled((m_hasDocument||!m_previewUrl.isEmpty())&&!busy&&!observing);
-    m_saveAction->setEnabled(m_hasDocument&&!busy);m_importAction->setEnabled(m_hasDocument&&m_editorReady&&!busy);
+    m_saveAction->setEnabled(m_hasDocument&&!busy);m_importAction->setEnabled(m_hasDocument&&m_editorReady&&!busy&&!observing);m_importResults->setAvailable(m_importAction->isEnabled());
     const bool edit=m_editorReady&&!busy;
     m_exportAction->setEnabled(m_hasDocument&&edit&&!m_exportActive);
     m_undoAction->setEnabled(edit&&m_canUndo);m_redoAction->setEnabled(edit&&m_canRedo);
@@ -230,7 +242,7 @@ void MainWindow::updateActions() {
 }
 QString MainWindow::compatibleAssetField() const {
     const auto selected=m_assetTree->selectedItems();const auto *asset=selected.size()==1?selected.first():nullptr;const auto *item=m_componentTree->currentItem();
-    if(!asset||m_assetTree->selectedItems().size()!=1||!item||!item->data(0,Qt::UserRole).isValid())return {};
+    if(!asset||asset->isHidden()||m_assetTree->selectedItems().size()!=1||!item||!item->data(0,Qt::UserRole).isValid())return {};
     const auto mime=asset->data(0,Qt::UserRole+1).toString();
     const int t=item->data(0,Qt::UserRole).toInt(),c=item->data(0,Qt::UserRole+1).toInt();
     if(t<0||t>=m_snapshot.tracks.size()||c<0||c>=m_snapshot.tracks[t].clips.size())return {};
@@ -248,11 +260,11 @@ void MainWindow::setSamples(const domain::VideoSamples &samples) {
 void MainWindow::useSelectedSample(){const auto *item=m_sampleTree->currentItem();if(item&&!item->data(0,Qt::UserRole).toString().isEmpty())newDocumentDialog(item->data(0,Qt::UserRole).toString());}
 void MainWindow::showProposal(const QString &summary,bool pending){m_hasProposal=pending;m_proposalSummary->setPlainText(summary.isEmpty()?QStringLiteral("尚无待确认提案。"):summary);updateActions();}
 void MainWindow::showAgentStatus(const domain::AgentStatus &status){
- if(!status.taskId.isEmpty())emit historyRecorded(QJsonObject{{"id","agent/"+status.taskId},{"title","创作任务 · "+status.goal.left(60)},{"project",m_hasDocument?m_document.manifestPath():QString()},{"projectName",m_document.name},{"detail",status.goal+"\n\n"+activityPhase(status.phase)+" · "+status.message+QString("\n完成步骤 %1 / %2\n").arg(status.completed).arg(status.total)+status.events.join("\n")}});
-m_agentBusy=QStringList{"creating","applying","undoing"}.contains(status.phase);m_agentPanel->showStatus(status);updateActions();}
+ if(!status.taskId.isEmpty())emit historyRecorded(QJsonObject{{"id","agent/"+status.taskId},{"kind","agent"},{"goal",status.goal},{"title","创作任务 · "+status.goal.left(60)},{"project",m_hasDocument?m_document.manifestPath():QString()},{"projectName",m_document.name},{"detail",activityPhase(status.phase)+" · "+status.message+QString("\n完成步骤 %1 / %2\n").arg(status.completed).arg(status.total)+status.events.join("\n")}});
+m_agentRestoring=status.phase=="restoring";m_agentBusy=QStringList{"thinking","creating","applying","undoing"}.contains(status.phase);m_agentPanel->showStatus(status);updateActions();}
 void MainWindow::showAgentPlan(const domain::AgentPlan &plan){m_agentPanel->showPlan(plan,m_snapshot);}
 void MainWindow::showExportTask(const domain::ExportTask &task) {
-    if(!task.buildId.isEmpty())emit historyRecorded(QJsonObject{{"id","export/"+task.buildId},{"title","导出 · "+activityPhase(task.phase)},{"project",m_hasDocument?m_document.manifestPath():QString()},{"projectName",m_document.name},{"artifact",task.phase=="complete"?task.destination:QString()},{"detail",QString("状态：%1\nBuild：%2\n目标：%3\n%4").arg(activityPhase(task.phase),task.buildId,task.destination,task.error)}});
+    if(!task.buildId.isEmpty())emit historyRecorded(QJsonObject{{"id","export/"+task.buildId},{"kind","export"},{"title","导出 · "+activityPhase(task.phase)},{"project",m_hasDocument?m_document.manifestPath():QString()},{"projectName",m_document.name},{"artifact",task.phase=="complete"?task.destination:QString()},{"detail",QString("状态：%1\nBuild：%2\n目标：%3\n%4").arg(activityPhase(task.phase),task.buildId,task.destination,task.error)}});
     m_exportTask=task;const bool observing=QStringList{"planning","submitting","working","cancelling","getting","validating"}.contains(task.phase);m_exportActive=task.active||observing;
     m_agentPanel->setVersions(m_snapshot,task);
     const QMap<QString,QString> labels{{"idle","尚无任务"},{"planning","检查作品与构建计划"},{"submitting","准备渲染"},{"working","正在渲染画面"},{"cancelling","正在取消构建"},{"stopped","已停止观察，可恢复查看"},{"getting","正在获取成片"},{"validating","正在校验视频与全片解码"},{"complete","成片已完成 · 校验通过"},{"failed","导出未完成"},{"cancelled","构建已取消"}};
@@ -271,7 +283,7 @@ void MainWindow::showSnapshot(const domain::Snapshot &snapshot) {
         QStringList changes;
         for(const auto &track:snapshot.tracks)for(const auto &clip:track.clips)for(const auto &field:clip.inspector)
             for(const auto &oldTrack:m_snapshot.tracks)for(const auto &oldClip:oldTrack.clips)if(oldClip.id==clip.id)for(const auto &old:oldClip.inspector)if(old.id==field.id&&old.rawValue!=field.rawValue)changes.append(clip.label+" · "+field.label+"\n"+old.rawValue.toString().left(512)+" → "+field.rawValue.toString().left(512));
-        emit historyRecorded(QJsonObject{{"id","edit/"+m_document.manifestPath()+"/"+QString::fromLatin1(snapshot.sourceFingerprint.toHex())},{"title",QString("修改记录 · 版本 %1").arg(snapshot.revision)},{"project",m_document.manifestPath()},{"projectName",m_document.name},{"detail",changes.isEmpty()?QStringLiteral("工程源码已更新并重新编译。"):changes.join("\n\n").left(8000)}});
+        emit historyRecorded(QJsonObject{{"id","edit/"+m_document.manifestPath()+"/"+QString::fromLatin1(snapshot.sourceFingerprint.toHex())},{"kind","edit"},{"title",QString("修改记录 · 版本 %1").arg(snapshot.revision)},{"project",m_document.manifestPath()},{"projectName",m_document.name},{"detail",changes.isEmpty()?QStringLiteral("工程源码已更新并重新编译。"):changes.join("\n\n").left(8000)}});
     }
     m_snapshot=snapshot;m_agentPanel->setVersions(snapshot,m_exportTask);m_transport->setSnapshot(snapshot);m_scenes->setSnapshot(snapshot,m_document);m_componentTree->clear();m_inspectorTable->clear();
     if(!snapshot.isLoaded()){m_agentPanel->setSelection({},{});m_spaceSummary->setText("预览由 Hypit 提供 · 本地素材创作");updateActions();return;}
@@ -290,6 +302,13 @@ void MainWindow::restoreWorkspaceLayout(const QJsonObject &layout){
 void MainWindow::restorePlayhead(int frame){m_pendingFrame=qMax(0,frame);}
 void MainWindow::showRecentProjects(const QJsonArray &recent){m_recentMenu->clear();for(const auto &v:recent){const auto item=v.toObject();const auto path=item["path"].toString();auto *action=m_recentMenu->addAction(item["name"].toString().left(100)+(QFileInfo(path).isFile()?QString():QStringLiteral("（文件已移动）")));action->setToolTip(path);connect(action,&QAction::triggered,this,[this,path]{if(!m_documentOpenAction->isEnabled()){statusBar()->showMessage("请等待当前操作结束。",4000);return;}if(QFileInfo(path).isFile())emit openDocumentRequested(path);else{showError("最近工程已移动，请重新选择工程清单。");m_documentOpenAction->trigger();}});}if(recent.isEmpty())m_recentMenu->addAction("暂无最近工程")->setEnabled(false);}
 void MainWindow::showHistory(const QJsonArray &history){m_history->showRecords(history);}
+void MainWindow::showImportReport(const QJsonObject &report){
+    if(!report.isEmpty()&&(!m_hasDocument||report["projectRoot"].toString()!=m_document.rootPath))return;
+    const bool active=report["active"].toBool();
+    m_importResults->showReport(report);
+    if(!report.isEmpty()&&active&&!m_importReportActive)m_taskTabs->setCurrentWidget(m_importResults);
+    m_importReportActive=active;
+}
 void MainWindow::selectScene(const QString &entityId,int frame) {
     for(int t=0;t<m_componentTree->topLevelItemCount();++t)for(int c=0;c<m_componentTree->topLevelItem(t)->childCount();++c){
         auto *item=m_componentTree->topLevelItem(t)->child(c);if(item->toolTip(0)==entityId){m_componentTree->setCurrentItem(item);m_componentTree->scrollToItem(item);m_scenes->setPosition(frame);m_pendingFrame=-1;if(m_transport->ready())m_transport->seek(frame);else m_pendingFrame=frame;return;}
@@ -323,10 +342,20 @@ void MainWindow::showError(const QString &error){if(!m_backendReady){m_backendEr
 void MainWindow::appendLog(const QString &line){m_taskLog->appendPlainText(line);}
 void MainWindow::setEditorState(bool ready,bool busy,bool canUndo,bool canRedo){const bool changed=m_editorReady!=ready;m_editorReady=ready;m_editorBusy=busy;m_canUndo=canUndo;m_canRedo=canRedo;if(changed)showSelectedInspector();updateActions();if(busy)statusBar()->showMessage("正在保存修改并检查编译…");}
 void MainWindow::applySelectedAsset(){const auto field=compatibleAssetField();if(field.isEmpty()||!m_hasDocument||!m_editorReady||m_editorBusy||m_importBusy||m_agentBusy||m_exportActive)return;const auto *item=m_componentTree->currentItem();const int t=item->data(0,Qt::UserRole).toInt(),c=item->data(0,Qt::UserRole+1).toInt();emit editRequested(m_snapshot.tracks[t].clips[c].id,field,m_assetTree->selectedItems().first()->data(0,Qt::UserRole));}
+void MainWindow::filterAssets(){
+    if(!m_assetTree)return;
+    const QString query=m_assetSearch->text().trimmed(),type=m_assetType->currentData().toString();int visible=0;
+    {QSignalBlocker blocker(m_assetTree);
+    for(int i=0;i<m_assetTree->topLevelItemCount();++i){auto *item=m_assetTree->topLevelItem(i);const auto mime=item->data(0,Qt::UserRole+1).toString();
+        const bool matches=(query.isEmpty()||item->text(0).contains(query,Qt::CaseInsensitive))&&(type=="all"||mime.startsWith(type+'/'));
+        item->setHidden(!matches);if(!matches)item->setSelected(false);else ++visible;
+    }}
+    m_assetCount->setText(QString("显示 %1 / %2 个素材%3").arg(visible).arg(m_assetTree->topLevelItemCount()).arg(visible==0?QStringLiteral(" · 可清空关键词或重置筛选"):QString()));updateActions();
+}
 void MainWindow::showImportProgress(int completed,int total,const QString &path){statusBar()->showMessage(QString("导入 %1 / %2 · %3").arg(completed).arg(total).arg(QFileInfo(path).fileName()));}
-void MainWindow::selectImportedAsset(const domain::Asset &asset){for(int i=0;i<m_assetTree->topLevelItemCount();++i){auto *item=m_assetTree->topLevelItem(i);if(item->data(0,Qt::UserRole).toString()=="./"+asset.path){m_assetTree->clearSelection();m_assetTree->setCurrentItem(item);item->setSelected(true);break;}}}
+void MainWindow::selectImportedAsset(const domain::Asset &asset){for(int i=0;i<m_assetTree->topLevelItemCount();++i){auto *item=m_assetTree->topLevelItem(i);if(!item->isHidden()&&item->data(0,Qt::UserRole).toString()=="./"+asset.path){m_assetTree->clearSelection();m_assetTree->setCurrentItem(item);item->setSelected(true);break;}}}
 void MainWindow::previewSelectedAsset(){
-    const auto selected=m_assetTree->selectedItems();const auto *item=selected.size()==1?selected.first():nullptr;if(!item||!m_hasDocument)return;
+    const auto selected=m_assetTree->selectedItems();const auto *item=selected.size()==1?selected.first():nullptr;if(!item||item->isHidden()||!m_hasDocument)return;
     const auto root=QFileInfo(m_document.rootPath).canonicalFilePath();const auto path=QFileInfo(QDir(root).filePath(item->data(0,Qt::UserRole).toString())).canonicalFilePath();
     if(root.isEmpty()||!path.startsWith(root+'/')||!QFileInfo(path).isFile()){showError("素材文件已移动。请重新打开工程并定位原文件。");return;}
     if(item->data(0,Qt::UserRole+1)=="video/mp4"){(new MediaPlayerDialog(path,"素材预览",this))->show();return;}
@@ -335,16 +364,18 @@ void MainWindow::previewSelectedAsset(){
     auto *dialog=new QDialog(this);dialog->setAttribute(Qt::WA_DeleteOnClose);dialog->setWindowTitle("素材预览 · "+item->text(0));auto *layout=new QVBoxLayout(dialog);auto *label=new QLabel;label->setPixmap(QPixmap::fromImage(image));label->setAlignment(Qt::AlignCenter);layout->addWidget(label);layout->addWidget(copyLabel(QString("%1 × %2 · %3").arg(size.width()).arg(size.height()).arg(path)));dialog->show();
 }
 void MainWindow::showDocument(const domain::Project &project) {
-    m_document=project;m_scenes->setSnapshot(m_snapshot,m_document);
+    const bool changedRoot=m_document.rootPath!=project.rootPath;
+    if(changedRoot){QSignalBlocker searchBlock(m_assetSearch),typeBlock(m_assetType);m_assetSearch->clear();m_assetType->setCurrentIndex(0);}
+    m_document=project;m_history->setCurrentProject(project.manifestPath());m_importResults->setProjectRoot(project.rootPath);m_scenes->setSnapshot(m_snapshot,m_document);
     m_hasDocument=true;setWindowTitle(QStringLiteral("%1 — FrameLab · 灵感片场").arg(project.name));m_documentTitle->setText(project.name);m_documentTitle->setToolTip(project.rootPath);
     QString selected;if(const auto *item=m_assetTree->currentItem())selected=item->data(0,Qt::UserRole).toString();m_assetTree->clear();QTreeWidgetItem *selection=nullptr;
     for(const auto &asset:project.assets){auto *item=new QTreeWidgetItem(m_assetTree);
         const auto path=QDir(project.rootPath).filePath(asset.path);const auto canonical=QFileInfo(path).canonicalFilePath();const auto root=QFileInfo(project.rootPath).canonicalFilePath();
         if(asset.mime.startsWith("image/")&&!root.isEmpty()&&canonical.startsWith(root+'/')){QImageReader reader(path);const auto size=reader.size();if(size.isValid()&&qint64(size.width())*size.height()<=40000000){reader.setScaledSize(size.scaled(52,38,Qt::KeepAspectRatio));item->setIcon(0,QPixmap::fromImage(reader.read()));}}
 item->setText(0,(asset.mime=="video/mp4"?QStringLiteral("视频 · "):QStringLiteral("图片 · "))+asset.originalName);item->setText(1,QStringLiteral("%1×%2").arg(asset.width).arg(asset.height));item->setToolTip(0,asset.path);item->setData(0,Qt::UserRole,"./"+asset.path);item->setData(0,Qt::UserRole+1,asset.mime);if(!selection||"./"+asset.path==selected)selection=item;}
-    if(selection)m_assetTree->setCurrentItem(selection);showSelectedInspector();if(m_previewUrl.isEmpty())m_previewStack->setCurrentWidget(m_previewPlaceholder);updateActions();
+    if(selection)m_assetTree->setCurrentItem(selection);filterAssets();showSelectedInspector();if(m_previewUrl.isEmpty())m_previewStack->setCurrentWidget(m_previewPlaceholder);updateActions();
 }
-void MainWindow::clearDocument(){m_pendingFrame=-1;m_document={};m_hasDocument=false;m_importBusy=false;setWindowTitle("FrameLab · 灵感片场");m_documentTitle->setText("从一段视频开始创作");m_assetTree->clear();showProposal({},false);showExportTask({});if(m_previewUrl.isEmpty())m_previewStack->setCurrentWidget(m_welcome);updateActions();}
+void MainWindow::clearDocument(){m_pendingFrame=-1;m_document={};m_history->setCurrentProject({});m_importResults->setProjectRoot({});m_importReportActive=false;m_hasDocument=false;m_importBusy=false;setWindowTitle("FrameLab · 灵感片场");m_documentTitle->setText("从一段视频开始创作");m_assetTree->clear();filterAssets();showProposal({},false);showExportTask({});if(m_previewUrl.isEmpty())m_previewStack->setCurrentWidget(m_welcome);updateActions();}
 void MainWindow::newDocumentDialog(const QString &samplePath) {
     QDialog dialog(this);dialog.setWindowTitle(samplePath.isEmpty()?"新建作品":"用示例视频创作");dialog.resize(550,300);auto *layout=new QVBoxLayout(&dialog);auto *form=new QFormLayout;
     auto *name=new QLineEdit(samplePath.isEmpty()?QStringLiteral("我的光影故事"):QStringLiteral("对话之外 · 光影故事"));form->addRow("工程名称",name);

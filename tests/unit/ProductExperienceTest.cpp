@@ -6,6 +6,9 @@
 #include <QDragEnterEvent>
 #include <QDropEvent>
 #include <QPlainTextEdit>
+#include <QLineEdit>
+#include <QComboBox>
+#include <QLabel>
 #include <QPushButton>
 #include <QSplitter>
 #include <QTemporaryDir>
@@ -38,6 +41,9 @@ private slots:
   ui::MainWindow first;first.resize(1500,950);first.findChild<QSplitter*>("workspaceColumns")->setSizes({300,750,450});const auto layout=first.workspaceLayout();ui::MainWindow second;second.restoreWorkspaceLayout(layout);QCOMPARE(second.workspaceLayout()["columns"],layout["columns"]);
   QJsonObject record{{"id","task1"},{"title","任务 · 测试"},{"project","/missing/workbench.qvw.json"},{"detail","旧文案 → 新文案\n完成 2 / 2"},{"artifact","/missing/film.mp4"}};second.showHistory({record});auto *tree=second.findChild<QTreeWidget*>("historyRecords");QCOMPARE(tree->topLevelItemCount(),1);auto *detail=second.findChild<QPlainTextEdit*>("historyDetail");QVERIFY(detail->toPlainText().contains("旧文案 → 新文案"));QVERIFY(detail->toPlainText().contains("文件已移动"));
  }
+ void historyCannotReuseDuringTaskRestoration(){
+  ui::MainWindow window;window.setBackendAvailable(true);window.showHistory({QJsonObject{{"id","agent/old"},{"goal","a goal"},{"title","old"}}});auto *reuse=window.findChild<QPushButton*>("historyReuseGoal");QVERIFY(reuse->isEnabled());domain::AgentStatus status;status.phase="restoring";window.showAgentStatus(status);QVERIFY(!reuse->isEnabled());status.phase="review";window.showAgentStatus(status);QVERIFY(reuse->isEnabled());
+ }
  void historicalEventsAreActualChanges(){
   ui::MainWindow window;domain::Project project;project.rootPath="/tmp/history-test";window.showDocument(project);QSignalSpy history(&window,&ui::MainWindow::historyRecorded);
   domain::Snapshot snapshot;snapshot.revision=1;snapshot.sourceFingerprint="aaa";domain::Track track;domain::Clip clip;clip.id="exact/id";clip.label="开场";domain::InspectorField field;field.id="text";field.label="标题";field.rawValue="旧标题";clip.inspector={field};track.clips={clip};snapshot.tracks={track};window.showSnapshot(snapshot);QCOMPARE(history.count(),0);
@@ -50,6 +56,14 @@ private slots:
 
  void batchSelectionCannotApplyAmbiguousAsset(){
   ui::MainWindow window;domain::Project project;project.rootPath="/tmp/library";project.assets={{"a","assets/a.png","a","image/png",1,1,1},{"b","assets/b.png","b","image/png",1,1,1}};window.showDocument(project);window.setBackendAvailable(true);domain::Snapshot snapshot;snapshot.revision=1;domain::Clip clip;clip.id="exact";domain::InspectorField field;field.id="src";field.binding="image";field.writable=true;field.control=domain::ControlKind::Text;clip.inspector={field};domain::Track track;track.clips={clip};snapshot.tracks={track};window.showSnapshot(snapshot);window.setEditorState(true,false,false,false);auto *tree=window.findChild<QTreeWidget*>("assets");auto *apply=window.findChild<QPushButton*>("applyAsset");QVERIFY(apply->isEnabled());tree->topLevelItem(1)->setSelected(true);QVERIFY(!apply->isEnabled());
+ }
+
+ void filteringAssetsClearsHiddenSelectionAndSurvivesRefresh(){
+  ui::MainWindow window;domain::Project project;project.rootPath="/tmp/library-filter";project.assets={{"a","assets/a.png","Campus.PNG","image/png",1,1,1},{"b","assets/b.mp4","Movie.mp4","video/mp4",1,1,1}};window.showDocument(project);
+  auto *search=window.findChild<QLineEdit*>("assetSearch");auto *type=window.findChild<QComboBox*>("assetType");auto *tree=window.findChild<QTreeWidget*>("assets");QVERIFY(search);QVERIFY(type);
+  search->setText("campus");QVERIFY(!tree->topLevelItem(0)->isHidden());QVERIFY(tree->topLevelItem(1)->isHidden());type->setCurrentIndex(type->findData("video"));QVERIFY(tree->selectedItems().isEmpty());QVERIFY(window.findChild<QLabel*>("assetCount")->text().contains("0 / 2"));
+  search->clear();QVERIFY(tree->topLevelItem(0)->isHidden());QVERIFY(!tree->topLevelItem(1)->isHidden());window.selectImportedAsset(project.assets.first());QVERIFY(tree->selectedItems().isEmpty());QVERIFY(!window.findChild<QPushButton*>("previewAsset")->isEnabled());window.showDocument(project);QCOMPARE(type->currentData().toString(),QString("video"));QVERIFY(tree->selectedItems().isEmpty());
+  auto next=project;next.rootPath="/tmp/another-project";window.showDocument(next);QCOMPARE(type->currentData().toString(),QString("all"));QVERIFY(!tree->topLevelItem(0)->isHidden());
  }
 
 };

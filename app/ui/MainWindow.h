@@ -20,10 +20,12 @@ class QLineEdit;
 class QTabWidget;
 class QSlider;
 class QProgressBar;
+class QComboBox;
 class QSplitter;
 class QMenu;
 namespace qvw::ui {
 class HistoryPanel;
+class ImportResultsPanel;
 class SceneStrip;
 class StudioTransport;
 class AgentPanel;
@@ -57,6 +59,7 @@ public:
     void restorePlayhead(int frame);
     void showRecentProjects(const QJsonArray &recent);
     void showHistory(const QJsonArray &history);
+    void showImportReport(const QJsonObject &report);
 signals:
     void historyRecorded(const QJsonObject &record);
     void playheadChanged(const QString &manifest,int frame);
@@ -68,6 +71,7 @@ signals:
     void importImageRequested(const QString &path);
     void importVideoRequested(const QString &path);
     void cancelImportRequested();
+    void retryImportRequested();
     void newTemplateDocumentRequested(const QString &templateId,const QString &directory,const QString &name);
     void sampleDocumentRequested(const QString &video,const QString &directory,const QString &name);
     void editRequested(const QString &entityId,const QString &fieldId,const QVariant &value);
@@ -103,6 +107,10 @@ private:
     void previewSelectedAsset();
     QPushButton *m_previewAsset=nullptr;
     QLabel *m_assetSelection=nullptr;
+    QLineEdit *m_assetSearch=nullptr;
+    QComboBox *m_assetType=nullptr;
+    QLabel *m_assetCount=nullptr;
+    void filterAssets();
     void showSelectedInspector();
     QTreeWidget *m_componentTree = nullptr;
     QTreeWidget *m_inspectorTable = nullptr;
@@ -145,6 +153,9 @@ private:
     domain::Snapshot m_snapshot;
     domain::Project m_document;
     HistoryPanel *m_history=nullptr;
+    ImportResultsPanel *m_importResults=nullptr;
+    bool m_importReportActive=false;
+    QTabWidget *m_inspectorTabs=nullptr;
     QSplitter *m_columns=nullptr,*m_middle=nullptr;
     QMenu *m_recentMenu=nullptr;
     int m_pendingFrame=-1;
@@ -155,6 +166,7 @@ private:
     StudioTransport *m_transport=nullptr;
     AgentPanel *m_agentPanel=nullptr;
     bool m_agentBusy=false;
+    bool m_agentRestoring=false;
     QLabel *m_backendStatus=nullptr;
     QLabel *m_transportTime=nullptr;
     QSlider *m_seekSlider=nullptr;

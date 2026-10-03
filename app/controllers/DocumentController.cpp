@@ -19,14 +19,20 @@ bool DocumentController::create(const QString &templateDirectory,const QString &
     if(importingVideo()){emit failed(QStringLiteral("素材正在导入，请等待完成或取消后新建工程。"));return false;}
     domain::Project project; QString error;
     if (!services::ProjectStore::create(templateDirectory,destination,name,&project,&error)) { emit failed(error); return false; }
-    ++m_documentGeneration;m_project=project; emit projectChanged(project); emit projectLoaded(project);
+    const auto generation=++m_documentGeneration;m_project=project;clearImportRecovery();
+    if(generation!=m_documentGeneration)return false;emit projectChanged(project);
+    if(generation!=m_documentGeneration)return false;emit projectLoaded(project);
+    if(generation!=m_documentGeneration)return false;
     emit message(QStringLiteral("已创建工程：%1").arg(project.manifestPath())); return true;
 }
 bool DocumentController::open(const QString &manifest) {
     if(importingVideo()){emit failed(QStringLiteral("素材正在导入，请等待完成或取消后打开工程。"));return false;}
     domain::Project project; QString error;
     if (!services::ProjectStore::load(manifest,&project,&error)) { emit failed(error); return false; }
-    ++m_documentGeneration;m_project=project; emit projectChanged(project); emit projectLoaded(project);
+    const auto generation=++m_documentGeneration;m_project=project;clearImportRecovery();
+    if(generation!=m_documentGeneration)return false;emit projectChanged(project);
+    if(generation!=m_documentGeneration)return false;emit projectLoaded(project);
+    if(generation!=m_documentGeneration)return false;
     emit message(QStringLiteral("已打开工程：%1").arg(project.manifestPath())); return true;
 }
 bool DocumentController::save() {
@@ -57,10 +63,13 @@ bool DocumentController::importFiles(const QStringList &paths){
     if(!m_project){emit failed(QStringLiteral("请先新建或打开工程。"));return false;}
     if(paths.isEmpty() || paths.size()>64){emit failed(QStringLiteral("每批请选择 1 到 64 个 PNG、JPEG 或 MP4 文件。"));return false;}
     ++m_batchGeneration;m_batchActive=true;m_batchPending=false;m_batchVideo=false;
+    m_recoveryRoot=m_project->rootPath;m_incompletePaths.clear();m_batchEntries={};
+    for(const auto &path:paths)m_batchEntries.append(QJsonObject{{"path",path},{"state","pending"},{"error",QString()}});
     m_batchPaths=paths;m_batchErrors.clear();m_batchNext=0;m_batchCompleted=0;m_batchSuccess=0;
     m_importGeneration=m_documentGeneration;
     const auto generation=m_batchGeneration;
     publishImportState();
+    if(m_batchActive && generation==m_batchGeneration)publishImportReport();
     if(m_batchActive && generation==m_batchGeneration)scheduleNextImport();
     return true;
 }
@@ -78,6 +87,8 @@ void DocumentController::processNextImport(quint64 generation){
        || !m_project || m_importGeneration!=m_documentGeneration)return;
     if(m_batchNext==m_batchPaths.size()){finishBatch(false);return;}
     const auto path=m_batchPaths[m_batchNext++];m_batchPending=true;
+    setEntryState(m_batchNext-1,"working");publishImportReport();
+    if(!m_batchActive||generation!=m_batchGeneration)return;
     const auto extension=QFileInfo(path).suffix().toLower();m_batchVideo=(extension=="mp4");
     if(m_batchVideo){
         // The importer reports synchronous start failures through failed(), too.
@@ -97,7 +108,7 @@ void DocumentController::acceptImport(const domain::Project &project,const domai
     const auto documentGeneration=m_documentGeneration,batchGeneration=m_batchGeneration;
     const bool batch=m_batchActive && m_batchPending;
     m_project=project;
-    if(batch){m_batchPending=false;++m_batchCompleted;++m_batchSuccess;}
+    if(batch){m_batchPending=false;++m_batchCompleted;++m_batchSuccess;setEntryState(m_batchNext-1,"imported");}
     // Publish the committed project before a progress handler can cancel the remaining queue.
     emit projectChanged(project);
     if(documentGeneration!=m_documentGeneration || (batch && (!m_batchActive || batchGeneration!=m_batchGeneration)))return;
@@ -109,6 +120,7 @@ void DocumentController::acceptImport(const domain::Project &project,const domai
     if(documentGeneration!=m_documentGeneration || (batch && (!m_batchActive || batchGeneration!=m_batchGeneration)))return;
     emit message(video ? QStringLiteral("视频已导入并保存：%1；模板使用前 8 秒，静音播放。").arg(asset.path)
                        : QStringLiteral("图片已导入并保存：%1；选中素材和组件后，点击“替换选中组件素材”。").arg(asset.path));
+    if(batch && m_batchActive && batchGeneration==m_batchGeneration)publishImportReport();
     if(batch && m_batchActive && batchGeneration==m_batchGeneration)scheduleNextImport();
 }
 void DocumentController::rejectBatchEntry(const QString &error){
@@ -116,7 +128,9 @@ void DocumentController::rejectBatchEntry(const QString &error){
     const auto path=m_batchPaths[m_batchNext-1];
     m_batchPending=false;++m_batchCompleted;
     m_batchErrors.append(QStringLiteral("%1：%2").arg(QFileInfo(path).fileName(),error));
+    setEntryState(m_batchNext-1,"failed",error);
     emit importProgress(m_batchCompleted,m_batchPaths.size(),path);
+    if(m_batchActive && generation==m_batchGeneration)publishImportReport();
     if(m_batchActive && generation==m_batchGeneration)scheduleNextImport();
 }
 void DocumentController::finishBatch(bool canceled){
@@ -124,9 +138,26 @@ void DocumentController::finishBatch(bool canceled){
     const auto success=m_batchSuccess,total=int(m_batchPaths.size());
     auto errors=m_batchErrors;
     if(canceled)errors.append(QStringLiteral("导入已取消；已完成 %1/%2，成功 %3 个。").arg(m_batchCompleted).arg(total).arg(success));
+    if(canceled)for(int i=0;i<m_batchEntries.size();++i)if(m_batchEntries[i].toObject()["state"]=="working")setEntryState(i,"pending");
     ++m_batchGeneration;m_batchActive=false;m_batchPending=false;m_batchVideo=false;
-    emit importBatchFinished(success,total,errors);
+    const auto generation=m_batchGeneration;publishImportReport();
+    if(generation==m_batchGeneration)emit importBatchFinished(success,total,errors);
     publishImportState();
+}
+void DocumentController::setEntryState(int index,const QString &state,const QString &error){
+    if(index<0||index>=m_batchEntries.size())return;auto entry=m_batchEntries[index].toObject();entry["state"]=state;entry["error"]=error.left(4096);m_batchEntries.replace(index,entry);
+}
+void DocumentController::publishImportReport(){
+    if(!m_project||m_project->rootPath!=m_recoveryRoot){m_incompletePaths.clear();emit importReportReady({});return;}
+    if(!m_batchActive){m_incompletePaths.clear();for(const auto &v:m_batchEntries){const auto entry=v.toObject();if(entry["state"]!="imported")m_incompletePaths.append(entry["path"].toString());}}
+    emit importReportReady(QJsonObject{{"projectRoot",m_recoveryRoot},{"active",m_batchActive},{"completed",m_batchCompleted},{"total",m_batchEntries.size()},{"success",m_batchSuccess},{"entries",m_batchEntries}});
+}
+void DocumentController::clearImportRecovery(){
+    m_recoveryRoot.clear();m_incompletePaths.clear();m_batchEntries={};emit importReportReady({});
+}
+bool DocumentController::retryIncompleteImports(){
+    if(importingVideo()||!m_project||m_project->rootPath!=m_recoveryRoot||m_incompletePaths.isEmpty())return false;
+    const auto remaining=m_incompletePaths;return importFiles(remaining);
 }
 bool DocumentController::importingVideo() const{return m_batchActive || m_videoImporter.active();}
 void DocumentController::cancelVideoImport(){
@@ -135,6 +166,6 @@ void DocumentController::cancelVideoImport(){
 }
 void DocumentController::close() {
     const auto generation=++m_documentGeneration;m_project.reset();cancelVideoImport();
-    if(generation==m_documentGeneration)emit documentClosed();
+    if(generation==m_documentGeneration){clearImportRecovery();if(generation==m_documentGeneration)emit documentClosed();}
 }
 }

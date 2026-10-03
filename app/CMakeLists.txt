@@ -42,6 +42,7 @@ target_link_libraries(qvw_services PUBLIC qvw_domain qvw_infra Qt6::Gui)
 
 add_library(qvw_ui STATIC
   ui/AssetTree.cpp
+  ui/ImportResultsPanel.cpp
   ui/HistoryPanel.cpp
   ui/SceneStrip.cpp
   ui/MainWindow.cpp

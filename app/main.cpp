@@ -228,10 +228,12 @@ int main(int argc, char **argv) {
     QObject::connect(&creation,&qvw::controllers::SampleCreationController::message,&window,&qvw::ui::MainWindow::appendLog);
     QObject::connect(&creation,&qvw::controllers::SampleCreationController::failed,&window,&qvw::ui::MainWindow::showError);
     QObject::connect(&window, &qvw::ui::MainWindow::saveDocumentRequested, &document, &qvw::controllers::DocumentController::save);
+    QObject::connect(&document,&qvw::controllers::DocumentController::importReportReady,&window,&qvw::ui::MainWindow::showImportReport);
+    QObject::connect(&window,&qvw::ui::MainWindow::retryImportRequested,&document,&qvw::controllers::DocumentController::retryIncompleteImports);
     QObject::connect(&window,&qvw::ui::MainWindow::importFilesRequested,&document,&qvw::controllers::DocumentController::importFiles);
     QObject::connect(&document,&qvw::controllers::DocumentController::importProgress,&window,&qvw::ui::MainWindow::showImportProgress);
     QObject::connect(&document,&qvw::controllers::DocumentController::assetImported,&window,&qvw::ui::MainWindow::selectImportedAsset);
-    QObject::connect(&document,&qvw::controllers::DocumentController::importBatchFinished,&window,[&](int success,int total,const QStringList &errors){window.appendLog(QString("素材导入完成：%1 / %2 成功。%3").arg(success).arg(total).arg(errors.isEmpty()?QString():"\n"+errors.join("\n")));if(!errors.isEmpty())window.showError("部分素材未导入，可重新拖入失败文件：\n"+errors.join("\n"));});
+    QObject::connect(&document,&qvw::controllers::DocumentController::importBatchFinished,&window,[&](int success,int total,const QStringList &errors){window.appendLog(QString("素材导入完成：%1 / %2 成功。%3").arg(success).arg(total).arg(errors.isEmpty()?QString():"\n"+errors.join("\n")));});
     QObject::connect(&window, &qvw::ui::MainWindow::importImageRequested, &document, &qvw::controllers::DocumentController::importImage);
     QObject::connect(&window,&qvw::ui::MainWindow::importVideoRequested,&document,&qvw::controllers::DocumentController::importVideo);
     QObject::connect(&document,&qvw::controllers::DocumentController::videoImportStateChanged,&window,&qvw::ui::MainWindow::setImportBusy);

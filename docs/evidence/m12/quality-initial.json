@@ -1,0 +1,24 @@
+[
+  {
+    "title": "恢复旧任务期间复用目标会再次出现旧方案批准入口",
+    "file": "app/ui/AgentPanel.cpp",
+    "start_line": 107,
+    "end_line": 110,
+    "severity": "P1",
+    "category": "BUSINESS_SEMANTICS",
+    "confidence": 10,
+    "rationale": "打开包含已保存待审阅任务的工程时，AgentController::restore 在工程尚未编译就绪时发布 restoring；此时 EditorController 为 ready=false、busy=false，ProjectController 保持 available=true，因此 MainWindow 的历史复用按钮仍可点击。composeGoal 将 restoring 视为可用并接受新目标，但没有终止待恢复任务。编译完成后 AgentController 的 stateChanged/snapshotChanged 会再次调用 restore，发布旧任务 review 和 planReady；AgentPanel::showStatus 因阶段改变把 m_composing 设回 false，重新显示旧方案并启用批准入口，用户刚复用的目标未生成方案就被旧任务审阅界面替代。",
+    "suggestion": "把 restoring 计入不可复用状态，或给控制器增加明确的开始新目标操作，使待恢复任务失效；补充 restoring → composeGoal → restore 完成的回归场景。"
+  },
+  {
+    "title": "JSON 转义后的合法完整目标超过历史单条上限时被静默丢弃",
+    "file": "app/infrastructure/WorkspaceStore.cpp",
+    "start_line": 45,
+    "end_line": 46,
+    "severity": "P2",
+    "category": "ROBUSTNESS",
+    "confidence": 10,
+    "rationale": "新增 goal 字段要求保留完整目标，但单条 JSON 仍固定限制 16384 字节。AgentController/HistoryPanel/composeGoal 接受最多 8192 UTF-8 字节，例如 8192 个双引号是合法的非空目标，JSON 转义后 goal 内容本身已达到 16384 字节，再加 id/title/字段结构必然超限。即使 detail 清空，下一行仍直接 return，导致该创作任务完全不进入历史且无法复用。此路径无需超长或非法目标即可触发。",
+    "suggestion": "确保合法目标的最坏 JSON 转义大小连同必需元数据能够保存；调整单条限制时同步 load 校验和全局容量，或采用明确的存储编码，并增加引号/反斜杠边界用例。"
+  }
+]

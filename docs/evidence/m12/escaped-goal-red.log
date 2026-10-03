@@ -1,0 +1,10 @@
+********* Start testing of WorkspaceStoreTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : WorkspaceStoreTest::initTestCase()
+FAIL!  : WorkspaceStoreTest::escapedGoalsPreservedWithinTotalBudget() Compared values are not the same
+   Actual   (store.history().size()): 0
+   Expected (1)                     : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/WorkspaceStoreTest.cpp(22)]
+PASS   : WorkspaceStoreTest::cleanupTestCase()
+Totals: 2 passed, 1 failed, 0 skipped, 0 blacklisted, 10ms
+********* Finished testing of WorkspaceStoreTest *********
