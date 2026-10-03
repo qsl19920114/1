@@ -117,10 +117,19 @@ ConfigLoadResult loadAppConfig(const QString &configPath) {
     result.config.ffprobePath = resolve(QStringLiteral("ffprobe"));
     result.config.codexPath = resolve(QStringLiteral("codex"));
 
+    if (root.contains("samples") && (!root["samples"].isObject()
+        || (root["samples"].toObject().contains("catalogPath")
+            && !validString(root["samples"].toObject()["catalogPath"], 4096)))) {
+        result.error = QStringLiteral("配置 samples.catalogPath 必须是非空路径字符串。");
+        return result;
+    }
+
     // The lock lives in <repository>/config; its ../hypit points to a sibling
     // checkout of that repository, independent of the caller's working directory.
     QDir repository = QFileInfo(path).absoluteDir();
     repository.cdUp();
+    const auto samplePath = root["samples"].toObject()["catalogPath"].toString();
+    if (!samplePath.isEmpty()) result.config.sampleCatalogPath = QDir::cleanPath(repository.absoluteFilePath(samplePath));
     result.config.configFilePath = QFileInfo(path).absoluteFilePath();
     result.config.distributionPath = QDir::cleanPath(repository.absoluteFilePath(declaredPath));
     result.config.launcherPath = QDir::cleanPath(QDir(result.config.distributionPath).absoluteFilePath(launcher));

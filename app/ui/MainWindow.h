@@ -126,6 +126,7 @@ private:
     QAction *m_redoAction=nullptr;
     QAction *m_sourceAction=nullptr;
     QPushButton *m_applyAssetButton=nullptr;
+    QPushButton *m_handoffAssetButton=nullptr;
     QTreeWidget *m_assetTree = nullptr;
     QLabel *m_documentTitle = nullptr;
     QAction *m_newAction = nullptr;

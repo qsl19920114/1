@@ -10,6 +10,9 @@ struct VideoSample {
     QStringList sources;
     bool available=true;
     QString error;
+    double durationSeconds = 0;
+    int width = 0;
+    int height = 0;
 };
 using VideoSamples=QVector<VideoSample>;
 }

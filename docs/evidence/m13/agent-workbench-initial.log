@@ -1,0 +1,31 @@
+********* Start testing of AgentWorkbenchDemo *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : AgentWorkbenchDemo::initTestCase()
+QINFO  : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport() 1 / Hypit 示例库：官方来源、时长和去重结果
+2026-10-03 18:55:43.787 agent_workbench_demo[78274:24994395] error messaging the mach port for IMKCFRunLoopWakeUpReliable
+QINFO  : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport() 2 / 在 Qt 中创建可编辑工程，使用本地 Hypit 对话示例
+QWARN  : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QINFO  : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport() 3 / 导入另一个官方视频，选择素材并交给 Agent
+QINFO  : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport() 4 / 使用当前 Codex 登录生成方案，等待真实模型返回
+QINFO  : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport() 正在读取工程与素材，等待 Codex 制定方案…
+QINFO  : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport() 方案待审阅，尚未修改工程。
+QINFO  : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport() 5 / 审阅修改前后：确认前工程源码保持不变
+QINFO  : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport() 开始逐项应用已批准的修改…
+QINFO  : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport() 已确认1/1项修改，正在回读编译版本…
+QWARN  : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QINFO  : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport() 方案已应用并回读确认，可继续修改或导出当前版本。
+QINFO  : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport() 6 / 真实修改已写回 Hypit，Qt 预览同步到新版本
+QINFO  : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport() 7 / 再用自然语言修改标题，复用同一审阅和执行链
+QINFO  : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport() 正在读取工程与素材，等待 Codex 制定方案…
+QINFO  : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport() 方案待审阅，尚未修改工程。
+QINFO  : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport() 开始逐项应用已批准的修改…
+QINFO  : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport() 已确认1/1项修改，正在回读编译版本…
+QWARN  : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QINFO  : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport() 方案已应用并回读确认，可继续修改或导出当前版本。
+QINFO  : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport() 8 / 导出成片：计划、构建、获取输出和全片解码
+QINFO  : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport() 9 / 成片已完成，可查看任务与修改历史
+PASS   : AgentWorkbenchDemo::realQtAgentMaterialReviewAndExport()
+PASS   : AgentWorkbenchDemo::cleanupTestCase()
+Totals: 3 passed, 0 failed, 0 skipped, 0 blacklisted, 90108ms
+********* Finished testing of AgentWorkbenchDemo *********

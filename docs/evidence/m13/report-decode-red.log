@@ -1,0 +1,15 @@
+test_official_hash_bound_decode_evidence_is_reused (__main__.DecodeEvidenceRegression) ... ok
+test_swapped_source_cannot_inherit_unbound_decode_pass (__main__.DecodeEvidenceRegression) ... FAIL
+
+======================================================================
+FAIL: test_swapped_source_cannot_inherit_unbound_decode_pass (__main__.DecodeEvidenceRegression)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/qvw-report-decode-regression.py", line 27, in test_swapped_source_cannot_inherit_unbound_decode_pass
+    m.copy_video(source, target, 'regression fixture', 'test', {}, 'ffprobe', 'ffmpeg',
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.020s
+
+FAILED (failures=1)

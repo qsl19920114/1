@@ -3,7 +3,8 @@
 namespace qvw::services {
 class SampleCatalog {
 public:
-    // Only known local sample outputs from the pinned external distribution.
-    static domain::VideoSamples discover(const QString &distribution);
+    // Known pinned outputs plus an optional local schemaVersion 1 catalog.
+    // Catalog paths must remain within its directory; no downloads at startup.
+    static domain::VideoSamples discover(const QString &distribution, const QString &catalogPath = {});
 };
 }

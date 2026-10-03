@@ -186,6 +186,22 @@
         "docs/evidence/m12/packaged-native.json",
         "docs/evidence/m12/delivery-integrity.json"
       ]
+    },
+    "G13": {
+      "milestone": "M13",
+      "definition": "Qt素材与真实Agent联动、官方样例扩充、真实视频与Word/HTML报告及1.5本地交付",
+      "verdict": "PASS",
+      "reason": "36/36 CTest、真实两次Codex/批准/编辑/预览/导出、4个新官方样例、7视频报告完整性、审查修复及1.5搬移启动/包完整性通过。",
+      "evidence": [
+        "docs/evidence/m13/ctest-first.log",
+        "docs/evidence/m13/agent-workbench-demo.json",
+        "docs/evidence/m13/preparation-manifest.json",
+        "docs/evidence/m13/report-delivery.json",
+        "docs/evidence/m13/spec-final.md",
+        "docs/evidence/m13/quality-review-summary.md",
+        "docs/evidence/m13/packaged-native.json",
+        "docs/evidence/m13/delivery-integrity.json"
+      ]
     }
   },
   "tasks": [
@@ -1162,6 +1178,83 @@
         "docs/evidence/m12/quality-review_summary.md",
         "docs/evidence/m12/packaged-native.json",
         "docs/evidence/m12/delivery-integrity.json"
+      ]
+    },
+    {
+      "id": "T052",
+      "milestone": "M13",
+      "title": "Qt与Agent素材交接及生产桥接",
+      "status": "done",
+      "dependsOn": [
+        "T051"
+      ],
+      "evidence": [
+        "docs/evidence/m13/ctest-first.log",
+        "docs/evidence/m13/agent-workbench-demo.json",
+        "docs/evidence/m13/preparation-manifest.json",
+        "docs/evidence/m13/report-delivery.json",
+        "docs/evidence/m13/spec-final.md",
+        "docs/evidence/m13/quality-review-summary.md",
+        "docs/evidence/m13/packaged-native.json",
+        "docs/evidence/m13/delivery-integrity.json"
+      ]
+    },
+    {
+      "id": "T053",
+      "milestone": "M13",
+      "title": "官方Hypit示例准备与有界本地目录",
+      "status": "done",
+      "dependsOn": [
+        "T051"
+      ],
+      "evidence": [
+        "docs/evidence/m13/ctest-first.log",
+        "docs/evidence/m13/agent-workbench-demo.json",
+        "docs/evidence/m13/preparation-manifest.json",
+        "docs/evidence/m13/report-delivery.json",
+        "docs/evidence/m13/spec-final.md",
+        "docs/evidence/m13/quality-review-summary.md",
+        "docs/evidence/m13/packaged-native.json",
+        "docs/evidence/m13/delivery-integrity.json"
+      ]
+    },
+    {
+      "id": "T054",
+      "milestone": "M13",
+      "title": "真实Agent操作录像及Word/HTML实验报告",
+      "status": "done",
+      "dependsOn": [
+        "T052",
+        "T053"
+      ],
+      "evidence": [
+        "docs/evidence/m13/ctest-first.log",
+        "docs/evidence/m13/agent-workbench-demo.json",
+        "docs/evidence/m13/preparation-manifest.json",
+        "docs/evidence/m13/report-delivery.json",
+        "docs/evidence/m13/spec-final.md",
+        "docs/evidence/m13/quality-review-summary.md",
+        "docs/evidence/m13/packaged-native.json",
+        "docs/evidence/m13/delivery-integrity.json"
+      ]
+    },
+    {
+      "id": "T055",
+      "milestone": "M13",
+      "title": "最终审查回归及1.5交付",
+      "status": "done",
+      "dependsOn": [
+        "T054"
+      ],
+      "evidence": [
+        "docs/evidence/m13/ctest-first.log",
+        "docs/evidence/m13/agent-workbench-demo.json",
+        "docs/evidence/m13/preparation-manifest.json",
+        "docs/evidence/m13/report-delivery.json",
+        "docs/evidence/m13/spec-final.md",
+        "docs/evidence/m13/quality-review-summary.md",
+        "docs/evidence/m13/packaged-native.json",
+        "docs/evidence/m13/delivery-integrity.json"
       ]
     }
   ]

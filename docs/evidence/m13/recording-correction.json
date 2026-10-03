@@ -1,0 +1,8 @@
+{
+  "initialFunctionalVerdict": "PASS",
+  "initialQtTestPassed": 3,
+  "initialRealModelRequests": 2,
+  "visualIssue": "Retina image DPR=2 retained during drawing into DPR=1 canvas, making application occupy one quarter of recording",
+  "fix": "Normalize fitted QImage devicePixelRatio to 1 before drawing; record a fresh real model run",
+  "deliveryUses": "final corrected recording only"
+}

@@ -1,0 +1,103 @@
+{
+    "artifact": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m13/runs/20261003-185540/Qt-Agent联动成片.mp4",
+    "artifactFullDecode": true,
+    "audio": "original video-story template is muted",
+    "availableSamples": 5,
+    "buildId": "bld_20261003T105646043Z_A705A13624",
+    "capture": "continuous own MainWindow, actual frame intervals, no accelerated model waits",
+    "driver": "scripted production widgets/signals; production AgentWorkbenchBridge; actual Codex/Hypit",
+    "explicitDriverApprovals": 2,
+    "handoffGoal": "请将当前选中组件的兼容素材属性替换为以下工程素材：{\"bindingValue\":\"./assets/7356166e9ac71e69367cac8927ee3818d47c3a04077523efb94310cb9ac9cb1c.mp4\",\"name\":\"ranking-hypit-final.mp4\"}。只修改该素材绑定，保留文案、时长、颜色和其他组件；不要猜测素材画面内容。",
+    "materialPlan": {
+        "format": "qvw.agent-plan@1",
+        "kind": "edit",
+        "operations": [
+            {
+                "entityId": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m13/runs/20261003-185540/QtAgent集成工程/main.svml::output::cover.track:cover",
+                "fieldId": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m13/runs/20261003-185540/QtAgent集成工程/main.svml::output::cover.track:cover:inspector:video",
+                "value": "./assets/7356166e9ac71e69367cac8927ee3818d47c3a04077523efb94310cb9ac9cb1c.mp4"
+            }
+        ],
+        "projectName": "",
+        "question": "",
+        "scenes": [
+        ],
+        "summary": "拟仅将当前选中组件的视频素材绑定替换为 ranking-hypit-final.mp4，保留文案、时长、颜色及其他组件，待用户批准后执行。"
+    },
+    "ownedStudioStopped": true,
+    "pixelsUploaded": false,
+    "previewFingerprint": "b80ba58f7af76e7cb095dada30eddfb9fceec390be80c4df892ac3241a96d325",
+    "project": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m13/runs/20261003-185540/QtAgent集成工程/workbench.qvw.json",
+    "provider": "current Codex login",
+    "publicMessages": 2,
+    "realModelRequests": 2,
+    "recording": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m13/runs/20261003-185540/Qt-Agent真实操作演示.mp4",
+    "recordingElapsedMs": 84543,
+    "recordingFrames": 423,
+    "recordingFullDecode": true,
+    "sourceUnchangedBeforeApproval": true,
+    "stages": [
+        {
+            "atMs": 118,
+            "frameIndex": 1,
+            "title": "1 / Hypit 示例库：官方来源、时长和去重结果"
+        },
+        {
+            "atMs": 4119,
+            "frameIndex": 21,
+            "title": "2 / 在 Qt 中创建可编辑工程，使用本地 Hypit 对话示例"
+        },
+        {
+            "atMs": 10716,
+            "frameIndex": 53,
+            "title": "3 / 导入另一个官方视频，选择素材并交给 Agent"
+        },
+        {
+            "atMs": 15029,
+            "frameIndex": 75,
+            "title": "4 / 使用当前 Codex 登录生成方案，等待真实模型返回"
+        },
+        {
+            "atMs": 31735,
+            "frameIndex": 158,
+            "title": "5 / 审阅修改前后：确认前工程源码保持不变"
+        },
+        {
+            "atMs": 36005,
+            "frameIndex": 180,
+            "title": "6 / 真实修改已写回 Hypit，Qt 预览同步到新版本"
+        },
+        {
+            "atMs": 40507,
+            "frameIndex": 202,
+            "title": "7 / 再用自然语言修改标题，复用同一审阅和执行链"
+        },
+        {
+            "atMs": 59707,
+            "frameIndex": 298,
+            "title": "8 / 导出成片：计划、构建、获取输出和全片解码"
+        },
+        {
+            "atMs": 80483,
+            "frameIndex": 402,
+            "title": "9 / 成片已完成，可查看任务与修改历史"
+        }
+    ],
+    "titlePlan": {
+        "format": "qvw.agent-plan@1",
+        "kind": "edit",
+        "operations": [
+            {
+                "entityId": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m13/runs/20261003-185540/QtAgent集成工程/main.svml::output::cover.track:cover",
+                "fieldId": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m13/runs/20261003-185540/QtAgent集成工程/main.svml::output::cover.track:cover:inspector:title",
+                "value": "Qt 与 Agent，让创作连起来"
+            }
+        ],
+        "projectName": "",
+        "question": "",
+        "scenes": [
+        ],
+        "summary": "拟仅修改当前视频组件的标题为“Qt 与 Agent，让创作连起来”；其它文字、视频素材、时长和颜色保持不变，待用户批准后执行。"
+    },
+    "verdict": "PASS"
+}

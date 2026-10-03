@@ -64,8 +64,12 @@ add_library(qvw_agent STATIC agent/PlanService.cpp agent/ContextBuilder.cpp agen
 target_include_directories(qvw_agent PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(qvw_agent PUBLIC qvw_controllers Qt6::Gui)
 
+add_library(qvw_workflow STATIC workflow/AgentWorkbenchBridge.cpp)
+target_include_directories(qvw_workflow PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(qvw_workflow PUBLIC qvw_ui qvw_agent)
+
 qt_add_executable(qt_video_workbench main.cpp)
-target_link_libraries(qt_video_workbench PRIVATE qvw_ui qvw_agent)
+target_link_libraries(qt_video_workbench PRIVATE qvw_workflow)
 target_compile_definitions(qt_video_workbench PRIVATE QVW_APP_VERSION="${PROJECT_VERSION}")
 
 set_target_properties(qt_video_workbench PROPERTIES

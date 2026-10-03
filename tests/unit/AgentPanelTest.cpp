@@ -97,6 +97,11 @@ private slots:
         panel.showStatus(status); QCOMPARE(panel.findChild<QPlainTextEdit *>("agentGoal")->toPlainText(), goal);
         panel.findChild<QPushButton *>("agentGenerate")->click(); QCOMPARE(generated.count(), 1); QCOMPARE(generated.first().first().toString(), goal);
     }
+    void assetHandoffRequiresSelectionAndResetsApproval(){
+        ui::AgentPanel panel;panel.setAvailable(true);QVERIFY(!panel.composeAssetGoal("图片","./assets/a.png"));panel.setSelection("actual/component","当前组件");QVERIFY(!panel.composeAssetGoal("图片","../escape.png"));domain::AgentStatus status;status.phase="review";status.canApprove=true;panel.showStatus(status);panel.showPlan(editPlan(),snapshot());
+        QSignalSpy generated(&panel,&ui::AgentPanel::generateRequested),approved(&panel,&ui::AgentPanel::approveRequested),stopped(&panel,&ui::AgentPanel::stopRequested);QVERIFY(panel.composeAssetGoal("本地图片","./assets/a.png"));QCOMPARE(stopped.size(),1);QCOMPARE(generated.size(),0);QCOMPARE(approved.size(),0);QVERIFY(panel.findChild<QCheckBox*>("agentScope")->isChecked());QVERIFY(!panel.findChild<QPushButton*>("planApprove")->isEnabled());
+        status.phase="restoring";panel.showStatus(status);QVERIFY(!panel.composeAssetGoal("图片","./assets/b.png"));
+    }
     void composeGoalUsesTheControllersUtf8ByteLimit_data() {
         QTest::addColumn<QString>("goal");
         QTest::newRow("ascii-5000-bytes") << QString(5000, QChar('x'));

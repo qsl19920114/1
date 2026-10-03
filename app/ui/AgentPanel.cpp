@@ -2,6 +2,8 @@
 #include "ui/PlanReviewPanel.h"
 #include <QCheckBox>
 #include <QFileDialog>
+#include <QJsonArray>
+#include <QJsonDocument>
 #include <QHBoxLayout>
 #include <QImageReader>
 #include <QLabel>
@@ -19,7 +21,7 @@ QLabel *plainLabel(const QString &text, const QString &name) {
 }
 QString phaseText(const QString &phase) {
     const QMap<QString, QString> phases{{"idle", "准备创作"}, {"thinking", "正在生成方案"}, {"review", "等待审阅"},
-        {"creating", "正在创建工程"}, {"applying", "正在修改工程"}, {"undoing", "正在撤销上一步"},
+        {"restoring", "正在恢复工程任务"}, {"creating", "正在创建工程"}, {"applying", "正在修改工程"}, {"undoing", "正在撤销上一步"},
         {"failed", "执行失败"}, {"paused", "任务已暂停"}, {"stale", "方案版本已过期"},
         {"complete", "任务已完成"}, {"completed", "任务已完成"}, {"clarify", "需要补充信息"}, {"cancelled", "任务已停止"}};
     return phases.value(phase, phase);
@@ -31,6 +33,7 @@ AgentPanel::AgentPanel(QWidget *parent):QWidget(parent) {
     auto *layout = new QVBoxLayout(this); layout->setContentsMargins(12, 12, 12, 12); layout->setSpacing(8);
     layout->addWidget(plainLabel(QStringLiteral("Agent 创作"), "agentTitle"));
     layout->addWidget(plainLabel(QStringLiteral("真实 Codex · 使用当前 Codex 登录"), "agentModel"));
+    m_projectContext = plainLabel(QStringLiteral("尚未打开工程 · 可选择图片创建作品"), "agentProjectContext");layout->addWidget(m_projectContext);
     m_stage = plainLabel({}, "agentStage"); layout->addWidget(m_stage);
     m_goal = new QPlainTextEdit; m_goal->setObjectName("agentGoal"); m_goal->setFixedHeight(90);
     m_goal->setPlaceholderText(QStringLiteral("描述想做的作品，或说明当前工程要怎样修改…")); layout->addWidget(m_goal);
@@ -110,6 +113,16 @@ bool AgentPanel::composeGoal(const QString &goal) {
     m_review->clearPlan(); m_publicOutput->clear(); m_composing = true;
     m_scope->setChecked(false); m_goal->setPlainText(goal);
     updateActions(); m_goal->setFocus(Qt::OtherFocusReason); return true;
+}
+void AgentPanel::setProjectContext(const domain::Project &project,const domain::Snapshot &snapshot) {
+    m_projectContext->setText(project.rootPath.isEmpty()?QStringLiteral("尚未打开工程 · 可选择图片创建作品"):
+        QStringLiteral("当前工程：%1\n%2 个工程素材 · %3").arg(project.name).arg(project.assets.size()).arg(snapshot.isLoaded()?QStringLiteral("已读取编译版本 v%1").arg(snapshot.revision):QStringLiteral("等待工程编译")));
+}
+bool AgentPanel::composeAssetGoal(const QString &name,const QString &binding) {
+    if(m_selectedEntity.isEmpty()||!binding.startsWith("./assets/")||binding.contains(".."))return false;
+    const auto material=QString::fromUtf8(QJsonDocument(QJsonObject{{"name",name},{"bindingValue",binding}}).toJson(QJsonDocument::Compact));
+    if(!composeGoal(QStringLiteral("请将当前选中组件的兼容素材属性替换为以下工程素材：%1。只修改该素材绑定，保留文案、时长、颜色和其他组件；不要猜测素材画面内容。").arg(material)))return false;
+    m_scope->setChecked(true);return true;
 }
 void AgentPanel::showPublicMessage(const QString &text) {
     if (m_status.phase != "thinking" || text.isEmpty()) return;

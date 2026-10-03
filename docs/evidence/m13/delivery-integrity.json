@@ -1,0 +1,13 @@
+{
+  "verdict": "PASS",
+  "version": "1.5.0",
+  "archive": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/release-macos-arm64-1.5.0/FrameLab-1.5.0-macOS-arm64.zip",
+  "archiveSha256": "89c49bdb27a7f077f1335126e87306ad99b87711346e7897ebe26db28cd08204",
+  "archiveExecutableMatchesBundle": true,
+  "executableSha256": "1331171f45b67fcdd9a0369c1060b373b8c9ce9db69804943a176127924daa28",
+  "verifiedLicenseFiles": 248,
+  "machOBinaries": 82,
+  "artifact": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m13/runs/20261003-185901/Qt-Agent联动成片.mp4",
+  "artifactSha256": "173a49a4b496998c2e628c4895a9bb52e4fff0aea859b0d4a9d07a668540a086",
+  "project": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m13/runs/20261003-185901/QtAgent集成工程/workbench.qvw.json"
+}

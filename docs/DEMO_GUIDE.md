@@ -1,6 +1,20 @@
 # 演示与提交材料
 
-## 本地交付目录
+## 最新交付：1.5 Qt × Agent 实验
+
+- `.workbench/deliverables-m13/index.html`：本地实验报告与7个可播放视频。
+- `.workbench/deliverables-m13/experiment-report.docx`：可编辑 Word 报告；姓名、学号自行填写。
+- `videos/qt-agent-walkthrough.mp4`：实际 Qt 窗口连续录像，最终2次真实模型请求、审阅/批准、素材与标题修改及导出。
+- `videos/qt-agent-film.mp4`：本次工程生成的8秒静音成片。其余5个视频为明确标注来源的Hypit示例。
+- `.workbench/启动FrameLab.command`：启动1.5应用并打开演示工程。
+
+录像由 `tests/integration/AgentWorkbenchDemo.cpp` 驱动正式控件/信号，复用生产桥接和真实Codex/Hypit；录制保留模型等待时间。不是手工鼠标演示，不代表模型理解了视频画面。报告中的图取自真实录像，仅辅助讲解。
+
+复现：先按使用指南配置本地依赖与当前Codex登录，执行 `python3 scripts/showcase/prepare_hypit_samples.py` 准备官方示例，然后运行 `build/tests/agent_workbench_demo`，最后运行 `python3 scripts/showcase/build_experiment_report.py --delivery .workbench/deliverables-m13`。报告生成器仅接受通过的真实演示；官方视频来源/哈希与解码证据在 `source-manifest.json`。保持整个交付文件夹一起移动，HTML与Word的视频链接使用相对路径。
+
+以下保留历史1.0演示说明；旧模拟提案不等同于当前真实Agent入口。
+
+## 历史本地交付目录
 
 `.workbench/deliverables/完整操作演示.mp4` 是连续录制本项目真实 Qt 窗口的操作视频；`.workbench/deliverables/校园光影-演示成片.mp4` 是这次工程经 Hypit build/get 和媒体校验得到的8秒视频。二者用途不同。工程位置记录在 `docs/evidence/m6/walkthrough.json`，可直接打开其中的 `workbench.qvw.json` 继续编辑。
 

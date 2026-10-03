@@ -1,0 +1,229 @@
+[  0%] Built target qvw_infra_autogen_timestamp_deps
+[  0%] Built target qt_video_workbench_qmlimportscan
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  0%] Automatic MOC for target qvw_domain
+[  1%] Automatic MOC for target qvw_infra
+[  1%] Built target qvw_domain_autogen
+[  1%] Built target qvw_infra_autogen
+[  3%] Built target qvw_domain
+[  3%] Built target qvw_ui_autogen_timestamp_deps
+[  6%] Built target qvw_infra
+[  6%] Automatic MOC for target qvw_ui
+[  6%] Built target qvw_backend_autogen_timestamp_deps
+[  6%] Built target hypit_probe_test_autogen_timestamp_deps
+[  6%] Built target infrastructure_test_autogen_timestamp_deps
+[  6%] Built target qvw_services_autogen_timestamp_deps
+[  6%] Built target json_process_test_autogen_timestamp_deps
+[  6%] Built target log_rotation_test_autogen_timestamp_deps
+[  6%] Built target workspace_store_test_autogen_timestamp_deps
+[  6%] Built target qvw_ui_autogen
+[  7%] Automatic MOC for target qvw_backend
+[  7%] Automatic MOC for target qvw_services
+[  7%] Automatic MOC for target infrastructure_test
+[  7%] Automatic MOC for target hypit_probe_test
+[  7%] Automatic MOC for target json_process_test
+[  7%] Built target qvw_services_autogen
+[  7%] Built target qvw_backend_autogen
+[  7%] Built target infrastructure_test_autogen
+[  7%] Automatic MOC for target log_rotation_test
+[  7%] Built target hypit_probe_test_autogen
+[  7%] Built target json_process_test_autogen
+[  7%] Built target log_rotation_test_autogen
+[  8%] Automatic MOC for target workspace_store_test
+[  9%] Built target infrastructure_test
+[  9%] Built target workspace_store_test_autogen
+[ 11%] Built target qvw_backend
+[ 12%] Built target hypit_probe_test
+[ 13%] Built target json_process_test
+[ 13%] Built target studio_process_test_autogen_timestamp_deps
+[ 13%] Built target studio_client_test_autogen_timestamp_deps
+[ 13%] Built target studio_writer_test_autogen_timestamp_deps
+[ 17%] Built target qvw_services
+[ 19%] Built target log_rotation_test
+[ 20%] Built target workspace_store_test
+[ 20%] Built target media_validation_test_autogen_timestamp_deps
+[ 20%] Built target export_workspace_test_autogen_timestamp_deps
+[ 25%] Built target qvw_ui
+[ 25%] Built target proposal_service_test_autogen_timestamp_deps
+[ 25%] Built target sample_catalog_test_autogen_timestamp_deps
+[ 25%] Built target qvw_controllers_autogen_timestamp_deps
+[ 25%] Automatic MOC for target studio_client_test
+[ 25%] Automatic MOC for target studio_writer_test
+[ 25%] Automatic MOC for target studio_process_test
+[ 25%] Built target inspector_controls_test_autogen_timestamp_deps
+[ 25%] Built target project_store_test_autogen_timestamp_deps
+[ 25%] Built target asset_service_test_autogen_timestamp_deps
+[ 25%] Built target source_edit_guard_test_autogen_timestamp_deps
+[ 25%] Built target studio_writer_test_autogen
+[ 25%] Built target studio_client_test_autogen
+[ 25%] Built target studio_process_test_autogen
+[ 25%] Built target product_window_test_autogen_timestamp_deps
+[ 25%] Built target agent_panel_test_autogen_timestamp_deps
+[ 25%] Automatic MOC for target export_workspace_test
+[ 26%] Automatic MOC for target media_validation_test
+[ 26%] Automatic MOC for target proposal_service_test
+[ 26%] Built target preview_version_test_autogen_timestamp_deps
+[ 26%] Built target product_experience_test_autogen_timestamp_deps
+[ 27%] Automatic MOC for target sample_catalog_test
+[ 27%] Built target export_workspace_test_autogen
+[ 27%] Built target history_panel_test_autogen_timestamp_deps
+[ 27%] Built target media_validation_test_autogen
+[ 27%] Built target import_results_panel_test_autogen_timestamp_deps
+[ 27%] Built target proposal_service_test_autogen
+[ 27%] Built target sample_catalog_test_autogen
+[ 27%] Automatic MOC for target qvw_controllers
+[ 29%] Built target studio_client_test
+[ 30%] Built target studio_process_test
+[ 30%] Automatic MOC for target inspector_controls_test
+[ 31%] Automatic MOC for target project_store_test
+[ 31%] Automatic MOC for target asset_service_test
+[ 31%] Built target qvw_controllers_autogen
+[ 31%] Built target inspector_controls_test_autogen
+[ 31%] Built target project_store_test_autogen
+[ 31%] Automatic MOC for target source_edit_guard_test
+[ 33%] Built target asset_service_test_autogen
+[ 33%] Built target studio_writer_test
+[ 33%] Built target source_edit_guard_test_autogen
+[ 34%] Built target export_workspace_test
+[ 35%] Built target media_validation_test
+[ 36%] Built target proposal_service_test
+[ 37%] Built target sample_catalog_test
+[ 38%] Automatic MOC for target product_window_test
+[ 39%] Automatic MOC for target agent_panel_test
+[ 39%] Built target product_window_test_autogen
+[ 40%] Automatic MOC for target preview_version_test
+[ 41%] Automatic MOC for target history_panel_test
+[ 41%] Automatic MOC for target product_experience_test
+[ 41%] Automatic MOC for target import_results_panel_test
+[ 41%] Built target agent_panel_test_autogen
+[ 41%] Built target preview_version_test_autogen
+[ 41%] Built target history_panel_test_autogen
+[ 41%] Built target product_experience_test_autogen
+[ 41%] Built target import_results_panel_test_autogen
+[ 43%] Built target inspector_controls_test
+[ 44%] Built target project_store_test
+[ 45%] Built target source_edit_guard_test
+[ 46%] Built target product_window_test
+[ 49%] Built target agent_panel_test
+[ 50%] Built target qvw_controllers
+[ 51%] Built target asset_service_test
+[ 51%] Built target creation_efficiency_e2e_test_autogen_timestamp_deps
+[ 52%] Built target preview_version_test
+[ 52%] Built target document_controller_test_autogen_timestamp_deps
+[ 52%] Built target qvw_agent_autogen_timestamp_deps
+[ 53%] Built target product_experience_test
+[ 54%] Built target history_panel_test
+[ 56%] Built target import_results_panel_test
+[ 56%] Built target project_e2e_test_autogen_timestamp_deps
+[ 56%] Built target editor_controller_test_autogen_timestamp_deps
+[ 56%] Built target export_controller_test_autogen_timestamp_deps
+[ 56%] Built target editor_e2e_test_autogen_timestamp_deps
+[ 56%] Built target export_e2e_test_autogen_timestamp_deps
+[ 56%] Built target proposal_controller_test_autogen_timestamp_deps
+[ 56%] Built target runtime_paths_test_autogen_timestamp_deps
+[ 56%] Built target proposal_e2e_test_autogen_timestamp_deps
+[ 56%] Built target video_asset_importer_test_autogen_timestamp_deps
+[ 56%] Built target export_cache_test_autogen_timestamp_deps
+[ 56%] Built target walkthrough_demo_autogen_timestamp_deps
+[ 56%] Built target product_e2e_test_autogen_timestamp_deps
+[ 56%] Built target asset_library_test_autogen_timestamp_deps
+[ 56%] Built target product_experience_e2e_test_autogen_timestamp_deps
+[ 56%] Automatic MOC for target qvw_agent
+[ 57%] Automatic MOC for target creation_efficiency_e2e_test
+[ 57%] Automatic MOC for target document_controller_test
+[ 57%] Automatic MOC for target project_e2e_test
+[ 58%] Automatic MOC for target editor_e2e_test
+[ 58%] Automatic MOC for target editor_controller_test
+[ 58%] Built target qvw_agent_autogen
+[ 58%] Built target creation_efficiency_e2e_test_autogen
+[ 58%] Built target document_controller_test_autogen
+[ 58%] Built target project_e2e_test_autogen
+[ 58%] Built target editor_e2e_test_autogen
+[ 58%] Built target editor_controller_test_autogen
+[ 58%] Automatic MOC for target export_controller_test
+[ 59%] Automatic MOC for target export_e2e_test
+[ 59%] Automatic MOC for target proposal_controller_test
+[ 60%] Automatic MOC for target proposal_e2e_test
+[ 61%] Built target export_controller_test_autogen
+[ 61%] Automatic MOC for target export_cache_test
+[ 61%] Automatic MOC for target runtime_paths_test
+[ 61%] Built target export_e2e_test_autogen
+[ 61%] Built target proposal_controller_test_autogen
+[ 61%] Built target proposal_e2e_test_autogen
+[ 61%] Built target export_cache_test_autogen
+[ 61%] Built target runtime_paths_test_autogen
+[ 61%] Automatic MOC for target walkthrough_demo
+[ 61%] Automatic MOC for target video_asset_importer_test
+[ 61%] Built target walkthrough_demo_autogen
+[ 61%] Automatic MOC for target product_e2e_test
+[ 63%] Automatic MOC for target product_experience_e2e_test
+[ 63%] Automatic MOC for target asset_library_test
+[ 64%] Built target creation_efficiency_e2e_test
+[ 64%] Built target video_asset_importer_test_autogen
+[ 64%] Built target product_e2e_test_autogen
+[ 64%] Built target product_experience_e2e_test_autogen
+[ 64%] Built target asset_library_test_autogen
+[ 65%] Built target document_controller_test
+[ 66%] Built target project_e2e_test
+[ 67%] Built target editor_controller_test
+[ 68%] Built target editor_e2e_test
+[ 69%] Built target export_controller_test
+[ 73%] Built target export_e2e_test
+[ 74%] Built target qvw_agent
+[ 75%] Built target proposal_controller_test
+[ 75%] Built target agent_plan_test_autogen_timestamp_deps
+[ 76%] Built target proposal_e2e_test
+[ 77%] Built target runtime_paths_test
+[ 78%] Built target export_cache_test
+[ 78%] Built target model_client_test_autogen_timestamp_deps
+[ 78%] Built target story_template_test_autogen_timestamp_deps
+[ 80%] Built target walkthrough_demo
+[ 80%] Built target agent_model_live_autogen_timestamp_deps
+[ 81%] Built target video_asset_importer_test
+[ 81%] Built target agent_task_store_test_autogen_timestamp_deps
+[ 81%] Built target agent_controller_test_autogen_timestamp_deps
+[ 81%] Built target agent_e2e_test_autogen_timestamp_deps
+[ 81%] Built target qvw_workflow_autogen_timestamp_deps
+[ 82%] Built target product_e2e_test
+[ 83%] Built target product_experience_e2e_test
+[ 84%] Built target asset_library_test
+[ 84%] Automatic MOC for target agent_plan_test
+[ 84%] Automatic MOC for target agent_model_live
+[ 84%] Automatic MOC for target model_client_test
+[ 84%] Built target agent_model_live_autogen
+[ 84%] Automatic MOC for target story_template_test
+[ 84%] Built target agent_plan_test_autogen
+[ 84%] Automatic MOC for target agent_controller_test
+[ 85%] Automatic MOC for target agent_task_store_test
+[ 85%] Built target model_client_test_autogen
+[ 86%] Automatic MOC for target qvw_workflow
+[ 86%] Built target story_template_test_autogen
+[ 86%] Built target agent_task_store_test_autogen
+[ 86%] Built target agent_controller_test_autogen
+[ 87%] Automatic MOC for target agent_e2e_test
+[ 87%] Built target qvw_workflow_autogen
+[ 88%] Built target agent_plan_test
+[ 88%] Built target agent_e2e_test_autogen
+[ 89%] Built target agent_model_live
+[ 90%] Built target model_client_test
+[ 91%] Built target story_template_test
+[ 92%] Built target agent_task_store_test
+[ 93%] Built target agent_controller_test
+[ 94%] Built target qvw_workflow
+[ 95%] Built target agent_e2e_test
+[ 95%] Built target startup_early_close_test_autogen_timestamp_deps
+[ 95%] Built target qt_video_workbench_autogen_timestamp_deps
+[ 95%] Built target agent_workbench_demo_autogen_timestamp_deps
+[ 96%] Automatic MOC for target startup_early_close_test
+[ 97%] Automatic MOC for target qt_video_workbench
+[ 97%] Automatic MOC for target agent_workbench_demo
+[ 97%] Built target qt_video_workbench_autogen
+[ 97%] Built target startup_early_close_test_autogen
+[ 97%] Built target agent_workbench_demo_autogen
+[ 98%] Built target qt_video_workbench
+[ 98%] Building CXX object tests/CMakeFiles/agent_workbench_demo.dir/agent_workbench_demo_autogen/mocs_compilation.cpp.o
+[ 98%] Building CXX object tests/CMakeFiles/agent_workbench_demo.dir/integration/AgentWorkbenchDemo.cpp.o
+[ 98%] Linking CXX executable startup_early_close_test
+[ 99%] Built target startup_early_close_test
+[100%] Linking CXX executable agent_workbench_demo
+[100%] Built target agent_workbench_demo

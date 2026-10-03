@@ -19,10 +19,12 @@ public:
     void showAssets(const domain::AgentAssets &);
     void setSelection(const QString &entityId, const QString &label);
     void setAvailable(bool);
+    void setProjectContext(const domain::Project &, const domain::Snapshot &);
     void setVersions(const domain::Snapshot &, const domain::ExportTask &);
     void setPreviewVersion(const domain::PreviewVersion &);
 public slots:
     bool composeGoal(const QString &goal);
+    bool composeAssetGoal(const QString &name, const QString &binding);
     void showPublicMessage(const QString &text);
 signals:
     void generateRequested(const QString &goal);
@@ -47,6 +49,7 @@ private:
     bool m_composing = true;
     bool m_detailsExpanded = false;
     QLabel *m_stage = nullptr;
+    QLabel *m_projectContext = nullptr;
     QPlainTextEdit *m_publicOutput = nullptr;
     QPushButton *m_continue = nullptr;
     QPushButton *m_revise = nullptr;

@@ -1,0 +1,9 @@
+********* Start testing of ProductExperienceTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : ProductExperienceTest::initTestCase()
+QWARN  : ProductExperienceTest::handoffSelectedAssetPreparesScopedGoalWithoutExecution() qt.qpa.fonts: Populating font family aliases took 151 ms. Replace uses of missing font family "Sans Serif" with one that exists to avoid this cost.
+FAIL!  : ProductExperienceTest::handoffSelectedAssetPreparesScopedGoalWithoutExecution() 'button' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProductExperienceTest.cpp(62)]
+PASS   : ProductExperienceTest::cleanupTestCase()
+Totals: 2 passed, 1 failed, 0 skipped, 0 blacklisted, 606ms
+********* Finished testing of ProductExperienceTest *********

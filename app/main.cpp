@@ -1,3 +1,4 @@
+#include "workflow/AgentWorkbenchBridge.h"
 #include "services/ProjectStore.h"
 #include "services/AssetService.h"
 #include <QFileDialog>
@@ -91,25 +92,8 @@ int main(int argc, char **argv) {
     model.setEnvironment(loaded.config.processEnvironment);
     qvw::agent::AgentController agent(document,editor,exporter,model,qvw::infra::RuntimePaths::templateDirectory());
     qvw::ui::MainWindow window;
-    QObject::connect(window.agentPanel(),&qvw::ui::AgentPanel::imagesRequested,&agent,&qvw::agent::AgentController::setImages);
-    QObject::connect(window.agentPanel(),&qvw::ui::AgentPanel::generateRequested,&agent,&qvw::agent::AgentController::generate);
-    QObject::connect(window.agentPanel(),&qvw::ui::AgentPanel::scopeChanged,&agent,&qvw::agent::AgentController::setScope);
-    QObject::connect(window.agentPanel(),&qvw::ui::AgentPanel::selectionChanged,&agent,&qvw::agent::AgentController::setSelection);
-    QObject::connect(window.agentPanel(),&qvw::ui::AgentPanel::approveRequested,&agent,[&](const QJsonObject &edited,const QString &destination){
-        agent.updatePlan(edited);
-        if(agent.plan()&&agent.plan()->content==edited&&agent.status().canApprove)agent.approve(destination);
-    });
-    QObject::connect(window.agentPanel(),&qvw::ui::AgentPanel::stopRequested,&agent,&qvw::agent::AgentController::stop);
-    QObject::connect(window.agentPanel(),&qvw::ui::AgentPanel::retryRequested,&agent,&qvw::agent::AgentController::retry);
-    QObject::connect(window.agentPanel(),&qvw::ui::AgentPanel::repairRequested,&agent,&qvw::agent::AgentController::repair);
-    QObject::connect(window.agentPanel(),&qvw::ui::AgentPanel::undoRequested,&agent,&qvw::agent::AgentController::undoLast);
-    QObject::connect(window.agentPanel(),&qvw::ui::AgentPanel::restoreRequested,&agent,&qvw::agent::AgentController::restore);
-    QObject::connect(&agent,&qvw::agent::AgentController::statusChanged,&window,&qvw::ui::MainWindow::showAgentStatus);
-    QObject::connect(&agent,&qvw::agent::AgentController::planReady,&window,&qvw::ui::MainWindow::showAgentPlan);
-    QObject::connect(&agent,&qvw::agent::AgentController::assetsChanged,window.agentPanel(),&qvw::ui::AgentPanel::showAssets);
-    QObject::connect(&agent,&qvw::agent::AgentController::failed,&window,[&](const QString &text){window.appendLog("Agent 未完成："+text);log.error(text);});
-    QObject::connect(&agent,&qvw::agent::AgentController::message,&window,&qvw::ui::MainWindow::appendLog);
-    QObject::connect(&agent,&qvw::agent::AgentController::publicMessageReceived,window.agentPanel(),&qvw::ui::AgentPanel::showPublicMessage);
+    qvw::workflow::bindAgentWorkbench(window,agent);
+    QObject::connect(&agent,&qvw::agent::AgentController::failed,&window,[&log](const QString &text){log.error(text);});
     qvw::infra::WorkspaceStore workspace(QDir(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)).filePath("workspace.json"));
     QString workspaceError;
     if(!verification){if(!workspace.load(&workspaceError))window.appendLog(workspaceError);window.restoreWorkspaceLayout(workspace.layout());window.showRecentProjects(workspace.recent());window.showHistory(workspace.history());}
@@ -119,7 +103,7 @@ int main(int argc, char **argv) {
     QObject::connect(&window,&qvw::ui::MainWindow::historyRecorded,&window,[&](const QJsonObject &record){if(verification)return;workspace.record(record);window.showHistory(workspace.history());workspaceSave.start();});
     QObject::connect(&window,&qvw::ui::MainWindow::playheadChanged,&window,[&](const QString &path,int frame){if(verification||workspace.frame(path)==frame)return;workspace.setFrame(path,frame);if(!workspaceSave.isActive())workspaceSave.start();});
     QObject::connect(&app,&QCoreApplication::aboutToQuit,&window,saveWorkspace);
-    window.setSamples(qvw::services::SampleCatalog::discover(loaded.config.distributionPath));
+    window.setSamples(qvw::services::SampleCatalog::discover(loaded.config.distributionPath,loaded.config.sampleCatalogPath));
     window.appendLog(QStringLiteral("日志：%1").arg(log.filePath()));
     if (!log.isReady()) window.appendLog(QStringLiteral("日志不可写：%1").arg(log.lastError()));
     bool finished = false, gotSnapshot = false, pageLoaded = false, jsPending = false, cleanupStopped = true;
@@ -264,7 +248,7 @@ int main(int argc, char **argv) {
             return;
         }
         const auto config = qvw::infra::loadAppConfig(path);
-        if (!config.ok()) window.showError(config.error); else {creation.cancel();document.close();document.setMediaTools(config.config.ffprobePath,config.config.ffmpegPath,config.config.processEnvironment);model.setProgram(config.config.codexPath.isEmpty()?QStringLiteral("codex"):config.config.codexPath);model.setEnvironment(config.config.processEnvironment);window.setSamples(qvw::services::SampleCatalog::discover(config.config.distributionPath));exporter.setConfig(config.config);controller.configure(config.config);}
+        if (!config.ok()) window.showError(config.error); else {creation.cancel();document.close();document.setMediaTools(config.config.ffprobePath,config.config.ffmpegPath,config.config.processEnvironment);model.setProgram(config.config.codexPath.isEmpty()?QStringLiteral("codex"):config.config.codexPath);model.setEnvironment(config.config.processEnvironment);window.setSamples(qvw::services::SampleCatalog::discover(config.config.distributionPath,config.config.sampleCatalogPath));exporter.setConfig(config.config);controller.configure(config.config);}
     });
     QObject::connect(&window, &qvw::ui::MainWindow::previewLoaded, &app, [&](bool ok) {
         if(finished)return;

@@ -56,7 +56,7 @@ target_compile_definitions(walkthrough_demo PRIVATE QVW_SOURCE_DIR="${PROJECT_SO
 
 if(UNIX)
   add_executable(startup_early_close_test integration/StartupEarlyCloseTest.cpp)
-  target_link_libraries(startup_early_close_test PRIVATE qvw_ui qvw_agent)
+  target_link_libraries(startup_early_close_test PRIVATE qvw_workflow)
   target_compile_definitions(startup_early_close_test PRIVATE QVW_APP_VERSION="${PROJECT_VERSION}")
   add_test(NAME startup_early_close COMMAND startup_early_close_test)
   set_tests_properties(startup_early_close PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen" TIMEOUT 15)
@@ -128,3 +128,8 @@ set_tests_properties(import_results_panel PROPERTIES ENVIRONMENT "QT_QPA_PLATFOR
 add_executable(creation_efficiency_e2e_test integration/CreationEfficiencyE2ETest.cpp)
 target_link_libraries(creation_efficiency_e2e_test PRIVATE qvw_ui qvw_controllers Qt6::Test)
 target_compile_definitions(creation_efficiency_e2e_test PRIVATE QVW_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
+
+# Explicit opt-in: invokes current Codex login and records a real application.
+add_executable(agent_workbench_demo integration/AgentWorkbenchDemo.cpp)
+target_link_libraries(agent_workbench_demo PRIVATE qvw_workflow Qt6::Test)
+target_compile_definitions(agent_workbench_demo PRIVATE QVW_SOURCE_DIR="${PROJECT_SOURCE_DIR}")

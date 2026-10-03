@@ -1,4 +1,6 @@
 #include "ui/SceneStrip.h"
+#include "ui/AgentPanel.h"
+#include <QCheckBox>
 #include "ui/MainWindow.h"
 #include "ui/HistoryPanel.h"
 #include "ui/AssetTree.h"
@@ -54,10 +56,21 @@ private slots:
   auto *tree=window.findChild<QTreeWidget*>("assets");auto *apply=window.findChild<QPushButton*>("applyAsset");auto *first=tree->topLevelItem(0),*second=tree->topLevelItem(1);tree->setCurrentItem(second);first->setSelected(true);second->setSelected(false);QCOMPARE(tree->selectedItems().size(),1);QCOMPARE(tree->currentItem(),second);QVERIFY(apply->isEnabled());QSignalSpy writes(&window,&ui::MainWindow::editRequested);apply->click();QCOMPARE(writes.size(),1);QCOMPARE(writes[0][2].toString(),QString("./assets/a.png"));
  }
 
+ void handoffSelectedAssetPreparesScopedGoalWithoutExecution(){
+  ui::MainWindow window;domain::Project project;project.name="集成实验";project.rootPath="/tmp/handoff";project.assets={{"a","assets/a.png","甲.png","image/png",1,1,1},{"b","assets/b.png","乙.png","image/png",1,1,1}};window.showDocument(project);window.setBackendAvailable(true);
+  domain::Snapshot snapshot;snapshot.revision=7;domain::Clip clip;clip.id="exact/component";domain::InspectorField field;field.id="src";field.binding="image";field.writable=true;field.control=domain::ControlKind::Text;clip.inspector={field};domain::Track track;track.clips={clip};snapshot.tracks={track};window.showSnapshot(snapshot);window.setEditorState(true,false,false,false);
+  auto *button=window.findChild<QPushButton*>("handoffAssetToAgent");QVERIFY(button);QVERIFY(button->isEnabled());auto *tree=window.findChild<QTreeWidget*>("assets");tree->setCurrentItem(tree->topLevelItem(1));tree->topLevelItem(0)->setSelected(true);tree->topLevelItem(1)->setSelected(false);
+  QSignalSpy writes(&window,&ui::MainWindow::editRequested),generated(window.agentPanel(),&ui::AgentPanel::generateRequested),approved(window.agentPanel(),&ui::AgentPanel::approveRequested);button->click();QCOMPARE(writes.size(),0);QCOMPARE(generated.size(),0);QCOMPARE(approved.size(),0);
+  auto *goal=window.findChild<QPlainTextEdit*>("agentGoal");QVERIFY(goal->toPlainText().contains("./assets/a.png"));QVERIFY(!goal->toPlainText().contains("./assets/b.png"));QVERIFY(window.findChild<QCheckBox*>("agentScope")->isChecked());QVERIFY(window.findChild<QLabel*>("agentProjectContext")->text().contains("集成实验"));
+  tree->topLevelItem(1)->setSelected(true);QVERIFY(!button->isEnabled());tree->topLevelItem(1)->setSelected(false);window.findChild<QLineEdit*>("assetSearch")->setText("no-match");QVERIFY(!button->isEnabled());window.findChild<QLineEdit*>("assetSearch")->clear();tree->setCurrentItem(tree->topLevelItem(0));QVERIFY(button->isEnabled());domain::AgentStatus state;state.phase="restoring";window.showAgentStatus(state);QVERIFY(!button->isEnabled());state.phase="thinking";window.showAgentStatus(state);QVERIFY(!button->isEnabled());
+ }
  void batchSelectionCannotApplyAmbiguousAsset(){
   ui::MainWindow window;domain::Project project;project.rootPath="/tmp/library";project.assets={{"a","assets/a.png","a","image/png",1,1,1},{"b","assets/b.png","b","image/png",1,1,1}};window.showDocument(project);window.setBackendAvailable(true);domain::Snapshot snapshot;snapshot.revision=1;domain::Clip clip;clip.id="exact";domain::InspectorField field;field.id="src";field.binding="image";field.writable=true;field.control=domain::ControlKind::Text;clip.inspector={field};domain::Track track;track.clips={clip};snapshot.tracks={track};window.showSnapshot(snapshot);window.setEditorState(true,false,false,false);auto *tree=window.findChild<QTreeWidget*>("assets");auto *apply=window.findChild<QPushButton*>("applyAsset");QVERIFY(apply->isEnabled());tree->topLevelItem(1)->setSelected(true);QVERIFY(!apply->isEnabled());
  }
 
+ void shortOfficialSampleIsPreviewOnly(){
+  ui::MainWindow window;window.setBackendAvailable(true);domain::VideoSample sample;sample.name="访谈";sample.path="/tmp/interview.mp4";sample.durationSeconds=7.03;sample.width=720;sample.height=1280;window.setSamples({sample});QVERIFY(window.findChild<QPushButton*>("previewSample")->isEnabled());QVERIFY(!window.findChild<QPushButton*>("createFromSample")->isEnabled());sample.durationSeconds=10;window.setSamples({sample});QVERIFY(window.findChild<QPushButton*>("createFromSample")->isEnabled());
+ }
  void filteringAssetsClearsHiddenSelectionAndSurvivesRefresh(){
   ui::MainWindow window;domain::Project project;project.rootPath="/tmp/library-filter";project.assets={{"a","assets/a.png","Campus.PNG","image/png",1,1,1},{"b","assets/b.mp4","Movie.mp4","video/mp4",1,1,1}};window.showDocument(project);
   auto *search=window.findChild<QLineEdit*>("assetSearch");auto *type=window.findChild<QComboBox*>("assetType");auto *tree=window.findChild<QTreeWidget*>("assets");QVERIFY(search);QVERIFY(type);

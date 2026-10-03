@@ -1,0 +1,10 @@
+{
+  "verdict": "PASS",
+  "relocatedApp": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/搬移 验证 1.5 空格/FrameLab.app",
+  "cwd": "/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/framelab-1.5-o2fn9vpk/中文 空格启动目录",
+  "initialPath": "/usr/bin:/bin:/usr/sbin:/sbin",
+  "screenshots": false,
+  "ownedStudioAbsent": true,
+  "previewFingerprint": "b80ba58f7af76e7cb095dada30eddfb9fceec390be80c4df892ac3241a96d325",
+  "report": "packaged-startup.json"
+}

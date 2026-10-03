@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "samples": [
+    {
+      "name": "Hypit 官方作品 · 复杂口播讲解（137秒）",
+      "path": "downloads/final.mp4",
+      "sourceUrl": "https://storage.googleapis.com/hypit-public-assets/assets/examples/complex-explainer/v1/20260914/final.mp4",
+      "sha256": "2a8b10d88656ed6b122d92f2bc414e05670521a7f7f94b475f7bbb94085ab5c7",
+      "sizeBytes": 43912844,
+      "durationSeconds": 137.066667,
+      "width": 1080,
+      "height": 1920,
+      "validation": {
+        "ffprobeExitCode": 0,
+        "fullDecodeExitCode": 0,
+        "fullDecodeStderr": ""
+      }
+    },
+    {
+      "name": "Hypit 官方样例 · 访谈",
+      "path": "videos/interview-hypit-final.mp4",
+      "sourceUrl": "https://storage.googleapis.com/hypit-public-assets/assets/examples/complex-explainer/v1/20260914/media.tar.gz",
+      "sha256": "71c8ec2efd057447d3c5c8f225f10c6ab9138704cad2bd813b701ac0507f7448",
+      "sizeBytes": 7610499,
+      "durationSeconds": 7.033333,
+      "width": 720,
+      "height": 1280,
+      "validation": {
+        "ffprobeExitCode": 0,
+        "fullDecodeExitCode": 0,
+        "fullDecodeStderr": ""
+      },
+      "archiveMember": "./productions/explainer/assets/examples/interview-hypit-final.mp4"
+    },
+    {
+      "name": "Hypit 官方样例 · 排行榜",
+      "path": "videos/ranking-hypit-final.mp4",
+      "sourceUrl": "https://storage.googleapis.com/hypit-public-assets/assets/examples/complex-explainer/v1/20260914/media.tar.gz",
+      "sha256": "7356166e9ac71e69367cac8927ee3818d47c3a04077523efb94310cb9ac9cb1c",
+      "sizeBytes": 4963242,
+      "durationSeconds": 10.033333,
+      "width": 720,
+      "height": 1280,
+      "validation": {
+        "ffprobeExitCode": 0,
+        "fullDecodeExitCode": 0,
+        "fullDecodeStderr": ""
+      },
+      "archiveMember": "./productions/explainer/assets/examples/ranking-hypit-final.mp4"
+    },
+    {
+      "name": "Hypit 官方样例 · 播客",
+      "path": "videos/podcast-hypit-final.mp4",
+      "sourceUrl": "https://storage.googleapis.com/hypit-public-assets/assets/examples/complex-explainer/v1/20260914/media.tar.gz",
+      "sha256": "fd2afbacba9093ec148b81825d2b90f8bc8cc01217882df3c445fbf34b827e45",
+      "sizeBytes": 7729281,
+      "durationSeconds": 9.033333,
+      "width": 720,
+      "height": 1280,
+      "validation": {
+        "ffprobeExitCode": 0,
+        "fullDecodeExitCode": 0,
+        "fullDecodeStderr": ""
+      },
+      "archiveMember": "./productions/explainer/assets/examples/podcast-hypit-final.mp4"
+    }
+  ]
+}

@@ -22,6 +22,7 @@ struct AppConfig {
     QString ffmpegPath;
     QString ffprobePath;
     QString codexPath;
+    QString sampleCatalogPath;
     QProcessEnvironment processEnvironment = RuntimePaths::processEnvironment();
 };
 
