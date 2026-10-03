@@ -1,0 +1,17 @@
+{
+    "pixelsUploaded": false,
+    "provider": "codex-current-chatgpt-login",
+    "realModel": true,
+    "response": {
+        "format": "qvw.agent-plan@1",
+        "kind": "clarify",
+        "operations": [
+        ],
+        "projectName": "",
+        "question": "请先上传并选择三张图片，按希望的出场顺序排列。将使用三段竖屏图片模板规划15秒招新短片。",
+        "scenes": [
+        ],
+        "summary": "尚未选择素材，需先选择三张图片后才能提出创建方案；当前未创建或修改工程。"
+    },
+    "verdict": "PASS"
+}

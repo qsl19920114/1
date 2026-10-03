@@ -1,0 +1,6 @@
+matching restore phase=review statusScope= planScope=
+first stale restore phase=stale canApprove=0
+saved baseline changed to current=1
+second stale restore phase=review canApprove=1
+corrupt restore phase=idle failureSignals=0
+internal symlink linked=1 eventAppend=1 authoredSourceMutated=1

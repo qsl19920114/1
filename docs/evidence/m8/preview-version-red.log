@@ -1,0 +1,55 @@
+********* Start testing of PreviewVersionTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : PreviewVersionTest::initTestCase()
+FAIL!  : PreviewVersionTest::mapperCarriesOnlyHyperframesPreviewWithoutChangingSourceIdentity() Compared values are not the same
+   Actual   (first.snapshot.previewSrcdoc): ""
+   Expected (picture())                   : "<!doctype html><html><head><style>html,body{margin:0;} [data-composition-id]{background:#112233;}</style></head><body><div id='composition' data-composition-id='movie' data-width='64' data-height='96' data-fps='30' data-hypit-frame-count='450'><"...
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/PreviewVersionTest.cpp(77)]
+QWARN  : PreviewVersionTest::loadedCompositionConfirmsExactVersionAndFingerprint() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::loadedCompositionConfirmsExactVersionAndFingerprint() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::loadedCompositionConfirmsExactVersionAndFingerprint() SKIA: Failed to begin write access.
+FAIL!  : PreviewVersionTest::loadedCompositionConfirmsExactVersionAndFingerprint() 'transport.previewVersion().isConfirmed()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/PreviewVersionTest.cpp(88)]
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(script) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(script) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(script) SKIA: Failed to begin write access.
+FAIL!  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(script) 'probe(view, old).value("confirmed").toBool()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/PreviewVersionTest.cpp(101)]
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(static-text) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(static-text) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(static-text) SKIA: Failed to begin write access.
+FAIL!  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(static-text) 'probe(view, old).value("confirmed").toBool()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/PreviewVersionTest.cpp(101)]
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(font-size) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(font-size) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(font-size) SKIA: Failed to begin write access.
+FAIL!  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(font-size) 'probe(view, old).value("confirmed").toBool()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/PreviewVersionTest.cpp(101)]
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(image-src) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(image-src) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(image-src) SKIA: Failed to begin write access.
+FAIL!  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(image-src) 'probe(view, old).value("confirmed").toBool()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/PreviewVersionTest.cpp(101)]
+QWARN  : PreviewVersionTest::differentHtmlAndMissingBaselineRemainUnconfirmed() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::differentHtmlAndMissingBaselineRemainUnconfirmed() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::differentHtmlAndMissingBaselineRemainUnconfirmed() SKIA: Failed to begin write access.
+FAIL!  : PreviewVersionTest::differentHtmlAndMissingBaselineRemainUnconfirmed() 'probe(view, s).value("confirmed").toBool()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/PreviewVersionTest.cpp(110)]
+QWARN  : PreviewVersionTest::undecodedVideoDoesNotConfirmEvenWhenImagesAreLoaded() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::undecodedVideoDoesNotConfirmEvenWhenImagesAreLoaded() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::undecodedVideoDoesNotConfirmEvenWhenImagesAreLoaded() SKIA: Failed to begin write access.
+FAIL!  : PreviewVersionTest::undecodedVideoDoesNotConfirmEvenWhenImagesAreLoaded() '!transport.ready()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/PreviewVersionTest.cpp(121)]
+QWARN  : PreviewVersionTest::artifactModeRevokesAndCompositionReturnConfirmsAgain() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::artifactModeRevokesAndCompositionReturnConfirmsAgain() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::artifactModeRevokesAndCompositionReturnConfirmsAgain() SKIA: Failed to begin write access.
+FAIL!  : PreviewVersionTest::artifactModeRevokesAndCompositionReturnConfirmsAgain() 'transport.previewVersion().isConfirmed()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/PreviewVersionTest.cpp(125)]
+QWARN  : PreviewVersionTest::clearAndNewSnapshotRejectQueuedOldConfirmation() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::clearAndNewSnapshotRejectQueuedOldConfirmation() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::clearAndNewSnapshotRejectQueuedOldConfirmation() SKIA: Failed to begin write access.
+FAIL!  : PreviewVersionTest::clearAndNewSnapshotRejectQueuedOldConfirmation() 'transport.previewVersion().isConfirmed()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/PreviewVersionTest.cpp(138)]
+PASS   : PreviewVersionTest::cleanupTestCase()
+Totals: 2 passed, 10 failed, 0 skipped, 0 blacklisted, 42927ms
+********* Finished testing of PreviewVersionTest *********

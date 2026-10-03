@@ -1,0 +1,26 @@
+********* Start testing of ModelClientTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : ModelClientTest::initTestCase()
+PASS   : ModelClientTest::runsAsynchronouslyWithIsolatedArgumentsAndStdin()
+PASS   : ModelClientTest::rejectsInvalidCliResults(nonzero)
+PASS   : ModelClientTest::rejectsInvalidCliResults(malformed)
+PASS   : ModelClientTest::rejectsInvalidCliResults(empty)
+PASS   : ModelClientTest::rejectsInvalidCliResults(empty-object)
+PASS   : ModelClientTest::rejectsInvalidCliResults(array)
+PASS   : ModelClientTest::rejectsInvalidCliResults(missing)
+PASS   : ModelClientTest::rejectsInvalidCliResults(result-limit)
+PASS   : ModelClientTest::rejectsInvalidCliResults(stdout-limit)
+PASS   : ModelClientTest::rejectsInvalidCliResults(stderr-limit)
+PASS   : ModelClientTest::rejectsInvalidCliResults(tool)
+PASS   : ModelClientTest::rejectsInvalidCliResults(unknown-item)
+PASS   : ModelClientTest::rejectsInvalidCliResults(fragmented-tool)
+PASS   : ModelClientTest::rejectsInvalidCliResults(malformed-event)
+PASS   : ModelClientTest::failedStartAndTimeout()
+PASS   : ModelClientTest::reclaimsCancelledStartingFailure(cancel)
+PASS   : ModelClientTest::reclaimsCancelledStartingFailure(replace)
+PASS   : ModelClientTest::reclaimsCancelledStartingFailure(destroy)
+PASS   : ModelClientTest::cancelAndRestartIgnoreOldCallbacks()
+PASS   : ModelClientTest::replacesBusyRequestAndSuppressesReentrantOldCompletion()
+PASS   : ModelClientTest::cleanupTestCase()
+Totals: 22 passed, 0 failed, 0 skipped, 0 blacklisted, 4082ms
+********* Finished testing of ModelClientTest *********

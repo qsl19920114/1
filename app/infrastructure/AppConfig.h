@@ -21,6 +21,7 @@ struct AppConfig {
     bool nodeExplicit = false;
     QString ffmpegPath;
     QString ffprobePath;
+    QString codexPath;
     QProcessEnvironment processEnvironment = RuntimePaths::processEnvironment();
 };
 

@@ -234,7 +234,7 @@ def main():
     (output / 'SHA256SUMS.txt').write_text(checksum + '  ' + archive.name + '\n')
     summary = {'format':'qvw.release-artifact@1','version':version,'app':str(app),'archive':str(archive),
                'sha256':checksum,'signing':'ad-hoc; not notarized','platform':'macOS arm64; minimum 15.0',
-               'externalDependencies':['Hypit 0.2.10','Node >=22.15','FFmpeg/ffprobe','Runtime-selected rendering browser'],
+               'externalDependencies':['Hypit 0.2.10','Node >=22.15','FFmpeg/ffprobe','Runtime-selected rendering browser','Codex CLI with current login (Agent creation)'],
                'machOBinaries':len(entries)}
     (output / 'release.json').write_text(json.dumps(summary,indent=2)+'\n')
     print(json.dumps(summary))

@@ -1,0 +1,19 @@
+********* Start testing of PreviewVersionTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : PreviewVersionTest::initTestCase()
+QWARN  : PreviewVersionTest::fixedTextRuntimeLayoutConfirmsVisibleVersion(shrink) GPUInfo not initialized on GpuInfoUpdate
+QWARN  : PreviewVersionTest::fixedTextRuntimeLayoutConfirmsVisibleVersion(shrink) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::fixedTextRuntimeLayoutConfirmsVisibleVersion(shrink) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+FAIL!  : PreviewVersionTest::fixedTextRuntimeLayoutConfirmsVisibleVersion(shrink) 'transport.previewVersion().isConfirmed()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/PreviewVersionTest.cpp(142)]
+QWARN  : PreviewVersionTest::fixedTextRuntimeLayoutConfirmsVisibleVersion(line-sequences) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::fixedTextRuntimeLayoutConfirmsVisibleVersion(line-sequences) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+FAIL!  : PreviewVersionTest::fixedTextRuntimeLayoutConfirmsVisibleVersion(line-sequences) 'transport.previewVersion().isConfirmed()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/PreviewVersionTest.cpp(142)]
+QWARN  : PreviewVersionTest::fixedTextRuntimeLayoutConfirmsVisibleVersion(shrink-with-line-sequences) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::fixedTextRuntimeLayoutConfirmsVisibleVersion(shrink-with-line-sequences) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+FAIL!  : PreviewVersionTest::fixedTextRuntimeLayoutConfirmsVisibleVersion(shrink-with-line-sequences) 'transport.previewVersion().isConfirmed()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/PreviewVersionTest.cpp(142)]
+PASS   : PreviewVersionTest::cleanupTestCase()
+Totals: 2 passed, 3 failed, 0 skipped, 0 blacklisted, 15890ms
+********* Finished testing of PreviewVersionTest *********

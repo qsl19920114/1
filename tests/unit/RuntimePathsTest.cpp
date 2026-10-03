@@ -19,6 +19,14 @@ QByteArray config(const QByteArray &extra={}){return "{\"hypit\":{\"distribution
 class RuntimePathsTest:public QObject {
  Q_OBJECT
 private slots:
+ void validatesAndResolvesExplicitCodexWithoutGlobalPathChanges(){
+  QTemporaryDir tmp;const auto path=tmp.filePath("config/version-lock.json");
+  QVERIFY(write(path,config(",\"tools\":{\"codex\":\"relative/codex\"}")));QVERIFY(!loadAppConfig(path).ok());
+  const auto cli=tmp.filePath("当前 Codex/bin/codex");QVERIFY(write(cli,"#!/bin/sh\nexit 0\n"));QVERIFY(QFile::setPermissions(cli,QFile::ReadOwner|QFile::WriteOwner|QFile::ExeOwner));
+  auto object=QJsonDocument::fromJson(config()).object();object["tools"]=QJsonObject{{"codex",cli}};QVERIFY(write(path,QJsonDocument(object).toJson()));
+  const auto parentPath=qgetenv("PATH");const auto loaded=loadAppConfig(path);QVERIFY2(loaded.ok(),qPrintable(loaded.error));
+  QCOMPARE(RuntimePaths::resolveTool("codex",loaded.config.processEnvironment),cli);QCOMPARE(qgetenv("PATH"),parentPath);
+ }
  void rejectsOversizedConfig(){QTemporaryDir tmp;const auto path=tmp.filePath("config/version-lock.json");QVERIFY(write(path,config()+QByteArray(65536,' ')));QVERIFY(!loadAppConfig(path).ok());}
  void rejectsDirectoryConfig(){QTemporaryDir tmp;QVERIFY(!loadAppConfig(tmp.path()).ok());}
  void rejectsSymlinkConfig(){QTemporaryDir tmp;QVERIFY(write(tmp.filePath("real.json"),config()));QVERIFY(QFile::link(tmp.filePath("real.json"),tmp.filePath("link.json")));QVERIFY(!loadAppConfig(tmp.filePath("link.json")).ok());}

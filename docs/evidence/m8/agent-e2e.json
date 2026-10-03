@@ -1,0 +1,59 @@
+{
+    "artifact": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/agent-creation-20261002-234036-336/校园创作社-15秒.mp4",
+    "buildId": "bld_20261002T154129631Z_0EF9376F68",
+    "createSteps": 15,
+    "finalFingerprint": "0933ec9ff70e0e156e7de4566d4a15a54177992a4107d1f8d87c09b562b2f6ad",
+    "fps": 30,
+    "frames": 450,
+    "height": 1280,
+    "mediaValidation": "ExportController ffprobe and full decode",
+    "modelPlan": {
+        "format": "qvw.agent-plan@1",
+        "kind": "create",
+        "operations": [
+        ],
+        "projectName": "校园创作社招新",
+        "question": "",
+        "scenes": [
+            {
+                "assetId": "ef697db4aa19e3ec3107de33ececf851ce8c995461fbd693e7f831d8157838b3",
+                "color": "#19C9AF",
+                "durationFrames": 90,
+                "fontSize": 64,
+                "sceneId": "scene-1",
+                "subtitle": "校园创作社招新啦！",
+                "title": "校园创作社 · 向光而行"
+            },
+            {
+                "assetId": "cfb4eb70200279b4d871b210fd6641d6e521a17d56682fba43d40a87500982ee",
+                "color": "#19C9AF",
+                "durationFrames": 240,
+                "fontSize": 60,
+                "sceneId": "scene-2",
+                "subtitle": "把脑洞变成作品，让创意遇见伙伴。",
+                "title": "你的创意，值得登场"
+            },
+            {
+                "assetId": "5a520bf78acad6f588619c23d5c396871b776e3aa341604e81c2aa13714bc4b3",
+                "color": "#19C9AF",
+                "durationFrames": 120,
+                "fontSize": 48,
+                "sceneId": "scene-3",
+                "subtitle": "校园创作社，期待与你一起创作！",
+                "title": "周五晚七点，欢迎加入"
+            }
+        ],
+        "summary": "拟使用story-reel三段竖屏模板创建15秒招新短片，按3秒、8秒、4秒分别绑定三张不同背景图片，采用活泼青绿色；不推测图片内容，结尾保留指定完整标题。方案待审阅批准后执行。"
+    },
+    "pixelsUploaded": false,
+    "project": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/agent-creation-20261002-234036-336/校园故事工程/workbench.qvw.json",
+    "provider": "codex-current-chatgpt-login",
+    "realModelRequests": 2,
+    "reopened": true,
+    "screenshots": false,
+    "semanticVisualVerdict": "requires human viewing",
+    "testDriverConfirmsPlan": true,
+    "undoRedo": true,
+    "verdict": "PASS",
+    "width": 720
+}

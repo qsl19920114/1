@@ -15,6 +15,7 @@ struct Clip {
     int startFrame = 0;
     int endFrameExclusive = 0;
     InspectorFields inspector;
+    QString authoredId; // Exact upstream authoredId; mutation still uses the full compiled id.
 };
 
 struct Track {
@@ -45,10 +46,20 @@ struct Snapshot {
     QByteArray sourceFingerprint;
     CanvasSpace space;
     QVector<Track> tracks;
+    /// Compiled, local Studio HTML used only to verify the visible preview.
+    /// Never include it in the model context or authored-source fingerprint.
+    QString previewSrcdoc;
 
     bool isLoaded() const { return revision >= 0; }
     int writableFieldCount() const;
 };
 
+struct PreviewVersion {
+    int revision = -1;
+    QByteArray sourceFingerprint;
+    bool isConfirmed() const { return revision >= 0 && !sourceFingerprint.isEmpty(); }
+};
+
 }
 Q_DECLARE_METATYPE(qvw::domain::Snapshot)
+Q_DECLARE_METATYPE(qvw::domain::PreviewVersion)

@@ -1,0 +1,24 @@
+********* Start testing of AgentPanelTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : AgentPanelTest::initTestCase()
+FAIL!  : AgentPanelTest::multilineGoalUsesCurrentCodexAndExplicitScope() 'goal' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentPanelTest.cpp(69)]
+FAIL!  : AgentPanelTest::creationEditsCardsAndOrderWithIntegerFrames() 'title' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentPanelTest.cpp(83)]
+FAIL!  : AgentPanelTest::editReviewKeepsActualFieldIdsAndPrimitiveTypes() 'title' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentPanelTest.cpp(99)]
+FAIL!  : AgentPanelTest::clarificationAndUnknownFieldsCannotBeApproved() 'question' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentPanelTest.cpp(118)]
+FAIL!  : AgentPanelTest::realProgressLocksMutationAndKeepsStopAvailable() 'goal' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentPanelTest.cpp(126)]
+FAIL!  : AgentPanelTest::stalePlanIsVisibleAndVersionsCompareFingerprint() 'panel.findChild<QLineEdit *>("operationValue_0")' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentPanelTest.cpp(143)]
+FAIL!  : AgentPanelTest::assetsShowLocalThumbnailsWithoutPaths() 'list' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentPanelTest.cpp(151)]
+FAIL!  : AgentPanelTest::createConfirmationEmitsEditedPlanAndExplicitNewPath() 'name' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentPanelTest.cpp(157)]
+FAIL!  : AgentPanelTest::creationRejectsExistingDestinationAndInvalidTotals() 'confirm' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentPanelTest.cpp(180)]
+PASS   : AgentPanelTest::cleanupTestCase()
+Totals: 2 passed, 9 failed, 0 skipped, 0 blacklisted, 22ms
+********* Finished testing of AgentPanelTest *********

@@ -1,0 +1,22 @@
+正在检查 Hypit 配置：/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/local-agent-config.json
+Hypit 0.2.10 自检通过（/Users/bytedance/Downloads/国产资产作业/hypit）
+正在打开工程：/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m7/对话之外 20261002-093038-727/main.svrun
+Project            /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m7/对话之外 20261002-093038-727
+Run                /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m7/对话之外 20261002-093038-727/main.svrun
+Runtime Profile    /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m7/对话之外 20261002-093038-727/hypit.runtime.json
+Runtime selection  command argument (this session only)
+
+➜  Local:   http://localhost:5795/
+Studio 已就绪：http://localhost:5795/（PID 85021）
+2026-10-03 09:43:04.824 qt-video-workbench[84843:23678967] error messaging the mach port for IMKCFRunLoopWakeUpReliable
+➜  Network: use --host to expose
+[1003/094304.851126:WARNING:src/core/web_engine_library_info.cpp:63] Command line switch --webengine-resources-path not passed to renderer process
+[1003/094304.854209:WARNING:src/core/web_engine_library_info.cpp:63] Command line switch --webengine-locales-path not passed to renderer process
+Comments           http://localhost:5795/#comments
+已读取真实会话：revision 1，轨道 1，可写字段 5
+js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PREVIEW compiled composition present=true
+Studio process exited with code 143.
+Studio 已退出，exit=143
+CLEANUP ownedPid= 85021 running= false

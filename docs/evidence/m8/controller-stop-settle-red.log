@@ -1,0 +1,9 @@
+********* Start testing of AgentControllerTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+QINFO  : AgentControllerTest::initTestCase() AgentController tests use a fake model executable and local HTTP protocol simulation; they do not claim real Codex or Hypit verification.
+PASS   : AgentControllerTest::initTestCase()
+FAIL!  : AgentControllerTest::stopStillSettlesAcceptedWriteBeforeRetryingOnlyRemainingStep() '!f.agent->status().canRetry' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentControllerTest.cpp(139)]
+PASS   : AgentControllerTest::cleanupTestCase()
+Totals: 2 passed, 1 failed, 0 skipped, 0 blacklisted, 912ms
+********* Finished testing of AgentControllerTest *********

@@ -105,7 +105,10 @@ void EditorController::read(const Snapshot &snapshot) {
     switch(m_phase) {
     case Phase::Idle:case Phase::Write:return;
     case Phase::Refresh:
-        if(!sameVersion(m_snapshot,snapshot))resetHistory();
+        // Studio's filesystem watcher can republish our confirmed source with
+        // a new revision. Only an actual source change invalidates undo here;
+        // mutation preflight and 409 recovery still require exact versions.
+        if(!hasSources(snapshot)||m_snapshot.sourceFingerprint!=snapshot.sourceFingerprint)resetHistory();
         finish(&snapshot);return;
     case Phase::Preflight: {
         if(!sameVersion(m_snapshot,snapshot)||!hasSources(snapshot)) {

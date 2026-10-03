@@ -1,0 +1,16 @@
+********* Start testing of AgentPanelTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : AgentPanelTest::initTestCase()
+FAIL!  : AgentPanelTest::unverifiedExportDoesNotLookLikeACompletedArtifact() '!version->text().contains("最近导出 v7")' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentPanelTest.cpp(191)]
+FAIL!  : AgentPanelTest::restoredTaskDisplaysItsGoalAndActualScope() Compared values are not the same
+   Actual   (goal->toPlainText()): ""
+   Expected (s.goal)             : "\u53EA\u8C03\u6574\u6700\u540E\u4E00\u6BB5\n\u4FDD\u7559\u5F00\u573A"
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentPanelTest.cpp(198)]
+QWARN  : AgentPanelTest::staleWhileCreationDialogIsOpenRevokesConfirmation() This plugin does not support propagateSizeHints()
+PASS   : AgentPanelTest::staleWhileCreationDialogIsOpenRevokesConfirmation()
+QWARN  : AgentPanelTest::taskPanelFitsWorkbenchWidth() This plugin does not support propagateSizeHints()
+PASS   : AgentPanelTest::taskPanelFitsWorkbenchWidth()
+PASS   : AgentPanelTest::cleanupTestCase()
+Totals: 4 passed, 2 failed, 0 skipped, 0 blacklisted, 202ms
+********* Finished testing of AgentPanelTest *********

@@ -1,0 +1,102 @@
+********* Start testing of PreviewVersionTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : PreviewVersionTest::initTestCase()
+PASS   : PreviewVersionTest::mapperCarriesOnlyHyperframesPreviewWithoutChangingSourceIdentity()
+QWARN  : PreviewVersionTest::loadedCompositionConfirmsExactVersionAndFingerprint() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::loadedCompositionConfirmsExactVersionAndFingerprint() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::loadedCompositionConfirmsExactVersionAndFingerprint()
+QWARN  : PreviewVersionTest::fixedTextRuntimeLayoutConfirmsVisibleVersion(shrink) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::fixedTextRuntimeLayoutConfirmsVisibleVersion(shrink) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::fixedTextRuntimeLayoutConfirmsVisibleVersion(shrink)
+QWARN  : PreviewVersionTest::fixedTextRuntimeLayoutConfirmsVisibleVersion(line-sequences) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::fixedTextRuntimeLayoutConfirmsVisibleVersion(line-sequences) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::fixedTextRuntimeLayoutConfirmsVisibleVersion(line-sequences)
+QWARN  : PreviewVersionTest::fixedTextRuntimeLayoutConfirmsVisibleVersion(shrink-with-line-sequences) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::fixedTextRuntimeLayoutConfirmsVisibleVersion(shrink-with-line-sequences) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::fixedTextRuntimeLayoutConfirmsVisibleVersion(shrink-with-line-sequences)
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(static-text) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(static-text) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(static-text)
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(static-image) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(static-image) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(static-image)
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(static-font) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(static-font) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(static-font)
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(authored-flow-data) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(authored-flow-data) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(authored-flow-data)
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(unknown-flow-data) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(unknown-flow-data) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(unknown-flow-data)
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(scale-outside-shrink-flow) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(scale-outside-shrink-flow) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(scale-outside-shrink-flow)
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(physical-line-outside-glyph) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(physical-line-outside-glyph) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(physical-line-outside-glyph)
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(parent-position) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(parent-position) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(parent-position)
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(parent-left) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(parent-left) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(parent-left)
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(parent-top) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(parent-top) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(parent-top)
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(parent-width) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(parent-width) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(parent-width)
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(parent-height) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(parent-height) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(parent-height)
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(invalid-runtime-scale) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(invalid-runtime-scale) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(invalid-runtime-scale)
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(invalid-runtime-geometry) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(invalid-runtime-geometry) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::fixedTextRuntimeStillRejectsStaticAndUnownedChanges(invalid-runtime-geometry)
+QWARN  : PreviewVersionTest::compiledTextKeepsQStringPlaceholdersLiteral() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::compiledTextKeepsQStringPlaceholdersLiteral() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::compiledTextKeepsQStringPlaceholdersLiteral()
+QWARN  : PreviewVersionTest::supersededInitialFramePromiseStillAllowsDecodedCurrentDocument() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::supersededInitialFramePromiseStillAllowsDecodedCurrentDocument() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::supersededInitialFramePromiseStillAllowsDecodedCurrentDocument()
+QWARN  : PreviewVersionTest::pendingAndRejectedFrameRuntimeRemainUnconfirmed(pending) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::pendingAndRejectedFrameRuntimeRemainUnconfirmed(pending) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::pendingAndRejectedFrameRuntimeRemainUnconfirmed(pending)
+QWARN  : PreviewVersionTest::pendingAndRejectedFrameRuntimeRemainUnconfirmed(rejected) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::pendingAndRejectedFrameRuntimeRemainUnconfirmed(rejected) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QCRITICAL: PreviewVersionTest::pendingAndRejectedFrameRuntimeRemainUnconfirmed(rejected) js: Uncaught (in promise) Error: runtime failed
+PASS   : PreviewVersionTest::pendingAndRejectedFrameRuntimeRemainUnconfirmed(rejected)
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(script) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(script) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(script) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(script)
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(static-text) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(static-text) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(static-text) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(static-text)
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(font-size) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(font-size) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(font-size) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(font-size)
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(image-src) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(image-src) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(image-src) js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::newSrcdocAttributeCannotConfirmOldDocument(image-src)
+QWARN  : PreviewVersionTest::differentHtmlAndMissingBaselineRemainUnconfirmed() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::differentHtmlAndMissingBaselineRemainUnconfirmed() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::differentHtmlAndMissingBaselineRemainUnconfirmed()
+QWARN  : PreviewVersionTest::undecodedVideoDoesNotConfirmEvenWhenImagesAreLoaded() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::undecodedVideoDoesNotConfirmEvenWhenImagesAreLoaded() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::undecodedVideoDoesNotConfirmEvenWhenImagesAreLoaded()
+QWARN  : PreviewVersionTest::artifactModeRevokesAndCompositionReturnConfirmsAgain() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::artifactModeRevokesAndCompositionReturnConfirmsAgain() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::artifactModeRevokesAndCompositionReturnConfirmsAgain()
+QWARN  : PreviewVersionTest::clearAndNewSnapshotRejectQueuedOldConfirmation() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : PreviewVersionTest::clearAndNewSnapshotRejectQueuedOldConfirmation() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : PreviewVersionTest::clearAndNewSnapshotRejectQueuedOldConfirmation()
+PASS   : PreviewVersionTest::cleanupTestCase()
+Totals: 33 passed, 0 failed, 0 skipped, 0 blacklisted, 7857ms
+********* Finished testing of PreviewVersionTest *********

@@ -3,6 +3,7 @@
 #include "domain/Project.h"
 #include "domain/ExportTask.h"
 #include "domain/VideoSample.h"
+#include "domain/AgentPlan.h"
 #include <QMainWindow>
 #include <QUrl>
 class QLabel;
@@ -19,6 +20,7 @@ class QSlider;
 class QProgressBar;
 namespace qvw::ui {
 class StudioTransport;
+class AgentPanel;
 class MainWindow : public QMainWindow {
     Q_OBJECT
 public:
@@ -38,6 +40,10 @@ public:
     void setImportBusy(bool busy);
     void setSamples(const domain::VideoSamples &samples);
     QWebEngineView *previewView() const { return m_webView; }
+    AgentPanel *agentPanel() const { return m_agentPanel; }
+    domain::PreviewVersion previewVersion() const;
+    void showAgentStatus(const domain::AgentStatus &status);
+    void showAgentPlan(const domain::AgentPlan &plan);
 signals:
     void openRequested(const QString &workspace, const QString &run, const QString &runtime);
     void newDocumentRequested(const QString &directory, const QString &name);
@@ -65,6 +71,7 @@ signals:
     void refreshRequested();
     void configurationRequested(const QString &path);
     void previewLoaded(bool ok);
+    void previewVersionChanged(const qvw::domain::PreviewVersion &version);
 private:
     QWidget *buildProjectPanel();
     QWidget *buildPreviewPanel();
@@ -120,6 +127,8 @@ private:
     domain::VideoSamples m_samples;
     domain::ExportTask m_exportTask;
     StudioTransport *m_transport=nullptr;
+    AgentPanel *m_agentPanel=nullptr;
+    bool m_agentBusy=false;
     QLabel *m_backendStatus=nullptr;
     QLabel *m_transportTime=nullptr;
     QSlider *m_seekSlider=nullptr;

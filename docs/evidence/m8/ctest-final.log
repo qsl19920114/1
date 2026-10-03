@@ -1,0 +1,67 @@
+Test project /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build
+      Start  1: infrastructure
+ 1/31 Test  #1: infrastructure ...................   Passed    0.09 sec
+      Start  2: studio_process
+ 2/31 Test  #2: studio_process ...................   Passed   33.56 sec
+      Start  3: studio_client
+ 3/31 Test  #3: studio_client ....................   Passed    1.00 sec
+      Start  4: hypit_probe
+ 4/31 Test  #4: hypit_probe ......................   Passed    2.83 sec
+      Start  5: inspector_controls
+ 5/31 Test  #5: inspector_controls ...............   Passed    1.36 sec
+      Start  6: project_store
+ 6/31 Test  #6: project_store ....................   Passed    0.41 sec
+      Start  7: document_controller
+ 7/31 Test  #7: document_controller ..............   Passed    0.25 sec
+      Start  8: asset_service
+ 8/31 Test  #8: asset_service ....................   Passed    0.94 sec
+      Start  9: source_edit_guard
+ 9/31 Test  #9: source_edit_guard ................   Passed    0.05 sec
+      Start 10: studio_writer
+10/31 Test #10: studio_writer ....................   Passed    1.76 sec
+      Start 11: editor_controller
+11/31 Test #11: editor_controller ................   Passed    3.93 sec
+      Start 12: json_process
+12/31 Test #12: json_process .....................   Passed    0.80 sec
+      Start 13: export_workspace
+13/31 Test #13: export_workspace .................   Passed    0.22 sec
+      Start 14: media_validation
+14/31 Test #14: media_validation .................   Passed    3.18 sec
+      Start 15: export_controller
+15/31 Test #15: export_controller ................   Passed   48.80 sec
+      Start 16: proposal_service
+16/31 Test #16: proposal_service .................   Passed    0.06 sec
+      Start 17: proposal_controller
+17/31 Test #17: proposal_controller ..............   Passed    0.61 sec
+      Start 18: runtime_paths
+18/31 Test #18: runtime_paths ....................   Passed    5.72 sec
+      Start 19: log_rotation
+19/31 Test #19: log_rotation .....................   Passed    3.76 sec
+      Start 20: export_cache
+20/31 Test #20: export_cache .....................   Passed    5.74 sec
+      Start 21: startup_early_close
+21/31 Test #21: startup_early_close ..............   Passed    0.89 sec
+      Start 22: product_window
+22/31 Test #22: product_window ...................   Passed    1.15 sec
+      Start 23: video_asset_importer
+23/31 Test #23: video_asset_importer .............   Passed   13.38 sec
+      Start 24: sample_catalog
+24/31 Test #24: sample_catalog ...................   Passed    0.06 sec
+      Start 25: agent_plan
+25/31 Test #25: agent_plan .......................   Passed    0.39 sec
+      Start 26: model_client
+26/31 Test #26: model_client .....................   Passed    4.55 sec
+      Start 27: agent_panel
+27/31 Test #27: agent_panel ......................   Passed    0.64 sec
+      Start 28: story_template
+28/31 Test #28: story_template ...................   Passed    0.43 sec
+      Start 29: agent_task_store
+29/31 Test #29: agent_task_store .................   Passed    0.24 sec
+      Start 30: agent_controller
+30/31 Test #30: agent_controller .................   Passed   21.39 sec
+      Start 31: preview_version
+31/31 Test #31: preview_version ..................   Passed    8.00 sec
+
+100% tests passed out of 31
+
+Total Test time (real) = 166.84 sec

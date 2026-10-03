@@ -1,0 +1,20 @@
+{"level":"INFO","message":"正在检查 Hypit 配置：/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/local-agent-config.json","timestamp":"2026-10-03T01:43:03.095Z"}
+{"level":"INFO","message":"开始版本自检：/opt/homebrew/bin/node /Users/bytedance/Downloads/国产资产作业/hypit/bin/hypit.mjs version --json","timestamp":"2026-10-03T01:43:03.097Z"}
+{"argumentCount":3,"arguments":["/Users/bytedance/Downloads/国产资产作业/hypit/bin/hypit.mjs","version","--json"],"exitCode":0,"level":"INFO","message":"外部命令结束","program":"/opt/homebrew/bin/node","timestamp":"2026-10-03T01:43:03.627Z","truncated":false}
+{"level":"INFO","message":"Hypit 0.2.10 自检通过（/Users/bytedance/Downloads/国产资产作业/hypit）","timestamp":"2026-10-03T01:43:03.635Z"}
+{"level":"INFO","message":"Hypit 0.2.10 自检通过（/Users/bytedance/Downloads/国产资产作业/hypit）","timestamp":"2026-10-03T01:43:03.645Z"}
+{"level":"INFO","message":"正在打开工程：/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m7/对话之外 20261002-093038-727/main.svrun","timestamp":"2026-10-03T01:43:03.716Z"}
+{"level":"INFO","message":"已打开工程：/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m7/对话之外 20261002-093038-727/workbench.qvw.json","timestamp":"2026-10-03T01:43:03.719Z"}
+{"level":"INFO","message":"Project            /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m7/对话之外 20261002-093038-727","timestamp":"2026-10-03T01:43:04.424Z"}
+{"level":"INFO","message":"Run                /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m7/对话之外 20261002-093038-727/main.svrun","timestamp":"2026-10-03T01:43:04.428Z"}
+{"level":"INFO","message":"Runtime Profile    /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m7/对话之外 20261002-093038-727/hypit.runtime.json","timestamp":"2026-10-03T01:43:04.432Z"}
+{"level":"INFO","message":"Runtime selection  command argument (this session only)","timestamp":"2026-10-03T01:43:04.436Z"}
+{"level":"INFO","message":"","timestamp":"2026-10-03T01:43:04.442Z"}
+{"level":"INFO","message":"➜  Local:   http://localhost:5795/","timestamp":"2026-10-03T01:43:04.734Z"}
+{"level":"INFO","message":"Studio 已就绪：http://localhost:5795/（PID 85021）","timestamp":"2026-10-03T01:43:04.763Z"}
+{"level":"INFO","message":"➜  Network: use --host to expose","timestamp":"2026-10-03T01:43:04.842Z"}
+{"level":"INFO","message":"Comments           http://localhost:5795/#comments","timestamp":"2026-10-03T01:43:04.911Z"}
+{"level":"INFO","message":"已读取真实会话：revision 1，轨道 1，可写字段 5","timestamp":"2026-10-03T01:43:04.964Z"}
+{"level":"INFO","message":"Studio process exited with code 143.","timestamp":"2026-10-03T01:43:07.060Z"}
+{"argumentCount":10,"arguments":["/Users/bytedance/Downloads/国产资产作业/hypit/bin/hypit.mjs","studio","--run","/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m7/对话之外 20261002-093038-727/main.svrun","--workspace","/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m7/对话之外 20261002-093038-727","--runtime","/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m7/对话之外 20261002-093038-727/hypit.runtime.json","--port","5795"],"exitCode":143,"level":"ERROR","message":"外部命令结束","program":"/opt/homebrew/bin/node","timestamp":"2026-10-03T01:43:07.065Z","truncated":false}
+{"level":"INFO","message":"Studio 已退出，exit=143","timestamp":"2026-10-03T01:43:07.079Z"}

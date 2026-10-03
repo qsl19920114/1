@@ -97,7 +97,7 @@ ConfigLoadResult loadAppConfig(const QString &configPath) {
     }
     const auto tools = root["tools"].toObject();
     QStringList explicitPaths;
-    for (const auto &name : {QStringLiteral("node"), QStringLiteral("ffmpeg"), QStringLiteral("ffprobe")}) {
+    for (const auto &name : {QStringLiteral("node"), QStringLiteral("ffmpeg"), QStringLiteral("ffprobe"), QStringLiteral("codex")}) {
         if (!tools.contains(name)) continue;
         const auto value = tools[name];
         const QFileInfo tool(value.toString());
@@ -115,6 +115,7 @@ ConfigLoadResult loadAppConfig(const QString &configPath) {
     result.config.nodeExplicit = tools.contains(QStringLiteral("node"));
     result.config.ffmpegPath = resolve(QStringLiteral("ffmpeg"));
     result.config.ffprobePath = resolve(QStringLiteral("ffprobe"));
+    result.config.codexPath = resolve(QStringLiteral("codex"));
 
     // The lock lives in <repository>/config; its ../hypit points to a sibling
     // checkout of that repository, independent of the caller's working directory.

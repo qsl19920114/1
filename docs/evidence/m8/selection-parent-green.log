@@ -1,0 +1,17 @@
+********* Start testing of ProductWindowTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : ProductWindowTest::initTestCase()
+QWARN  : ProductWindowTest::selectingTrackClearsAgentComponentContext() qt.qpa.fonts: Populating font family aliases took 31 ms. Replace uses of missing font family "Sans Serif" with one that exists to avoid this cost. 
+PASS   : ProductWindowTest::selectingTrackClearsAgentComponentContext()
+PASS   : ProductWindowTest::agentIsPrimaryCreationEntry()
+PASS   : ProductWindowTest::closeRequiresSession()
+PASS   : ProductWindowTest::stoppedObservationAllowsSwitchWithoutCallingCancel()
+PASS   : ProductWindowTest::writingPreventsProjectReplacement()
+PASS   : ProductWindowTest::applyingRequiresCompatibleSelection()
+PASS   : ProductWindowTest::matchingVideoAssetEmitsActualBinding()
+PASS   : ProductWindowTest::queuedEditCannotWriteAfterClose()
+PASS   : ProductWindowTest::playbackRequiresCompletedExistingFilm()
+PASS   : ProductWindowTest::errorPreservesCompiledDocument()
+PASS   : ProductWindowTest::cleanupTestCase()
+Totals: 12 passed, 0 failed, 0 skipped, 0 blacklisted, 466ms
+********* Finished testing of ProductWindowTest *********

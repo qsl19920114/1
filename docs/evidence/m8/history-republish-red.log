@@ -1,0 +1,30 @@
+********* Start testing of EditorControllerTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : EditorControllerTest::initTestCase()
+FAIL!  : EditorControllerTest::identicalSourceRepublishPreservesUndoButChangedSourceClearsIt() 'state.last()[2].toBool()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(77)]
+PASS   : EditorControllerTest::editUndoRedo()
+PASS   : EditorControllerTest::typedWireValuesFromLiteralSnapshots(number)
+PASS   : EditorControllerTest::typedWireValuesFromLiteralSnapshots(boolean)
+PASS   : EditorControllerTest::sourceDependencyClosureMayChange()
+PASS   : EditorControllerTest::sourceStillRejectsChangedRetainedDependency()
+PASS   : EditorControllerTest::preflightFingerprintConflictWithoutRevisionChange()
+PASS   : EditorControllerTest::conflictClearsHistory()
+PASS   : EditorControllerTest::rejectedRollbackKeepsHistoryAndNewRevision()
+PASS   : EditorControllerTest::timeoutNeverClaimsSuccessEvenIfServerApplied()
+PASS   : EditorControllerTest::cancellationAndParallelRequest()
+PASS   : EditorControllerTest::readFailureRequiresExplicitRefresh()
+PASS   : EditorControllerTest::reentrantCloseOnStateCannotPublishOrWrite()
+PASS   : EditorControllerTest::sourceSuccessAndUndo()
+PASS   : EditorControllerTest::sourceCompileFailureRestoresAndKeepsHistory()
+PASS   : EditorControllerTest::confirmationFailureDoesNotClaimSuccess()
+PASS   : EditorControllerTest::wrongAcknowledgedRevisionClearsHistory()
+PASS   : EditorControllerTest::sourceUnknownOutcomeMustNotRestore()
+PASS   : EditorControllerTest::acceptedSourceWithLostConfirmationMustNotRestore()
+PASS   : EditorControllerTest::missingSourcesAndUnsupportedControlCannotWrite()
+PASS   : EditorControllerTest::readOnlyControlCannotWrite()
+PASS   : EditorControllerTest::reentrantCloseOnCompletionStateDoesNotPublish()
+PASS   : EditorControllerTest::sourceRecoveryDoesNotOverwriteExternalFile()
+PASS   : EditorControllerTest::cleanupTestCase()
+Totals: 24 passed, 1 failed, 0 skipped, 0 blacklisted, 3626ms
+********* Finished testing of EditorControllerTest *********

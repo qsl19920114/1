@@ -1,0 +1,279 @@
+{
+  "recordedAtUtc": "2026-10-02T15:47:57.305262+00:00",
+  "sourceSpecVerdict": "PASS",
+  "scope": "full_file; M8-M10 and related integrations; ModelClient excluded",
+  "reviewedFiles": [
+    {
+      "file": "CMakeLists.txt",
+      "lines": 30,
+      "sha256": "030a447ca3dc8c28f7d8d2a2b79195ed697894daeec660784d9a5da8ede8a7a2"
+    },
+    {
+      "file": "app/CMakeLists.txt",
+      "lines": 82,
+      "sha256": "4c1f177999edde2bf9fdc16929636985aa2d7160a8c776e1134fbcf0d4b01c79"
+    },
+    {
+      "file": "app/agent/AgentController.cpp",
+      "lines": 218,
+      "sha256": "7f0619037d90d2bfcef872dd884ee4036f06d1d69bdd5085f4545f39651a258e"
+    },
+    {
+      "file": "app/agent/AgentController.h",
+      "lines": 75,
+      "sha256": "5b8689eabafac92f7cc6f103b0284420c5d497ffa5499d4a7072c2ea81b1ed34"
+    },
+    {
+      "file": "app/agent/AgentTaskStore.cpp",
+      "lines": 49,
+      "sha256": "8064130ac5f34b66b86aa34537ab0fdb2508881993c654911c1c0fbceae87e46"
+    },
+    {
+      "file": "app/agent/AgentTaskStore.h",
+      "lines": 11,
+      "sha256": "308ce13977d5130ae13684d0f8a1d40408e58c0b1d02decc6fffae67cc423d7c"
+    },
+    {
+      "file": "app/agent/ApprovalManager.h",
+      "lines": 12,
+      "sha256": "41c11e8b36ebe55a4d16cc4ae71de5e43c85d50a09741fbd815b3b717b70308e"
+    },
+    {
+      "file": "app/agent/ContextBuilder.cpp",
+      "lines": 27,
+      "sha256": "b6b1dc6fc39cd31e68a9d5b8cb82af9b318e65752aa47dd8bca0bb6ce63e7431"
+    },
+    {
+      "file": "app/agent/ContextBuilder.h",
+      "lines": 10,
+      "sha256": "a67940660aaeeedfbbb764c452ffb9def1b4097c363eaf538c77065f9b4f52ff"
+    },
+    {
+      "file": "app/agent/PlanService.cpp",
+      "lines": 79,
+      "sha256": "7f4e4f7e6a46fcb346b09f6bcdc357bfb02dd181695afa13501d25e2bf0b1041"
+    },
+    {
+      "file": "app/agent/PlanService.h",
+      "lines": 13,
+      "sha256": "7bba2ec2694872ba2da1a7896895e98f043001df7271af94b12d86752a700ea2"
+    },
+    {
+      "file": "app/agent/StoryTemplate.cpp",
+      "lines": 43,
+      "sha256": "c9b3e840725b257b304b41e14e3be6bc687d61cb11038c8fa616f7c2f848d8fc"
+    },
+    {
+      "file": "app/agent/StoryTemplate.h",
+      "lines": 10,
+      "sha256": "7f7d1d31a7938d968ef830c222e7f457b2369c91709b4b8806f899727fe3852f"
+    },
+    {
+      "file": "app/agent/ToolDispatcher.cpp",
+      "lines": 21,
+      "sha256": "b6804e8cd71ef8b06f2b9ff3f94c2350ec6e7f01a422ab7d00a7033b4aaac312"
+    },
+    {
+      "file": "app/agent/ToolDispatcher.h",
+      "lines": 11,
+      "sha256": "f3eb2fe8d1dc2d546638300916a02e4960f279b8926b20143bd1d58afe226041"
+    },
+    {
+      "file": "app/backend/hypit/SnapshotMapper.cpp",
+      "lines": 151,
+      "sha256": "5b6fca7f30a52f91f347f3b044a4ab35e07f9df4e9d54e4f4d65f9e240b6945d"
+    },
+    {
+      "file": "app/controllers/EditorController.cpp",
+      "lines": 190,
+      "sha256": "b8f7142ee58482df23ca091ad723fbfc2e0fd443d4fc1dc94155a72cb57be9c6"
+    },
+    {
+      "file": "app/controllers/EditorController.h",
+      "lines": 58,
+      "sha256": "90dbd079aad3c20599367bd8091f1853345f8e4a2cb3e29bf74931c6a43603c4"
+    },
+    {
+      "file": "app/domain/AgentPlan.h",
+      "lines": 41,
+      "sha256": "31ffd3c8d9086ead541dfe2b604995d42c604ccb62d59a1deeb965e6a513b6ad"
+    },
+    {
+      "file": "app/domain/Snapshot.h",
+      "lines": 65,
+      "sha256": "82542925feb565bddc220630903789e02f97fc5a6f0ec07f7d8d7ec1051d7468"
+    },
+    {
+      "file": "app/infrastructure/AppConfig.cpp",
+      "lines": 132,
+      "sha256": "ff953da256c535f752e29b01c4ccc6b7ee5bf4a21cf22581dad1281271310cf4"
+    },
+    {
+      "file": "app/infrastructure/AppConfig.h",
+      "lines": 39,
+      "sha256": "7af07c0a8722f3e792bf2b1fac474ea75a237c13b68cdff36349e27096ee413b"
+    },
+    {
+      "file": "app/main.cpp",
+      "lines": 320,
+      "sha256": "ca2a8ea9045571ad194568193764a970d165dd8724a7e92cc4c36fbe1c850f8a"
+    },
+    {
+      "file": "app/ui/AgentPanel.cpp",
+      "lines": 147,
+      "sha256": "72b000be5b3bb906446efc0f3aaa98dd9cfc1e1a5c0abdd0a6d339fe56ff2bb8"
+    },
+    {
+      "file": "app/ui/AgentPanel.h",
+      "lines": 64,
+      "sha256": "be30bf9c3a77732f2e8a81ccbbb1ace5cb9a3e187527ca8030deefdea161a374"
+    },
+    {
+      "file": "app/ui/MainWindow.cpp",
+      "lines": 347,
+      "sha256": "570a893991c48b342ee2e5569838c0a9732492c1c6980420d9dfdfdd9cee93ff"
+    },
+    {
+      "file": "app/ui/MainWindow.h",
+      "lines": 160,
+      "sha256": "de9c43662fa5009db452498bf0cd68b1b4a3d1b2817f5c9e4f8003eb9b2ba1f1"
+    },
+    {
+      "file": "app/ui/PlanReviewPanel.cpp",
+      "lines": 277,
+      "sha256": "1d028689aa684a279861dbd0cc1a5e6e25cf54d6adfe61ad854c3e590d52616a"
+    },
+    {
+      "file": "app/ui/PlanReviewPanel.h",
+      "lines": 43,
+      "sha256": "3c6e700e6dd8dadcc9d2782ed28c66803844c06f88e5027235e02ebac420a860"
+    },
+    {
+      "file": "app/ui/StudioTransport.cpp",
+      "lines": 150,
+      "sha256": "613b96a89922fd813f788b5d8d69a696a1bc648481abbd6ecce2c8a7b6810397"
+    },
+    {
+      "file": "app/ui/StudioTransport.h",
+      "lines": 42,
+      "sha256": "9da194721042c7e8aaffeb22f139463375c5aaf5ed199bd25cdaf2d6e935e92e"
+    },
+    {
+      "file": "templates/story-reel/hypit.runtime.json",
+      "lines": 1,
+      "sha256": "2f9b1b94de9995b066967e7a7620988030cb12a68a58c6dd0b121cb0eea782d5"
+    },
+    {
+      "file": "templates/story-reel/main.svml",
+      "lines": 23,
+      "sha256": "5e9b7d336e4523b85e3bd5525b5fbd787825f86043ea0d72de71f5aae76c9bb9"
+    },
+    {
+      "file": "templates/story-reel/main.svrun",
+      "lines": 2,
+      "sha256": "3ee1cbf02e58a81bba7b0a9d02ad656cbadf82de70cc4f0e5e52174bfbaf209c"
+    },
+    {
+      "file": "templates/story-reel/main.svs",
+      "lines": 2,
+      "sha256": "b882cf19c261a9b86377c7c801ab2673993cbb2700a1289828f47947eb3bcd60"
+    },
+    {
+      "file": "templates/story-reel/packages/story-reel/activation.js",
+      "lines": 47,
+      "sha256": "3e84256c3819954b79f0625aba75096c85f707869339539874e48a0aa92904ca"
+    },
+    {
+      "file": "templates/story-reel/packages/story-reel/package.json",
+      "lines": 1,
+      "sha256": "7b390e46971ddf49c8b0c39523d92ac1245699082c2c7f7f299febb7f9bcf50d"
+    },
+    {
+      "file": "templates/story-reel/packages/story-reel/render.js",
+      "lines": 25,
+      "sha256": "e13d0d3eafdf3ce63dc7ca049884486fa0b5511ae14e3c6df854a029bfdfcbd3"
+    },
+    {
+      "file": "templates/story-reel/template.json",
+      "lines": 1,
+      "sha256": "2ec69cf818144bd3d4952cd15705ec970c8b97ac7578f4ccd577627d22669027"
+    },
+    {
+      "file": "tests/CMakeLists.txt",
+      "lines": 104,
+      "sha256": "bca42333c8bcb4cf4c9fd3ced08101d557ff63ae2fcb2fc28f761926228d9c14"
+    },
+    {
+      "file": "tests/agent-ui.cmake",
+      "lines": 4,
+      "sha256": "ce40ddff0686625094b75d734571ae30c6bc5f98ea0d9b3cf8ecd03a7ac73213"
+    },
+    {
+      "file": "tests/integration/AgentE2ETest.cpp",
+      "lines": 61,
+      "sha256": "d9d13510b0d8864097ebdb474259ce19caf49109bde91507d7f4935ff97a0e05"
+    },
+    {
+      "file": "tests/preview-version.cmake",
+      "lines": 4,
+      "sha256": "9a8633b43dc3067376ec0224ffa0aecaa1130378fcdbb7efbb6fee03f7708c4f"
+    },
+    {
+      "file": "tests/support/AgentProtocolFixture.h",
+      "lines": 222,
+      "sha256": "ed66cd9a044a4cc3df397a9f87a77f8ec69b518d617975fbe39743c91b1aecc6"
+    },
+    {
+      "file": "tests/template/story-reel.test.mjs",
+      "lines": 28,
+      "sha256": "d2a88bc029ab4be2998a89e0ded6c092539e620fa883718e7797de856ea51f2e"
+    },
+    {
+      "file": "tests/unit/AgentControllerTest.cpp",
+      "lines": 385,
+      "sha256": "d4df490fcbd552f530e318bddb9116aa32842a3cfb666ecd5e8f2fc9daa20ea7"
+    },
+    {
+      "file": "tests/unit/AgentPanelTest.cpp",
+      "lines": 332,
+      "sha256": "af8488a6d096813197804e970ba42780231f2bc65d05707a7b909325f2446e55"
+    },
+    {
+      "file": "tests/unit/AgentPlanTest.cpp",
+      "lines": 50,
+      "sha256": "9cc702102fa816c51d559931e50e49cdf927cfeef191249687c3fc19a057b3af"
+    },
+    {
+      "file": "tests/unit/AgentTaskStoreTest.cpp",
+      "lines": 47,
+      "sha256": "0f33e35212d6525f741fcbf6625d3fe05a7abf6c34825d5ba1e725aeccebddab"
+    },
+    {
+      "file": "tests/unit/EditorControllerTest.cpp",
+      "lines": 192,
+      "sha256": "97012e0ac5f396f8af28ab35dbf6c04ddc9889421fe3713c830018978e6271ea"
+    },
+    {
+      "file": "tests/unit/PreviewVersionTest.cpp",
+      "lines": 175,
+      "sha256": "e708b8694301f923fb892e091e41d7de47bc45da49647c4a28825d381fe32f21"
+    },
+    {
+      "file": "tests/unit/ProductWindowTest.cpp",
+      "lines": 82,
+      "sha256": "7ade2cfe069d3bdb39429d193813e744943a70011c0ed37b2241d1c4bd05305b"
+    },
+    {
+      "file": "tests/unit/RuntimePathsTest.cpp",
+      "lines": 50,
+      "sha256": "fa0528046cfc7ca9a7546a29eb05a042ac2d43ad40736ef50db753dc9c2da23b"
+    },
+    {
+      "file": "tests/unit/StoryTemplateTest.cpp",
+      "lines": 22,
+      "sha256": "5f218ec7b8a05f2cdf8b4371444b8a5c150a30fd0a769525f110b1f13e842341"
+    }
+  ],
+  "files": 54,
+  "lines": 4777
+}

@@ -1,0 +1,202 @@
+[
+  {
+    "file": "app/agent/AgentController.cpp",
+    "sha256": "7ca9f2960304aea1e89c5073f27ff288b2ee8dc5604d72029dd7d5b9c9c87987",
+    "lines": 174
+  },
+  {
+    "file": "app/agent/AgentController.h",
+    "sha256": "24ad316b8401479e1d199716e5e69956df063f334be7d7ce5c6c42b6133f8f40",
+    "lines": 70
+  },
+  {
+    "file": "app/agent/AgentTaskStore.cpp",
+    "sha256": "1ca2dac6ae6aea7f562abcda24e0f129bab08e43025824cd6921f48951a31e89",
+    "lines": 41
+  },
+  {
+    "file": "app/agent/AgentTaskStore.h",
+    "sha256": "308ce13977d5130ae13684d0f8a1d40408e58c0b1d02decc6fffae67cc423d7c",
+    "lines": 11
+  },
+  {
+    "file": "app/agent/ApprovalManager.h",
+    "sha256": "41c11e8b36ebe55a4d16cc4ae71de5e43c85d50a09741fbd815b3b717b70308e",
+    "lines": 12
+  },
+  {
+    "file": "app/agent/ContextBuilder.cpp",
+    "sha256": "67e75b44decd502b7f4f229c3aee42b47863f66008eab2892a1e094b5f0dc302",
+    "lines": 27
+  },
+  {
+    "file": "app/agent/ContextBuilder.h",
+    "sha256": "6d208fb36cc1d5d5ee73a4a5cc88ab5ef55b95eb0d9ed820a2c7cb9f5c43d55c",
+    "lines": 10
+  },
+  {
+    "file": "app/agent/PlanService.cpp",
+    "sha256": "7f4e4f7e6a46fcb346b09f6bcdc357bfb02dd181695afa13501d25e2bf0b1041",
+    "lines": 79
+  },
+  {
+    "file": "app/agent/PlanService.h",
+    "sha256": "7bba2ec2694872ba2da1a7896895e98f043001df7271af94b12d86752a700ea2",
+    "lines": 13
+  },
+  {
+    "file": "app/agent/StoryTemplate.cpp",
+    "sha256": "c9b3e840725b257b304b41e14e3be6bc687d61cb11038c8fa616f7c2f848d8fc",
+    "lines": 43
+  },
+  {
+    "file": "app/agent/StoryTemplate.h",
+    "sha256": "7f7d1d31a7938d968ef830c222e7f457b2369c91709b4b8806f899727fe3852f",
+    "lines": 10
+  },
+  {
+    "file": "app/agent/ToolDispatcher.cpp",
+    "sha256": "b6804e8cd71ef8b06f2b9ff3f94c2350ec6e7f01a422ab7d00a7033b4aaac312",
+    "lines": 21
+  },
+  {
+    "file": "app/agent/ToolDispatcher.h",
+    "sha256": "f3eb2fe8d1dc2d546638300916a02e4960f279b8926b20143bd1d58afe226041",
+    "lines": 11
+  },
+  {
+    "file": "app/backend/hypit/SnapshotMapper.cpp",
+    "sha256": "c8cc647e28e36068f4249a8658c8ffc70295ba9bd7705fb0f1215ede344d907b",
+    "lines": 148
+  },
+  {
+    "file": "app/domain/AgentPlan.h",
+    "sha256": "31ffd3c8d9086ead541dfe2b604995d42c604ccb62d59a1deeb965e6a513b6ad",
+    "lines": 41
+  },
+  {
+    "file": "app/domain/Snapshot.h",
+    "sha256": "96c6f5f58f17863d0bfe7b577efd237ec38dca7c380155cb0c5b4cc52f82ceaf",
+    "lines": 55
+  },
+  {
+    "file": "app/main.cpp",
+    "sha256": "b4b52d492392ed5b96b222dce600b7d71a06c275b3da3df62daafba909def636",
+    "lines": 304
+  },
+  {
+    "file": "app/ui/AgentPanel.cpp",
+    "sha256": "645726810d9706a3bd0c65a08d57cd8c680329ba5cd4cbe7dd089c4ef5fa4c3a",
+    "lines": 129
+  },
+  {
+    "file": "app/ui/AgentPanel.h",
+    "sha256": "2dfb23ee0d6a4d59a1230ab4faffa614af2a53ebe97fc9750c7e280561805b1f",
+    "lines": 61
+  },
+  {
+    "file": "app/ui/MainWindow.cpp",
+    "sha256": "79b66a3fed7f97d0551f23bab2c19bfe51c60fea950363f860743e4e3d240c6e",
+    "lines": 341
+  },
+  {
+    "file": "app/ui/MainWindow.h",
+    "sha256": "291701238790a47ec2ef19b97f3392a839e14864ab090773e784024f0cf67478",
+    "lines": 158
+  },
+  {
+    "file": "app/ui/PlanReviewPanel.cpp",
+    "sha256": "f7150fbb6973283cf25415663897ac3aa6444fa12b36cfc4ef64e1f1c6988324",
+    "lines": 271
+  },
+  {
+    "file": "app/ui/PlanReviewPanel.h",
+    "sha256": "412448ecf8dce5671b2e95f30315f437d80e22405c0215b490d339e2b145ab83",
+    "lines": 42
+  },
+  {
+    "file": "templates/story-reel/hypit.runtime.json",
+    "sha256": "2f9b1b94de9995b066967e7a7620988030cb12a68a58c6dd0b121cb0eea782d5",
+    "lines": 1
+  },
+  {
+    "file": "templates/story-reel/main.svml",
+    "sha256": "5e9b7d336e4523b85e3bd5525b5fbd787825f86043ea0d72de71f5aae76c9bb9",
+    "lines": 23
+  },
+  {
+    "file": "templates/story-reel/main.svrun",
+    "sha256": "3ee1cbf02e58a81bba7b0a9d02ad656cbadf82de70cc4f0e5e52174bfbaf209c",
+    "lines": 2
+  },
+  {
+    "file": "templates/story-reel/main.svs",
+    "sha256": "b882cf19c261a9b86377c7c801ab2673993cbb2700a1289828f47947eb3bcd60",
+    "lines": 2
+  },
+  {
+    "file": "templates/story-reel/packages/story-reel/activation.js",
+    "sha256": "3e84256c3819954b79f0625aba75096c85f707869339539874e48a0aa92904ca",
+    "lines": 47
+  },
+  {
+    "file": "templates/story-reel/packages/story-reel/package.json",
+    "sha256": "7b390e46971ddf49c8b0c39523d92ac1245699082c2c7f7f299febb7f9bcf50d",
+    "lines": 1
+  },
+  {
+    "file": "templates/story-reel/packages/story-reel/render.js",
+    "sha256": "e13d0d3eafdf3ce63dc7ca049884486fa0b5511ae14e3c6df854a029bfdfcbd3",
+    "lines": 25
+  },
+  {
+    "file": "templates/story-reel/template.json",
+    "sha256": "2ec69cf818144bd3d4952cd15705ec970c8b97ac7578f4ccd577627d22669027",
+    "lines": 1
+  },
+  {
+    "file": "tests/agent-ui.cmake",
+    "sha256": "ce40ddff0686625094b75d734571ae30c6bc5f98ea0d9b3cf8ecd03a7ac73213",
+    "lines": 4
+  },
+  {
+    "file": "tests/integration/AgentE2ETest.cpp",
+    "sha256": "a84cb017d5612d8a790397dc3f49f2eb63ca25c410d8ffd71a031acda8ee4ba8",
+    "lines": 61
+  },
+  {
+    "file": "tests/template/story-reel.test.mjs",
+    "sha256": "d2a88bc029ab4be2998a89e0ded6c092539e620fa883718e7797de856ea51f2e",
+    "lines": 28
+  },
+  {
+    "file": "tests/unit/AgentControllerTest.cpp",
+    "sha256": "565fa64e308efaea37bc0ed46c388be0212c97414713479065184c4959e0cbcd",
+    "lines": 28
+  },
+  {
+    "file": "tests/unit/AgentPanelTest.cpp",
+    "sha256": "36cd1505b8e3bbedb6cac7c2061f2336723f69ebdc91749e4b9391aa1090a265",
+    "lines": 229
+  },
+  {
+    "file": "tests/unit/AgentPlanTest.cpp",
+    "sha256": "9cc702102fa816c51d559931e50e49cdf927cfeef191249687c3fc19a057b3af",
+    "lines": 50
+  },
+  {
+    "file": "tests/unit/AgentTaskStoreTest.cpp",
+    "sha256": "b043abb43b860e3cd1244874ac699b98b220b4b2b49141fe8cfaa3184f1e95a5",
+    "lines": 28
+  },
+  {
+    "file": "tests/unit/ProductWindowTest.cpp",
+    "sha256": "ec4e87c884069b49cf8cb7470f1dc430301661201b7a1609ec406f490257cb18",
+    "lines": 71
+  },
+  {
+    "file": "tests/unit/StoryTemplateTest.cpp",
+    "sha256": "5f218ec7b8a05f2cdf8b4371444b8a5c150a30fd0a769525f110b1f13e842341",
+    "lines": 22
+  }
+]

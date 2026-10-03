@@ -1,0 +1,28 @@
+********* Start testing of RuntimePathsTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : RuntimePathsTest::initTestCase()
+PASS   : RuntimePathsTest::validatesAndResolvesExplicitCodexWithoutGlobalPathChanges()
+PASS   : RuntimePathsTest::rejectsOversizedConfig()
+PASS   : RuntimePathsTest::rejectsDirectoryConfig()
+PASS   : RuntimePathsTest::rejectsSymlinkConfig()
+PASS   : RuntimePathsTest::validatesToolFields(tools object)
+PASS   : RuntimePathsTest::validatesToolFields(type)
+PASS   : RuntimePathsTest::validatesToolFields(relative)
+PASS   : RuntimePathsTest::validatesToolFields(missing)
+PASS   : RuntimePathsTest::validatesToolFields(empty)
+PASS   : RuntimePathsTest::validatesHypitLengths()
+PASS   : RuntimePathsTest::bundledConfigWinsOverDeveloperConfig()
+PASS   : RuntimePathsTest::explicitNodeRecognizesOnlyPinnedOfficialShell()
+PASS   : RuntimePathsTest::loadedShellLauncherAlsoWorksForStudio()
+PASS   : RuntimePathsTest::loadedDefaultNodePreservesExecutableShellLauncher()
+PASS   : RuntimePathsTest::projectConfigPropagatesExplicitNodeToStudio()
+PASS   : RuntimePathsTest::explicitNodeExecutableIsUsed()
+PASS   : RuntimePathsTest::explicitToolsResolveInChildren()
+PASS   : RuntimePathsTest::jsonProcessHonorsExplicitEnvironment()
+PASS   : RuntimePathsTest::templatePathsDependOnlyOnExecutable()
+PASS   : RuntimePathsTest::mediaDecodeGetsStandardPath()
+PASS   : RuntimePathsTest::studioGetsStandardPath()
+PASS   : RuntimePathsTest::childPathIncludesStandardToolsWithoutChangingParent()
+PASS   : RuntimePathsTest::cleanupTestCase()
+Totals: 24 passed, 0 failed, 0 skipped, 0 blacklisted, 6086ms
+********* Finished testing of RuntimePathsTest *********

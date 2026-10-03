@@ -1,0 +1,17 @@
+********* Start testing of AgentPanelTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : AgentPanelTest::initTestCase()
+FAIL!  : AgentPanelTest::compiledSnapshotDoesNotConfirmVisualPreviewVersion() 'versions->text().contains("编译快照 v7")' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentPanelTest.cpp(231)]
+FAIL!  : AgentPanelTest::idleWithoutTaskClearsPreviousReview(create) 'review->editedPlan().isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentPanelTest.cpp(251)]
+FAIL!  : AgentPanelTest::idleWithoutTaskClearsPreviousReview(edit) 'review->editedPlan().isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentPanelTest.cpp(251)]
+FAIL!  : AgentPanelTest::idleWithoutTaskClearsPreviousReview(clarify) 'review->editedPlan().isEmpty()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentPanelTest.cpp(251)]
+QWARN  : AgentPanelTest::closingTaskDismissesPendingCreationDialog() This plugin does not support propagateSizeHints()
+FAIL!  : AgentPanelTest::closingTaskDismissesPendingCreationDialog() 'dismissed' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentPanelTest.cpp(269)]
+PASS   : AgentPanelTest::cleanupTestCase()
+Totals: 2 passed, 5 failed, 0 skipped, 0 blacklisted, 492ms
+********* Finished testing of AgentPanelTest *********

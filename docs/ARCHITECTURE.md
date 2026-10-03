@@ -1,5 +1,7 @@
 # 当前架构与工程格式
 
+1.2新增真实模型规划、本地批准、顺序执行和独立任务记录，见[Agent 架构](AGENT_ARCHITECTURE.md)。新增功能仍共用下面的工程事实、编辑历史和导出控制器。
+
 UI 使用领域 DTO；main 仅连接信号。DocumentController 管理持久化工程和素材，ProjectController 管理异步 Hypit 自检、Studio 生命周期和 Snapshot，EditorController 管理原生编辑与历史。UI 不解析 Hypit 内部 JSON。
 
 依赖由 CMake targets 约束：UI → Domain，Controllers → Services / Backend / Infrastructure；Services → Domain / Infrastructure + Qt Core/Gui；Backend → Domain / Infrastructure + Network。

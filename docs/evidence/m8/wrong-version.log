@@ -1,0 +1,4 @@
+正在检查 Hypit 配置：/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-4bq4r3ct/中文 空格目录/config/wrong-version.json
+Hypit 版本不符：实际 0.2.10，版本锁要求 0.2.11。请选择匹配版本的配置。
+Hypit 版本不符：实际 0.2.10，版本锁要求 0.2.11。请选择匹配版本的配置。
+CLEANUP ownedPid= 0 running= false

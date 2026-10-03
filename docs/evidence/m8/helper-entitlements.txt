@@ -1,0 +1,14 @@
+Executable=/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/release-macos-arm64-1.2.0/QtVideoWorkbench.app/Contents/Frameworks/QtWebEngineCore.framework/Versions/A/Helpers/QtWebEngineProcess.app/Contents/MacOS/QtWebEngineProcess
+[Dict]
+	[Key] com.apple.security.cs.allow-jit
+	[Value]
+		[Bool] true
+	[Key] com.apple.security.cs.allow-unsigned-executable-memory
+	[Value]
+		[Bool] true
+	[Key] com.apple.security.cs.disable-executable-page-protection
+	[Value]
+		[Bool] true
+	[Key] com.apple.security.cs.disable-library-validation
+	[Value]
+		[Bool] true

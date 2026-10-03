@@ -1,7 +1,7 @@
 {
   "format": "qt-video-workbench.tasks@1",
   "note": "状态只有四种：done 需附证据路径；partial 需写明未验证部分；blocked 需写明阻塞原因；pending 未开始。不得在前置门禁未过时把后续任务标为 done。",
-  "updatedAt": "2026-10-02",
+  "updatedAt": "2026-10-03",
   "gates": {
     "G0": {
       "milestone": "M0",
@@ -113,6 +113,49 @@
       ],
       "reason": "本地样例哈希/全片解码通过；异步视频素材32项负向/取消/路径测试通过；真实Qt原生播放/定位、键盘滚轮、原创静音视频导出、成片播放与重开通过；源码规格和质量复审PASS；1.1.0运行包82项链接/签名、248份许可材料和9种搬移场景通过，纯视频启动验证通过。",
       "promotedAt": "2026-10-02"
+    },
+    "G8": {
+      "milestone": "M8",
+      "definition": "真实Codex请求、严格上下文/方案与不修改工程的审阅",
+      "verdict": "PASS",
+      "reason": "Real Codex and creation/export loop, 31 final regression suites, spec/quality reviews, and final package preview/relocation all passed.",
+      "evidence": [
+        "docs/evidence/m8/agent-e2e.json",
+        "docs/evidence/m8/agent-e2e-final.log",
+        "docs/evidence/m8/ctest-final.log",
+        "docs/evidence/m8/spec-review.md",
+        "docs/evidence/m8/quality-review.md"
+      ]
+    },
+    "G9": {
+      "milestone": "M9",
+      "definition": "三段竖屏工程实际创建、逐项确认与负向执行保护",
+      "verdict": "PASS",
+      "reason": "Real Codex and creation/export loop, 31 final regression suites, spec/quality reviews, and final package preview/relocation all passed.",
+      "evidence": [
+        "docs/evidence/m8/agent-e2e.json",
+        "docs/evidence/m8/agent-e2e-final.log",
+        "docs/evidence/m8/ctest-final.log",
+        "docs/evidence/m8/spec-review.md",
+        "docs/evidence/m8/quality-review.md"
+      ]
+    },
+    "G10": {
+      "milestone": "M10",
+      "definition": "任务恢复、多轮局部修改、可视版本与最新成片及发布验证",
+      "verdict": "PASS",
+      "reason": "Real Codex and creation/export loop, 31 final regression suites, spec/quality reviews, and final package preview/relocation all passed.",
+      "evidence": [
+        "docs/evidence/m8/agent-e2e.json",
+        "docs/evidence/m8/agent-e2e-final.log",
+        "docs/evidence/m8/ctest-final.log",
+        "docs/evidence/m8/spec-review.md",
+        "docs/evidence/m8/quality-review.md",
+        "docs/evidence/m8/packaged-native.json",
+        "docs/evidence/m8/relocation.json",
+        "docs/evidence/m8/release.json",
+        "docs/evidence/m8/delivery-integrity.json"
+      ]
     }
   },
   "tasks": [
@@ -823,6 +866,108 @@
         "docs/evidence/m7/release.json",
         "docs/evidence/m7/spec-review.md",
         "docs/evidence/m7/quality-review.md"
+      ]
+    },
+    {
+      "id": "T037",
+      "milestone": "M8",
+      "title": "当前Codex登录与有界异步ModelClient",
+      "status": "done",
+      "dependsOn": [
+        "T036"
+      ],
+      "evidence": [
+        "docs/evidence/m8/model-green.log",
+        "docs/evidence/m8/model-spec-review.md",
+        "docs/evidence/m8/model-quality-review.md",
+        "docs/evidence/m8/agent-e2e.json",
+        "docs/evidence/m8/model-environment-green.log",
+        "docs/evidence/m8/quality-model-environment-recheck.log"
+      ]
+    },
+    {
+      "id": "T038",
+      "milestone": "M8",
+      "title": "真实上下文与类型化多步骤方案",
+      "status": "done",
+      "dependsOn": [
+        "T037"
+      ],
+      "evidence": [
+        "docs/evidence/m8/plan-green.log",
+        "docs/evidence/m8/spec-review-recheck.md",
+        "docs/evidence/m8/controller-final.log",
+        "docs/evidence/m8/ui-selection-green.log"
+      ]
+    },
+    {
+      "id": "T039",
+      "milestone": "M9",
+      "title": "原创三段竖屏模板与本地素材创建",
+      "status": "done",
+      "dependsOn": [
+        "T038"
+      ],
+      "evidence": [
+        "docs/evidence/m8/story-green.log",
+        "docs/evidence/m8/story-template-node-green.log",
+        "docs/evidence/m8/agent-e2e.json",
+        "docs/evidence/m8/agent-e2e-final.log"
+      ]
+    },
+    {
+      "id": "T040",
+      "milestone": "M9",
+      "title": "本地批准与逐项执行及失败修订",
+      "status": "done",
+      "dependsOn": [
+        "T039"
+      ],
+      "evidence": [
+        "docs/evidence/m8/controller-negative-green.log",
+        "docs/evidence/m8/agent-e2e.json",
+        "docs/evidence/m8/controller-final.log",
+        "docs/evidence/m8/quality-review.md"
+      ]
+    },
+    {
+      "id": "T041",
+      "milestone": "M10",
+      "title": "任务保存与版本安全恢复和多轮导出",
+      "status": "done",
+      "dependsOn": [
+        "T040"
+      ],
+      "evidence": [
+        "docs/evidence/m8/task-symlink-green.log",
+        "docs/evidence/m8/controller-negative-green.log",
+        "docs/evidence/m8/agent-e2e.json",
+        "docs/evidence/m8/task-special-green.log",
+        "docs/evidence/m8/quality-task-special-recheck.log",
+        "docs/evidence/m8/controller-final.log"
+      ]
+    },
+    {
+      "id": "T042",
+      "milestone": "M10",
+      "title": "Agent主界面、真实可视版本与1.2.0交付",
+      "status": "done",
+      "dependsOn": [
+        "T041"
+      ],
+      "evidence": [
+        "docs/evidence/m8/ui-scope-green.log",
+        "docs/evidence/m8/agent-e2e.json",
+        "docs/evidence/m8/preview-text-layout-green.log",
+        "docs/evidence/m8/quality-preview-text-recheck.log",
+        "docs/evidence/m8/selection-parent-green.log",
+        "docs/evidence/m8/ctest-final.log",
+        "docs/evidence/m8/packaged-native.json",
+        "docs/evidence/m8/relocation.json",
+        "docs/evidence/m8/release.json",
+        "docs/evidence/m8/spec-review.md",
+        "docs/evidence/m8/quality-review.md",
+        "docs/evidence/m8/delivery-integrity.json"
       ]
     }
   ]

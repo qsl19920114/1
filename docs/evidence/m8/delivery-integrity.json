@@ -1,0 +1,11 @@
+{
+  "verdict": "PASS",
+  "licenseRecords": 248,
+  "licenseShaMatches": true,
+  "zipSha256": "4ce9eb94d22efdc4065e61be01013cf46779c6ffede01914550d6a29621ff8a4",
+  "zipShaMatches": true,
+  "deliveredFilmMatchesExport": true,
+  "deliveredFilmBytes": 99425,
+  "appVersion": "Qt Video Workbench 1.2.0",
+  "machOBinaries": 82
+}

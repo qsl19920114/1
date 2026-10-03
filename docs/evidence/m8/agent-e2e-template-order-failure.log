@@ -1,0 +1,11 @@
+********* Start testing of AgentE2ETest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : AgentE2ETest::initTestCase()
+QINFO  : AgentE2ETest::realModelCreatesEditsReopensAndExports() 已准备3张图片。模型仅接收名称和尺寸，图片保留在本地。
+QINFO  : AgentE2ETest::realModelCreatesEditsReopensAndExports() 正在读取工程与素材，等待 Codex 制定方案…
+QINFO  : AgentE2ETest::realModelCreatesEditsReopensAndExports() 方案待审阅，尚未修改工程。
+QINFO  : AgentE2ETest::realModelCreatesEditsReopensAndExports() 正在创建工程、导入图片并编译三段时间线…
+QFATAL : AgentE2ETest::realModelCreatesEditsReopensAndExports() Test function timed out
+FAIL!  : AgentE2ETest::realModelCreatesEditsReopensAndExports() Received a fatal error.
+Totals: 1 passed, 1 failed, 0 skipped, 0 blacklisted, 300006ms
+********* Finished testing of AgentE2ETest *********

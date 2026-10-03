@@ -1,0 +1,13 @@
+[
+  {
+    "title": "启动阶段取消后若启动失败，脱离父对象的进程与临时目录不会释放",
+    "file": "app/agent/ModelClient.cpp",
+    "start_line": 73,
+    "end_line": 81,
+    "severity": "P2",
+    "category": "ROBUSTNESS",
+    "confidence": 9,
+    "rationale": "具体触发路径：在 macOS/Unix 上将 program 设置为不存在或无法执行的路径，request() 启动后，在事件循环处理 FailedToStart 前调用 cancel()、替换请求或析构 ModelClient。此时 QProcess 仍为 Starting，dispose() 将其 setParent(nullptr)，把请求目录移交给 finished 回调捕获，并断开原 errorOccurred 回调。Qt 6.11.2 的 _q_startupNotification() 启动失败分支会置 NotRunning、发 errorOccurred(FailedToStart)、清理内部资源并返回，不发 finished。因此唯一 deleteLater 路径永远不会运行，QProcess/QTimer 及捕获的 QTemporaryDir 一直保留，反复触发可积累对象和请求文件。此项由当前源码与固定版本 Qt 官方源码确认；现有测试只等启动失败后再发下一请求，未覆盖此时序，未进行额外运行探针。Qt 依据：https://raw.githubusercontent.com/qt/qtbase/v6.11.2/src/corelib/io/qprocess.cpp （_q_startupNotification）。 定级为 P2：目前确认的影响局限于本地退役对象和请求文件残留，触发需启动窗口内取消及启动失败同时成立，未确认核心流程故障或凭据外泄。",
+    "suggestion": "为退役进程同时处理 errorOccurred(FailedToStart) 和 finished，使用幂等回收函数或在 FailedToStart 时确认 NotRunning 后 deleteLater，并让临时目录在最终进程对象回收时释放。保留 UI 线程非阻塞清理。补充无效程序路径 request() 后立即 cancel()/替换/析构的回归测试，验证退役 QProcess 被销毁及临时目录删除。"
+  }
+]

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>代码评审报告 — qt-video-workbench</title>
+  <style>
+    :root {
+      --color-p0: #dc2626;
+      --color-p0-bg: #fef2f2;
+      --color-p0-border: #fca5a5;
+      --color-p1: #d97706;
+      --color-p1-bg: #fffbeb;
+      --color-p1-border: #fcd34d;
+      --color-p2: #2563eb;
+      --color-p2-bg: #eff6ff;
+      --color-p2-border: #93c5fd;
+      --color-bg: #f8fafc;
+      --color-card: #ffffff;
+      --color-border: #e2e8f0;
+      --color-text: #1e293b;
+      --color-text-secondary: #64748b;
+      --color-code-bg: #f1f5f9;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      padding: 24px;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    /* --- Header --- */
+    .report-header {
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 28px 32px;
+      margin-bottom: 20px;
+    }
+
+    .report-header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--color-text-secondary);
+    }
+
+    .meta-item .label { font-weight: 600; color: var(--color-text); }
+
+    /* --- P0 Alert Banner --- */
+    .p0-alert {
+      background: var(--color-p0-bg);
+      border: 1px solid var(--color-p0-border);
+      border-left: 4px solid var(--color-p0);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .p0-alert-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--color-p0);
+      margin-bottom: 8px;
+    }
+
+    .p0-alert-list {
+      list-style: none;
+      font-size: 14px;
+    }
+
+    .p0-alert-list li {
+      padding: 2px 0;
+      color: var(--color-text);
+    }
+
+    /* --- Summary Bar --- */
+    .summary-bar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .summary-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+    }
+
+    .summary-chip .count {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .summary-chip.p0 { border-color: var(--color-p0); color: var(--color-p0); }
+    .summary-chip.p1 { border-color: var(--color-p1); color: var(--color-p1); }
+    .summary-chip.p2 { border-color: var(--color-p2); color: var(--color-p2); }
+    .summary-chip.total { border-color: var(--color-text); color: var(--color-text); }
+
+    /* --- Defect Cards --- */
+    .defect-list { display: flex; flex-direction: column; gap: 16px; }
+
+    .defect-card {
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .defect-card.severity-P0 { border-left: 4px solid var(--color-p0); }
+    .defect-card.severity-P1 { border-left: 4px solid var(--color-p1); }
+    .defect-card.severity-P2 { border-left: 4px solid var(--color-p2); }
+
+    .defect-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--color-border);
+      flex-wrap: wrap;
+    }
+
+    .severity-badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .severity-badge.P0 { background: var(--color-p0); }
+    .severity-badge.P1 { background: var(--color-p1); }
+    .severity-badge.P2 { background: var(--color-p2); }
+
+    .category-badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      background: var(--color-code-bg);
+      color: var(--color-text-secondary);
+    }
+
+    .defect-title {
+      font-size: 15px;
+      font-weight: 600;
+      flex: 1;
+    }
+
+    .confidence-tag {
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+    }
+
+    .defect-body { padding: 20px; }
+
+    .defect-location {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      margin-bottom: 12px;
+      font-family: "SF Mono", "Fira Code", "Cascadia Code", monospace;
+    }
+
+    .defect-section { margin-bottom: 16px; }
+    .defect-section:last-child { margin-bottom: 0; }
+
+    .defect-section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .defect-section p {
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .code-block {
+      background: var(--color-code-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      padding: 12px 16px;
+      font-family: "SF Mono", "Fira Code", "Cascadia Code", monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    /* --- Empty State --- */
+    .empty-state {
+      text-align: center;
+      padding: 64px 32px;
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+    }
+
+    .empty-state h2 {
+      font-size: 18px;
+      color: #16a34a;
+      margin-bottom: 8px;
+    }
+
+    .empty-state p {
+      font-size: 14px;
+      color: var(--color-text-secondary);
+    }
+
+    /* --- Footer --- */
+    .report-footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+      color: var(--color-text-secondary);
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 640px) {
+      body { padding: 12px; }
+      .report-header { padding: 20px; }
+      .defect-header { padding: 12px 16px; }
+      .defect-body { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ====== Header ====== -->
+    <div class="report-header">
+      <h1>代码评审报告</h1>
+      <div class="meta-grid">
+        <div class="meta-item">
+          <span class="label">仓库：</span>
+          <span>qt-video-workbench</span>
+        </div>
+        <div class="meta-item">
+          <span class="label">检测模式：</span>
+          <span>通用检测</span>
+        </div>
+        <div class="meta-item">
+          <span class="label">检测范围：</span>
+          <span>HEAD tracked diff + explicitly scoped untracked full files, base 8fae1e8</span>
+        </div>
+        <div class="meta-item">
+          <span class="label">生成时间：</span>
+          <span>2026-10-02 23:51</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== P0 Alert (hidden when no P0) ====== -->
+    <div class="p0-alert">
+      <div class="p0-alert-title">高优先级告警 — 发现 P0 级别缺陷，建议立即处理</div>
+      <ul class="p0-alert-list">
+        
+      </ul>
+    </div>
+
+    <!-- ====== Summary ====== -->
+    <div class="summary-bar">
+      <div class="summary-chip p0"><span class="count">0</span> P0</div>
+      <div class="summary-chip p1"><span class="count">3</span> P1</div>
+      <div class="summary-chip p2"><span class="count">0</span> P2</div>
+      <div class="summary-chip total"><span class="count">3</span> 合计</div>
+    </div>
+
+    <!-- ====== Defect List ====== -->
+    <div class="defect-list">
+      
+    <div class="defect-card severity-P1">
+      <div class="defect-header">
+        <span class="severity-badge P1">P1</span>
+        <span class="category-badge">健壮性问题</span>
+        <span class="defect-title">任务记录路径允许 FIFO，恢复与事件追加会阻塞界面</span>
+        <span class="confidence-tag">置信度 10/10</span>
+      </div>
+      <div class="defect-body">
+        <div class="defect-location">app/agent/AgentTaskStore.cpp:14-22</div>
+        <div class="defect-section">
+          <div class="defect-section-title">问题描述</div>
+          <p>path 仅拒绝符号链接，随后 resolvePath(...,false) 不要求终点为普通文件。打开既有工程时，若 .workbench/agent/current.json 是无 writer 的 FIFO，restore→load→QFile::open(ReadOnly) 在 UI 线程阻塞；若 events.jsonl 是无 reader 的 FIFO，generate/approve→record→append→QFile::open(WriteOnly|Append) 同样阻塞。可复现输入是对这些固定记录路径运行 mkfifo，然后打开工程或生成目标。</p>
+        </div>
+        <div class="defect-section">
+          <div class="defect-section-title">修复建议</div>
+          <p>对已存在的所有任务终点（current、events、previous、lock）要求 isFile，并要求已存在的父路径为目录；保留 symlink 拒绝与边界检查，在 QFile/QLockFile 打开前失败返回。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="defect-card severity-P1">
+      <div class="defect-header">
+        <span class="severity-badge P1">P1</span>
+        <span class="category-badge">健壮性问题</span>
+        <span class="defect-title">Codex 子进程未继承配置后的工具 PATH，Finder 下的脚本入口无法启动</span>
+        <span class="confidence-tag">置信度 9/10</span>
+      </div>
+      <div class="defect-body">
+        <div class="defect-location">app/main.cpp:85-85</div>
+        <div class="defect-section">
+          <div class="defect-section-title">问题描述</div>
+          <p>明确复现路径：以父 PATH=/usr/bin:/bin 启动应用，在 tools.codex 指定一个有效的 Codex JavaScript launcher（首行为 #!/usr/bin/env node），Node 位于 /opt/homebrew/bin 或 tools.node 指定的自定义目录。AppConfig.cpp:110 构造包含这些目录的 processEnvironment，并在118成功解析 codex；此处及230却仅 setProgram。ModelClient.cpp:224–231 创建 QProcess 后未设置环境，因此 launcher 继承原始精简 PATH，/usr/bin/env 找不到 node，真实方案生成失败。USER_GUIDE.md:16、20、76 明确支持这些 tools 配置及 Finder 启动，现有 RuntimePathsTest:22–29 只核对路径解析，不能覆盖该执行路径。</p>
+        </div>
+        <div class="defect-section">
+          <div class="defect-section-title">修复建议</div>
+          <p>为 ModelClient 增加进程环境配置接口，将 AppConfig.processEnvironment 在首次启动和 main.cpp:230 切换配置时传入，并在创建 QProcess 后调用 setProcessEnvironment；覆盖精简父 PATH 和需要 /usr/bin/env node 的 Codex 入口。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="defect-card severity-P1">
+      <div class="defect-header">
+        <span class="severity-badge P1">P1</span>
+        <span class="category-badge">逻辑错误</span>
+        <span class="defect-title">把 Hypit 合法文本布局的运行时 DOM 变化判为版本不匹配，永久禁用预览控制</span>
+        <span class="confidence-tag">置信度 9/10</span>
+      </div>
+      <div class="defect-body">
+        <div class="defect-location">app/ui/StudioTransport.cpp:49-59</div>
+        <div class="defect-section">
+          <div class="defect-section-title">问题描述</div>
+          <p>明确复现路径：通过“更多→打开 Run”打开固定 Hypit 支持的含 text-flow、overflow=shrink 的合法工程，字体加载与布局正常完成。未执行脚本的 DOMParser 基线没有 data-hypit-text-shrink-scale；固定上游 packages/hyperframes/src/text.ts:1117/1134 无论是否实际缩小均会为已加载 DOM 新增该属性，1076–1085 还会合法调整 position/left/top/width/height；line sequences 在1162新增 data-hypit-text-physical-line。这些变化先被49/54的所有 data-* 完全相等检查拒绝，若只过滤属性仍可能被57–59的样式比较拒绝。于是 probe 永久返回 confirmed=false，poll:122 设置 m_ready=false，MainWindow.cpp:113–115 持续禁用 Qt 播放、上一/下一帧与定位，即使源指纹、srcdoc、画面和媒体均正确。合法输入可直接参照固定上游 packages/hyperframes/test/document.test.ts:117–219。</p>
+        </div>
+        <div class="defect-section">
+          <div class="defect-section-title">修复建议</div>
+          <p>根据固定 Hypit 的 text runtime 契约区分 authored 属性与运行时布局属性/样式：对 shrink-scale、physical-line 及 text-flow shrink 的 position/left/top/width/height 做精确的运行时处理，同时保留源码、静态文本/素材/其他属性的版本校验；不要笼统忽略所有 data 属性或样式。</p>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <!-- ====== Empty State (shown when no defects) ====== -->
+    <!-- __EMPTY_STATE_START__
+    <div class="empty-state">
+      <h2>未发现缺陷</h2>
+      <p>本次评审未发现 P0-P2 级别的缺陷。共检查 56 个文件，约 5414 行变更。</p>
+    </div>
+    __EMPTY_STATE_END__ -->
+
+    <div class="report-footer">
+      bits-code-guard &middot; 由 AI 辅助生成 &middot; 2026-10-02 23:51
+    </div>
+
+  </div>
+</body>
+</html>
+
+<!--
+╔══════════════════════════════════════════════════════════════╗
+║                        占位符说明                           ║
+╠══════════════════════════════════════════════════════════════╣
+║                                                              ║
+║  --- 报告元信息 ---                                          ║
+║  qt-video-workbench           仓库名称                            ║
+║  通用检测         检测模式                            ║
+║  HEAD tracked diff + explicitly scoped untracked full files, base 8fae1e8          检测范围描述                         ║
+║  2026-10-02 23:51        报告生成时间 (YYYY-MM-DD HH:mm)     ║
+║                                                              ║
+║  --- 统计数据 ---                                            ║
+║  0            P0 缺陷数量                         ║
+║  3            P1 缺陷数量                         ║
+║  0            P2 缺陷数量                         ║
+║  3         缺陷总数                            ║
+║                                                              ║
+║  --- P0 告警 ---                                             ║
+║  none    有 P0 时为 "block"，无 P0 时为      ║
+║                          "none"                              ║
+║        P0 缺陷摘要列表，每项格式：         ║
+║    <li>[P0][类型] file:line | {title}</li>                   ║
+║                                                              ║
+║  --- 缺陷卡片 ---                                            ║
+║  
+    <div class="defect-card severity-P1">
+      <div class="defect-header">
+        <span class="severity-badge P1">P1</span>
+        <span class="category-badge">健壮性问题</span>
+        <span class="defect-title">任务记录路径允许 FIFO，恢复与事件追加会阻塞界面</span>
+        <span class="confidence-tag">置信度 10/10</span>
+      </div>
+      <div class="defect-body">
+        <div class="defect-location">app/agent/AgentTaskStore.cpp:14-22</div>
+        <div class="defect-section">
+          <div class="defect-section-title">问题描述</div>
+          <p>path 仅拒绝符号链接，随后 resolvePath(...,false) 不要求终点为普通文件。打开既有工程时，若 .workbench/agent/current.json 是无 writer 的 FIFO，restore→load→QFile::open(ReadOnly) 在 UI 线程阻塞；若 events.jsonl 是无 reader 的 FIFO，generate/approve→record→append→QFile::open(WriteOnly|Append) 同样阻塞。可复现输入是对这些固定记录路径运行 mkfifo，然后打开工程或生成目标。</p>
+        </div>
+        <div class="defect-section">
+          <div class="defect-section-title">修复建议</div>
+          <p>对已存在的所有任务终点（current、events、previous、lock）要求 isFile，并要求已存在的父路径为目录；保留 symlink 拒绝与边界检查，在 QFile/QLockFile 打开前失败返回。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="defect-card severity-P1">
+      <div class="defect-header">
+        <span class="severity-badge P1">P1</span>
+        <span class="category-badge">健壮性问题</span>
+        <span class="defect-title">Codex 子进程未继承配置后的工具 PATH，Finder 下的脚本入口无法启动</span>
+        <span class="confidence-tag">置信度 9/10</span>
+      </div>
+      <div class="defect-body">
+        <div class="defect-location">app/main.cpp:85-85</div>
+        <div class="defect-section">
+          <div class="defect-section-title">问题描述</div>
+          <p>明确复现路径：以父 PATH=/usr/bin:/bin 启动应用，在 tools.codex 指定一个有效的 Codex JavaScript launcher（首行为 #!/usr/bin/env node），Node 位于 /opt/homebrew/bin 或 tools.node 指定的自定义目录。AppConfig.cpp:110 构造包含这些目录的 processEnvironment，并在118成功解析 codex；此处及230却仅 setProgram。ModelClient.cpp:224–231 创建 QProcess 后未设置环境，因此 launcher 继承原始精简 PATH，/usr/bin/env 找不到 node，真实方案生成失败。USER_GUIDE.md:16、20、76 明确支持这些 tools 配置及 Finder 启动，现有 RuntimePathsTest:22–29 只核对路径解析，不能覆盖该执行路径。</p>
+        </div>
+        <div class="defect-section">
+          <div class="defect-section-title">修复建议</div>
+          <p>为 ModelClient 增加进程环境配置接口，将 AppConfig.processEnvironment 在首次启动和 main.cpp:230 切换配置时传入，并在创建 QProcess 后调用 setProcessEnvironment；覆盖精简父 PATH 和需要 /usr/bin/env node 的 Codex 入口。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="defect-card severity-P1">
+      <div class="defect-header">
+        <span class="severity-badge P1">P1</span>
+        <span class="category-badge">逻辑错误</span>
+        <span class="defect-title">把 Hypit 合法文本布局的运行时 DOM 变化判为版本不匹配，永久禁用预览控制</span>
+        <span class="confidence-tag">置信度 9/10</span>
+      </div>
+      <div class="defect-body">
+        <div class="defect-location">app/ui/StudioTransport.cpp:49-59</div>
+        <div class="defect-section">
+          <div class="defect-section-title">问题描述</div>
+          <p>明确复现路径：通过“更多→打开 Run”打开固定 Hypit 支持的含 text-flow、overflow=shrink 的合法工程，字体加载与布局正常完成。未执行脚本的 DOMParser 基线没有 data-hypit-text-shrink-scale；固定上游 packages/hyperframes/src/text.ts:1117/1134 无论是否实际缩小均会为已加载 DOM 新增该属性，1076–1085 还会合法调整 position/left/top/width/height；line sequences 在1162新增 data-hypit-text-physical-line。这些变化先被49/54的所有 data-* 完全相等检查拒绝，若只过滤属性仍可能被57–59的样式比较拒绝。于是 probe 永久返回 confirmed=false，poll:122 设置 m_ready=false，MainWindow.cpp:113–115 持续禁用 Qt 播放、上一/下一帧与定位，即使源指纹、srcdoc、画面和媒体均正确。合法输入可直接参照固定上游 packages/hyperframes/test/document.test.ts:117–219。</p>
+        </div>
+        <div class="defect-section">
+          <div class="defect-section-title">修复建议</div>
+          <p>根据固定 Hypit 的 text runtime 契约区分 authored 属性与运行时布局属性/样式：对 shrink-scale、physical-line 及 text-flow shrink 的 position/left/top/width/height 做精确的运行时处理，同时保留源码、静态文本/素材/其他属性的版本校验；不要笼统忽略所有 data 属性或样式。</p>
+        </div>
+      </div>
+    </div>        所有缺陷卡片的 HTML，单张卡片格式：  ║
+║                                                              ║
+║    <div class="defect-card severity-{severity}">             ║
+║      <div class="defect-header">                             ║
+║        <span class="severity-badge {severity}">              ║
+║          {severity}</span>                                   ║
+║        <span class="category-badge">                         ║
+║          {category_zh}</span>                                ║
+║        <span class="defect-title">                           ║
+║          {title}</span>                                       ║
+║        <span class="confidence-tag">                         ║
+║          置信度 {confidence}/10</span>                       ║
+║      </div>                                                  ║
+║      <div class="defect-body">                               ║
+║        <div class="defect-location">                         ║
+║          {file}:{start_line}-{end_line}</div>                ║
+║        <div class="defect-section">                          ║
+║          <div class="defect-section-title">                  ║
+║            问题描述</div>                                    ║
+║          <p>{rationale}</p>                                  ║
+║        </div>                                                ║
+║        <div class="defect-section">                          ║
+║          <div class="defect-section-title">                  ║
+║            问题代码</div>                                    ║
+║          <div class="code-block">                            ║
+║            {代码片段}</div>                                  ║
+║        </div>                                                ║
+║        <div class="defect-section">                          ║
+║          <div class="defect-section-title">                  ║
+║            修复建议</div>                                    ║
+║          <p>{suggestion}</p>                                 ║
+║        </div>                                                ║
+║      </div>                                                  ║
+║    </div>                                                    ║
+║                                                              ║
+║  --- 空状态 ---                                              ║
+║  无缺陷时：取消注释 __EMPTY_STATE_START__ 到                 ║
+║  __EMPTY_STATE_END__ 之间的内容，并删除 defect-list 区块      ║
+║  56          检查的文件数                         ║
+║  5414          变更行数                            ║
+║                                                              ║
+║  --- category 中英文映射 ---                                  ║
+║  LOGIC       → 逻辑错误                                     ║
+║  BUSINESS_SEMANTICS → 业务语义问题                           ║
+║  SECURITY    → 安全漏洞                                      ║
+║  CONCURRENCY → 并发问题                                      ║
+║  ROBUSTNESS  → 健壮性问题                                    ║
+║  PERFORMANCE → 性能问题                                      ║
+║  QUALITY     → 代码质量问题                                  ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+-->

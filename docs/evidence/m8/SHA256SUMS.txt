@@ -1,0 +1,1 @@
+4ce9eb94d22efdc4065e61be01013cf46779c6ffede01914550d6a29621ff8a4  FrameLab-1.2.0-macOS-arm64.zip

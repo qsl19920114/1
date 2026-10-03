@@ -45,6 +45,8 @@ add_library(qvw_ui STATIC
   ui/InspectorControls.cpp
   ui/StudioTransport.cpp
   ui/MediaPlayerDialog.cpp
+  ui/AgentPanel.cpp
+  ui/PlanReviewPanel.cpp
 )
 target_include_directories(qvw_ui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(qvw_ui PUBLIC qvw_domain Qt6::Widgets Qt6::WebEngineWidgets)
@@ -53,8 +55,12 @@ add_library(qvw_controllers STATIC controllers/ProjectController.cpp controllers
 target_include_directories(qvw_controllers PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(qvw_controllers PUBLIC qvw_backend qvw_infra qvw_services)
 
+add_library(qvw_agent STATIC agent/PlanService.cpp agent/ContextBuilder.cpp agent/StoryTemplate.cpp agent/ModelClient.cpp agent/AgentTaskStore.cpp agent/AgentController.cpp agent/ToolDispatcher.cpp)
+target_include_directories(qvw_agent PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(qvw_agent PUBLIC qvw_controllers Qt6::Gui)
+
 qt_add_executable(qt_video_workbench main.cpp)
-target_link_libraries(qt_video_workbench PRIVATE qvw_ui qvw_controllers)
+target_link_libraries(qt_video_workbench PRIVATE qvw_ui qvw_agent)
 target_compile_definitions(qt_video_workbench PRIVATE QVW_APP_VERSION="${PROJECT_VERSION}")
 
 set_target_properties(qt_video_workbench PROPERTIES

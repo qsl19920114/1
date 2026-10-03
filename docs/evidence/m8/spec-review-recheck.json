@@ -1,0 +1,117 @@
+{
+  "initialFindings": [
+    {
+      "title": "任务路径允许工程内符号链接，事件追加会写坏源码",
+      "file": "app/agent/AgentTaskStore.cpp",
+      "start_line": 10,
+      "end_line": 14,
+      "severity": "P1",
+      "category": "SECURITY",
+      "confidence": 10,
+      "rationale": "path仅复用ProjectStore::resolvePath的根目录包含检查，该检查允许指向工程内部的符号链接。将.workbench/agent/events.jsonl链接至同工程main.svml后，append返回true且源码发生实际变化。违反T041禁止符号链接，并把任务日志写入真实工程输入。",
+      "suggestion": "逐段拒绝.workbench、agent和current.json/events.jsonl/events.previous.jsonl/task.lock的符号链接；对内部链接也拒绝并保持工程源文件不变。",
+      "status": "closed-after-recheck"
+    },
+    {
+      "title": "过期任务恢复覆盖保存基线，第二次恢复会允许旧剩余操作",
+      "file": "app/agent/AgentController.cpp",
+      "start_line": 132,
+      "end_line": 143,
+      "severity": "P1",
+      "category": "BUSINESS_SEMANTICS",
+      "confidence": 10,
+      "rationale": "初始实现未把saved执行基线赋给m_executionBase。新Controller在指纹不匹配时publish(stale)调用persist，persist对空执行基线使用currentBase并覆盖current.json。实测第一轮stale且不可批准，保存基线已变当前，第二次restore变review且可批准。旧记录因此不再保留版本不匹配事实。",
+      "suggestion": "版本不匹配时保留保存的基线和剩余操作，仅展示stale；不得替换为当前工程基线。增加连续两次restore仍不可批准的回归。",
+      "status": "closed-after-recheck"
+    },
+    {
+      "title": "恢复遗漏持久化作用范围，局部任务被显示为整个工程",
+      "file": "app/agent/AgentController.cpp",
+      "start_line": 132,
+      "end_line": 145,
+      "severity": "P1",
+      "category": "BUSINESS_SEMANTICS",
+      "confidence": 10,
+      "rationale": "初始restore读取目标和操作但忽略state.scope与saved.scope，然后用currentBase构造待重新批准方案。新进程m_scope为空。实测持久化ending范围的合法任务恢复后status.scope及plan.base.scope均为空，Qt会显示整个工程，修订模型上下文也不再有原范围约束。",
+      "suggestion": "读取、核对并恢复持久化scope，在新审批及修订上下文继续验证范围；不要用新进程默认空scope替换原任务范围。",
+      "status": "closed-after-recheck"
+    },
+    {
+      "title": "编译Snapshot被直接显示为可视预览已确认的版本",
+      "file": "app/ui/AgentPanel.cpp",
+      "start_line": 107,
+      "end_line": 118,
+      "severity": "P1",
+      "category": "BUSINESS_SEMANTICS",
+      "confidence": 9,
+      "rationale": "updateVersions仅因snapshot.isLoaded就显示预览确认vN。该类没有预览已显示的revision/fingerprint输入；MainWindow::showSnapshot在Editor读回时立即更新标签，而loadFinished、StudioTransport的真实composition就绪检查以及失败状态均不更新此标签。因此浏览器未就绪或仍是旧内容时也显示最新预览已确认，无法表达工程和预览版本差异。",
+      "suggestion": "将现有事实准确标为编译快照；独立记录可视预览的已确认revision/fingerprint，未获取时明确待确认，页面失败撤销确认。",
+      "status": "closed-after-recheck"
+    },
+    {
+      "title": "损坏任务记录恢复静默返回，用户无法获知失败原因",
+      "file": "app/agent/AgentController.cpp",
+      "start_line": 132,
+      "end_line": 134,
+      "severity": "P2",
+      "category": "ROBUSTNESS",
+      "confidence": 10,
+      "rationale": "初始restore在AgentTaskStore::load失败时直接return，丢弃损坏JSON/超限/不支持版本等具体错误。独立探针将current.json写成非法JSON后，状态仍idle且failed信号为0，违反T041损坏记录明确提示的要求。",
+      "suggestion": "对已存在但损坏或不支持的记录显示失败原因并撤销执行能力；区分没有历史任务与损坏历史任务。",
+      "status": "closed-after-recheck"
+    }
+  ],
+  "newScopeIssue": "closed-after-independent-ui-controller-probe",
+  "diagnosticPersistence": "closed-after-independent-targeted-controller-test",
+  "actualVisiblePreview": "closed-after-native-studio-startup-and-webengine-negative-tests",
+  "openImplementationFindings": [],
+  "remainingGates": [],
+  "separateDeliveryGate": "quality, package-native and relocation evidence verified PASS; commit/push handled by root",
+  "sourceSpecVerdict": "PASS",
+  "closedAdditionalIssues": [
+    "restored-next-request-scope-ui",
+    "actual-qt-selection-distinct-from-scope",
+    "task-scope-preserved-through-navigation-and-retry",
+    "non-clip-selection-clears-context",
+    "new-creation-root-before-compilation",
+    "failure-diagnostics-survive-restore"
+  ],
+  "completeCTest": {
+    "passed": 31,
+    "failed": 0,
+    "seconds": 166.84,
+    "afterThreeQualityFixes": true
+  },
+  "latestRealE2E": {
+    "passed": 3,
+    "failed": 0,
+    "milliseconds": 69860,
+    "modelRequests": 2,
+    "beforeThreeQualityFixes": true
+  },
+  "sourceManifest": "spec-review-sources-final.json",
+  "priorCompleteCTest": {
+    "passed": 31,
+    "failed": 0,
+    "seconds": 174.37,
+    "evidence": "ctest-before-quality-fixes.log"
+  },
+  "qualityFixes": {
+    "taskStoreSpecialEndpoints": "closed; all11/independent7 recorded PASS",
+    "modelEnvironment": "closed; all23/independent3 recorded PASS",
+    "previewTextRuntime": "closed; all33/independent19 recorded PASS",
+    "verificationMethod": "limited source read and existing implementer/independent quality logs; no new runs"
+  },
+  "qualityVerdict": "PASS",
+  "packagedNativeVerdict": "PASS",
+  "relocation": {
+    "verdict": "PASS",
+    "cases": 9,
+    "otherMachineVerified": false
+  },
+  "followupMethod": "Read-only source and existing evidence review; no new tests/Build/model requests.",
+  "deliveryEvidenceVerdict": "PASS",
+  "packagedAgentFingerprintMatchesE2E": true,
+  "packagedAgentFingerprint": "0933ec9ff70e0e156e7de4566d4a15a54177992a4107d1f8d87c09b562b2f6ad",
+  "packagedVideoFingerprint": "bfd9fda5d876f4059e188e8efaeee838a03349898b97607995379b709628687d"
+}

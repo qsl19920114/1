@@ -1,0 +1,8 @@
+********* Start testing of StoryTemplateTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : StoryTemplateTest::initTestCase()
+FAIL!  : StoryTemplateTest::sceneOrderAndDurationAreAuthoredBeforeStudio() 'qvw::agent::StoryTemplate::prepare(QStringLiteral(QVW_SOURCE_DIR)+"/templates/story-reel",scenes,temp.filePath("trusted"),&error)' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StoryTemplateTest.cpp(12)]
+PASS   : StoryTemplateTest::cleanupTestCase()
+Totals: 2 passed, 1 failed, 0 skipped, 0 blacklisted, 3ms
+********* Finished testing of StoryTemplateTest *********

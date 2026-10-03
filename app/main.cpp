@@ -5,6 +5,8 @@
 #include "controllers/ExportController.h"
 #include "controllers/ProposalController.h"
 #include "controllers/SampleCreationController.h"
+#include "agent/AgentController.h"
+#include "ui/AgentPanel.h"
 #include "services/SampleCatalog.h"
 #include "infrastructure/AppConfig.h"
 #include "infrastructure/LogWriter.h"
@@ -79,12 +81,35 @@ int main(int argc, char **argv) {
     document.setMediaTools(loaded.config.ffprobePath,loaded.config.ffmpegPath,loaded.config.processEnvironment);
     qvw::controllers::ProposalController proposals(editor);
     qvw::controllers::ExportController exporter(loaded.config,log);
+    qvw::agent::ModelClient model;
+    model.setProgram(loaded.config.codexPath.isEmpty()?QStringLiteral("codex"):loaded.config.codexPath);
+    model.setEnvironment(loaded.config.processEnvironment);
+    qvw::agent::AgentController agent(document,editor,exporter,model,qvw::infra::RuntimePaths::templateDirectory());
     qvw::ui::MainWindow window;
+    QObject::connect(window.agentPanel(),&qvw::ui::AgentPanel::imagesRequested,&agent,&qvw::agent::AgentController::setImages);
+    QObject::connect(window.agentPanel(),&qvw::ui::AgentPanel::generateRequested,&agent,&qvw::agent::AgentController::generate);
+    QObject::connect(window.agentPanel(),&qvw::ui::AgentPanel::scopeChanged,&agent,&qvw::agent::AgentController::setScope);
+    QObject::connect(window.agentPanel(),&qvw::ui::AgentPanel::selectionChanged,&agent,&qvw::agent::AgentController::setSelection);
+    QObject::connect(window.agentPanel(),&qvw::ui::AgentPanel::approveRequested,&agent,[&](const QJsonObject &edited,const QString &destination){
+        agent.updatePlan(edited);
+        if(agent.plan()&&agent.plan()->content==edited&&agent.status().canApprove)agent.approve(destination);
+    });
+    QObject::connect(window.agentPanel(),&qvw::ui::AgentPanel::stopRequested,&agent,&qvw::agent::AgentController::stop);
+    QObject::connect(window.agentPanel(),&qvw::ui::AgentPanel::retryRequested,&agent,&qvw::agent::AgentController::retry);
+    QObject::connect(window.agentPanel(),&qvw::ui::AgentPanel::repairRequested,&agent,&qvw::agent::AgentController::repair);
+    QObject::connect(window.agentPanel(),&qvw::ui::AgentPanel::undoRequested,&agent,&qvw::agent::AgentController::undoLast);
+    QObject::connect(window.agentPanel(),&qvw::ui::AgentPanel::restoreRequested,&agent,&qvw::agent::AgentController::restore);
+    QObject::connect(&agent,&qvw::agent::AgentController::statusChanged,&window,&qvw::ui::MainWindow::showAgentStatus);
+    QObject::connect(&agent,&qvw::agent::AgentController::planReady,&window,&qvw::ui::MainWindow::showAgentPlan);
+    QObject::connect(&agent,&qvw::agent::AgentController::assetsChanged,window.agentPanel(),&qvw::ui::AgentPanel::showAssets);
+    QObject::connect(&agent,&qvw::agent::AgentController::failed,&window,[&](const QString &text){window.appendLog("Agent 未完成："+text);log.error(text);});
+    QObject::connect(&agent,&qvw::agent::AgentController::message,&window,&qvw::ui::MainWindow::appendLog);
     window.setSamples(qvw::services::SampleCatalog::discover(loaded.config.distributionPath));
     window.appendLog(QStringLiteral("日志：%1").arg(log.filePath()));
     if (!log.isReady()) window.appendLog(QStringLiteral("日志不可写：%1").arg(log.lastError()));
     bool finished = false, gotSnapshot = false, pageLoaded = false, jsPending = false, cleanupStopped = true;
     bool compiledReady=false,imagesReady=false,mediaReady=false,previewVideosReady=false,verificationSucceeded=false; qint64 ownedPid=0;QUrl studioUrl;qvw::domain::Snapshot lastSnapshot;
+    qvw::domain::PreviewVersion verifiedPreview;
     QString verificationError;
     QTimer poll, deadline;
     poll.setInterval(500); deadline.setSingleShot(true); deadline.setInterval(60000);
@@ -116,7 +141,7 @@ int main(int argc, char **argv) {
         editor.attach(url,controller.workspace());
     });
     QObject::connect(&controller, &qvw::controllers::ProjectController::projectClosed, &editor, &qvw::controllers::EditorController::clear);
-    QObject::connect(&editor, &qvw::controllers::EditorController::snapshotReady, &window, &qvw::ui::MainWindow::showSnapshot);
+    QObject::connect(&editor, &qvw::controllers::EditorController::snapshotReady, &window, [&](const qvw::domain::Snapshot &snapshot){lastSnapshot=snapshot;window.showSnapshot(snapshot);});
     QObject::connect(&editor, &qvw::controllers::EditorController::stateChanged, &window, &qvw::ui::MainWindow::setEditorState);
     QObject::connect(&window,&qvw::ui::MainWindow::demoProposalRequested,&proposals,&qvw::controllers::ProposalController::generateDemo);
     QObject::connect(&window,&qvw::ui::MainWindow::importProposalRequested,&proposals,&qvw::controllers::ProposalController::importJson);
@@ -131,7 +156,7 @@ int main(int argc, char **argv) {
     QObject::connect(&window, &qvw::ui::MainWindow::redoRequested, &editor, &qvw::controllers::EditorController::redo);
     QObject::connect(&window, &qvw::ui::MainWindow::exportRequested, &exporter, [&](const QString &path){
         if(editor.isBusy()||document.importingVideo()){window.appendLog(QStringLiteral("请等待编辑或素材导入完成后导出。"));return;}
-        exporter.startExport(editor.snapshot(),path);
+        agent.startExport(path);
     });
     QObject::connect(&window, &qvw::ui::MainWindow::cancelExportRequested, &exporter, &qvw::controllers::ExportController::cancelBuild);
     QObject::connect(&window, &qvw::ui::MainWindow::stopExportObservationRequested, &exporter, &qvw::controllers::ExportController::stopObserving);
@@ -144,6 +169,7 @@ int main(int argc, char **argv) {
     QObject::connect(&editor, &qvw::controllers::EditorController::message, &window, [&](const QString &text){window.appendLog(text);log.info(text);});
     QObject::connect(&editor, &qvw::controllers::EditorController::failed, &window, [&](const QString &text){window.appendLog(QStringLiteral("编辑未完成：%1").arg(text));log.error(text);});
     QObject::connect(&controller, &qvw::controllers::ProjectController::failed, &window, [&](const QString &error) {
+        agent.backendFailed(error);
         window.showError(error); qCritical().noquote() << error;
         verificationError=error;if (verification) finish(6);
     });
@@ -202,7 +228,7 @@ int main(int argc, char **argv) {
             return;
         }
         const auto config = qvw::infra::loadAppConfig(path);
-        if (!config.ok()) window.showError(config.error); else {creation.cancel();document.close();document.setMediaTools(config.config.ffprobePath,config.config.ffmpegPath,config.config.processEnvironment);window.setSamples(qvw::services::SampleCatalog::discover(config.config.distributionPath));exporter.setConfig(config.config);controller.configure(config.config);}
+        if (!config.ok()) window.showError(config.error); else {creation.cancel();document.close();document.setMediaTools(config.config.ffprobePath,config.config.ffmpegPath,config.config.processEnvironment);model.setProgram(config.config.codexPath.isEmpty()?QStringLiteral("codex"):config.config.codexPath);model.setEnvironment(config.config.processEnvironment);window.setSamples(qvw::services::SampleCatalog::discover(config.config.distributionPath));exporter.setConfig(config.config);controller.configure(config.config);}
     });
     QObject::connect(&window, &qvw::ui::MainWindow::previewLoaded, &app, [&](bool ok) {
         if(finished)return;
@@ -212,7 +238,7 @@ int main(int argc, char **argv) {
     QObject::connect(&app, &QCoreApplication::aboutToQuit, &controller, [&] {
         finished = true; poll.stop(); deadline.stop();
         ownedPid = controller.studioPid();
-        document.cancelVideoImport();creation.cancel();controller.closeProject();
+        agent.stop();document.cancelVideoImport();creation.cancel();controller.closeProject();
         cleanupStopped = !controller.isRunning();
         qInfo() << "CLEANUP ownedPid=" << ownedPid << "running=" << controller.isRunning();
     });
@@ -234,9 +260,18 @@ int main(int argc, char **argv) {
                 if (!guard || finished) return;
                 jsPending = false;
                 const auto result=ready.toMap();compiledReady=result.value("composition").toBool();imagesReady=result.value("images").toBool();mediaReady=result.value("media").toBool();previewVideosReady=result.value("videos").toBool();
-                if (finished || !compiledReady || !mediaReady) return;
+                const auto preview=window.previewVersion();
+                const bool currentPreview=preview.isConfirmed()&&preview.revision==lastSnapshot.revision&&preview.sourceFingerprint==lastSnapshot.sourceFingerprint;
+                if (finished || !compiledReady || !mediaReady || (verify&&!currentPreview)) return;
                 qInfo() << "PREVIEW compiled composition present=true";
-                poll.stop(); QTimer::singleShot(750, &app, [&] { if (!finished) {if(verify){verificationSucceeded=true;finish(0);}else capture();} });
+                poll.stop(); QTimer::singleShot(750, &app, [&] {
+                    if(finished)return;
+                    if(verify){
+                        const auto current=window.previewVersion();
+                        if(!current.isConfirmed()||current.revision!=lastSnapshot.revision||current.sourceFingerprint!=lastSnapshot.sourceFingerprint){poll.start();return;}
+                        verifiedPreview=current;verificationSucceeded=true;finish(0);
+                    }else capture();
+                });
             });
     });
     window.show();
@@ -272,6 +307,10 @@ int main(int argc, char **argv) {
         QJsonObject report{{"format","qvw.startup-verification@1"},{"verdict",finalCode==0?"PASS":"FAIL"},{"exitCode",finalCode},{"error",verificationError},{"qtVersion",qVersion()},{"appVersion",app.applicationVersion()},{"resourceRoot",qvw::infra::RuntimePaths::resourceRoot()},{"templateDirectory",qvw::infra::RuntimePaths::templateDirectory()},{"config",loaded.config.configFilePath},{"distribution",loaded.config.distributionPath},{"node",loaded.config.nodePath},{"ffmpeg",loaded.config.ffmpegPath},{"ffprobe",loaded.config.ffprobePath},{"project",document.project().manifestPath()},{"studioUrl",studioUrl.toString()},{"revision",lastSnapshot.revision},{"sourceFingerprint",QString::fromLatin1(lastSnapshot.sourceFingerprint.toHex())},{"snapshot",gotSnapshot},{"pageLoaded",pageLoaded},{"compiledCompositionReady",compiledReady},{"imagesReady",imagesReady},{"mediaReady",mediaReady},{"previewVideosReady",previewVideosReady},{"ownedStudioPid",ownedPid},{"cleanupStopped",cleanupStopped},{"screenshots",false}};
         report["project"]=document.hasProject()?document.project().manifestPath():QString();
         report["verificationSucceeded"]=verificationSucceeded;
+        report["previewRevision"]=verifiedPreview.revision;
+        report["previewFingerprint"]=QString::fromLatin1(verifiedPreview.sourceFingerprint.toHex());
+        report["previewMatchesSnapshot"]=verifiedPreview.isConfirmed()&&verifiedPreview.revision==lastSnapshot.revision&&verifiedPreview.sourceFingerprint==lastSnapshot.sourceFingerprint;
+        report["codexExecutable"]=loaded.config.codexPath;
         report["webEngineVersion"]=qWebEngineVersion();
         report["chromiumVersion"]=qWebEngineChromiumVersion();
         report["chromiumSecurityPatchVersion"]=qWebEngineChromiumSecurityPatchVersion();

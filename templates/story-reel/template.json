@@ -1,0 +1,1 @@
+{"format": "qt-video-workbench.template@1", "id": "story-reel", "title": "三段故事 · 竖屏图片短片", "version": "1.0.0", "source": "main.svml", "run": "main.svrun", "runtime": "hypit.runtime.json", "width": 720, "height": 1280, "fps": 30, "durationSeconds": 15, "audioRequired": false}

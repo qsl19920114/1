@@ -1,0 +1,20 @@
+{"level":"INFO","message":"正在检查 Hypit 配置：/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-4bq4r3ct/中文 空格目录/config/explicit.json","timestamp":"2026-10-03T01:42:13.072Z"}
+{"level":"INFO","message":"开始版本自检：/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-4bq4r3ct/中文 空格目录/tools/custom-node /private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-4bq4r3ct/中文 空格目录/runtime/hypit/bin/hypit.mjs version --json","timestamp":"2026-10-03T01:42:13.074Z"}
+{"argumentCount":3,"arguments":["/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-4bq4r3ct/中文 空格目录/runtime/hypit/bin/hypit.mjs","version","--json"],"exitCode":0,"level":"INFO","message":"外部命令结束","program":"/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-4bq4r3ct/中文 空格目录/tools/custom-node","timestamp":"2026-10-03T01:42:13.750Z","truncated":false}
+{"level":"INFO","message":"Hypit 0.2.10 自检通过（/Users/bytedance/Downloads/国产资产作业/hypit）","timestamp":"2026-10-03T01:42:13.757Z"}
+{"level":"INFO","message":"Hypit 0.2.10 自检通过（/Users/bytedance/Downloads/国产资产作业/hypit）","timestamp":"2026-10-03T01:42:13.766Z"}
+{"level":"INFO","message":"正在打开工程：/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-4bq4r3ct/中文 空格目录/默认 新建工程/main.svrun","timestamp":"2026-10-03T01:42:13.776Z"}
+{"level":"INFO","message":"已打开工程：/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-4bq4r3ct/中文 空格目录/默认 新建工程/workbench.qvw.json","timestamp":"2026-10-03T01:42:13.791Z"}
+{"level":"INFO","message":"Project            /private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-4bq4r3ct/中文 空格目录/默认 新建工程","timestamp":"2026-10-03T01:42:14.537Z"}
+{"level":"INFO","message":"Run                /private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-4bq4r3ct/中文 空格目录/默认 新建工程/main.svrun","timestamp":"2026-10-03T01:42:14.539Z"}
+{"level":"INFO","message":"Runtime Profile    /private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-4bq4r3ct/中文 空格目录/默认 新建工程/hypit.runtime.json","timestamp":"2026-10-03T01:42:14.551Z"}
+{"level":"INFO","message":"Runtime selection  command argument (this session only)","timestamp":"2026-10-03T01:42:14.562Z"}
+{"level":"INFO","message":"","timestamp":"2026-10-03T01:42:14.571Z"}
+{"level":"INFO","message":"➜  Local:   http://localhost:5599/","timestamp":"2026-10-03T01:42:14.872Z"}
+{"level":"INFO","message":"Studio 已就绪：http://localhost:5599/（PID 82004）","timestamp":"2026-10-03T01:42:14.901Z"}
+{"level":"INFO","message":"➜  Network: use --host to expose","timestamp":"2026-10-03T01:42:15.038Z"}
+{"level":"INFO","message":"Comments           http://localhost:5599/#comments","timestamp":"2026-10-03T01:42:15.041Z"}
+{"level":"INFO","message":"已读取真实会话：revision 1，轨道 1，可写字段 5","timestamp":"2026-10-03T01:42:15.074Z"}
+{"level":"INFO","message":"Studio process exited with code 143.","timestamp":"2026-10-03T01:42:17.009Z"}
+{"argumentCount":10,"arguments":["/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-4bq4r3ct/中文 空格目录/runtime/hypit/bin/hypit.mjs","studio","--run","/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-4bq4r3ct/中文 空格目录/默认 新建工程/main.svrun","--workspace","/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-4bq4r3ct/中文 空格目录/默认 新建工程","--runtime","/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-4bq4r3ct/中文 空格目录/默认 新建工程/hypit.runtime.json","--port","5599"],"exitCode":143,"level":"ERROR","message":"外部命令结束","program":"/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-m6-relocated-4bq4r3ct/中文 空格目录/tools/custom-node","timestamp":"2026-10-03T01:42:17.013Z","truncated":false}
+{"level":"INFO","message":"Studio 已退出，exit=143","timestamp":"2026-10-03T01:42:17.020Z"}

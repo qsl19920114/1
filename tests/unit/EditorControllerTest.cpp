@@ -70,6 +70,15 @@ public:
 class EditorControllerTest : public QObject {
     Q_OBJECT
 private slots:
+    void identicalSourceRepublishPreservesUndoButChangedSourceClearsIt() {
+        EditorHttp h;QVERIFY(h.listen());EditorController e;h.attach(e);
+        QSignalSpy ok(&e,&EditorController::operationSucceeded),state(&e,&EditorController::stateChanged),snap(&e,&EditorController::snapshotReady);
+        e.edit("clip","title","new");QTRY_COMPARE(ok.size(),1);++h.revision;
+        e.refresh();QTRY_COMPARE(snap.size(),2);QVERIFY(state.last()[2].toBool());
+        e.undo();QTRY_COMPARE(ok.size(),2);QCOMPARE(h.value,QString("old"));
+        h.source="external";++h.revision;e.refresh();QTRY_COMPARE(snap.size(),4);
+        QVERIFY(!state.last()[2].toBool());QVERIFY(!state.last()[3].toBool());
+    }
     void editUndoRedo() {
         EditorHttp h;QVERIFY(h.listen());EditorController e;h.attach(e);QSignalSpy ok(&e,&EditorController::operationSucceeded),state(&e,&EditorController::stateChanged);
         e.edit("clip","title","new");QTRY_COMPARE(ok.size(),1);QCOMPARE(h.writes,1);QCOMPARE(e.snapshot().revision,2);QVERIFY(state.last()[2].toBool());

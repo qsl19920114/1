@@ -48,6 +48,7 @@ InspectorField mapField(const QJsonObject &raw) {
 Clip mapClip(const QJsonObject &raw) {
     Clip clip;
     clip.id = raw.value(QStringLiteral("id")).toString();
+    clip.authoredId = raw.value(QStringLiteral("authoredId")).toString();
     clip.label = raw.value(QStringLiteral("label")).toString();
     if (clip.label.isEmpty()) clip.label = raw.value("display").toObject().value("title").toString();
     if (clip.label.isEmpty()) clip.label = raw.value("authoredId").toString();
@@ -128,6 +129,9 @@ MapResult mapSessionPayload(const QByteArray &payload) {
         snapshot.sourceFingerprint=QCryptographicHash::hash(QJsonDocument(texts).toJson(QJsonDocument::Compact),QCryptographicHash::Sha256);
     }
     snapshot.space = mapSpace(root.value(QStringLiteral("space")).toObject());
+    const auto preview = root.value("preview").toObject();
+    if (preview.value("kind") == "hyperframes" && preview.value("srcdoc").isString())
+        snapshot.previewSrcdoc = preview.value("srcdoc").toString();
 
     for (const QJsonValue &trackValue : root.value(QStringLiteral("tracks")).toArray()) {
         const QJsonObject rawTrack = trackValue.toObject();

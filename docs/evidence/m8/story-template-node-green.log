@@ -1,0 +1,10 @@
+✔ portrait scene fits actual canvas and leaves all text as text nodes (0.7045ms)
+✔ invalid typography and color do not compile (0.17075ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 228.844375

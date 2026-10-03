@@ -1,0 +1,2 @@
+qt.qpa.fonts: Populating font family aliases took 33 ms. Replace uses of missing font family "Sans Serif" with one that exists to avoid this cost. 
+scopeCheckbox=0 newTaskScope= newTaskPhase=thinking

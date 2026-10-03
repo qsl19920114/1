@@ -1,0 +1,11 @@
+********* Start testing of AgentControllerTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+QINFO  : AgentControllerTest::initTestCase() AgentController tests use a fake model executable and local HTTP protocol simulation; they do not claim real Codex or Hypit verification.
+PASS   : AgentControllerTest::initTestCase()
+FAIL!  : AgentControllerTest::failedStepFactsSurviveRestoreAndReachRepairModel() Compared values are not the same
+   Actual   (f.savedState()["lastResult"].toString()): ""
+   Expected (actualError)                            : "\u7B2C1\u6B65\u6267\u884C\u5931\u8D25\uFF1Aprotocol simulation: rejected and rolled back\uFF1B\u6210\u529F\u524D\u7F000\u9879\u4FDD\u7559\u3002"
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentControllerTest.cpp(17)]
+PASS   : AgentControllerTest::cleanupTestCase()
+Totals: 2 passed, 1 failed, 0 skipped, 0 blacklisted, 697ms
+********* Finished testing of AgentControllerTest *********

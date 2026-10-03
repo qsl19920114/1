@@ -1,0 +1,32 @@
+********* Start testing of AgentControllerTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+QINFO  : AgentControllerTest::initTestCase() AgentController tests use a fake model executable and local HTTP protocol simulation; they do not claim real Codex or Hypit verification.
+PASS   : AgentControllerTest::initTestCase()
+FAIL!  : AgentControllerTest::restoredScopeRequiresNewApprovalAndRejectsOtherComponent() 'f.initialize()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentControllerTest.cpp(15)]
+FAIL!  : AgentControllerTest::staleRestoreNeverRebasesSavedFingerprintAcrossRepeatedRestore() 'f.initialize()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentControllerTest.cpp(36)]
+FAIL!  : AgentControllerTest::damagedTaskJsonReportsFailureAndIsNotOverwritten() 'f.initialize()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentControllerTest.cpp(51)]
+FAIL!  : AgentControllerTest::secondStep422RetainsPrefixAndRetryOnlyWritesFailedStep() 'f.initialize()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentControllerTest.cpp(67)]
+FAIL!  : AgentControllerTest::retriesStopAfterTwoFailuresWithoutReplayingSuccessfulPrefix() 'f.initialize()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentControllerTest.cpp(90)]
+FAIL!  : AgentControllerTest::stopWhileWriteIsAcceptedConfirmsPrefixAndPreventsNextStep() 'f.initialize()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentControllerTest.cpp(114)]
+FAIL!  : AgentControllerTest::manualChangeWhileModelIsThinkingInvalidatesItsFutureAnswer() 'f.initialize()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentControllerTest.cpp(130)]
+FAIL!  : AgentControllerTest::manualChangeAfterReviewPreventsApproval() 'f.initialize()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentControllerTest.cpp(145)]
+FAIL!  : AgentControllerTest::lateRevisionOnlyRepublishContinuesAndPreservesSharedUndo() 'f.initialize()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentControllerTest.cpp(157)]
+FAIL!  : AgentControllerTest::externalSourceDuringCompileSettleStopsRemainingWrites() 'f.initialize()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentControllerTest.cpp(180)]
+FAIL!  : AgentControllerTest::newTaskUsesCurrentBaselineRatherThanPreviousReviewBaseline() 'f.initialize()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentControllerTest.cpp(197)]
+FAIL!  : AgentControllerTest::switchingProjectsDoesNotPersistPreviousTaskInNewDocument() 'f.initialize()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentControllerTest.cpp(212)]
+PASS   : AgentControllerTest::modelProposalLeavesDocumentUntouchedUntilApproval()
+PASS   : AgentControllerTest::cleanupTestCase()
+Totals: 3 passed, 12 failed, 0 skipped, 0 blacklisted, 691ms
+********* Finished testing of AgentControllerTest *********

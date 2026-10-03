@@ -1,0 +1,12 @@
+********* Start testing of ModelClientTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : ModelClientTest::initTestCase()
+FAIL!  : ModelClientTest::runsAsynchronouslyWithIsolatedArgumentsAndStdin() 'arguments.contains(setting)' returned FALSE. (features.memories=false)
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ModelClientTest.cpp(139)]
+FAIL!  : ModelClientTest::rejectsInvalidCliResults(empty-object) Compared values are not the same
+   Actual   (failed.size()): 0
+   Expected (1)            : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ModelClientTest.cpp(165)]
+PASS   : ModelClientTest::cleanupTestCase()
+Totals: 2 passed, 2 failed, 0 skipped, 0 blacklisted, 9617ms
+********* Finished testing of ModelClientTest *********

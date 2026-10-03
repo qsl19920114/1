@@ -1,0 +1,2 @@
+tools.ffprobe 必须是现有可执行文件的绝对路径。备选工具可省略此字段。
+CLEANUP ownedPid= 0 running= false

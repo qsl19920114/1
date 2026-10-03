@@ -1,0 +1,52 @@
+********* Start testing of EditorControllerTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : EditorControllerTest::initTestCase()
+FAIL!  : EditorControllerTest::identicalSourceRepublishPreservesUndoButChangedSourceClearsIt() 'h.listen()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(74)]
+FAIL!  : EditorControllerTest::editUndoRedo() 'h.listen()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(83)]
+FAIL!  : EditorControllerTest::typedWireValuesFromLiteralSnapshots(number) 'h.listen()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(95)]
+FAIL!  : EditorControllerTest::typedWireValuesFromLiteralSnapshots(boolean) 'h.listen()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(95)]
+FAIL!  : EditorControllerTest::sourceDependencyClosureMayChange() 'h.listen()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(102)]
+FAIL!  : EditorControllerTest::sourceStillRejectsChangedRetainedDependency() 'h.listen()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(109)]
+FAIL!  : EditorControllerTest::preflightFingerprintConflictWithoutRevisionChange() 'h.listen()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(113)]
+FAIL!  : EditorControllerTest::conflictClearsHistory() 'h.listen()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(117)]
+FAIL!  : EditorControllerTest::rejectedRollbackKeepsHistoryAndNewRevision() 'h.listen()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(121)]
+FAIL!  : EditorControllerTest::timeoutNeverClaimsSuccessEvenIfServerApplied() 'h.listen()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(126)]
+FAIL!  : EditorControllerTest::cancellationAndParallelRequest() 'h.listen()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(130)]
+FAIL!  : EditorControllerTest::readFailureRequiresExplicitRefresh() 'h.listen()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(135)]
+FAIL!  : EditorControllerTest::reentrantCloseOnStateCannotPublishOrWrite() 'h.listen()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(140)]
+FAIL!  : EditorControllerTest::sourceSuccessAndUndo() 'h.listen()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(145)]
+FAIL!  : EditorControllerTest::sourceCompileFailureRestoresAndKeepsHistory() 'h.listen()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(150)]
+FAIL!  : EditorControllerTest::confirmationFailureDoesNotClaimSuccess() 'h.listen()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(154)]
+FAIL!  : EditorControllerTest::wrongAcknowledgedRevisionClearsHistory() 'h.listen()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(158)]
+FAIL!  : EditorControllerTest::sourceUnknownOutcomeMustNotRestore() 'h.listen()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(163)]
+FAIL!  : EditorControllerTest::acceptedSourceWithLostConfirmationMustNotRestore() 'h.listen()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(168)]
+FAIL!  : EditorControllerTest::missingSourcesAndUnsupportedControlCannotWrite() 'h.listen()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(172)]
+FAIL!  : EditorControllerTest::readOnlyControlCannotWrite() 'h.listen()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(177)]
+FAIL!  : EditorControllerTest::reentrantCloseOnCompletionStateDoesNotPublish() 'h.listen()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(181)]
+FAIL!  : EditorControllerTest::sourceRecoveryDoesNotOverwriteExternalFile() 'h.listen()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp(186)]
+PASS   : EditorControllerTest::cleanupTestCase()
+Totals: 2 passed, 23 failed, 0 skipped, 0 blacklisted, 11ms
+********* Finished testing of EditorControllerTest *********

@@ -1,8 +1,8 @@
 # FrameLab · 灵感片场
 
-深色 Qt 视频创作工作台。新增本地视频示例、原创视频故事模板、异步视频导入、原生播放定位与成片播放。使用方法见[使用指南](docs/USER_GUIDE.md)。
+深色 Qt 视频创作工作台。通过当前 Codex 登录理解创作目标，审阅方案后创建本地图片故事工程，再局部修改和导出。保留视频示例、原生编辑与播放定位。使用方法见[使用指南](docs/USER_GUIDE.md)。
 
-Qt 6 Widgets 视频工程应用。版本 **1.1.0**：原创图片标题卡、工程和素材管理、原生属性编辑、撤销/重做、受保护源码编辑、真实 Studio 预览、经过媒体校验的 MP4 导出，以及明确确认的受约束提案。进度见 [STATUS.md](STATUS.md)。
+Qt 6 Widgets 视频工程应用。版本 **1.2.0**：真实模型、三段创作方案审阅、多步骤执行与任务恢复，共用原有工程、素材、编辑历史和经过媒体校验的 MP4 导出。进度见 [STATUS.md](STATUS.md)。
 
 ## 构建与启动
 
@@ -14,9 +14,20 @@ cmake --build build -j4
 ./build/app/qt-video-workbench.app/Contents/MacOS/qt-video-workbench
 ```
 
-### 创作流程
+### Agent 创作流程
 
-1. 点击“新建工程”，输入名称并选择保存位置，创建独立的标题卡工程。
+1. 在右侧「Agent 创作」选择三张本地 PNG/JPEG，输入“做15秒校园招新短片，开场3秒、主体8秒、结尾4秒”。
+2. 等待真实 Codex 生成方案。修改三张卡片的文案、图片、字号、颜色、时长和顺序，再确认新工程目录。
+3. 工作台创建原创720×1280、30fps工程，逐项写入并回读。生成方案阶段不会修改工程；停止保留已完成步骤。
+4. 选择结尾组件，勾选「下一次请求仅当前组件」，输入“标题改为周五一起玩！其他内容保持”。审阅真实字段差异后确认。
+5. 可通过共享编辑历史撤销上一步。重开工程后恢复任务需要重新核对版本和批准剩余动作。
+6. 点击「导出MP4…」。只有真实 Build、指定 Output、参数检查及全片解码均通过，才交付所选版本。
+
+需要本机可运行的 Codex CLI 和当前登录。若 Finder 启动时 CLI 不在 PATH，在配置的 `tools.codex` 指定可执行文件绝对路径；凭据由 Codex 自己使用，应用不读写凭据。模型仅收到所选图片的名称、尺寸、ID及必要工程字段，不上传图片像素。完整说明见[Agent 架构](docs/AGENT_ARCHITECTURE.md)。
+
+### 手动创作流程
+
+1. 点击“新建工程”，输入名称、选择视频故事或图片标题卡模板及保存位置，创建独立工程。
 2. 点击“导入图片”，选择 PNG/JPEG。素材列表显示名称、真实尺寸；原图保持不变。
 3. 选择图片素材及组件，点击“应用到选中组件的图片”；也可双击素材复制相对路径。**导入与应用到画面是两个动作。**
 4. 在右侧原生属性修改标题、副标题、主题色、图片路径或入场帧数。修改经后端确认后进入历史，使用工具栏“撤销/重做”。
@@ -39,13 +50,13 @@ cmake --build build -j4
 
 “打开 Run…”保留高级入口，选择既有 `.svrun`、workspace 和本地 Runtime。命令行对应 `--run`、`--workspace`、`--runtime`；与 `--project`、离线 `--session` 互斥。
 
-## 编辑提案
+## 辅助模拟提案
 
 右侧“编辑提案 · 本地模拟”支持 `标题改为校园摄影社`、`主题色改为#e47735`、`图片使用第1张`。生成后核对当前值、拟修改值及来源，再点击“确认修改”；放弃或过期提案不修改工程。确认写入与原生编辑共用控制器，成功后可撤销。
 
 可导入64KiB以内的单项提案JSON。Schema为 `qvw.edit-proposal@1`，必须包含当前revision、sourceFingerprint（SHA256的64个十六进制字符）、真实entityId/fieldId、简单值及origin。来源由导入入口确定；JSON自称“真实模型”不能提高可信度。未知键、多项操作、Source/Shell、不可写字段、过期版本和工程外图片均拒绝。
 
-默认Provider为本地受限规则演示，界面明确标“模拟”；未发模型请求。真实模型为可选扩展，本轮未配置、未验收。
+此辅助入口仍使用明确标注的本地规则演示。主入口「Agent 创作」使用真实 Codex；两者有各自的方案格式和来源标签，共用版本保护与编辑历史。
 
 ## 工程、素材与配置
 
@@ -65,10 +76,12 @@ cmake --build build -j4
 ```bash
 ctest --test-dir build --output-on-failure
 node --test tests/template/title-card.test.mjs
+node --test tests/template/story-reel.test.mjs
 ./build/tests/project_e2e_test
 ./build/tests/editor_e2e_test
 ./build/tests/export_e2e_test
 ./build/tests/proposal_e2e_test
+./build/tests/agent_e2e_test
 ./build/tests/walkthrough_demo
 ```
 
@@ -87,7 +100,7 @@ python3 scripts/release/collect_licenses.py
 python3 scripts/release/package_macos.py
 ```
 
-产物位于 `.workbench/release-macos-arm64/`，包括.app、ZIP、SHA256和链接检查清单。包为本地ad hoc签名，未公证。Qt运行库随包；上述视频执行依赖为外部组件。Windows、另一台无Qt机器和真实模型未验收。
+当前产物目录由应用版本决定：`.workbench/release-macos-arm64-1.2.0/`，包括.app、ZIP、SHA256和链接检查清单。包为本地ad hoc签名，未公证。Qt运行库随包；视频执行依赖和 Codex CLI 为外部组件。Windows及另一台无Qt机器未验收；实际发布与模型联调结果见 [STATUS.md](STATUS.md)。
 
 完整操作视频与真实成片位于 `.workbench/deliverables/`。演示驱动通过生产界面信号执行真实操作，并连续录制本应用窗口；视频不作为截图门禁。复现与结果见 [测试报告](docs/TEST_REPORT.md)、[演示说明](docs/DEMO_GUIDE.md)、[第三方说明](docs/THIRD_PARTY.md)。
 

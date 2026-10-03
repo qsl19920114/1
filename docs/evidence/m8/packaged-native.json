@@ -1,0 +1,23 @@
+{
+  "verdict": "PASS",
+  "cwd": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/framelab-native-xgkkto34/中文 空格启动目录",
+  "initialPath": "/usr/bin:/bin:/usr/sbin:/sbin",
+  "qtEnvironmentOverridesRemoved": true,
+  "screenshots": false,
+  "cases": [
+    {
+      "name": "packaged-agent-startup",
+      "verdict": "PASS",
+      "report": "packaged-agent-startup.json",
+      "ownedStudioAbsent": true,
+      "previewFingerprint": "0933ec9ff70e0e156e7de4566d4a15a54177992a4107d1f8d87c09b562b2f6ad"
+    },
+    {
+      "name": "packaged-video-startup",
+      "verdict": "PASS",
+      "report": "packaged-video-startup.json",
+      "ownedStudioAbsent": true,
+      "previewFingerprint": "bfd9fda5d876f4059e188e8efaeee838a03349898b97607995379b709628687d"
+    }
+  ]
+}

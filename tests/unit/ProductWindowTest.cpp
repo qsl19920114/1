@@ -1,4 +1,5 @@
 #include "ui/MainWindow.h"
+#include "ui/AgentPanel.h"
 #include <QTest>
 #include <QAction>
 #include <QPushButton>
@@ -17,6 +18,20 @@ class ProductWindowTest : public QObject {
         return nullptr;
     }
 private slots:
+    void selectingTrackClearsAgentComponentContext() {
+        qvw::ui::MainWindow w;qvw::domain::Snapshot s;s.revision=1;
+        qvw::domain::Track track;track.id="track";qvw::domain::Clip clip;clip.id="clip";track.clips.append(clip);s.tracks.append(track);
+        QSignalSpy selected(w.agentPanel(),&qvw::ui::AgentPanel::selectionChanged);w.showSnapshot(s);
+        QCOMPARE(selected.last().first().toString(),QString("clip"));
+        auto *tree=w.findChild<QTreeWidget*>("components");QVERIFY(tree);tree->setCurrentItem(tree->topLevelItem(0));
+        QCOMPARE(selected.last().first().toString(),QString());
+        tree->setCurrentItem(tree->topLevelItem(0)->child(0));QCOMPARE(selected.last().first().toString(),QString("clip"));
+        tree->setCurrentItem(nullptr);QCOMPARE(selected.last().first().toString(),QString());
+    }
+    void agentIsPrimaryCreationEntry() {
+        qvw::ui::MainWindow w;
+        QVERIFY(w.findChild<QWidget*>("agentPanel"));
+    }
     void closeRequiresSession() {
         qvw::ui::MainWindow w;w.setBackendAvailable(true);
         auto *close=action(w,"关闭工程");QVERIFY(close);QVERIFY(!close->isEnabled());

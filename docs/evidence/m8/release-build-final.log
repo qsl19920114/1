@@ -1,0 +1,38 @@
+[  1%] Built target qvw_infra_autogen_timestamp_deps
+[  1%] Built target qt_video_workbench_qmlimportscan
+[  1%] Built target qvw_domain_autogen_timestamp_deps
+[  3%] Built target qvw_domain_autogen
+[  4%] Built target qvw_infra_autogen
+[ 12%] Built target qvw_domain
+[ 12%] Built target qvw_ui_autogen_timestamp_deps
+[ 22%] Built target qvw_infra
+[ 24%] Automatic MOC for target qvw_ui
+[ 24%] Built target qvw_backend_autogen_timestamp_deps
+[ 24%] Built target qvw_services_autogen_timestamp_deps
+[ 24%] Built target qvw_ui_autogen
+[ 25%] Built target qvw_backend_autogen
+[ 27%] Built target qvw_services_autogen
+[ 36%] Built target qvw_backend
+[ 37%] Building CXX object app/CMakeFiles/qvw_ui.dir/ui/StudioTransport.cpp.o
+[ 54%] Built target qvw_services
+[ 54%] Built target qvw_controllers_autogen_timestamp_deps
+[ 56%] Built target qvw_controllers_autogen
+[ 68%] Built target qvw_controllers
+[ 68%] Built target qvw_agent_autogen_timestamp_deps
+[ 69%] Automatic MOC for target qvw_agent
+[ 71%] Linking CXX static library libqvw_ui.a
+[ 80%] Built target qvw_ui
+[ 80%] Built target qvw_agent_autogen
+[ 83%] Building CXX object app/CMakeFiles/qvw_agent.dir/agent/ModelClient.cpp.o
+[ 83%] Building CXX object app/CMakeFiles/qvw_agent.dir/qvw_agent_autogen/mocs_compilation.cpp.o
+[ 84%] Building CXX object app/CMakeFiles/qvw_agent.dir/agent/AgentTaskStore.cpp.o
+[ 86%] Building CXX object app/CMakeFiles/qvw_agent.dir/agent/AgentController.cpp.o
+[ 87%] Linking CXX static library libqvw_agent.a
+[ 93%] Built target qvw_agent
+[ 93%] Built target qt_video_workbench_autogen_timestamp_deps
+[ 95%] Automatic MOC for target qt_video_workbench
+[ 95%] Built target qt_video_workbench_autogen
+[ 96%] Building CXX object app/CMakeFiles/qt_video_workbench.dir/main.cpp.o
+[ 98%] Linking CXX executable qt-video-workbench.app/Contents/MacOS/qt-video-workbench
+Copy original templates beside application runtime
+[100%] Built target qt_video_workbench
