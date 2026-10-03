@@ -21,6 +21,8 @@ public:
     void setAvailable(bool);
     void setVersions(const domain::Snapshot &, const domain::ExportTask &);
     void setPreviewVersion(const domain::PreviewVersion &);
+public slots:
+    void showPublicMessage(const QString &text);
 signals:
     void generateRequested(const QString &goal);
     void imagesRequested(const QStringList &paths);
@@ -41,6 +43,12 @@ private:
     domain::ExportTask m_export;
     QString m_selectedEntity;
     bool m_available = false;
+    bool m_composing = true;
+    bool m_detailsExpanded = false;
+    QLabel *m_stage = nullptr;
+    QPlainTextEdit *m_publicOutput = nullptr;
+    QPushButton *m_continue = nullptr;
+    QPushButton *m_revise = nullptr;
     QPlainTextEdit *m_goal = nullptr;
     QLabel *m_selection = nullptr;
     QLabel *m_taskScope = nullptr;

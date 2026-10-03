@@ -8,6 +8,41 @@
 class AgentControllerTest : public QObject {
     Q_OBJECT
 private slots:
+    void publicOutputNeverAuthorizesAnIncompleteOrInvalidProposal() {
+        agent_test::AgentProtocolFixture f; QVERIFY(f.initialize());
+        QVERIFY(f.useFakeModel(QJsonObject{{"kind", "invalid"}}, true));
+        QSignalSpy output(f.agent.get(), SIGNAL(publicMessageReceived(QString))); QVERIFY(output.isValid());
+        f.agent->generate("调整标题"); QTRY_VERIFY_WITH_TIMEOUT(QFileInfo::exists(f.temp.filePath("model-started")), 5000);
+        QVERIFY(QMetaObject::invokeMethod(&f.model, "publicMessageReceived", Q_ARG(QString, "真实公开内容")));
+        QCOMPARE(output.size(), 1); QCOMPARE(output[0][0].toString(), QString("真实公开内容"));
+        QCOMPARE(f.agent->status().phase, QString("thinking")); QVERIFY(!f.agent->status().canApprove); QVERIFY(!f.agent->plan());
+        f.agent->approve(); QCOMPARE(f.http.writes, 0);
+        QVERIFY(agent_test::writeFile(f.temp.filePath("model-release"), "release"));
+        QTRY_COMPARE_WITH_TIMEOUT(f.agent->status().phase, QString("failed"), 5000);
+        QVERIFY(!f.agent->status().canApprove); QVERIFY(!f.agent->plan()); QCOMPARE(f.http.writes, 0);
+        QVERIFY(QMetaObject::invokeMethod(&f.model, "publicMessageReceived", Q_ARG(QString, "late content"))); QCOMPARE(output.size(), 1);
+    }
+    void stoppingReviewRevokesApprovalAndAllowsAnotherGoal() {
+        agent_test::AgentProtocolFixture f; QVERIFY(f.initialize());
+        QVERIFY(f.useFakeModel(agent_test::editPlan(QJsonArray{agent_test::operation("title", "old proposal")})));
+        f.agent->generate("原目标"); QTRY_COMPARE_WITH_TIMEOUT(f.agent->status().phase, QString("review"), 5000);
+        QVERIFY(f.agent->status().canApprove); f.agent->stop(); QVERIFY(!f.agent->status().canApprove);
+        f.agent->approve(); f.agent->retry(); QCOMPARE(f.http.writes, 0);
+        QVERIFY(f.useFakeModel(agent_test::editPlan(QJsonArray{agent_test::operation("title", "new proposal")})));
+        f.agent->generate("新的目标"); QTRY_COMPARE_WITH_TIMEOUT(f.agent->status().phase, QString("review"), 5000);
+        QCOMPARE(f.agent->status().goal, QString("新的目标")); QCOMPARE(f.http.writes, 0);
+        f.agent->approve(); QTRY_COMPARE_WITH_TIMEOUT(f.agent->status().phase, QString("complete"), 5000);
+        QCOMPARE(f.http.writes, 1); QCOMPARE(f.http.value("title"), QString("new proposal"));
+    }
+    void cancellationDiscardsFurtherPublicMessagesAndApproval() {
+        agent_test::AgentProtocolFixture f; QVERIFY(f.initialize());
+        QVERIFY(f.useFakeModel(agent_test::editPlan(QJsonArray{agent_test::operation("title", "pending")}), true));
+        QSignalSpy output(f.agent.get(), SIGNAL(publicMessageReceived(QString))); QVERIFY(output.isValid());
+        f.agent->generate("调整标题"); QTRY_VERIFY_WITH_TIMEOUT(QFileInfo::exists(f.temp.filePath("model-started")), 5000);
+        f.agent->stop();
+        QVERIFY(QMetaObject::invokeMethod(&f.model, "publicMessageReceived", Q_ARG(QString, "late content")));
+        QCOMPARE(output.size(), 0); QVERIFY(!f.agent->status().canApprove); QVERIFY(!f.agent->plan()); QCOMPARE(f.http.writes, 0);
+    }
     void navigationDuringApplyPreservesApprovedScopeForEveryStep() {
         agent_test::AgentProtocolFixture f;QVERIFY(f.initialize());f.agent->setScope("scene-1");
         QVERIFY(f.useFakeModel(agent_test::editPlan(QJsonArray{agent_test::operation("title","accepted"),agent_test::operation("subtitle","also accepted")})));

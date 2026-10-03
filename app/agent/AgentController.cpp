@@ -27,6 +27,7 @@ AgentController::AgentController(controllers::DocumentController &d,controllers:
  connect(&m_settlePoll,&QTimer::timeout,this,[this]{if(m_settling){if(m_editor.isBusy())m_settlePoll.start();else m_editor.refresh();}});
  connect(&m_settleDeadline,&QTimer::timeout,this,[this]{if(m_settling)operationFailed("等待编译稳定超时，已完成步骤保留；请刷新后重新审阅剩余操作。");});
  connect(&m_creationDeadline,&QTimer::timeout,this,[this]{backendFailed("创建后等待真实编译快照超时，后续未执行；工程已保留。");});
+ connect(&m,&ModelClient::publicMessageReceived,this,[this](const QString &text){if(m_status.phase=="thinking"&&!m_stopRequested)emit publicMessageReceived(text);});
  connect(&m,&ModelClient::completed,this,[this](const QJsonObject &json){
   if(m_status.phase!="thinking")return;
   if(!sameBase(m_requestBase)){publish("stale","等待模型期间工程已改变，请重新生成。");return;}

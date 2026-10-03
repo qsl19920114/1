@@ -121,12 +121,23 @@ public:
         const auto event = document.object();
         const auto type = event.value(QStringLiteral("type")).toString();
         if (type.startsWith(QStringLiteral("item."))) {
-            const auto itemType = event.value(QStringLiteral("item")).toObject().value(QStringLiteral("type")).toString();
+            const auto item = event.value(QStringLiteral("item")).toObject();
+            const auto itemType = item.value(QStringLiteral("type")).toString();
             // Administrator or MCP configuration may still inject tools. These
             // flags are not a guarantee of no tools: reject observed tool use.
             if (itemType != QStringLiteral("agent_message") && itemType != QStringLiteral("reasoning")) {
                 fail(QStringLiteral("Codex 尝试调用工具，方案生成已停止。"));
                 return false;
+            }
+            // JSONL events carry received text snapshots, not a guaranteed token stream.
+            // Leave partial JSON as display-only text until the final result is validated.
+            if (itemType == QStringLiteral("agent_message") && item.value(QStringLiteral("text")).isString()) {
+                const auto text = item.value(QStringLiteral("text")).toString();
+                if (!text.isEmpty()) {
+                    QPointer<ModelClient> guard(owner);
+                    emit owner->publicMessageReceived(text);
+                    if (!guard) return false;
+                }
             }
         }
         if (type == QStringLiteral("error") || type == QStringLiteral("turn.failed")) {
@@ -155,12 +166,12 @@ public:
             if (newline < 0) break;
             const auto line = pendingEvents.left(newline);
             pendingEvents.remove(0, newline + 1);
-            if (!eventLine(line)) return false;
+            if (!eventLine(line) || !current(candidate, candidateGeneration)) return false;
         }
         if (final && !pendingEvents.isEmpty()) {
             const auto line = pendingEvents;
             pendingEvents.clear();
-            if (!eventLine(line)) return false;
+            if (!eventLine(line) || !current(candidate, candidateGeneration)) return false;
         }
         return current(candidate, candidateGeneration);
     }

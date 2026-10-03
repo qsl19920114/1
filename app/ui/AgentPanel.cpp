@@ -31,6 +31,7 @@ AgentPanel::AgentPanel(QWidget *parent):QWidget(parent) {
     auto *layout = new QVBoxLayout(this); layout->setContentsMargins(12, 12, 12, 12); layout->setSpacing(8);
     layout->addWidget(plainLabel(QStringLiteral("Agent 创作"), "agentTitle"));
     layout->addWidget(plainLabel(QStringLiteral("真实 Codex · 使用当前 Codex 登录"), "agentModel"));
+    m_stage = plainLabel({}, "agentStage"); layout->addWidget(m_stage);
     m_goal = new QPlainTextEdit; m_goal->setObjectName("agentGoal"); m_goal->setFixedHeight(90);
     m_goal->setPlaceholderText(QStringLiteral("描述想做的作品，或说明当前工程要怎样修改…")); layout->addWidget(m_goal);
     m_selection = plainLabel(QStringLiteral("Qt 选中：无"), "agentSelection"); layout->addWidget(m_selection);
@@ -45,18 +46,29 @@ AgentPanel::AgentPanel(QWidget *parent):QWidget(parent) {
     m_phase = plainLabel(QStringLiteral("准备创作"), "agentPhase"); layout->addWidget(m_phase);
     m_progress = plainLabel({}, "agentProgress"); m_progress->hide(); layout->addWidget(m_progress);
     m_message = plainLabel({}, "agentMessage"); m_message->hide(); layout->addWidget(m_message);
+    m_publicOutput = new QPlainTextEdit; m_publicOutput->setObjectName("agentPublicOutput"); m_publicOutput->setReadOnly(true);
+    m_publicOutput->setMaximumBlockCount(400); m_publicOutput->setMaximumHeight(160); m_publicOutput->hide(); layout->addWidget(m_publicOutput);
+    m_continue = new QPushButton(QStringLiteral("继续创作")); m_continue->setObjectName("agentContinue"); layout->addWidget(m_continue);
+    connect(m_continue, &QPushButton::clicked, this, [this] { m_composing = true; updateActions(); m_goal->setFocus(); });
     m_review = new PlanReviewPanel(this); layout->addWidget(m_review, 1);
+    m_revise = new QPushButton(QStringLiteral("重新描述目标")); m_revise->setObjectName("agentRevise"); layout->addWidget(m_revise);
+    connect(m_revise, &QPushButton::clicked, this, [this] {
+        if (!m_revise->isEnabled()) return;
+        // Reuse the controller cancellation path to revoke approval before exposing input.
+        emit stopRequested();
+        m_review->clearPlan(); m_composing = true; updateActions(); m_goal->setFocus();
+    });
     auto *actions = new QHBoxLayout;
     const auto button = [actions](const QString &text, const QString &name) { auto *b = new QPushButton(text); b->setObjectName(name); actions->addWidget(b); return b; };
     m_stop = button(QStringLiteral("停止后续"), "agentStop"); m_retry = button(QStringLiteral("重试失败步骤"), "agentRetry");
     m_repair = button(QStringLiteral("根据现状修订"), "agentRepair"); layout->addLayout(actions);
     auto *history = new QHBoxLayout; m_undo = new QPushButton(QStringLiteral("撤销上一步")); m_undo->setObjectName("agentUndo"); history->addWidget(m_undo);
     m_restore = new QPushButton(QStringLiteral("恢复任务")); m_restore->setObjectName("agentRestore"); history->addWidget(m_restore); layout->addLayout(history);
-    m_versions = plainLabel({}, "agentVersions"); layout->addWidget(m_versions);
+    m_versions = plainLabel({}, "agentVersions"); m_versions->hide(); layout->addWidget(m_versions);
     auto *toggle = new QToolButton; toggle->setObjectName("agentEventsToggle"); toggle->setText(QStringLiteral("展开任务记录")); toggle->setCheckable(true);
     toggle->setToolButtonStyle(Qt::ToolButtonTextBesideIcon); toggle->setArrowType(Qt::RightArrow); layout->addWidget(toggle);
     m_events = new QPlainTextEdit; m_events->setObjectName("agentEvents"); m_events->setReadOnly(true); m_events->setMaximumBlockCount(200); m_events->setMaximumHeight(130); m_events->hide(); layout->addWidget(m_events);
-    connect(toggle, &QToolButton::toggled, this, [this, toggle](bool expanded) { m_events->setVisible(expanded); toggle->setArrowType(expanded ? Qt::DownArrow : Qt::RightArrow); toggle->setText(expanded ? QStringLiteral("收起任务记录") : QStringLiteral("展开任务记录")); });
+    connect(toggle, &QToolButton::toggled, this, [this, toggle](bool expanded) { m_detailsExpanded = expanded; m_events->setVisible(expanded); m_versions->setVisible(expanded); updateActions(); toggle->setArrowType(expanded ? Qt::DownArrow : Qt::RightArrow); toggle->setText(expanded ? QStringLiteral("收起任务记录") : QStringLiteral("展开任务记录")); });
     connect(m_goal, &QPlainTextEdit::textChanged, this, &AgentPanel::updateActions);
     connect(m_generate, &QPushButton::clicked, this, [this] {
         if (!m_generate->isEnabled()) return;
@@ -80,7 +92,9 @@ AgentPanel::AgentPanel(QWidget *parent):QWidget(parent) {
 void AgentPanel::showPlan(const domain::AgentPlan &plan, const domain::Snapshot &snapshot) { m_review->showPlan(plan, snapshot); updateActions(); }
 void AgentPanel::showStatus(const domain::AgentStatus &status) {
     const bool newTask = !status.taskId.isEmpty() && status.taskId != m_status.taskId;
-    if (status.taskId.isEmpty() && status.phase == "idle") m_review->clearPlan();
+    if ((status.taskId.isEmpty() && status.phase == "idle") || status.phase == "thinking") m_review->clearPlan();
+    if (newTask || (status.phase == "thinking" && m_status.phase != "thinking") || (status.phase == "idle" && status.taskId.isEmpty())) m_publicOutput->clear();
+    if (status.phase != m_status.phase || newTask) m_composing = status.phase == "idle" || status.phase == "clarify";
     m_status = status; m_phase->setText(phaseText(status.phase)); m_phase->setToolTip(status.phase);
     if (newTask && !status.goal.isEmpty()) m_goal->setPlainText(status.goal);
     m_taskScope->setText(QStringLiteral("%1：%2").arg(status.taskId.isEmpty() ? QStringLiteral("当前范围") : QStringLiteral("任务范围"),
@@ -88,6 +102,12 @@ void AgentPanel::showStatus(const domain::AgentStatus &status) {
     m_progress->setText(status.total > 0 ? QStringLiteral("已完成 %1 / %2 项").arg(status.completed).arg(status.total) : QString()); m_progress->setVisible(status.total > 0);
     m_message->setText(status.message); m_message->setVisible(!status.message.isEmpty());
     m_events->setPlainText(status.events.mid(qMax(qsizetype(0), status.events.size() - 200)).join('\n').right(65536)); updateActions(); updateVersions();
+}
+void AgentPanel::showPublicMessage(const QString &text) {
+    if (m_status.phase != "thinking" || text.isEmpty()) return;
+    m_publicOutput->setPlainText(text.left(65536));
+    m_message->setText(QStringLiteral("已收到 Codex 公开输出，正在等待完整方案并校验…")); m_message->show();
+    updateActions();
 }
 void AgentPanel::showAssets(const domain::AgentAssets &assets) {
     m_assets->clear();
@@ -139,9 +159,26 @@ void AgentPanel::updateActions() {
     const bool busy = busyPhase(m_status.phase); const bool editable = m_available && !busy;
     m_goal->setEnabled(editable); m_images->setEnabled(editable); m_scope->setEnabled(editable && !m_selectedEntity.isEmpty());
     m_generate->setEnabled(editable && !m_goal->toPlainText().trimmed().isEmpty());
-    m_review->setEditingEnabled(editable && m_status.phase != "stale"); m_review->setApprovalEnabled(editable && m_status.canApprove && m_status.phase != "stale");
+    m_review->setEditingEnabled(editable && m_status.phase != "stale"); m_review->setApprovalEnabled(editable && !m_composing && m_status.canApprove && m_status.phase != "stale");
     m_stop->setEnabled(busy); m_retry->setEnabled(editable && m_status.canRetry && (m_status.phase == "failed" || m_status.phase == "paused"));
     m_repair->setEnabled(editable && (m_status.phase == "failed" || m_status.phase == "paused" || m_status.phase == "stale"));
     m_undo->setEnabled(editable && m_status.canUndo); m_restore->setEnabled(editable);
+    const auto phase = m_status.phase;
+    const bool review = phase == "review" || phase == "stale" || phase == "clarify";
+    const bool failed = phase == "failed" || phase == "paused" || phase == "stale";
+    const bool result = phase == "complete" || phase == "completed" || phase == "cancelled" || failed;
+    const bool compose = m_composing && !busy;
+    m_stage->setText(phase == "thinking" ? QStringLiteral("1 目标 → 正在生成方案")
+        : review ? QStringLiteral("2 审阅方案 → 确认后执行")
+        : busy ? QStringLiteral("3 执行 → 等待逐项确认")
+        : result && !compose ? QStringLiteral("4 结果 → 继续创作") : QStringLiteral("1 目标 → 2 审阅 → 3 执行 → 4 结果"));
+    m_goal->setVisible(compose); m_selection->setVisible(compose && !m_selectedEntity.isEmpty());
+    m_scope->setVisible(compose && !m_selectedEntity.isEmpty()); m_images->setVisible(compose);
+    m_assetSummary->setVisible(compose); m_assets->setVisible(compose && m_assets->count() > 0); m_generate->setVisible(compose);
+    m_review->setVisible(review && (!compose || phase == "clarify")); m_stop->setVisible(busy);
+    m_revise->setVisible(phase == "review" && !compose); m_revise->setEnabled(editable && phase == "review");
+    m_retry->setVisible(failed && m_status.canRetry); m_repair->setVisible(failed);
+    m_undo->setVisible(result && m_status.canUndo); m_restore->setVisible(phase == "idle" || failed);
+    m_continue->setVisible(result && !compose); m_publicOutput->setVisible((phase == "thinking" || m_detailsExpanded) && !m_publicOutput->toPlainText().isEmpty());
 }
 }

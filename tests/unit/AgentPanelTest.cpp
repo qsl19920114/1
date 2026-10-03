@@ -14,6 +14,7 @@
 #include <QSpinBox>
 #include <QTemporaryDir>
 #include <QTimer>
+#include <QToolButton>
 #include <QJsonArray>
 #include <QImage>
 #include <QFile>
@@ -68,6 +69,78 @@ class AgentPanelTest : public QObject {
     Q_OBJECT
 private slots:
     void initTestCase() { QApplication::setFont(QFont("PingFang SC")); }
+    void reviewCanReturnToGoalWithoutExecutingOrKeepingApproval() {
+        ui::AgentPanel panel; panel.setAvailable(true); panel.showAssets(assets());
+        auto *goal = panel.findChild<QPlainTextEdit *>("agentGoal"); goal->setPlainText("原目标");
+        domain::AgentStatus status; status.phase = "review"; status.canApprove = true;
+        panel.showStatus(status); panel.showPlan(editPlan(), snapshot());
+        auto *revise = panel.findChild<QPushButton *>("agentRevise"); QVERIFY(revise); QVERIFY(!revise->isHidden());
+        QSignalSpy stopped(&panel, &ui::AgentPanel::stopRequested), approved(&panel, &ui::AgentPanel::approveRequested);
+        connect(&panel, &ui::AgentPanel::stopRequested, &panel, [&] { status.phase = "paused"; status.canApprove = false; panel.showStatus(status); });
+        revise->click(); QCOMPARE(stopped.size(), 1); QCOMPARE(approved.size(), 0);
+        QVERIFY(!goal->isHidden()); QVERIFY(goal->isEnabled()); QCOMPARE(goal->toPlainText(), QString("原目标"));
+        QVERIFY(!panel.findChild<QPushButton *>("agentImages")->isHidden());
+        auto *generate = panel.findChild<QPushButton *>("agentGenerate"); QVERIFY(!generate->isHidden()); QVERIFY(generate->isEnabled());
+        auto *review = panel.findChild<ui::PlanReviewPanel *>("agentPlanReview"); QVERIFY(review->isHidden()); QVERIFY(review->editedPlan().isEmpty());
+        auto *confirm = panel.findChild<QPushButton *>("planApprove"); QVERIFY(!confirm->isEnabled()); confirm->click(); QCOMPARE(approved.size(), 0);
+        goal->setPlainText("新的目标"); QSignalSpy generated(&panel, &ui::AgentPanel::generateRequested); generate->click();
+        QCOMPARE(generated.size(), 1); QCOMPARE(generated[0][0].toString(), QString("新的目标"));
+    }
+    void stagesShowOnlyRelevantActionsAndKeepRealCounts() {
+        ui::AgentPanel panel; panel.setAvailable(true);
+        auto *goal = panel.findChild<QPlainTextEdit *>("agentGoal");
+        auto *review = panel.findChild<ui::PlanReviewPanel *>("agentPlanReview");
+        auto *stop = panel.findChild<QPushButton *>("agentStop");
+        QVERIFY(!goal->isHidden()); QVERIFY(review->isHidden()); QVERIFY(stop->isHidden());
+        domain::AgentStatus status; status.taskId = "new-task"; status.phase = "thinking";
+        panel.showStatus(status); QVERIFY(goal->isHidden()); QVERIFY(!stop->isHidden());
+        QVERIFY(panel.findChild<QPushButton *>("agentGenerate")->isHidden());
+        QVERIFY(QMetaObject::invokeMethod(&panel, "showPublicMessage", Q_ARG(QString, "真实公开片段 <b>不是HTML</b>")));
+        auto *output = panel.findChild<QPlainTextEdit *>("agentPublicOutput"); QVERIFY(output);
+        QCOMPARE(output->toPlainText(), QString("真实公开片段 <b>不是HTML</b>"));
+        QVERIFY(!panel.findChild<QPushButton *>("planApprove")->isEnabled());
+        status.phase = "review"; status.canApprove = true; panel.showStatus(status); panel.showPlan(editPlan(), snapshot());
+        QVERIFY(!review->isHidden()); QVERIFY(stop->isHidden()); QVERIFY(goal->isHidden());
+        QVERIFY(output->isHidden()); panel.findChild<QToolButton *>("agentEventsToggle")->click();
+        QVERIFY(!output->isHidden()); QCOMPARE(output->toPlainText(), QString("真实公开片段 <b>不是HTML</b>"));
+        panel.findChild<QToolButton *>("agentEventsToggle")->click(); QVERIFY(output->isHidden());
+        status.phase = "applying"; status.canApprove = false; status.total = 4; status.completed = 1; panel.showStatus(status);
+        QVERIFY(review->isHidden()); QVERIFY(!stop->isHidden());
+        QVERIFY(panel.findChild<QLabel *>("agentProgress")->text().contains("1 / 4"));
+        status.phase = "failed"; status.canRetry = true; panel.showStatus(status);
+        QVERIFY(!panel.findChild<QPushButton *>("agentRetry")->isHidden());
+        QVERIFY(!panel.findChild<QPushButton *>("agentRepair")->isHidden());
+        status.phase = "complete"; status.completed = 4; panel.showStatus(status);
+        QVERIFY(panel.findChild<QPushButton *>("agentRetry")->isHidden());
+        auto *next = panel.findChild<QPushButton *>("agentContinue"); QVERIFY(next); QVERIFY(!next->isHidden()); next->click();
+        QVERIFY(!goal->isHidden()); QVERIFY(!panel.findChild<QPushButton *>("agentGenerate")->isHidden());
+        status.phase = "thinking"; status.taskId = "next-task"; panel.showStatus(status); QVERIFY(output->toPlainText().isEmpty());
+        status.phase = "paused"; panel.showStatus(status);
+        QVERIFY(QMetaObject::invokeMethod(&panel, "showPublicMessage", Q_ARG(QString, "late output")));
+        QVERIFY(output->toPlainText().isEmpty()); QVERIFY(!panel.findChild<QPushButton *>("planApprove")->isEnabled());
+    }
+    void reviewSummarizesEscapedChangesAndExactImpactsBeforeEditing() {
+        ui::PlanReviewPanel review; auto current = snapshot(); current.space.frameRate = 24;
+        current.tracks[0].clips[0].startFrame = 48; current.tracks[0].clips[0].endFrameExclusive = 120;
+        current.tracks[0].clips[0].label = "结尾 <script>";
+        current.tracks[0].clips[0].inspector[0].rawValue = "旧 <b>标题</b>";
+        auto plan = editPlan(); auto ops = plan.content["operations"].toArray(); auto op = ops[0].toObject(); op["value"] = "新 <img src=x>"; ops[0] = op; plan.content["operations"] = ops;
+        review.showPlan(plan, current); review.setApprovalEnabled(true);
+        auto *changes = review.findChild<QLabel *>("planChanges"); QVERIFY(changes);
+        QCOMPARE(changes->textFormat(), Qt::RichText);
+        QVERIFY(changes->text().contains("结尾 &lt;script&gt;")); QVERIFY(changes->text().contains("2–5 秒"));
+        QVERIFY(changes->text().contains("48–120")); QVERIFY(changes->text().contains("旧 &lt;b&gt;标题&lt;/b&gt;"));
+        QVERIFY(changes->text().contains("<b>新 &lt;img src=x&gt;</b>")); QVERIFY(!changes->text().contains("<img src=x>"));
+        auto *modify = review.findChild<QPushButton *>("planModify"); QVERIFY(modify);
+        QVERIFY(review.findChild<QWidget *>("planScroll")->isHidden()); modify->click();
+        QVERIFY(!review.findChild<QWidget *>("planScroll")->isHidden());
+        review.findChild<QLineEdit *>("operationValue_0")->setText("用户修订");
+        QVERIFY(changes->text().contains("<b>用户修订</b>"));
+        QVERIFY(review.findChild<QPushButton *>("planApprove")->text().contains("确认执行"));
+        review.showAssets(assets()); review.showPlan(creation(), {});
+        QVERIFY(changes->text().contains("标题1")); QVERIFY(changes->text().contains("0–3 秒"));
+        QVERIFY(changes->text().contains("3–11 秒")); QVERIFY(changes->text().contains("11–15 秒"));
+    }
     void actualSelectionChangesWithoutRestrictingRequestScope() {
         ui::AgentPanel panel; panel.setAvailable(true);
         auto *checkbox = panel.findChild<QCheckBox *>("agentScope"); QVERIFY(checkbox); QVERIFY(!checkbox->isChecked());
@@ -261,6 +334,7 @@ private slots:
     void taskPanelFitsWorkbenchWidth() {
         ui::AgentPanel panel; panel.setStyleSheet("QWidget{font-size:13px;} QPushButton{padding:7px 12px;} QLineEdit,QDoubleSpinBox,QSpinBox{padding:6px;}");
         panel.setAvailable(true); panel.showAssets(assets()); panel.showPlan(creation(), {}); panel.resize(440, 900);
+        domain::AgentStatus status; status.phase = "review"; status.canApprove = true; panel.showStatus(status);
         panel.show(); QCoreApplication::processEvents(); QVERIFY2(panel.width() <= 440, qPrintable(QString("minimum width %1").arg(panel.width())));
         auto *card = panel.findChild<QGroupBox *>("sceneCard_0"); QVERIFY(card); QVERIFY(card->width() < 440);
     }

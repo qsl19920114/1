@@ -1,0 +1,12 @@
+********* Start testing of ProductExperienceE2ETest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : ProductExperienceE2ETest::initTestCase()
+QWARN  : ProductExperienceE2ETest::linkedScenesAndRememberedWork() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : ProductExperienceE2ETest::linkedScenesAndRememberedWork() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : ProductExperienceE2ETest::linkedScenesAndRememberedWork() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : ProductExperienceE2ETest::linkedScenesAndRememberedWork() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : ProductExperienceE2ETest::linkedScenesAndRememberedWork() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : ProductExperienceE2ETest::linkedScenesAndRememberedWork()
+PASS   : ProductExperienceE2ETest::cleanupTestCase()
+Totals: 3 passed, 0 failed, 0 skipped, 0 blacklisted, 25608ms
+********* Finished testing of ProductExperienceE2ETest *********

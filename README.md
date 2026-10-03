@@ -2,7 +2,7 @@
 
 深色 Qt 视频创作工作台。通过当前 Codex 登录理解创作目标，审阅方案后创建本地图片故事工程，再局部修改和导出。保留视频示例、原生编辑与播放定位。使用方法见[使用指南](docs/USER_GUIDE.md)。
 
-Qt 6 Widgets 视频工程应用。版本 **1.2.0**：真实模型、三段创作方案审阅、多步骤执行与任务恢复，共用原有工程、素材、编辑历史和经过媒体校验的 MP4 导出。进度见 [STATUS.md](STATUS.md)。
+Qt 6 Widgets 视频工程应用。版本 **1.3.0**：阶段式创作任务、场景定位、修改对照、批量素材与缺失文件修复，以及工作区和统一历史。保留真实模型、本地批准、多步骤执行与经过媒体校验的 MP4 导出。进度见 [STATUS.md](STATUS.md)。
 
 ## 构建与启动
 
@@ -100,7 +100,7 @@ python3 scripts/release/collect_licenses.py
 python3 scripts/release/package_macos.py
 ```
 
-当前产物目录由应用版本决定：`.workbench/release-macos-arm64-1.2.0/`，包括.app、ZIP、SHA256和链接检查清单。包为本地ad hoc签名，未公证。Qt运行库随包；视频执行依赖和 Codex CLI 为外部组件。Windows及另一台无Qt机器未验收；实际发布与模型联调结果见 [STATUS.md](STATUS.md)。
+当前产物目录由应用版本决定：`.workbench/release-macos-arm64-1.3.0/`，包括.app、ZIP、SHA256和链接检查清单。包为本地ad hoc签名，未公证。Qt运行库随包；视频执行依赖和 Codex CLI 为外部组件。Windows及另一台无Qt机器未验收；实际发布与模型联调结果见 [STATUS.md](STATUS.md)。
 
 完整操作视频与真实成片位于 `.workbench/deliverables/`。演示驱动通过生产界面信号执行真实操作，并连续录制本应用窗口；视频不作为截图门禁。复现与结果见 [测试报告](docs/TEST_REPORT.md)、[演示说明](docs/DEMO_GUIDE.md)、[第三方说明](docs/THIRD_PARTY.md)。
 

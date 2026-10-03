@@ -1,0 +1,10 @@
+********* Start testing of AgentPanelTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : AgentPanelTest::initTestCase()
+FAIL!  : AgentPanelTest::stagesShowOnlyRelevantActionsAndKeepRealCounts() '!output->isHidden()' returned FALSE. ()
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentPanelTest.cpp(88)]
+QWARN  : AgentPanelTest::taskPanelFitsWorkbenchWidth() This plugin does not support propagateSizeHints()
+PASS   : AgentPanelTest::taskPanelFitsWorkbenchWidth()
+PASS   : AgentPanelTest::cleanupTestCase()
+Totals: 3 passed, 1 failed, 0 skipped, 0 blacklisted, 138ms
+********* Finished testing of AgentPanelTest *********

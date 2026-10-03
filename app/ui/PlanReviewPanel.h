@@ -24,6 +24,7 @@ private:
     void updateOperation(int index, const QJsonValue &value);
     void moveScene(int index, int offset);
     void updateValidation();
+    void updateOverview();
     void approve();
     QString validationError() const;
     const domain::InspectorField *fieldFor(const QJsonObject &operation) const;
@@ -31,6 +32,10 @@ private:
     domain::Snapshot m_snapshot;
     domain::AgentAssets m_assets;
     QLabel *m_summary = nullptr;
+    QLabel *m_changes = nullptr;
+    QScrollArea *m_overview = nullptr;
+    QPushButton *m_modify = nullptr;
+    bool m_modifying = false;
     QLabel *m_question = nullptr;
     QLabel *m_totalDuration = nullptr;
     QLabel *m_validation = nullptr;

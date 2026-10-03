@@ -6,6 +6,10 @@
 #include <QFileInfo>
 #include <QImageReader>
 #include <QtEndian>
+#include <QTemporaryFile>
+#ifdef Q_OS_UNIX
+#include <unistd.h>
+#endif
 
 namespace qvw::services {
 namespace {
@@ -30,6 +34,83 @@ bool matches(const QString &path, const QByteArray &bytes) {
     const auto stored = file.read(bytes.size() + 1);
     return file.error() == QFileDevice::NoError && stored == bytes;
 }
+}
+
+namespace {
+bool sameAsset(const domain::Asset &a, const domain::Asset &b) {
+    return a.hash == b.hash && a.path == b.path && a.originalName == b.originalName
+        && a.mime == b.mime && a.width == b.width && a.height == b.height && a.size == b.size;
+}
+// Reject links at every user-controlled component, including dangling links and linked parents.
+bool plainPath(const QString &path, bool allowMissing, QString *error) {
+    if (path.contains(QChar::Null) || path.split('/').contains(".."))
+        return fail(error, QStringLiteral("素材路径不能包含上级目录跳转"));
+    const auto absolute = QFileInfo(path).absoluteFilePath();
+    QString cursor = QDir::rootPath();
+    const auto parts = absolute.split('/', Qt::SkipEmptyParts);
+    for (qsizetype i = 0; i < parts.size(); ++i) {
+        cursor = QDir(cursor).filePath(parts[i]);
+        const QFileInfo info(cursor);
+        bool systemAlias = false;
+#ifdef Q_OS_MACOS
+        systemAlias = (cursor == "/var" && info.canonicalFilePath() == "/private/var")
+                   || (cursor == "/tmp" && info.canonicalFilePath() == "/private/tmp");
+#endif
+        if (info.isSymLink() && !systemAlias)
+            return fail(error, QStringLiteral("素材路径不能含符号链接：%1").arg(cursor));
+        if (!info.exists()) {
+            if (allowMissing) continue;
+            return fail(error, QStringLiteral("素材文件不存在：%1").arg(cursor));
+        }
+        if ((i + 1 < parts.size() && !info.isDir())
+            || (i + 1 == parts.size() && !info.isFile() && !info.isDir()))
+            return fail(error, QStringLiteral("素材路径包含特殊文件或无效目录：%1").arg(cursor));
+    }
+    return true;
+}
+}
+
+bool AssetService::restoreMissing(const domain::Project &project, const domain::Asset &asset,
+                                 const QString &source, QString *error) {
+    bool registered = false;
+    for (const auto &entry : project.assets) if (sameAsset(entry, asset)) { registered = true; break; }
+    if (!registered) return fail(error, QStringLiteral("只能恢复工程已登记的原始素材"));
+    if (asset.size <= 0 || asset.size > qMin(project.maxAssetBytes, hardByteLimit))
+        return fail(error, QStringLiteral("素材大小无效或超过大小上限"));
+    QString destination;
+    if (!plainPath(project.rootPath, false, error)
+        || !ProjectStore::resolvePath(project, asset.path, &destination, error, false)
+        || !plainPath(destination, true, error)) return false;
+    if (QFileInfo::exists(destination) || QFileInfo(destination).isSymLink())
+        return fail(error, QStringLiteral("素材目标已存在，不能覆盖"));
+    if (!plainPath(source, false, error) || !QFileInfo(source).isFile())
+        return fail(error, QStringLiteral("恢复来源必须是不含符号链接的普通文件"));
+    QFile input(source);
+    if (!input.open(QIODevice::ReadOnly) || input.size() != asset.size)
+        return fail(error, QStringLiteral("恢复文件大小与原素材不一致"));
+    const auto bytes = input.read(asset.size + 1);
+    if (input.error() != QFileDevice::NoError || bytes.size() != asset.size
+        || QString::fromLatin1(QCryptographicHash::hash(bytes, QCryptographicHash::Sha256).toHex()) != asset.hash)
+        return fail(error, QStringLiteral("恢复文件内容与原素材哈希不一致"));
+    const auto directory = QFileInfo(destination).absolutePath();
+    if (!QDir().mkpath(directory) || !plainPath(destination, true, error))
+        return fail(error, QStringLiteral("无法安全创建素材目录"));
+    QTemporaryFile temporary(QDir(directory).filePath(".qvw-restore-XXXXXX"));
+    if (!temporary.open() || temporary.write(bytes) != bytes.size() || !temporary.flush())
+        return fail(error, QStringLiteral("无法写入恢复素材暂存文件"));
+    const auto staging = temporary.fileName();
+    temporary.close();
+    if (!matches(staging, bytes) || !plainPath(destination, true, error))
+        return fail(error, QStringLiteral("恢复素材校验失败"));
+#ifdef Q_OS_UNIX
+    // link publishes the complete file atomically and fails if any destination entry exists.
+    if (::link(QFile::encodeName(staging).constData(), QFile::encodeName(destination).constData()) != 0)
+#else
+    if (!QFile::rename(staging, destination))
+#endif
+        return fail(error, QStringLiteral("无法恢复素材；目标已存在或目录不可写"));
+    if (error) error->clear();
+    return true;
 }
 
 bool AssetService::importImage(domain::Project &project, const QString &source, domain::Asset *asset, QString *error) {

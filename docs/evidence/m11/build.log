@@ -1,0 +1,326 @@
+[  0%] Built target qvw_infra_autogen_timestamp_deps
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  0%] Built target qt_video_workbench_qmlimportscan
+[  1%] Built target qvw_domain_autogen
+[  1%] Built target qvw_infra_autogen
+[  3%] Built target qvw_domain
+[  6%] Built target qvw_infra
+[  6%] Built target qvw_ui_autogen_timestamp_deps
+[  6%] Built target qvw_backend_autogen_timestamp_deps
+[  6%] Built target qvw_services_autogen_timestamp_deps
+[  6%] Built target hypit_probe_test_autogen_timestamp_deps
+[  6%] Built target json_process_test_autogen_timestamp_deps
+[  6%] Built target infrastructure_test_autogen_timestamp_deps
+[  6%] Built target log_rotation_test_autogen_timestamp_deps
+[  6%] Built target workspace_store_test_autogen_timestamp_deps
+[  6%] Automatic MOC for target qvw_ui
+[  6%] Built target qvw_backend_autogen
+[  7%] Automatic MOC for target infrastructure_test
+[  7%] Built target qvw_services_autogen
+[  7%] Automatic MOC for target hypit_probe_test
+[  8%] Automatic MOC for target json_process_test
+[  9%] Automatic MOC for target log_rotation_test
+[  9%] Built target infrastructure_test_autogen
+[  9%] Built target qvw_ui_autogen
+[ 10%] Automatic MOC for target workspace_store_test
+[ 10%] Built target hypit_probe_test_autogen
+[ 10%] Built target log_rotation_test_autogen
+[ 12%] Built target qvw_backend
+[ 12%] Built target json_process_test_autogen
+[ 12%] Built target workspace_store_test_autogen
+[ 12%] Built target studio_writer_test_autogen_timestamp_deps
+[ 12%] Building CXX object app/CMakeFiles/qvw_ui.dir/ui/MainWindow.cpp.o
+[ 12%] Building CXX object tests/CMakeFiles/infrastructure_test.dir/infrastructure_test_autogen/mocs_compilation.cpp.o
+[ 13%] Building CXX object tests/CMakeFiles/hypit_probe_test.dir/hypit_probe_test_autogen/mocs_compilation.cpp.o
+[ 14%] Building CXX object tests/CMakeFiles/json_process_test.dir/json_process_test_autogen/mocs_compilation.cpp.o
+[ 14%] Building CXX object tests/CMakeFiles/log_rotation_test.dir/log_rotation_test_autogen/mocs_compilation.cpp.o
+[ 14%] Building CXX object tests/CMakeFiles/hypit_probe_test.dir/unit/HypitProbeTest.cpp.o
+[ 20%] Built target qvw_services
+[ 20%] Building CXX object tests/CMakeFiles/infrastructure_test.dir/unit/InfrastructureTest.cpp.o
+[ 20%] Building CXX object tests/CMakeFiles/json_process_test.dir/unit/JsonProcessTest.cpp.o
+[ 21%] Building CXX object tests/CMakeFiles/log_rotation_test.dir/unit/LogRotationTest.cpp.o
+[ 22%] Built target workspace_store_test
+[ 22%] Built target qvw_controllers_autogen_timestamp_deps
+[ 22%] Built target studio_process_test_autogen_timestamp_deps
+[ 22%] Built target studio_client_test_autogen_timestamp_deps
+[ 22%] Built target project_store_test_autogen_timestamp_deps
+[ 22%] Built target asset_service_test_autogen_timestamp_deps
+[ 22%] Built target source_edit_guard_test_autogen_timestamp_deps
+[ 23%] Automatic MOC for target studio_writer_test
+[ 23%] Built target studio_writer_test_autogen
+[ 23%] Built target export_workspace_test_autogen_timestamp_deps
+[ 23%] Built target media_validation_test_autogen_timestamp_deps
+[ 23%] Built target proposal_service_test_autogen_timestamp_deps
+[ 23%] Built target sample_catalog_test_autogen_timestamp_deps
+[ 23%] Built target qvw_controllers_autogen
+[ 24%] Automatic MOC for target studio_process_test
+[ 24%] Built target studio_process_test_autogen
+[ 24%] Automatic MOC for target studio_client_test
+[ 24%] Built target studio_client_test_autogen
+[ 24%] Built target project_store_test_autogen
+[ 25%] Automatic MOC for target asset_service_test
+[ 25%] Linking CXX executable infrastructure_test
+[ 26%] Linking CXX executable hypit_probe_test
+[ 26%] Built target infrastructure_test
+[ 26%] Built target hypit_probe_test
+[ 26%] Automatic MOC for target source_edit_guard_test
+[ 26%] Building CXX object tests/CMakeFiles/studio_writer_test.dir/studio_writer_test_autogen/mocs_compilation.cpp.o
+[ 26%] Built target source_edit_guard_test_autogen
+[ 27%] Building CXX object tests/CMakeFiles/studio_writer_test.dir/unit/StudioWriterTest.cpp.o
+[ 27%] Automatic MOC for target export_workspace_test
+[ 27%] Linking CXX executable json_process_test
+[ 27%] Linking CXX executable log_rotation_test
+[ 27%] Built target json_process_test
+[ 27%] Built target log_rotation_test
+[ 27%] Automatic MOC for target media_validation_test
+[ 27%] Automatic MOC for target proposal_service_test
+[ 27%] Built target media_validation_test_autogen
+[ 27%] Built target proposal_service_test_autogen
+[ 28%] Automatic MOC for target sample_catalog_test
+[ 28%] Built target sample_catalog_test_autogen
+[ 32%] Built target qvw_controllers
+[ 33%] Building CXX object tests/CMakeFiles/studio_process_test.dir/studio_process_test_autogen/mocs_compilation.cpp.o
+[ 33%] Building CXX object tests/CMakeFiles/studio_client_test.dir/studio_client_test_autogen/mocs_compilation.cpp.o
+[ 33%] Building CXX object tests/CMakeFiles/studio_process_test.dir/unit/StudioProcessTest.cpp.o
+[ 33%] Building CXX object tests/CMakeFiles/studio_client_test.dir/unit/StudioClientTest.cpp.o
+[ 34%] Linking CXX static library libqvw_ui.a
+[ 34%] Built target asset_service_test_autogen
+[ 34%] Linking CXX executable project_store_test
+[ 38%] Built target qvw_ui
+[ 39%] Built target project_store_test
+[ 39%] Built target document_controller_test_autogen_timestamp_deps
+[ 39%] Built target project_e2e_test_autogen_timestamp_deps
+[ 40%] Building CXX object tests/CMakeFiles/asset_service_test.dir/unit/AssetServiceTest.cpp.o
+[ 40%] Building CXX object tests/CMakeFiles/source_edit_guard_test.dir/source_edit_guard_test_autogen/mocs_compilation.cpp.o
+[ 40%] Building CXX object tests/CMakeFiles/source_edit_guard_test.dir/unit/SourceEditGuardTest.cpp.o
+[ 40%] Built target export_workspace_test_autogen
+[ 40%] Built target editor_controller_test_autogen_timestamp_deps
+[ 40%] Built target editor_e2e_test_autogen_timestamp_deps
+[ 40%] Building CXX object tests/CMakeFiles/export_workspace_test.dir/export_workspace_test_autogen/mocs_compilation.cpp.o
+[ 40%] Building CXX object tests/CMakeFiles/export_workspace_test.dir/unit/ExportWorkspaceTest.cpp.o
+[ 40%] Linking CXX executable studio_writer_test
+[ 40%] Built target studio_writer_test
+[ 40%] Building CXX object tests/CMakeFiles/media_validation_test.dir/media_validation_test_autogen/mocs_compilation.cpp.o
+[ 40%] Building CXX object tests/CMakeFiles/media_validation_test.dir/unit/MediaValidationTest.cpp.o
+[ 41%] Linking CXX executable studio_client_test
+[ 41%] Built target studio_client_test
+[ 41%] Built target export_controller_test_autogen_timestamp_deps
+[ 41%] Built target export_e2e_test_autogen_timestamp_deps
+[ 41%] Building CXX object tests/CMakeFiles/proposal_service_test.dir/proposal_service_test_autogen/mocs_compilation.cpp.o
+[ 41%] Linking CXX executable studio_process_test
+[ 42%] Building CXX object tests/CMakeFiles/proposal_service_test.dir/unit/ProposalServiceTest.cpp.o
+[ 43%] Linking CXX executable source_edit_guard_test
+[ 43%] Built target studio_process_test
+[ 43%] Built target proposal_controller_test_autogen_timestamp_deps
+[ 43%] Built target proposal_e2e_test_autogen_timestamp_deps
+[ 43%] Built target runtime_paths_test_autogen_timestamp_deps
+[ 43%] Built target source_edit_guard_test
+[ 43%] Built target export_cache_test_autogen_timestamp_deps
+[ 43%] Built target walkthrough_demo_autogen_timestamp_deps
+[ 43%] Built target product_window_test_autogen_timestamp_deps
+[ 43%] Built target video_asset_importer_test_autogen_timestamp_deps
+[ 43%] Built target agent_panel_test_autogen_timestamp_deps
+[ 43%] Building CXX object tests/CMakeFiles/sample_catalog_test.dir/sample_catalog_test_autogen/mocs_compilation.cpp.o
+[ 43%] Built target product_e2e_test_autogen_timestamp_deps
+[ 44%] Building CXX object tests/CMakeFiles/sample_catalog_test.dir/unit/SampleCatalogTest.cpp.o
+[ 44%] Built target preview_version_test_autogen_timestamp_deps
+[ 44%] Built target product_experience_test_autogen_timestamp_deps
+[ 44%] Built target product_experience_e2e_test_autogen_timestamp_deps
+[ 44%] Linking CXX executable asset_service_test
+[ 44%] Built target asset_library_test_autogen_timestamp_deps
+[ 44%] Built target qvw_agent_autogen_timestamp_deps
+[ 44%] Built target inspector_controls_test_autogen_timestamp_deps
+[ 44%] Automatic MOC for target document_controller_test
+[ 44%] Built target asset_service_test
+[ 45%] Automatic MOC for target project_e2e_test
+[ 46%] Linking CXX executable export_workspace_test
+/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ProposalServiceTest.cpp:34:102: warning: ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]
+   34 |     QDir(p.rootPath).mkpath(QFileInfo(relative).path());QFile f(QDir(p.rootPath).filePath(relative));f.open(QIODevice::WriteOnly);f.write("image");
+      |                                                                                                      ^~~~~~ ~~~~~~~~~~~~~~~~~~~~
+[ 46%] Built target export_workspace_test
+[ 46%] Automatic MOC for target editor_controller_test
+[ 47%] Linking CXX executable media_validation_test
+[ 47%] Built target editor_controller_test_autogen
+[ 48%] Automatic MOC for target editor_e2e_test
+[ 48%] Built target media_validation_test
+[ 48%] Automatic MOC for target export_controller_test
+[ 48%] Built target document_controller_test_autogen
+1 warning generated.
+[ 48%] Built target export_controller_test_autogen
+[ 48%] Built target project_e2e_test_autogen
+[ 48%] Linking CXX executable proposal_service_test
+[ 49%] Automatic MOC for target export_e2e_test
+[ 49%] Linking CXX executable sample_catalog_test
+[ 49%] Automatic MOC for target proposal_controller_test
+[ 50%] Automatic MOC for target proposal_e2e_test
+[ 50%] Built target proposal_controller_test_autogen
+[ 50%] Automatic MOC for target runtime_paths_test
+[ 50%] Built target proposal_service_test
+[ 50%] Built target sample_catalog_test
+[ 50%] Built target runtime_paths_test_autogen
+[ 50%] Automatic MOC for target export_cache_test
+[ 51%] Automatic MOC for target walkthrough_demo
+[ 51%] Built target export_cache_test_autogen
+[ 51%] Automatic MOC for target product_window_test
+[ 51%] Built target video_asset_importer_test_autogen
+[ 51%] Automatic MOC for target agent_panel_test
+[ 51%] Built target agent_panel_test_autogen
+[ 51%] Automatic MOC for target product_e2e_test
+[ 51%] Built target editor_e2e_test_autogen
+[ 51%] Built target proposal_e2e_test_autogen
+[ 51%] Built target export_e2e_test_autogen
+[ 52%] Automatic MOC for target preview_version_test
+[ 52%] Built target product_experience_test_autogen
+[ 53%] Automatic MOC for target product_experience_e2e_test
+[ 53%] Built target preview_version_test_autogen
+[ 53%] Built target asset_library_test_autogen
+[ 54%] Automatic MOC for target qvw_agent
+[ 54%] Automatic MOC for target inspector_controls_test
+[ 54%] Built target inspector_controls_test_autogen
+[ 54%] Building CXX object tests/CMakeFiles/document_controller_test.dir/document_controller_test_autogen/mocs_compilation.cpp.o
+[ 55%] Building CXX object tests/CMakeFiles/document_controller_test.dir/unit/DocumentControllerTest.cpp.o
+[ 55%] Built target product_window_test_autogen
+[ 55%] Built target walkthrough_demo_autogen
+[ 56%] Building CXX object tests/CMakeFiles/project_e2e_test.dir/project_e2e_test_autogen/mocs_compilation.cpp.o
+[ 57%] Building CXX object tests/CMakeFiles/editor_controller_test.dir/editor_controller_test_autogen/mocs_compilation.cpp.o
+[ 57%] Building CXX object tests/CMakeFiles/project_e2e_test.dir/integration/ProjectE2ETest.cpp.o
+[ 57%] Building CXX object tests/CMakeFiles/editor_controller_test.dir/unit/EditorControllerTest.cpp.o
+[ 57%] Built target product_e2e_test_autogen
+[ 57%] Building CXX object tests/CMakeFiles/editor_e2e_test.dir/editor_e2e_test_autogen/mocs_compilation.cpp.o
+[ 57%] Built target qvw_agent_autogen
+[ 58%] Building CXX object tests/CMakeFiles/editor_e2e_test.dir/integration/EditorE2ETest.cpp.o
+[ 59%] Building CXX object tests/CMakeFiles/export_controller_test.dir/export_controller_test_autogen/mocs_compilation.cpp.o
+[ 59%] Building CXX object tests/CMakeFiles/export_controller_test.dir/unit/ExportControllerTest.cpp.o
+[ 59%] Built target product_experience_e2e_test_autogen
+[ 59%] Building CXX object tests/CMakeFiles/export_e2e_test.dir/export_e2e_test_autogen/mocs_compilation.cpp.o
+[ 60%] Building CXX object tests/CMakeFiles/export_e2e_test.dir/integration/ExportE2ETest.cpp.o
+[ 60%] Linking CXX executable document_controller_test
+/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp:44:101: warning: ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]
+   44 |                         source=j["text"].toString();if(!root.isEmpty()){QFile f(root+"/scene.svml");f.open(QIODevice::WriteOnly);f.write(source.toUtf8());}
+      |                                                                                                     ^~~~~~ ~~~~~~~~~~~~~~~~~~~~
+/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/EditorControllerTest.cpp:45:77: warning: ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]
+   45 |                         if(externalAfterSource){QFile f(root+"/scene.svml");f.open(QIODevice::WriteOnly);f.write("external");failGet=true;}
+      |                                                                             ^~~~~~ ~~~~~~~~~~~~~~~~~~~~
+[ 60%] Built target document_controller_test
+[ 61%] Building CXX object tests/CMakeFiles/proposal_controller_test.dir/proposal_controller_test_autogen/mocs_compilation.cpp.o
+[ 61%] Building CXX object tests/CMakeFiles/proposal_controller_test.dir/unit/ProposalControllerTest.cpp.o
+[ 61%] Linking CXX executable project_e2e_test
+2 warnings generated.
+[ 61%] Built target project_e2e_test
+[ 62%] Linking CXX executable editor_controller_test
+[ 63%] Building CXX object tests/CMakeFiles/proposal_e2e_test.dir/proposal_e2e_test_autogen/mocs_compilation.cpp.o
+[ 63%] Building CXX object tests/CMakeFiles/proposal_e2e_test.dir/integration/ProposalE2ETest.cpp.o
+[ 63%] Built target editor_controller_test
+[ 64%] Building CXX object tests/CMakeFiles/runtime_paths_test.dir/runtime_paths_test_autogen/mocs_compilation.cpp.o
+[ 64%] Building CXX object tests/CMakeFiles/runtime_paths_test.dir/unit/RuntimePathsTest.cpp.o
+[ 64%] Linking CXX executable editor_e2e_test
+[ 64%] Built target editor_e2e_test
+[ 64%] Building CXX object tests/CMakeFiles/export_cache_test.dir/export_cache_test_autogen/mocs_compilation.cpp.o
+[ 65%] Building CXX object tests/CMakeFiles/export_cache_test.dir/unit/ExportCacheTest.cpp.o
+[ 66%] Linking CXX executable export_controller_test
+[ 66%] Linking CXX executable export_e2e_test
+[ 66%] Built target export_e2e_test
+[ 66%] Built target export_controller_test
+[ 67%] Building CXX object tests/CMakeFiles/walkthrough_demo.dir/walkthrough_demo_autogen/mocs_compilation.cpp.o
+[ 67%] Building CXX object tests/CMakeFiles/product_window_test.dir/unit/ProductWindowTest.cpp.o
+[ 67%] Building CXX object tests/CMakeFiles/walkthrough_demo.dir/integration/WalkthroughDemo.cpp.o
+[ 68%] Linking CXX executable proposal_controller_test
+[ 68%] Built target proposal_controller_test
+[ 69%] Linking CXX executable video_asset_importer_test
+[ 69%] Linking CXX executable proposal_e2e_test
+[ 69%] Built target video_asset_importer_test
+[ 70%] Linking CXX executable agent_panel_test
+[ 70%] Built target proposal_e2e_test
+[ 70%] Building CXX object tests/CMakeFiles/product_e2e_test.dir/product_e2e_test_autogen/mocs_compilation.cpp.o
+[ 70%] Building CXX object tests/CMakeFiles/product_e2e_test.dir/integration/ProductE2ETest.cpp.o
+[ 71%] Built target agent_panel_test
+[ 71%] Building CXX object tests/CMakeFiles/preview_version_test.dir/preview_version_test_autogen/mocs_compilation.cpp.o
+[ 72%] Building CXX object tests/CMakeFiles/preview_version_test.dir/unit/PreviewVersionTest.cpp.o
+[ 73%] Linking CXX executable runtime_paths_test
+[ 73%] Built target runtime_paths_test
+[ 73%] Linking CXX executable product_experience_test
+[ 73%] Linking CXX executable export_cache_test
+[ 74%] Built target product_experience_test
+[ 74%] Built target export_cache_test
+[ 74%] Building CXX object tests/CMakeFiles/product_experience_e2e_test.dir/integration/ProductExperienceE2ETest.cpp.o
+[ 76%] Built target asset_library_test
+[ 77%] Building CXX object app/CMakeFiles/qvw_agent.dir/qvw_agent_autogen/mocs_compilation.cpp.o
+[ 78%] Linking CXX executable product_window_test
+[ 78%] Linking CXX executable walkthrough_demo
+[ 79%] Built target product_window_test
+[ 79%] Building CXX object tests/CMakeFiles/inspector_controls_test.dir/inspector_controls_test_autogen/mocs_compilation.cpp.o
+[ 79%] Building CXX object tests/CMakeFiles/inspector_controls_test.dir/unit/InspectorControlsTest.cpp.o
+[ 79%] Built target walkthrough_demo
+[ 79%] Building CXX object app/CMakeFiles/qvw_agent.dir/agent/AgentTaskStore.cpp.o
+[ 79%] Linking CXX executable preview_version_test
+[ 80%] Linking CXX executable product_e2e_test
+[ 80%] Built target preview_version_test
+[ 80%] Building CXX object app/CMakeFiles/qvw_agent.dir/agent/AgentController.cpp.o
+[ 80%] Built target product_e2e_test
+[ 81%] Linking CXX executable inspector_controls_test
+[ 81%] Linking CXX executable product_experience_e2e_test
+[ 81%] Built target inspector_controls_test
+[ 82%] Built target product_experience_e2e_test
+[ 82%] Linking CXX static library libqvw_agent.a
+[ 85%] Built target qvw_agent
+[ 85%] Built target agent_model_live_autogen_timestamp_deps
+[ 85%] Built target model_client_test_autogen_timestamp_deps
+[ 85%] Built target agent_plan_test_autogen_timestamp_deps
+[ 85%] Built target story_template_test_autogen_timestamp_deps
+[ 85%] Built target qt_video_workbench_autogen_timestamp_deps
+[ 85%] Built target startup_early_close_test_autogen_timestamp_deps
+[ 85%] Built target agent_e2e_test_autogen_timestamp_deps
+[ 85%] Built target agent_controller_test_autogen_timestamp_deps
+[ 85%] Built target agent_task_store_test_autogen_timestamp_deps
+[ 87%] Automatic MOC for target agent_plan_test
+[ 87%] Automatic MOC for target story_template_test
+[ 87%] Automatic MOC for target qt_video_workbench
+[ 87%] Automatic MOC for target agent_model_live
+[ 88%] Automatic MOC for target model_client_test
+[ 88%] Built target story_template_test_autogen
+[ 88%] Built target agent_plan_test_autogen
+[ 89%] Automatic MOC for target agent_e2e_test
+[ 89%] Built target agent_model_live_autogen
+[ 89%] Automatic MOC for target startup_early_close_test
+[ 89%] Built target model_client_test_autogen
+[ 89%] Built target qt_video_workbench_autogen
+[ 89%] Automatic MOC for target agent_task_store_test
+[ 89%] Building CXX object tests/CMakeFiles/story_template_test.dir/story_template_test_autogen/mocs_compilation.cpp.o
+[ 90%] Building CXX object app/CMakeFiles/qt_video_workbench.dir/qt_video_workbench_autogen/mocs_compilation.cpp.o
+[ 91%] Building CXX object tests/CMakeFiles/story_template_test.dir/unit/StoryTemplateTest.cpp.o
+[ 91%] Built target agent_task_store_test_autogen
+[ 91%] Automatic MOC for target agent_controller_test
+[ 91%] Built target startup_early_close_test_autogen
+[ 91%] Building CXX object app/CMakeFiles/qt_video_workbench.dir/main.cpp.o
+[ 92%] Building CXX object tests/CMakeFiles/agent_plan_test.dir/agent_plan_test_autogen/mocs_compilation.cpp.o
+[ 92%] Linking CXX executable model_client_test
+[ 92%] Building CXX object tests/CMakeFiles/agent_plan_test.dir/unit/AgentPlanTest.cpp.o
+[ 93%] Built target model_client_test
+[ 93%] Building CXX object tests/CMakeFiles/agent_model_live.dir/agent_model_live_autogen/mocs_compilation.cpp.o
+[ 94%] Building CXX object tests/CMakeFiles/agent_model_live.dir/integration/AgentModelLive.cpp.o
+[ 94%] Linking CXX executable story_template_test
+[ 94%] Linking CXX executable agent_model_live
+[ 94%] Built target story_template_test
+[ 94%] Building CXX object tests/CMakeFiles/agent_task_store_test.dir/agent_task_store_test_autogen/mocs_compilation.cpp.o
+[ 94%] Built target agent_model_live
+[ 95%] Building CXX object tests/CMakeFiles/agent_task_store_test.dir/unit/AgentTaskStoreTest.cpp.o
+[ 95%] Linking CXX executable agent_plan_test
+[ 96%] Building CXX object tests/CMakeFiles/startup_early_close_test.dir/startup_early_close_test_autogen/mocs_compilation.cpp.o
+[ 96%] Building CXX object tests/CMakeFiles/startup_early_close_test.dir/integration/StartupEarlyCloseTest.cpp.o
+[ 96%] Built target agent_plan_test
+[ 97%] Linking CXX executable qt-video-workbench.app/Contents/MacOS/qt-video-workbench
+Copy original templates beside application runtime
+[ 97%] Built target qt_video_workbench
+[ 97%] Linking CXX executable agent_task_store_test
+[ 97%] Built target agent_task_store_test
+[ 98%] Linking CXX executable startup_early_close_test
+[ 98%] Built target startup_early_close_test
+[ 98%] Built target agent_e2e_test_autogen
+[ 98%] Built target agent_controller_test_autogen
+[ 99%] Building CXX object tests/CMakeFiles/agent_e2e_test.dir/agent_e2e_test_autogen/mocs_compilation.cpp.o
+[ 99%] Building CXX object tests/CMakeFiles/agent_e2e_test.dir/integration/AgentE2ETest.cpp.o
+[ 99%] Building CXX object tests/CMakeFiles/agent_controller_test.dir/unit/AgentControllerTest.cpp.o
+[ 99%] Linking CXX executable agent_e2e_test
+[ 99%] Built target agent_e2e_test
+[100%] Linking CXX executable agent_controller_test
+[100%] Built target agent_controller_test

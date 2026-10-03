@@ -1,0 +1,6 @@
+11 scoped files; 238 changed lines. No edits to source or builds.
+Inspected modified functions and direct callers for logic, security, state, lifetime, reentrancy, performance.
+Existing built tests: 6 relevant functions passed (2 each AgentPanelTest, ModelClientTest, AgentControllerTest); local simulation only. Public message isolation, malformed/cancelled output, no authorization via partial output passed. Existing stage tests assert review input hidden but omit reject/regenerate path; finding proven by visibility and signal call graph.
+
+Re-review PASS: review escape finding closed. Current scope: 11 files, 278 changed lines. New agentRevise button emits existing stopRequested before clearing local plan and enabling composition. Direct synchronous app wiring invokes controller.stop(), canApprove becomes false; panel independently disables approval while composing. New goal retains text and requires a newly generated/reviewed plan.
+Independently reran existing built regression functions: AgentPanelTest::reviewCanReturnToGoalWithoutExecutingOrKeepingApproval PASS; AgentControllerTest::stoppingReviewRevokesApprovalAndAllowsAnotherGoal PASS. Each invocation reports 3 passes including init/cleanup, 0 failures. No source edits or builds. Original finding and reports retained under initial-* names. No remaining P0-P2 findings.

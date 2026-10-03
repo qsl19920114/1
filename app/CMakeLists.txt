@@ -26,6 +26,7 @@ target_link_libraries(qvw_backend PUBLIC qvw_domain qvw_infra Qt6::Network)
 # Config, logging and the startup self-check. Depends on nothing above it, so it
 # stays usable from tests without pulling in the UI.
 add_library(qvw_infra STATIC
+  infrastructure/WorkspaceStore.cpp
   infrastructure/AppConfig.cpp
   infrastructure/HypitProbe.cpp
   infrastructure/LogWriter.cpp
@@ -40,6 +41,9 @@ target_include_directories(qvw_services PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(qvw_services PUBLIC qvw_domain qvw_infra Qt6::Gui)
 
 add_library(qvw_ui STATIC
+  ui/AssetTree.cpp
+  ui/HistoryPanel.cpp
+  ui/SceneStrip.cpp
   ui/MainWindow.cpp
   ui/MainWindow.h
   ui/InspectorControls.cpp

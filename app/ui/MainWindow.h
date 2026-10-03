@@ -6,6 +6,8 @@
 #include "domain/AgentPlan.h"
 #include <QMainWindow>
 #include <QUrl>
+#include <QJsonObject>
+#include <QJsonArray>
 class QLabel;
 class QPlainTextEdit;
 class QTreeWidget;
@@ -18,7 +20,11 @@ class QLineEdit;
 class QTabWidget;
 class QSlider;
 class QProgressBar;
+class QSplitter;
+class QMenu;
 namespace qvw::ui {
+class HistoryPanel;
+class SceneStrip;
 class StudioTransport;
 class AgentPanel;
 class MainWindow : public QMainWindow {
@@ -38,17 +44,27 @@ public:
     void setEditorState(bool ready,bool busy,bool canUndo,bool canRedo);
     void showExportTask(const domain::ExportTask &task);
     void setImportBusy(bool busy);
+    void showImportProgress(int completed,int total,const QString &path);
+    void selectImportedAsset(const domain::Asset &asset);
     void setSamples(const domain::VideoSamples &samples);
     QWebEngineView *previewView() const { return m_webView; }
     AgentPanel *agentPanel() const { return m_agentPanel; }
     domain::PreviewVersion previewVersion() const;
     void showAgentStatus(const domain::AgentStatus &status);
     void showAgentPlan(const domain::AgentPlan &plan);
+    QJsonObject workspaceLayout() const;
+    void restoreWorkspaceLayout(const QJsonObject &layout);
+    void restorePlayhead(int frame);
+    void showRecentProjects(const QJsonArray &recent);
+    void showHistory(const QJsonArray &history);
 signals:
+    void historyRecorded(const QJsonObject &record);
+    void playheadChanged(const QString &manifest,int frame);
     void openRequested(const QString &workspace, const QString &run, const QString &runtime);
     void newDocumentRequested(const QString &directory, const QString &name);
     void openDocumentRequested(const QString &manifest);
     void saveDocumentRequested();
+    void importFilesRequested(const QStringList &paths);
     void importImageRequested(const QString &path);
     void importVideoRequested(const QString &path);
     void cancelImportRequested();
@@ -84,6 +100,9 @@ private:
     void useSelectedSample();
     void sourceDialog();
     void applySelectedAsset();
+    void previewSelectedAsset();
+    QPushButton *m_previewAsset=nullptr;
+    QLabel *m_assetSelection=nullptr;
     void showSelectedInspector();
     QTreeWidget *m_componentTree = nullptr;
     QTreeWidget *m_inspectorTable = nullptr;
@@ -124,6 +143,13 @@ private:
     bool m_hasProposal = false;
     QUrl m_previewUrl;
     domain::Snapshot m_snapshot;
+    domain::Project m_document;
+    HistoryPanel *m_history=nullptr;
+    QSplitter *m_columns=nullptr,*m_middle=nullptr;
+    QMenu *m_recentMenu=nullptr;
+    int m_pendingFrame=-1;
+    SceneStrip *m_scenes=nullptr;
+    void selectScene(const QString &entityId,int frame);
     domain::VideoSamples m_samples;
     domain::ExportTask m_exportTask;
     StudioTransport *m_transport=nullptr;

@@ -41,7 +41,7 @@ bool integerField(const QJsonObject &object, const char *key, qint64 min, qint64
     *value = static_cast<qint64>(number); return true;
 }
 bool contained(const QString &root, const QString &path) { return path == root || path.startsWith(root + '/'); }
-bool validate(const domain::Project &project, QString *error) {
+bool validate(const domain::Project &project, QString *error, QVector<domain::Asset> *missing = nullptr) {
     if (project.name.trimmed().isEmpty() || project.templateId.trimmed().isEmpty() || project.templateVersion.trimmed().isEmpty())
         return fail(error, QStringLiteral("工程名称、模板标识和模板版本不能为空"));
     if (project.maxAssetBytes <= 0 || project.maxAssetBytes > maxSafeInteger)
@@ -55,7 +55,13 @@ bool validate(const domain::Project &project, QString *error) {
             || asset.width <= 0 || asset.height <= 0 || asset.size < 0 || asset.size > maxSafeInteger
             || hashes.contains(asset.hash) || paths.contains(asset.path))
             return fail(error, QStringLiteral("素材元数据无效或重复：%1").arg(asset.originalName));
-        if (!ProjectStore::resolvePath(project, asset.path, nullptr, error)) return false;
+        QString absolute;
+        if (!ProjectStore::resolvePath(project, asset.path, &absolute, error, missing == nullptr)) return false;
+        if (missing) {
+            const QFileInfo info(absolute);
+            if (!info.exists() && !info.isSymLink()) missing->push_back(asset);
+            else if (!info.isFile()) return fail(error, QStringLiteral("素材必须是普通文件：%1").arg(asset.path));
+        }
         hashes.insert(asset.hash); paths.insert(asset.path);
     }
     return true;
@@ -81,12 +87,15 @@ bool ProjectStore::resolvePath(const domain::Project &project, const QString &re
         return fail(error, QStringLiteral("工程路径必须是安全的相对路径：%1").arg(relative));
     const auto components = relative.split('/');
     auto current = root;
-    for (const auto &component : components) {
+    for (qsizetype i = 0; i < components.size(); ++i) {
+        const auto &component = components[i];
         if (component.isEmpty() || component == "." || component == "..")
             return fail(error, QStringLiteral("工程路径不能包含空段、. 或 ..：%1").arg(relative));
         current = QDir(current).filePath(component);
         const QFileInfo info(current);
         if (info.exists() || info.isSymLink()) {
+            if (i + 1 < components.size() && !info.isDir())
+                return fail(error, QStringLiteral("工程路径父级必须是目录：%1").arg(relative));
             const auto canonical = info.canonicalFilePath();
             if (canonical.isEmpty() || !contained(root, canonical))
                 return fail(error, QStringLiteral("工程路径越过根目录或符号链接无效：%1").arg(relative));
@@ -98,7 +107,8 @@ bool ProjectStore::resolvePath(const domain::Project &project, const QString &re
     return true;
 }
 
-bool ProjectStore::load(const QString &manifestPath, domain::Project *project, QString *error) {
+namespace {
+bool readProject(const QString &manifestPath, domain::Project *project, QVector<domain::Asset> *missing, QString *error) {
     if (!project) return fail(error, QStringLiteral("工程输出参数为空"));
     const QFileInfo manifest(manifestPath);
     if (manifest.fileName() != "workbench.qvw.json") return fail(error, QStringLiteral("工程清单必须命名为 workbench.qvw.json"));
@@ -126,8 +136,21 @@ bool ProjectStore::load(const QString &manifestPath, domain::Project *project, Q
             || !integerField(item, "size", 0, static_cast<qint64>(maxSafeInteger), &asset.size, error)) return false;
         asset.width = static_cast<int>(width); asset.height = static_cast<int>(height); parsed.assets.push_back(asset);
     }
-    if (!validate(parsed, error)) return false;
-    *project = parsed; if (error) error->clear(); return true;
+    QVector<domain::Asset> absent;
+    if (!validate(parsed, error, missing ? &absent : nullptr)) return false;
+    *project = parsed;
+    if (missing) *missing = absent;
+    if (error) error->clear(); return true;
+}
+}
+
+bool ProjectStore::load(const QString &manifestPath, domain::Project *project, QString *error) {
+    return readProject(manifestPath, project, nullptr, error);
+}
+bool ProjectStore::inspectMissingAssets(const QString &manifestPath, domain::Project *project,
+                                      QVector<domain::Asset> *missing, QString *error) {
+    if (!missing) return fail(error, QStringLiteral("缺失素材输出参数为空"));
+    return readProject(manifestPath, project, missing, error);
 }
 
 bool ProjectStore::save(domain::Project &project, QString *error) {

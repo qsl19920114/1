@@ -7,12 +7,15 @@
 #include <QDebug>
 int main(int argc,char **argv){
     QCoreApplication app(argc,argv);qvw::agent::ModelClient client;
+    if(argc>2)client.setProgram(QString::fromLocal8Bit(argv[2]));
+    int publicMessages=0,publicCharacters=0;
+    QObject::connect(&client,&qvw::agent::ModelClient::publicMessageReceived,&app,[&](const QString &text){++publicMessages;publicCharacters+=text.size();});
     QObject::connect(&client,&qvw::agent::ModelClient::failed,&app,[&](const QString &error){qCritical().noquote()<<error;app.exit(2);});
     QObject::connect(&client,&qvw::agent::ModelClient::completed,&app,[&](const QJsonObject &json){
         qvw::domain::AgentPlan plan;QString error;
         if(!qvw::agent::PlanService::parse(json,{},&plan,&error)||plan.kind()!="clarify"){qCritical().noquote()<<"Live model did not return required missing-assets clarification:"<<error;app.exit(3);return;}
-        QSaveFile file(QStringLiteral(QVW_SOURCE_DIR)+"/docs/evidence/m8/real-model-probe.json");
-        const auto bytes=QJsonDocument(QJsonObject{{"verdict","PASS"},{"provider","codex-current-chatgpt-login"},{"realModel",true},{"pixelsUploaded",false},{"response",json}}).toJson();
+        QSaveFile file(argc>1?QString::fromLocal8Bit(argv[1]):QStringLiteral(QVW_SOURCE_DIR)+"/docs/evidence/m8/real-model-probe.json");
+        const auto bytes=QJsonDocument(QJsonObject{{"verdict","PASS"},{"provider","codex-current-chatgpt-login"},{"realModel",true},{"pixelsUploaded",false},{"publicMessageEvents",publicMessages},{"publicCharacters",publicCharacters},{"response",json}}).toJson();
         if(!file.open(QIODevice::WriteOnly)||file.write(bytes)!=bytes.size()||!file.commit()){app.exit(4);return;}
         qInfo()<<"Real model structured clarification PASS";app.exit(0);
     });

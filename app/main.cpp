@@ -1,3 +1,8 @@
+#include "services/ProjectStore.h"
+#include "services/AssetService.h"
+#include <QFileDialog>
+#include <QMessageBox>
+#include "infrastructure/WorkspaceStore.h"
 #include "backend/hypit/SnapshotMapper.h"
 #include "controllers/ProjectController.h"
 #include "controllers/DocumentController.h"
@@ -104,6 +109,16 @@ int main(int argc, char **argv) {
     QObject::connect(&agent,&qvw::agent::AgentController::assetsChanged,window.agentPanel(),&qvw::ui::AgentPanel::showAssets);
     QObject::connect(&agent,&qvw::agent::AgentController::failed,&window,[&](const QString &text){window.appendLog("Agent 未完成："+text);log.error(text);});
     QObject::connect(&agent,&qvw::agent::AgentController::message,&window,&qvw::ui::MainWindow::appendLog);
+    QObject::connect(&agent,&qvw::agent::AgentController::publicMessageReceived,window.agentPanel(),&qvw::ui::AgentPanel::showPublicMessage);
+    qvw::infra::WorkspaceStore workspace(QDir(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation)).filePath("workspace.json"));
+    QString workspaceError;
+    if(!verification){if(!workspace.load(&workspaceError))window.appendLog(workspaceError);window.restoreWorkspaceLayout(workspace.layout());window.showRecentProjects(workspace.recent());window.showHistory(workspace.history());}
+    QTimer workspaceSave;workspaceSave.setSingleShot(true);workspaceSave.setInterval(750);
+    auto saveWorkspace=[&]{if(verification)return;workspace.setLayout(window.workspaceLayout());QString error;if(!workspace.save(&error))window.appendLog(error);};
+    QObject::connect(&workspaceSave,&QTimer::timeout,&window,saveWorkspace);
+    QObject::connect(&window,&qvw::ui::MainWindow::historyRecorded,&window,[&](const QJsonObject &record){if(verification)return;workspace.record(record);window.showHistory(workspace.history());workspaceSave.start();});
+    QObject::connect(&window,&qvw::ui::MainWindow::playheadChanged,&window,[&](const QString &path,int frame){if(verification||workspace.frame(path)==frame)return;workspace.setFrame(path,frame);if(!workspaceSave.isActive())workspaceSave.start();});
+    QObject::connect(&app,&QCoreApplication::aboutToQuit,&window,saveWorkspace);
     window.setSamples(qvw::services::SampleCatalog::discover(loaded.config.distributionPath));
     window.appendLog(QStringLiteral("日志：%1").arg(log.filePath()));
     if (!log.isReady()) window.appendLog(QStringLiteral("日志不可写：%1").arg(log.lastError()));
@@ -195,14 +210,32 @@ int main(int argc, char **argv) {
     QObject::connect(&window,&qvw::ui::MainWindow::sampleDocumentRequested,&creation,[&](const QString &sample,const QString &dir,const QString &name){
         if(exporter.isBusy())return;creation.create(sample,QDir(qvw::infra::RuntimePaths::templateDirectory()).filePath("video-story"),dir,name);
     });
-    QObject::connect(&window,&qvw::ui::MainWindow::openDocumentRequested,&document,[&](const QString &manifest){creation.cancel();document.open(manifest);});
+    auto openDocumentWithRepair=[&](const QString &manifest){
+        if(editor.isBusy()||document.importingVideo()||exporter.isBusy())return;
+        qvw::domain::Project inspected;QVector<qvw::domain::Asset> missing;QString error;
+        if(!verification&&qvw::services::ProjectStore::inspectMissingAssets(manifest,&inspected,&missing,&error)&&!missing.isEmpty()){
+            QMessageBox::information(&window,"重新定位缺失素材",QString("此工程缺少 %1 个素材。请选择对应的原始文件；内容校验通过后恢复原引用。取消将保留当前打开的工程。").arg(missing.size()));
+            for(const auto &asset:missing){
+                for(;;){const auto path=QFileDialog::getOpenFileName(&window,"定位原素材 · "+asset.originalName,{},"素材 (*.png *.jpg *.jpeg *.mp4);;所有文件 (*)");if(path.isEmpty())return;
+                    if(qvw::services::AssetService::restoreMissing(inspected,asset,path,&error))break;
+                    QMessageBox::warning(&window,"素材未恢复",error+"\n请选择相同内容的原文件，或取消。");
+                }
+            }
+        }
+        creation.cancel();document.open(manifest);
+    };
+    QObject::connect(&window,&qvw::ui::MainWindow::openDocumentRequested,&document,openDocumentWithRepair);
     QObject::connect(&creation,&qvw::controllers::SampleCreationController::message,&window,&qvw::ui::MainWindow::appendLog);
     QObject::connect(&creation,&qvw::controllers::SampleCreationController::failed,&window,&qvw::ui::MainWindow::showError);
     QObject::connect(&window, &qvw::ui::MainWindow::saveDocumentRequested, &document, &qvw::controllers::DocumentController::save);
+    QObject::connect(&window,&qvw::ui::MainWindow::importFilesRequested,&document,&qvw::controllers::DocumentController::importFiles);
+    QObject::connect(&document,&qvw::controllers::DocumentController::importProgress,&window,&qvw::ui::MainWindow::showImportProgress);
+    QObject::connect(&document,&qvw::controllers::DocumentController::assetImported,&window,&qvw::ui::MainWindow::selectImportedAsset);
+    QObject::connect(&document,&qvw::controllers::DocumentController::importBatchFinished,&window,[&](int success,int total,const QStringList &errors){window.appendLog(QString("素材导入完成：%1 / %2 成功。%3").arg(success).arg(total).arg(errors.isEmpty()?QString():"\n"+errors.join("\n")));if(!errors.isEmpty())window.showError("部分素材未导入，可重新拖入失败文件：\n"+errors.join("\n"));});
     QObject::connect(&window, &qvw::ui::MainWindow::importImageRequested, &document, &qvw::controllers::DocumentController::importImage);
     QObject::connect(&window,&qvw::ui::MainWindow::importVideoRequested,&document,&qvw::controllers::DocumentController::importVideo);
     QObject::connect(&document,&qvw::controllers::DocumentController::videoImportStateChanged,&window,&qvw::ui::MainWindow::setImportBusy);
-    QObject::connect(&window,&qvw::ui::MainWindow::cancelImportRequested,&document,[&]{creation.cancel();document.cancelVideoImport();window.appendLog("视频导入已取消，工程保持不变。");});
+    QObject::connect(&window,&qvw::ui::MainWindow::cancelImportRequested,&document,[&]{creation.cancel();document.cancelVideoImport();window.appendLog("已取消剩余导入，已完成的素材保留。");});
     QObject::connect(&document, &qvw::controllers::DocumentController::projectChanged, &window, &qvw::ui::MainWindow::showDocument);
     QObject::connect(&document, &qvw::controllers::DocumentController::documentClosed, &window, &qvw::ui::MainWindow::clearDocument);
     QObject::connect(&document, &qvw::controllers::DocumentController::documentClosed, &exporter, &qvw::controllers::ExportController::clearProject);
@@ -212,6 +245,7 @@ int main(int argc, char **argv) {
     QObject::connect(&document, &qvw::controllers::DocumentController::projectLoaded, &controller, [&](const qvw::domain::Project &project) {
         controller.openDocument(project,port);
     });
+    QObject::connect(&document,&qvw::controllers::DocumentController::projectLoaded,&window,[&](const qvw::domain::Project &project){if(verification)return;workspace.visit(project.manifestPath(),project.name);window.restorePlayhead(workspace.frame(project.manifestPath()));window.showRecentProjects(workspace.recent());workspaceSave.start();});
     QObject::connect(&document, &qvw::controllers::DocumentController::message, &window, [&](const QString &text) {
         window.appendLog(text); log.info(text);
     });
@@ -244,7 +278,7 @@ int main(int argc, char **argv) {
     });
     QObject::connect(&controller, &qvw::controllers::ProjectController::initialized, &app, [&] {
         if(parser.isSet("create-project"))document.create(QDir(qvw::infra::RuntimePaths::templateDirectory()).filePath("title-card"),parser.value("create-project"),parser.value("name"));
-        else if (parser.isSet("project")) document.open(parser.value("project"));
+        else if (parser.isSet("project")) openDocumentWithRepair(parser.value("project"));
         else if (live) controller.openProject(parser.value("workspace"), parser.value("run"), parser.value("runtime"), port);
     });
     QObject::connect(&deadline, &QTimer::timeout, &app, [&] { verificationError=QStringLiteral("真实预览验证超时。");qCritical().noquote()<<verificationError;finish(8); });

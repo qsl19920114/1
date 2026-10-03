@@ -33,6 +33,8 @@ public:
     domain::AgentAssets assets() const {return m_assets;}
     std::optional<domain::AgentPlan> plan() const {return m_plan;}
 signals:
+    // Full text snapshot from an observed public agent_message event; never reasoning.
+    void publicMessageReceived(const QString &text);
     void statusChanged(const qvw::domain::AgentStatus &status);
     void planReady(const qvw::domain::AgentPlan &plan);
     void assetsChanged(const qvw::domain::AgentAssets &assets);

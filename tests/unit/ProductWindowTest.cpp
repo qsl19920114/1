@@ -14,8 +14,7 @@ class ProductWindowTest : public QObject {
         return nullptr;
     }
     QPushButton *apply(qvw::ui::MainWindow &w) {
-        for(auto *b:w.findChildren<QPushButton*>())if(b->text().startsWith("应用到"))return b;
-        return nullptr;
+        return w.findChild<QPushButton*>("applyAsset");
     }
 private slots:
     void selectingTrackClearsAgentComponentContext() {

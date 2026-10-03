@@ -14,6 +14,7 @@ public:
     bool open(const QString &manifest);
     bool save();
     bool importImage(const QString &path);
+    bool importFiles(const QStringList &paths);
     void setMediaTools(const QString &ffprobe,const QString &ffmpeg,const QProcessEnvironment &environment);
     bool importVideo(const QString &path);
     bool importingVideo() const;
@@ -28,8 +29,20 @@ signals:
     void failed(const QString &message);
     void message(const QString &message);
     void videoImportStateChanged(bool importing);
+    void importProgress(int completed, int total, const QString &path);
+    void importBatchFinished(int success, int total, const QStringList &errors);
     void assetImported(const qvw::domain::Asset &asset);
 private:
+    void publishImportState();
+    void processNextImport(quint64 generation);
+    void acceptImport(const domain::Project &project, const domain::Asset &asset, bool video);
+    void rejectBatchEntry(const QString &error);
+    void finishBatch(bool canceled);
+    void scheduleNextImport();
+    bool m_batchActive = false, m_batchPending = false, m_batchVideo = false, m_announcedBusy = false;
+    QStringList m_batchPaths, m_batchErrors;
+    int m_batchNext = 0, m_batchCompleted = 0, m_batchSuccess = 0;
+    quint64 m_batchGeneration = 0;
     std::optional<domain::Project> m_project;
     services::VideoAssetImporter m_videoImporter;
     QString m_ffprobe,m_ffmpeg;

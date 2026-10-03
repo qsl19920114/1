@@ -47,6 +47,16 @@ int fakeCodex(const QStringList &arguments)
     if (!output.open(stdout, QIODevice::WriteOnly)) return 96;
     if (!diagnostics.open(stderr, QIODevice::WriteOnly)) return 97;
     if (mode == "slow") QThread::msleep(500);
+    if (mode == "public-output" || mode == "public-malformed" || mode == "public-held") {
+        output.write("{\"type\":\"item.completed\",\"item\":{\"id\":\"r\",\"type\":\"reasoning\",\"text\":\"private reasoning\"}}\n");
+        output.write("{\"type\":\"item.updated\",\"item\":{\"id\":\"m\",\"type\":\"agent_message\",\"text\":\"received\"}}\n"); output.flush();
+        QThread::msleep(200);
+        output.write("{\"type\":\"item.completed\",\"item\":{\"id\":\"m\",\"type\":\"agent_message\",\"text\":\"received public message\"}}\n"); output.flush();
+        QThread::msleep(200);
+        if (mode == "public-held") QThread::msleep(1000);
+        if (mode == "public-malformed") { output.write("{bad event}\n"); output.flush(); return 0; }
+    }
+
     if (mode == "nonzero") {
         diagnostics.write("Authorization: Bearer private-test-token\n");
         diagnostics.flush();
@@ -111,6 +121,27 @@ QJsonObject exampleSchema()
 class ModelClientTest : public QObject {
     Q_OBJECT
 private slots:
+    void onlyReceivedPublicMessagesAreProgressivelyPublished() {
+        ModelClient client; client.setProgram(QCoreApplication::applicationFilePath());
+        QSignalSpy output(&client, SIGNAL(publicMessageReceived(QString)));
+        QVERIFY(output.isValid()); QSignalSpy completed(&client, &ModelClient::completed);
+        client.request(requestPrompt("public-output"), exampleSchema());
+        QTRY_COMPARE_WITH_TIMEOUT(output.size(), 1, 1000); QVERIFY(client.isBusy()); QCOMPARE(completed.size(), 0);
+        QCOMPARE(output[0][0].toString(), QString("received"));
+        QTRY_VERIFY_WITH_TIMEOUT(output.size() >= 2, 1000); QCOMPARE(output[1][0].toString(), QString("received public message"));
+        QTRY_COMPARE_WITH_TIMEOUT(completed.size(), 1, 2000);
+        for (const auto &message : output) QVERIFY(!message[0].toString().contains("private reasoning"));
+    }
+    void publicOutputDoesNotMakeMalformedOrCancelledResponseComplete() {
+        ModelClient client; client.setProgram(QCoreApplication::applicationFilePath());
+        QSignalSpy output(&client, SIGNAL(publicMessageReceived(QString))); QVERIFY(output.isValid());
+        QSignalSpy completed(&client, &ModelClient::completed), failed(&client, &ModelClient::failed);
+        client.request(requestPrompt("public-malformed"), exampleSchema());
+        QTRY_COMPARE_WITH_TIMEOUT(failed.size(), 1, 2000); QVERIFY(output.size() >= 2); QCOMPARE(completed.size(), 0);
+        output.clear(); client.request(requestPrompt("public-held"), exampleSchema());
+        QTRY_COMPARE_WITH_TIMEOUT(output.size(), 1, 1000); client.cancel();
+        QTest::qWait(300); QCOMPARE(output.size(), 1); QCOMPARE(completed.size(), 0); QCOMPARE(failed.size(), 1);
+    }
     void envLauncherUsesConfiguredEnvironmentWithoutChangingParentPath() {
 #ifdef Q_OS_UNIX
         QTemporaryDir dir;const auto tools=dir.filePath("tools");QVERIFY(QDir().mkpath(tools));

@@ -1,0 +1,13 @@
+[
+  {
+    "title": "审阅阶段没有拒绝方案或返回目标输入的可用入口",
+    "file": "app/ui/AgentPanel.cpp",
+    "start_line": 168,
+    "end_line": 174,
+    "severity": "P1",
+    "category": "LOGIC",
+    "confidence": 10,
+    "rationale": "正常生成 create/edit 方案进入 review 后，showStatus 将 m_composing 设为 false，目标、素材选择和生成按钮均隐藏。review 不属于 busy、failed 或 result，所以停止、修订、继续创作和恢复任务也都隐藏。PlanReviewPanel 的修改方案仅展开字段编辑器，无法重新描述目标、更换操作目标或拒绝整张方案。用户必须执行不想要的方案，或在 Agent 外关闭/改变工程才能回到创作流程；此前目标和生成入口始终可用。新阶段测试断言输入隐藏，但未验证拒绝或重新生成路径。",
+    "suggestion": "在 review 提供重新描述目标或拒绝入口，撤销当前方案批准状态并返回可编辑目标/素材界面；测试未执行旧方案、重新生成可用及旧批准不能复用。"
+  }
+]

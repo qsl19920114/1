@@ -56,6 +56,14 @@ PlanReviewPanel::PlanReviewPanel(QWidget *parent):QWidget(parent) {
     auto *layout = new QVBoxLayout(this); layout->setContentsMargins(0, 0, 0, 0); layout->setSpacing(8);
     m_summary = plainLabel(QStringLiteral("生成后，可在这里编辑并确认方案。"), "planSummary"); layout->addWidget(m_summary);
     m_question = plainLabel({}, "planQuestion"); m_question->hide(); layout->addWidget(m_question);
+    m_changes = plainLabel({}, "planChanges"); m_changes->setTextFormat(Qt::RichText); m_changes->setAlignment(Qt::AlignTop);
+    m_overview = new QScrollArea(this); m_overview->setObjectName("planOverview"); m_overview->setWidgetResizable(true);
+    m_overview->setFrameShape(QFrame::NoFrame); m_overview->setMinimumHeight(110); m_overview->setWidget(m_changes); layout->addWidget(m_overview, 1); m_overview->hide();
+    m_modify = new QPushButton(QStringLiteral("修改方案")); m_modify->setObjectName("planModify"); m_modify->hide(); layout->addWidget(m_modify);
+    connect(m_modify, &QPushButton::clicked, this, [this] {
+        m_modifying = !m_modifying; m_scroll->setVisible(m_modifying); m_overview->setVisible(!m_modifying);
+        m_modify->setText(m_modifying ? QStringLiteral("查看修改摘要") : QStringLiteral("修改方案"));
+    });
     m_scroll = new QScrollArea(this); m_scroll->setObjectName("planScroll"); m_scroll->setWidgetResizable(true);
     m_scroll->setFrameShape(QFrame::NoFrame); m_scroll->setMinimumHeight(160); layout->addWidget(m_scroll, 1);
     m_totalDuration = plainLabel({}, "planTotalDuration"); m_totalDuration->hide(); layout->addWidget(m_totalDuration);
@@ -65,10 +73,10 @@ PlanReviewPanel::PlanReviewPanel(QWidget *parent):QWidget(parent) {
     layout->addWidget(m_approve); connect(m_approve, &QPushButton::clicked, this, &PlanReviewPanel::approve); m_scroll->hide();
 }
 void PlanReviewPanel::showPlan(const domain::AgentPlan &plan, const domain::Snapshot &snapshot) {
-    m_content = plan.content; m_snapshot = snapshot; rebuild();
+    m_content = plan.content; m_snapshot = snapshot; m_modifying = false; rebuild();
 }
 void PlanReviewPanel::clearPlan() {
-    m_content = {}; m_snapshot = {}; m_approvalEnabled = false;
+    m_content = {}; m_snapshot = {}; m_approvalEnabled = false; m_modifying = false;
     if (auto *dialog = findChild<QDialog *>("agentCreateDialog")) dialog->reject();
     rebuild();
 }
@@ -76,7 +84,7 @@ void PlanReviewPanel::showAssets(const domain::AgentAssets &assets) {
     m_assets = assets; if (m_content.value("kind") == "create") rebuild();
 }
 void PlanReviewPanel::setEditingEnabled(bool enabled) {
-    m_editingEnabled = enabled; if (m_body) m_body->setEnabled(enabled); updateValidation();
+    m_editingEnabled = enabled; if (m_body) m_body->setEnabled(enabled); m_modify->setEnabled(enabled); updateValidation();
 }
 void PlanReviewPanel::setApprovalEnabled(bool enabled) { m_approvalEnabled = enabled; updateValidation(); }
 QJsonObject PlanReviewPanel::editedPlan() const { return m_content; }
@@ -88,7 +96,9 @@ void PlanReviewPanel::rebuild() {
     m_summary->setText(m_content.isEmpty() ? QStringLiteral("生成后，可在这里编辑并确认方案。") : m_content.value("summary").toString());
     m_question->setText(m_content.value("question").toString()); m_question->setVisible(kind == "clarify");
     m_approve->setVisible(kind == "create" || kind == "edit");
-    m_approve->setText(kind == "create" ? QStringLiteral("确认创建…") : QStringLiteral("确认修改"));
+    m_approve->setText(kind == "create" ? QStringLiteral("确认执行 · 创建…") : QStringLiteral("确认执行修改"));
+    m_modify->setVisible(kind == "create" || kind == "edit");
+    m_modify->setText(m_modifying ? QStringLiteral("查看修改摘要") : QStringLiteral("修改方案"));
     m_totalDuration->setVisible(kind == "create");
     if (kind == "create") {
         auto *nameForm = new QFormLayout;
@@ -171,7 +181,8 @@ void PlanReviewPanel::rebuild() {
             editor->setObjectName(QString("operationValue_%1").arg(index)); form->addRow(QStringLiteral("拟值"), editor); layout->addWidget(card);
         }
     }
-    layout->addStretch(); m_body->setEnabled(m_editingEnabled); m_scroll->setWidget(m_body); m_scroll->setVisible(kind == "create" || kind == "edit"); updateValidation();
+    layout->addStretch(); m_body->setEnabled(m_editingEnabled); m_scroll->setWidget(m_body); m_scroll->setVisible(m_modifying && (kind == "create" || kind == "edit"));
+    m_overview->setVisible(!m_modifying && (kind == "create" || kind == "edit")); updateValidation();
 }
 void PlanReviewPanel::updateScene(int index, const QString &key, const QJsonValue &value) {
     auto scenes = m_content.value("scenes").toArray(); if (index < 0 || index >= scenes.size()) return;
@@ -236,7 +247,44 @@ QString PlanReviewPanel::validationError() const {
     }
     return {};
 }
+void PlanReviewPanel::updateOverview() {
+    const auto escaped = [](const QString &text) { return text.toHtmlEscaped().replace('\n', "<br>"); };
+    QStringList changes;
+    const auto kind = m_content.value("kind").toString();
+    if (kind == "create") {
+        int start = 0;
+        for (const auto &value : m_content.value("scenes").toArray()) {
+            const auto scene = value.toObject(); const int end = start + scene["durationFrames"].toInt();
+            QString imageName = QStringLiteral("素材不可用");
+            for (const auto &asset : m_assets) if (asset.asset.hash == scene["assetId"].toString()) { imageName = asset.asset.originalName; break; }
+            changes.append(QStringLiteral("<p><b>%1</b> · %2<br>%3–%4 秒 · %5–%6 帧<br>图片：%7<br>副标题：%8</p>")
+                .arg(escaped(scene["title"].toString()), escaped(scene["sceneId"].toString()), secondsText(start), secondsText(end))
+                .arg(start).arg(end).arg(escaped(imageName), escaped(scene["subtitle"].toString())));
+            start = end;
+        }
+    } else if (kind == "edit") {
+        for (const auto &value : m_content.value("operations").toArray()) {
+            const auto operation = value.toObject(); const auto *field = fieldFor(operation);
+            const domain::Clip *target = nullptr;
+            for (const auto &track : m_snapshot.tracks) for (const auto &clip : track.clips)
+                if (clip.id == operation["entityId"].toString()) target = &clip;
+            QString affected = target ? (target->label.isEmpty() ? target->id : target->label) : operation["entityId"].toString();
+            affected = escaped(affected);
+            if (target) {
+                if (std::isfinite(m_snapshot.space.frameRate) && m_snapshot.space.frameRate > 0)
+                    affected += QStringLiteral(" · %1–%2 秒").arg(QString::number(target->startFrame / m_snapshot.space.frameRate, 'g', 8), QString::number(target->endFrameExclusive / m_snapshot.space.frameRate, 'g', 8));
+                affected += QStringLiteral(" · %1–%2 帧（右端不含）").arg(target->startFrame).arg(target->endFrameExclusive);
+            }
+            changes.append(QStringLiteral("<p>影响：%1<br>%2：<s>%3</s> → <b>%4</b></p>").arg(affected,
+                escaped(field ? field->label : operation["fieldId"].toString()),
+                escaped(field ? wireText(field->rawValue, field->value) : QStringLiteral("字段不存在")),
+                escaped(wireText(operation["value"].toVariant(), QStringLiteral("无效值")))));
+        }
+    }
+    m_changes->setText(changes.join(QString()));
+}
 void PlanReviewPanel::updateValidation() {
+    updateOverview();
     int frames = 0; for (const auto &scene : m_content.value("scenes").toArray()) frames += scene.toObject()["durationFrames"].toInt();
     m_totalDuration->setText(QStringLiteral("总时长 %1 秒 · %2 帧 · 30fps").arg(secondsText(frames)).arg(frames));
     const auto error = validationError(); m_validation->setText(error); m_validation->setVisible(!error.isEmpty()); const auto kind = m_content.value("kind").toString();
