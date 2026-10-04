@@ -1,0 +1,123 @@
+title-card check fresh: exit=0
+{
+  "format": "hypit.cli-check@1",
+  "sourceKind": "author",
+  "ok": true,
+  "source": "main.svml",
+  "frontend": "@hypit/markup@1",
+  "units": 2,
+  "assets": 102,
+  "modules": 18,
+  "outputCount": 4
+}
+
+title-card check legacy: exit=0
+{
+  "format": "hypit.cli-check@1",
+  "sourceKind": "author",
+  "ok": true,
+  "source": "main.svml",
+  "frontend": "@hypit/markup@1",
+  "units": 2,
+  "assets": 102,
+  "modules": 18,
+  "outputCount": 4
+}
+
+title-card check contain-decimal: exit=0
+{
+  "format": "hypit.cli-check@1",
+  "sourceKind": "author",
+  "ok": true,
+  "source": "main.svml",
+  "frontend": "@hypit/markup@1",
+  "units": 2,
+  "assets": 102,
+  "modules": 18,
+  "outputCount": 4
+}
+
+title-card check invalid-range: exit=1
+{
+  "format": "hypit.cli-error@1",
+  "ok": false,
+  "error": {
+    "code": "CLI_ERROR",
+    "message": "image-position-x 需为0–100的有限数值。"
+  }
+}
+
+title-card studio:   Project            /private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-framing-5xwmfwxs/title-card
+title-card studio:   Run                /var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-framing-5xwmfwxs/title-card/main.svrun
+title-card studio:   Runtime Profile    /var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-framing-5xwmfwxs/title-card/hypit.runtime.json
+title-card studio:   Runtime selection  command argument (this session only)
+title-card studio: 
+title-card studio:   ➜  Local:   http://localhost:5739/
+title-card GET /__studio/session HTTP 200
+title-card actual writable inspector: {"binding": "image-fit", "label": "图片适配", "control": "select", "domain": "how", "section": {"id": "image", "label": "图片构图"}, "options": [{"value": "cover", "label": "铺满裁切"}, {"value": "contain", "label": "完整显示"}], "id": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-framing-5xwmfwxs/title-card/main.svml::output::cover.track:cover:inspector:image-fit", "value": "contain", "edit": {"language": "svml", "source": {"endpoint": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-framing-5xwmfwxs/title-card/main.svml::endpoint::621:image-fit", "path": "main.svml", "range": {"start": 820, "end": 827}, "preimage": "contain"}}}
+title-card actual writable inspector: {"binding": "image-position-x", "label": "水平焦点", "control": "number", "domain": "where", "section": {"id": "image", "label": "图片构图"}, "unit": "%", "number": {"minimum": 0, "maximum": 100, "step": 1}, "id": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-framing-5xwmfwxs/title-card/main.svml::output::cover.track:cover:inspector:image-position-x", "value": "12.5", "edit": {"language": "svml", "source": {"endpoint": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-framing-5xwmfwxs/title-card/main.svml::endpoint::621:image-position-x", "path": "main.svml", "range": {"start": 847, "end": 851}, "preimage": "12.5"}}}
+title-card actual writable inspector: {"binding": "image-position-y", "label": "垂直焦点", "control": "number", "domain": "where", "section": {"id": "image", "label": "图片构图"}, "unit": "%", "number": {"minimum": 0, "maximum": 100, "step": 1}, "id": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-framing-5xwmfwxs/title-card/main.svml::output::cover.track:cover:inspector:image-position-y", "value": "83.25", "edit": {"language": "svml", "source": {"endpoint": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-framing-5xwmfwxs/title-card/main.svml::endpoint::621:image-position-y", "path": "main.svml", "range": {"start": 871, "end": 876}, "preimage": "83.25"}}}
+title-card PASS real source compile and Studio writable fields
+title-card owned Studio stopped exit=143
+story-reel check fresh: exit=0
+{
+  "format": "hypit.cli-check@1",
+  "sourceKind": "author",
+  "ok": true,
+  "source": "main.svml",
+  "frontend": "@hypit/markup@1",
+  "units": 2,
+  "assets": 102,
+  "modules": 18,
+  "outputCount": 6
+}
+
+story-reel check legacy: exit=0
+{
+  "format": "hypit.cli-check@1",
+  "sourceKind": "author",
+  "ok": true,
+  "source": "main.svml",
+  "frontend": "@hypit/markup@1",
+  "units": 2,
+  "assets": 102,
+  "modules": 18,
+  "outputCount": 6
+}
+
+story-reel check contain-decimal: exit=0
+{
+  "format": "hypit.cli-check@1",
+  "sourceKind": "author",
+  "ok": true,
+  "source": "main.svml",
+  "frontend": "@hypit/markup@1",
+  "units": 2,
+  "assets": 102,
+  "modules": 18,
+  "outputCount": 6
+}
+
+story-reel check invalid-range: exit=1
+{
+  "format": "hypit.cli-error@1",
+  "ok": false,
+  "error": {
+    "code": "CLI_ERROR",
+    "message": "image-position-x 需为0–100的有限数值。"
+  }
+}
+
+story-reel studio:   Project            /private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-framing-5xwmfwxs/story-reel
+story-reel studio:   Run                /var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-framing-5xwmfwxs/story-reel/main.svrun
+story-reel studio:   Runtime Profile    /var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-framing-5xwmfwxs/story-reel/hypit.runtime.json
+story-reel studio:   Runtime selection  command argument (this session only)
+story-reel studio: 
+story-reel studio:   ➜  Local:   http://localhost:5739/
+story-reel GET /__studio/session HTTP 200
+story-reel actual writable inspector: {"binding": "image-fit", "label": "图片适配", "control": "select", "domain": "how", "section": {"id": "image", "label": "图片构图"}, "options": [{"value": "cover", "label": "铺满裁切"}, {"value": "contain", "label": "完整显示"}], "id": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-framing-5xwmfwxs/story-reel/main.svml::output::scene-1.track:scene-1:inspector:image-fit", "value": "contain", "edit": {"language": "svml", "source": {"endpoint": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-framing-5xwmfwxs/story-reel/main.svml::endpoint::623:image-fit", "path": "main.svml", "range": {"start": 847, "end": 854}, "preimage": "contain"}}}
+story-reel actual writable inspector: {"binding": "image-position-x", "label": "水平焦点", "control": "number", "domain": "where", "section": {"id": "image", "label": "图片构图"}, "unit": "%", "number": {"minimum": 0, "maximum": 100, "step": 1}, "id": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-framing-5xwmfwxs/story-reel/main.svml::output::scene-1.track:scene-1:inspector:image-position-x", "value": "12.5", "edit": {"language": "svml", "source": {"endpoint": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-framing-5xwmfwxs/story-reel/main.svml::endpoint::623:image-position-x", "path": "main.svml", "range": {"start": 874, "end": 878}, "preimage": "12.5"}}}
+story-reel actual writable inspector: {"binding": "image-position-y", "label": "垂直焦点", "control": "number", "domain": "where", "section": {"id": "image", "label": "图片构图"}, "unit": "%", "number": {"minimum": 0, "maximum": 100, "step": 1}, "id": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-framing-5xwmfwxs/story-reel/main.svml::output::scene-1.track:scene-1:inspector:image-position-y", "value": "83.25", "edit": {"language": "svml", "source": {"endpoint": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-framing-5xwmfwxs/story-reel/main.svml::endpoint::623:image-position-y", "path": "main.svml", "range": {"start": 898, "end": 903}, "preimage": "83.25"}}}
+story-reel PASS real source compile and Studio writable fields
+story-reel owned Studio stopped exit=143
+PASS: both templates fresh, legacy and adjusted source check; invalid range rejected; actual local Studio inspector verified. No render/export claimed.

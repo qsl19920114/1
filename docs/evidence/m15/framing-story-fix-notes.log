@@ -1,0 +1,7 @@
+Root cause: StoryTemplate::prepare hardcoded manifest version 1.0.0, rejecting upgraded installed 1.1.0 before source generation; independently generated Cards omitted new framing attrs.
+Fix: exact allowlist 1.0.0/1.1.0; explicit cover/50/50 on every generated 1.1.0 Card. Preserve 1.0.0 source without attrs because the actual legacy package rejects unknown attrs.
+RED: rebuilt story_template and agent_controller; both failed (new 1.1.0 version test and real installed template, Agent create phase).
+GREEN: cmake --build build --target story_template_test agent_controller_test -j 4; ctest --test-dir build -R '^(story_template|agent_controller)$' --output-on-failure => 2/2 passed, 27.22 sec.
+Real: temporary C++ driver links production libraries and invokes StoryTemplate::prepare; generated all3 scenes contain attrs; Hypit check exit0; local Studio HTTP200 with nine writable framing fields; Studio stopped.
+Evidence files: framing-story-{red,green}-build.log, framing-story-{red,green}.log, framing-story-generated-hypit.log.
+Debug build released to root; no release build, model call, commit, or upstream modification performed by this followup.

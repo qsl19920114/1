@@ -45,6 +45,8 @@ add_library(qvw_ui STATIC
   ui/ImportResultsPanel.cpp
   ui/HistoryPanel.cpp
   ui/SceneStrip.cpp
+  ui/ComponentBrowser.cpp
+  ui/ComponentBrowser.h
   ui/MainWindow.cpp
   ui/MainWindow.h
   ui/InspectorControls.cpp

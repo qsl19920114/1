@@ -144,3 +144,13 @@ set_tests_properties(media_player PROPERTIES TIMEOUT 90)
 add_executable(character_showcase_demo integration/CharacterShowcaseDemo.cpp)
 target_link_libraries(character_showcase_demo PRIVATE qvw_workflow Qt6::Test)
 target_compile_definitions(character_showcase_demo PRIVATE QVW_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
+
+add_executable(component_browser_test unit/ComponentBrowserTest.cpp)
+target_link_libraries(component_browser_test PRIVATE qvw_ui Qt6::Test)
+add_test(NAME component_browser COMMAND component_browser_test)
+set_tests_properties(component_browser PROPERTIES ENVIRONMENT "QT_QPA_PLATFORM=offscreen")
+
+# Explicit opt-in: actual Codex review, native framing edits, local rendered films.
+add_executable(component_framing_e2e_test integration/ComponentFramingE2ETest.cpp)
+target_link_libraries(component_framing_e2e_test PRIVATE qvw_workflow Qt6::Test)
+target_compile_definitions(component_framing_e2e_test PRIVATE QVW_SOURCE_DIR="${PROJECT_SOURCE_DIR}")

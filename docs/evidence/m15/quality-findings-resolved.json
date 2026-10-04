@@ -1,0 +1,24 @@
+[
+  {
+    "title": "模板升级为1.1.0后需同步受控创建器的版本校验",
+    "file": "templates/story-reel/template.json",
+    "start_line": 1,
+    "end_line": 1,
+    "severity": "P1",
+    "category": "LOGIC",
+    "confidence": 10,
+    "rationale": "本次将story-reel版本从1.0.0升级到1.1.0，但app/agent/StoryTemplate.cpp:16仍要求version严格等于1.0.0。AgentController::approve的create分支在第87行调用该创建器，因而所有新Agent创建方案批准后都会立即失败，无法创建工程。现有docs/evidence/m15/ctest-final.log中的story_template测试已在StoryTemplateTest.cpp:12以‘仅允许安装的story-reel@1模板。’实际失败。",
+    "suggestion": "同步更新StoryTemplate::prepare对已安装可信版本的校验，并执行现有story_template和agent_controller测试，保持未知模板版本仍被拒绝。"
+  },
+  {
+    "title": "将新增构图属性同步写入Agent生成的Card源文件",
+    "file": "templates/story-reel/main.svml",
+    "start_line": 14,
+    "end_line": 16,
+    "severity": "P1",
+    "category": "BUSINESS_SEMANTICS",
+    "confidence": 10,
+    "rationale": "三个新属性仅加入静态main.svml，但Agent创建流程通过StoryTemplate::prepare复制模板后，会在app/agent/StoryTemplate.cpp:33重新生成所有Card，并在第37行覆盖main.svml；该生成器没有image-fit/image-position-x/image-position-y。版本校验同步升级后，经Agent新建的story-reel工程仍缺少三项可编辑构图控件。固定Hypit源码packages/studio/src/parameters.ts:263–266在属性缺失且binding没有fallback时直接返回空绑定；本次Companion确实没有fallback。因此新功能在主要Agent创建入口不可用，不能以旧源默认渲染兼容代替。",
+    "suggestion": "同步更新StoryTemplate的受控Card生成器，为每个新场景显式写入三个默认构图literal，并在StoryTemplateTest中断言每个生成的Card含这些字段。"
+  }
+]

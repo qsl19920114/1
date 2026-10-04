@@ -1,7 +1,7 @@
 {
   "format": "qt-video-workbench.tasks@1",
   "note": "状态只有四种：done 需附证据路径；partial 需写明未验证部分；blocked 需写明阻塞原因；pending 未开始。不得在前置门禁未过时把后续任务标为 done。",
-  "updatedAt": "2026-10-03",
+  "updatedAt": "2026-10-04",
   "gates": {
     "G0": {
       "milestone": "M0",
@@ -218,6 +218,22 @@
         "docs/evidence/m14/quality-review-summary.md",
         "docs/evidence/m14/packaged-native.json",
         "docs/evidence/m14/delivery-integrity.json"
+      ]
+    },
+    "G15": {
+      "milestone": "M15",
+      "verdict": "PASS",
+      "definition": "组件定位与实际图片构图、Qt/Agent联动、兼容受控创建、真实成片及1.7交付",
+      "reason": "38/38CTest、16/16模板测试、真实Qt/Codex3步批准后执行及两份成片；真实生成故事9个可写字段；拒绝/源码回滚与原成片保留、复审、搬移启动和包完整性通过。",
+      "evidence": [
+        "docs/evidence/m15/ctest-final.log",
+        "docs/evidence/m15/component-framing.json",
+        "docs/evidence/m15/framing-media.json",
+        "docs/evidence/m15/framing-story-generated-hypit.log",
+        "docs/evidence/m15/spec-review.md",
+        "docs/evidence/m15/quality-review-summary.md",
+        "docs/evidence/m15/packaged-native.json",
+        "docs/evidence/m15/delivery-integrity.json"
       ]
     }
   },
@@ -1353,6 +1369,83 @@
         "docs/evidence/m14/quality-review-summary.md",
         "docs/evidence/m14/packaged-native.json",
         "docs/evidence/m14/delivery-integrity.json"
+      ]
+    },
+    {
+      "id": "T060",
+      "milestone": "M15",
+      "title": "可复用组件浏览器与定位交互",
+      "status": "done",
+      "dependsOn": [
+        "T059"
+      ],
+      "evidence": [
+        "docs/evidence/m15/ctest-final.log",
+        "docs/evidence/m15/component-framing.json",
+        "docs/evidence/m15/framing-media.json",
+        "docs/evidence/m15/framing-story-generated-hypit.log",
+        "docs/evidence/m15/spec-review.md",
+        "docs/evidence/m15/quality-review-summary.md",
+        "docs/evidence/m15/packaged-native.json",
+        "docs/evidence/m15/delivery-integrity.json"
+      ]
+    },
+    {
+      "id": "T061",
+      "milestone": "M15",
+      "title": "原创模板构图与受控创建兼容",
+      "status": "done",
+      "dependsOn": [
+        "T059"
+      ],
+      "evidence": [
+        "docs/evidence/m15/ctest-final.log",
+        "docs/evidence/m15/component-framing.json",
+        "docs/evidence/m15/framing-media.json",
+        "docs/evidence/m15/framing-story-generated-hypit.log",
+        "docs/evidence/m15/spec-review.md",
+        "docs/evidence/m15/quality-review-summary.md",
+        "docs/evidence/m15/packaged-native.json",
+        "docs/evidence/m15/delivery-integrity.json"
+      ]
+    },
+    {
+      "id": "T062",
+      "milestone": "M15",
+      "title": "真实Qt与Agent构图执行和成片验证",
+      "status": "done",
+      "dependsOn": [
+        "T060",
+        "T061"
+      ],
+      "evidence": [
+        "docs/evidence/m15/ctest-final.log",
+        "docs/evidence/m15/component-framing.json",
+        "docs/evidence/m15/framing-media.json",
+        "docs/evidence/m15/framing-story-generated-hypit.log",
+        "docs/evidence/m15/spec-review.md",
+        "docs/evidence/m15/quality-review-summary.md",
+        "docs/evidence/m15/packaged-native.json",
+        "docs/evidence/m15/delivery-integrity.json"
+      ]
+    },
+    {
+      "id": "T063",
+      "milestone": "M15",
+      "title": "最终回归复审及1.7交付",
+      "status": "done",
+      "dependsOn": [
+        "T062"
+      ],
+      "evidence": [
+        "docs/evidence/m15/ctest-final.log",
+        "docs/evidence/m15/component-framing.json",
+        "docs/evidence/m15/framing-media.json",
+        "docs/evidence/m15/framing-story-generated-hypit.log",
+        "docs/evidence/m15/spec-review.md",
+        "docs/evidence/m15/quality-review-summary.md",
+        "docs/evidence/m15/packaged-native.json",
+        "docs/evidence/m15/delivery-integrity.json"
       ]
     }
   ]

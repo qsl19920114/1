@@ -12,7 +12,7 @@
   <spatial:Canvas id="canvas" width="1280" height="720"/>
   <fonts:Stack id="font" family="noto-sans-sc" weight="600" style="normal"/>
   <card:Card id="cover" timeline={timeline.timeline} canvas={canvas} font={font} during="program"
-    title="校园创作社" subtitle="用镜头记录热爱，让灵感在这里相遇。" color="#35bca8" image="./assets/default.png" entrance-frames="18"/>
+    title="校园创作社" subtitle="用镜头记录热爱，让灵感在这里相遇。" color="#35bca8" image="./assets/default.png" image-fit="cover" image-position-x="50" image-position-y="50" entrance-frames="18"/>
   <film:Film id="main" canvas={canvas} timeline={timeline.timeline} appearance={style.film.main}><film:Track source={cover.track}/></film:Film>
   <render:Video id="final" composition={main.composition} timeline={timeline.timeline}/>
 </svml>

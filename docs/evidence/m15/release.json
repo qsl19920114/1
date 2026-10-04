@@ -1,0 +1,17 @@
+{
+  "format": "qvw.release-artifact@1",
+  "version": "Qt Video Workbench 1.7.0",
+  "app": "/Users/bytedance/Downloads/\u56fd\u4ea7\u8d44\u4ea7\u4f5c\u4e1a/qt-video-workbench/.workbench/release-macos-arm64-1.7.0/QtVideoWorkbench.app",
+  "archive": "/Users/bytedance/Downloads/\u56fd\u4ea7\u8d44\u4ea7\u4f5c\u4e1a/qt-video-workbench/.workbench/release-macos-arm64-1.7.0/FrameLab-1.7.0-macOS-arm64.zip",
+  "sha256": "6609df5d20f4c3a0a190f14dda6a1277c26cad54e69a8e2b527d05919918a4d1",
+  "signing": "ad-hoc; not notarized",
+  "platform": "macOS arm64; minimum 15.0",
+  "externalDependencies": [
+    "Hypit 0.2.10",
+    "Node >=22.15",
+    "FFmpeg/ffprobe",
+    "Runtime-selected rendering browser",
+    "Codex CLI with current login (Agent creation)"
+  ],
+  "machOBinaries": 82
+}

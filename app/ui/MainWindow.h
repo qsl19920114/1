@@ -27,6 +27,7 @@ namespace qvw::ui {
 class HistoryPanel;
 class ImportResultsPanel;
 class SceneStrip;
+class ComponentBrowser;
 class StudioTransport;
 class AgentPanel;
 class MainWindow : public QMainWindow {
@@ -51,6 +52,7 @@ public:
     void setSamples(const domain::VideoSamples &samples);
     QWebEngineView *previewView() const { return m_webView; }
     AgentPanel *agentPanel() const { return m_agentPanel; }
+    ComponentBrowser *componentBrowser() const { return m_componentBrowser; }
     domain::PreviewVersion previewVersion() const;
     void showAgentStatus(const domain::AgentStatus &status);
     void showAgentPlan(const domain::AgentPlan &plan);
@@ -113,6 +115,7 @@ private:
     QLabel *m_assetCount=nullptr;
     void filterAssets();
     void showSelectedInspector();
+    ComponentBrowser *m_componentBrowser = nullptr;
     QTreeWidget *m_componentTree = nullptr;
     QTreeWidget *m_inspectorTable = nullptr;
     QLabel *m_previewPlaceholder = nullptr;

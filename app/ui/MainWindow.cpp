@@ -5,6 +5,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include "ui/SceneStrip.h"
+#include "ui/ComponentBrowser.h"
 #include "ui/MainWindow.h"
 #include "ui/AgentPanel.h"
 #include <QSignalBlocker>
@@ -120,7 +121,7 @@ QScrollBar:vertical{width:9px;background:#121b28;} QScrollBar::handle:vertical{b
     auto *middle=new QSplitter(Qt::Vertical);m_middle=middle;middle->setObjectName("workspaceMiddle");middle->addWidget(buildPreviewPanel());middle->addWidget(buildTaskPanel());middle->setSizes({610,200});middle->setStretchFactor(0,4);middle->setStretchFactor(1,1);
     columns->addWidget(middle);m_rightPanel=buildInspectorPanel();columns->addWidget(m_rightPanel);columns->setSizes({275,845,400});columns->setStretchFactor(1,1);setCentralWidget(columns);
     connect(m_componentTree,&QTreeWidget::currentItemChanged,this,[this]{showSelectedInspector();updateActions();});
-    connect(m_componentTree,&QTreeWidget::itemClicked,this,[this](QTreeWidgetItem *item){if(item&&item->data(0,Qt::UserRole).isValid()){const int t=item->data(0,Qt::UserRole).toInt(),c=item->data(0,Qt::UserRole+1).toInt();if(t>=0&&t<m_snapshot.tracks.size()&&c>=0&&c<m_snapshot.tracks[t].clips.size())selectScene(m_snapshot.tracks[t].clips[c].id,m_snapshot.tracks[t].clips[c].startFrame);}});
+    connect(m_componentBrowser,&ComponentBrowser::componentActivated,this,&MainWindow::selectScene);
     connect(m_assetTree,&QTreeWidget::currentItemChanged,this,[this]{updateActions();});
     connect(m_proposalRequest,&QLineEdit::textChanged,this,[this]{updateActions();});
     connect(m_transport,&StudioTransport::positionChanged,this,[this](bool ready,int frame,int last,const QString &time){
@@ -159,7 +160,7 @@ QWidget *MainWindow::buildProjectPanel() {
     connect(m_handoffAssetButton,&QPushButton::clicked,this,[this]{prepareSelectedAssetGoal(false);});
     m_characterAssetButton=new QPushButton("AI 替换人物素材");m_characterAssetButton->setObjectName("handoffCharacterToAgent");m_characterAssetButton->setToolTip("把用户选择的人物图片或视频替换到当前组件，保留版式与动画。需生成、审阅和确认；不执行视频人物重生成。");assetLayout->addWidget(m_characterAssetButton);
     connect(m_characterAssetButton,&QPushButton::clicked,this,[this]{prepareSelectedAssetGoal(true);});m_cancelImport=new QPushButton("取消导入");m_cancelImport->hide();assetLayout->addWidget(m_cancelImport);connect(m_cancelImport,&QPushButton::clicked,this,&MainWindow::cancelImportRequested);m_libraryTabs->addTab(assets,"素材");
-    m_componentTree=new QTreeWidget;m_componentTree->setObjectName("components");m_componentTree->setHeaderLabels({"组件","帧范围"});m_componentTree->header()->setSectionResizeMode(0,QHeaderView::Stretch);m_libraryTabs->addTab(m_componentTree,"组件");
+    m_componentBrowser=new ComponentBrowser;m_componentTree=m_componentBrowser->tree();m_libraryTabs->addTab(m_componentBrowser,"组件");
     auto *examples=new QWidget;auto *sampleLayout=new QVBoxLayout(examples);sampleLayout->addWidget(copyLabel(QStringLiteral("Hypit 官方示例 · 可播放查看，再创建横屏作品。来源与原始成片保持可追溯。")));
     m_sampleTree=new QTreeWidget;m_sampleTree->setObjectName("samples");m_sampleTree->setHeaderLabels({"示例"});m_sampleTree->setRootIsDecorated(false);m_sampleTree->header()->setSectionResizeMode(QHeaderView::Stretch);sampleLayout->addWidget(m_sampleTree,1);
     m_samplePreview=new QPushButton("播放示例");m_samplePreview->setObjectName("previewSample");m_sampleUse=new QPushButton("用此视频创作…");m_sampleUse->setObjectName("createFromSample");m_sampleUse->setProperty("primary",true);sampleLayout->addWidget(m_samplePreview);sampleLayout->addWidget(m_sampleUse);
@@ -193,7 +194,7 @@ QWidget *MainWindow::buildPreviewPanel() {
 QWidget *MainWindow::buildInspectorPanel() {
     auto *tabs=new QTabWidget;m_inspectorTabs=tabs;
     m_agentPanel=new AgentPanel;m_agentPanel->setObjectName("agentPanel");tabs->addTab(m_agentPanel,"Agent 创作");
-    m_inspectorTable=new QTreeWidget;m_inspectorTable->setHeaderLabels({"属性","类型","当前值","状态"});m_inspectorTable->header()->setSectionResizeMode(0,QHeaderView::ResizeToContents);m_inspectorTable->header()->setSectionResizeMode(2,QHeaderView::Stretch);m_inspectorTable->setColumnHidden(1,true);m_inspectorTable->setColumnWidth(3,65);m_inspectorTable->setRootIsDecorated(false);tabs->addTab(m_inspectorTable,"属性");
+    m_inspectorTable=new QTreeWidget;m_inspectorTable->setObjectName("componentInspector");m_inspectorTable->setHeaderLabels({"属性","类型","当前值","状态"});m_inspectorTable->header()->setSectionResizeMode(0,QHeaderView::ResizeToContents);m_inspectorTable->header()->setSectionResizeMode(2,QHeaderView::Stretch);m_inspectorTable->setColumnHidden(1,true);m_inspectorTable->setColumnWidth(3,65);m_inspectorTable->setRootIsDecorated(false);tabs->addTab(m_inspectorTable,"属性");
     auto *proposals=new QWidget;auto *form=new QVBoxLayout(proposals);form->addWidget(copyLabel("本地模拟提案\n支持：标题改为…、主题色改为#RRGGBB、图片使用第1张。确认后才修改；未连接真实模型。"));
     m_proposalRequest=new QLineEdit;m_proposalRequest->setMaxLength(4096);m_proposalRequest->setPlaceholderText("例如：标题改为一段光影故事");form->addWidget(m_proposalRequest);
     m_generateProposal=new QPushButton("生成模拟提案");m_importProposal=new QPushButton("导入提案 JSON…");form->addWidget(m_generateProposal);form->addWidget(m_importProposal);
@@ -295,7 +296,6 @@ void MainWindow::showExportTask(const domain::ExportTask &task) {
 }
 void MainWindow::showSnapshot(const domain::Snapshot &snapshot) {
     const QSignalBlocker stableSelection(m_componentTree);
-    QString selectedId;if(const auto *item=m_componentTree->currentItem())selectedId=item->toolTip(0);
     if(snapshot.revision!=m_snapshot.revision||snapshot.sourceFingerprint!=m_snapshot.sourceFingerprint)++m_editGeneration;
     if(m_hasDocument&&m_snapshot.isLoaded()&&snapshot.isLoaded()&&!m_snapshot.sourceFingerprint.isEmpty()&&m_snapshot.sourceFingerprint!=snapshot.sourceFingerprint){
         QStringList changes;
@@ -303,14 +303,10 @@ void MainWindow::showSnapshot(const domain::Snapshot &snapshot) {
             for(const auto &oldTrack:m_snapshot.tracks)for(const auto &oldClip:oldTrack.clips)if(oldClip.id==clip.id)for(const auto &old:oldClip.inspector)if(old.id==field.id&&old.rawValue!=field.rawValue)changes.append(clip.label+" · "+field.label+"\n"+old.rawValue.toString().left(512)+" → "+field.rawValue.toString().left(512));
         emit historyRecorded(QJsonObject{{"id","edit/"+m_document.manifestPath()+"/"+QString::fromLatin1(snapshot.sourceFingerprint.toHex())},{"kind","edit"},{"title",QString("修改记录 · 版本 %1").arg(snapshot.revision)},{"project",m_document.manifestPath()},{"projectName",m_document.name},{"detail",changes.isEmpty()?QStringLiteral("工程源码已更新并重新编译。"):changes.join("\n\n").left(8000)}});
     }
-    m_snapshot=snapshot;m_agentPanel->setProjectContext(m_document,snapshot);m_agentPanel->setVersions(snapshot,m_exportTask);m_transport->setSnapshot(snapshot);m_scenes->setSnapshot(snapshot,m_document);m_componentTree->clear();m_inspectorTable->clear();
+    m_snapshot=snapshot;m_agentPanel->setProjectContext(m_document,snapshot);m_agentPanel->setVersions(snapshot,m_exportTask);m_transport->setSnapshot(snapshot);m_scenes->setSnapshot(snapshot,m_document);m_componentBrowser->setSnapshot(snapshot);m_inspectorTable->clear();
     if(!snapshot.isLoaded()){m_agentPanel->setSelection({},{});m_spaceSummary->setText("预览由 Hypit 提供 · 本地素材创作");updateActions();return;}
     m_spaceSummary->setText(snapshot.space.describe()+QStringLiteral(" · 预览由 Hypit 提供"));m_spaceSummary->setToolTip(snapshot.sourcePath);
-    QTreeWidgetItem *selected=nullptr;
-    for(int t=0;t<snapshot.tracks.size();++t){const auto &track=snapshot.tracks[t];auto *parent=new QTreeWidgetItem(m_componentTree);parent->setText(0,track.label.isEmpty()?track.id:track.label);
-        for(int c=0;c<track.clips.size();++c){const auto &clip=track.clips[c];auto *item=new QTreeWidgetItem(parent);item->setText(0,clip.label.isEmpty()?clip.id:clip.label);item->setToolTip(0,clip.id);item->setText(1,QStringLiteral("%1–%2").arg(clip.startFrame).arg(clip.endFrameExclusive));item->setData(0,Qt::UserRole,t);item->setData(0,Qt::UserRole+1,c);if(!selected||clip.id==selectedId)selected=item;}
-    }
-    m_componentTree->expandAll();if(selected)m_componentTree->setCurrentItem(selected);showSelectedInspector();updateActions();statusBar()->showMessage(QStringLiteral("作品已加载 · %1 个可编辑属性").arg(snapshot.writableFieldCount()),5000);
+    showSelectedInspector();updateActions();statusBar()->showMessage(QStringLiteral("作品已加载 · %1 个可编辑属性").arg(snapshot.writableFieldCount()),5000);
 }
 QJsonObject MainWindow::workspaceLayout() const{return {{"geometry",QString::fromLatin1(saveGeometry().toBase64())},{"columns",QString::fromLatin1(m_columns->saveState().toBase64())},{"middle",QString::fromLatin1(m_middle->saveState().toBase64())}};}
 void MainWindow::restoreWorkspaceLayout(const QJsonObject &layout){
@@ -328,9 +324,9 @@ void MainWindow::showImportReport(const QJsonObject &report){
     m_importReportActive=active;
 }
 void MainWindow::selectScene(const QString &entityId,int frame) {
-    for(int t=0;t<m_componentTree->topLevelItemCount();++t)for(int c=0;c<m_componentTree->topLevelItem(t)->childCount();++c){
-        auto *item=m_componentTree->topLevelItem(t)->child(c);if(item->toolTip(0)==entityId){m_componentTree->setCurrentItem(item);m_componentTree->scrollToItem(item);m_scenes->setPosition(frame);m_pendingFrame=-1;if(m_transport->ready())m_transport->seek(frame);else m_pendingFrame=frame;return;}
-    }
+    if(!m_componentBrowser->selectEntity(entityId))return;
+    m_scenes->setPosition(frame);m_pendingFrame=-1;
+    if(m_transport->ready())m_transport->seek(frame);else m_pendingFrame=frame;
 }
 void MainWindow::showSelectedInspector() {
     m_inspectorTable->clear();const auto *item=m_componentTree->currentItem();if(!item||!item->data(0,Qt::UserRole).isValid()||!item->data(0,Qt::UserRole+1).isValid()){m_agentPanel->setSelection({},{});m_scenes->setSelection({});return;}
@@ -355,7 +351,7 @@ void MainWindow::showPreview(const QUrl &url) {
     }
     m_previewStack->setCurrentWidget(m_webView);m_webView->load(url);updateActions();
 }
-void MainWindow::clearProject(){++m_editGeneration;m_transport->clear();m_previewUrl=QUrl();if(m_webView){m_webView->stop();m_webView->setUrl(QUrl("about:blank"));}m_editorReady=false;m_editorBusy=false;m_canUndo=m_canRedo=false;m_previewStack->setCurrentWidget(m_hasDocument?static_cast<QWidget*>(m_previewPlaceholder):m_welcome);showSnapshot({});updateActions();}
+void MainWindow::clearProject(){++m_editGeneration;m_componentBrowser->resetFilters();m_transport->clear();m_previewUrl=QUrl();if(m_webView){m_webView->stop();m_webView->setUrl(QUrl("about:blank"));}m_editorReady=false;m_editorBusy=false;m_canUndo=m_canRedo=false;m_previewStack->setCurrentWidget(m_hasDocument?static_cast<QWidget*>(m_previewPlaceholder):m_welcome);showSnapshot({});updateActions();}
 void MainWindow::showError(const QString &error){if(!m_backendReady){m_backendError=error;m_backendStatus->setToolTip(error);updateActions();}appendLog(QStringLiteral("错误：%1").arg(error));statusBar()->showMessage(error);if(!m_snapshot.isLoaded()&&m_hasDocument){m_previewPlaceholder->setText("预览未就绪\n"+error);m_previewStack->setCurrentWidget(m_previewPlaceholder);}m_taskTabs->setCurrentIndex(1);}
 void MainWindow::appendLog(const QString &line){m_taskLog->appendPlainText(line);}
 void MainWindow::setEditorState(bool ready,bool busy,bool canUndo,bool canRedo){const bool changed=m_editorReady!=ready;m_editorReady=ready;m_editorBusy=busy;m_canUndo=canUndo;m_canRedo=canRedo;if(changed)showSelectedInspector();updateActions();if(busy)statusBar()->showMessage("正在保存修改并检查编译…");}
@@ -383,7 +379,7 @@ void MainWindow::previewSelectedAsset(){
 }
 void MainWindow::showDocument(const domain::Project &project) {
     const bool changedRoot=m_document.rootPath!=project.rootPath;
-    if(changedRoot){QSignalBlocker searchBlock(m_assetSearch),typeBlock(m_assetType);m_assetSearch->clear();m_assetType->setCurrentIndex(0);}
+    if(changedRoot){m_componentBrowser->resetFilters();QSignalBlocker searchBlock(m_assetSearch),typeBlock(m_assetType);m_assetSearch->clear();m_assetType->setCurrentIndex(0);}
     m_document=project;m_agentPanel->setProjectContext(project,changedRoot?domain::Snapshot{}:m_snapshot);m_history->setCurrentProject(project.manifestPath());m_importResults->setProjectRoot(project.rootPath);m_scenes->setSnapshot(m_snapshot,m_document);
     m_hasDocument=true;setWindowTitle(QStringLiteral("%1 — FrameLab · 灵感片场").arg(project.name));m_documentTitle->setText(project.name);m_documentTitle->setToolTip(project.rootPath);
     QString selected;if(const auto *item=m_assetTree->currentItem())selected=item->data(0,Qt::UserRole).toString();m_assetTree->clear();QTreeWidgetItem *selection=nullptr;
@@ -393,7 +389,7 @@ void MainWindow::showDocument(const domain::Project &project) {
 item->setText(0,(asset.mime=="video/mp4"?QStringLiteral("视频 · "):QStringLiteral("图片 · "))+asset.originalName);item->setText(1,QStringLiteral("%1×%2").arg(asset.width).arg(asset.height));item->setToolTip(0,asset.path);item->setData(0,Qt::UserRole,"./"+asset.path);item->setData(0,Qt::UserRole+1,asset.mime);if(!selection||"./"+asset.path==selected)selection=item;}
     if(selection)m_assetTree->setCurrentItem(selection);filterAssets();showSelectedInspector();if(m_previewUrl.isEmpty())m_previewStack->setCurrentWidget(m_previewPlaceholder);updateActions();
 }
-void MainWindow::clearDocument(){m_pendingFrame=-1;m_document={};m_agentPanel->setProjectContext({},{});m_history->setCurrentProject({});m_importResults->setProjectRoot({});m_importReportActive=false;m_hasDocument=false;m_importBusy=false;setWindowTitle("FrameLab · 灵感片场");m_documentTitle->setText("从一段视频开始创作");m_assetTree->clear();filterAssets();showProposal({},false);showExportTask({});if(m_previewUrl.isEmpty())m_previewStack->setCurrentWidget(m_welcome);updateActions();}
+void MainWindow::clearDocument(){m_componentBrowser->resetFilters();m_pendingFrame=-1;m_document={};m_agentPanel->setProjectContext({},{});m_history->setCurrentProject({});m_importResults->setProjectRoot({});m_importReportActive=false;m_hasDocument=false;m_importBusy=false;setWindowTitle("FrameLab · 灵感片场");m_documentTitle->setText("从一段视频开始创作");m_assetTree->clear();filterAssets();showProposal({},false);showExportTask({});if(m_previewUrl.isEmpty())m_previewStack->setCurrentWidget(m_welcome);updateActions();}
 void MainWindow::newDocumentDialog(const QString &samplePath) {
     QDialog dialog(this);dialog.setWindowTitle(samplePath.isEmpty()?"新建作品":"用示例视频创作");dialog.resize(550,300);auto *layout=new QVBoxLayout(&dialog);auto *form=new QFormLayout;
     auto *name=new QLineEdit(samplePath.isEmpty()?QStringLiteral("我的光影故事"):QStringLiteral("对话之外 · 光影故事"));form->addRow("工程名称",name);

@@ -1,0 +1,28 @@
+********* Start testing of ComponentFramingE2ETest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : ComponentFramingE2ETest::initTestCase()
+QWARN  : ComponentFramingE2ETest::realFramingWorkflow() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : ComponentFramingE2ETest::realFramingWorkflow() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : ComponentFramingE2ETest::realFramingWorkflow() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : ComponentFramingE2ETest::realFramingWorkflow() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : ComponentFramingE2ETest::realFramingWorkflow() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : ComponentFramingE2ETest::realFramingWorkflow() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : ComponentFramingE2ETest::realFramingWorkflow() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QINFO  : ComponentFramingE2ETest::realFramingWorkflow() 正在读取工程与素材，等待 Codex 制定方案…
+QINFO  : ComponentFramingE2ETest::realFramingWorkflow() 方案待审阅，尚未修改工程。
+QINFO  : ComponentFramingE2ETest::realFramingWorkflow() 开始逐项应用已批准的修改…
+QWARN  : ComponentFramingE2ETest::realFramingWorkflow() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QINFO  : ComponentFramingE2ETest::realFramingWorkflow() 已确认1/3项修改，正在回读编译版本…
+QWARN  : ComponentFramingE2ETest::realFramingWorkflow() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QINFO  : ComponentFramingE2ETest::realFramingWorkflow() 已确认2/3项修改，正在回读编译版本…
+QWARN  : ComponentFramingE2ETest::realFramingWorkflow() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : ComponentFramingE2ETest::realFramingWorkflow() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QWARN  : ComponentFramingE2ETest::realFramingWorkflow() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QINFO  : ComponentFramingE2ETest::realFramingWorkflow() 已确认3/3项修改，正在回读编译版本…
+QWARN  : ComponentFramingE2ETest::realFramingWorkflow() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+QINFO  : ComponentFramingE2ETest::realFramingWorkflow() 方案已应用并回读确认，可继续修改或导出当前版本。
+QWARN  : ComponentFramingE2ETest::realFramingWorkflow() js: An iframe which has both allow-scripts and allow-same-origin for its sandbox attribute can escape its sandboxing.
+PASS   : ComponentFramingE2ETest::realFramingWorkflow()
+PASS   : ComponentFramingE2ETest::cleanupTestCase()
+Totals: 3 passed, 0 failed, 0 skipped, 0 blacklisted, 61689ms
+********* Finished testing of ComponentFramingE2ETest *********

@@ -1,0 +1,12 @@
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  0%] Built target qvw_domain_autogen
+[ 22%] Built target qvw_domain
+[ 22%] Built target qvw_ui_autogen_timestamp_deps
+[ 33%] Built target qvw_ui_autogen
+[ 77%] Built target qvw_ui
+[ 77%] Built target product_experience_test_autogen_timestamp_deps
+[ 88%] Automatic MOC for target product_experience_test
+[ 88%] Built target product_experience_test_autogen
+[100%] Building CXX object tests/CMakeFiles/product_experience_test.dir/unit/ProductExperienceTest.cpp.o
+[100%] Linking CXX executable product_experience_test
+[100%] Built target product_experience_test

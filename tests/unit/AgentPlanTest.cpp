@@ -1,4 +1,5 @@
 #include "agent/PlanService.h"
+#include "agent/ContextBuilder.h"
 #include <QTest>
 #include <QTemporaryDir>
 #include <QJsonArray>
@@ -30,6 +31,26 @@ private slots:
         auto json=base();json["operations"]=QJsonArray{QJsonObject{{"entityId","ending"},{"fieldId","title"},{"value",42}}};
         QVERIFY(agent::PlanService::parse(json,{project.rootPath,17,s.sourceFingerprint,{}},&p,&error));
         QVERIFY(!agent::PlanService::validate(p,project,s,{},&error));
+    }
+    void contextDeclaresEditTypesForStringBackedNumbers() {
+        QTemporaryDir dir;domain::Project project;project.rootPath=dir.path();auto s=snapshot();
+        auto &fields=s.tracks[0].clips[0].inspector;
+        auto number=fields[0];number.id="x";number.binding="image-position-x";number.control=domain::ControlKind::Number;number.rawValue="25";
+        auto fit=fields[0];fit.id="fit";fit.binding="image-fit";fit.control=domain::ControlKind::Select;fit.rawValue="cover";fit.options={{"铺满裁切","cover"},{"完整显示","contain"}};
+        fields={number,fit};
+        const auto context=agent::ContextBuilder::build(project,s,{},{});
+        const auto exposed=context["clips"].toArray()[0].toObject()["fields"].toArray();
+        QCOMPARE(exposed[0].toObject()["valueType"].toString(),QString("number"));
+        QCOMPARE(exposed[0].toObject()["value"].toString(),QString("25"));
+        QCOMPARE(exposed[1].toObject()["valueType"].toString(),QString("string"));
+        QCOMPARE(exposed[1].toObject()["options"].toArray(),QJsonArray({"cover","contain"}));
+        auto json=base();json["operations"]=QJsonArray{QJsonObject{{"entityId","ending"},{"fieldId","x"},{"value",50}},QJsonObject{{"entityId","ending"},{"fieldId","fit"},{"value","contain"}}};
+        domain::AgentPlan plan;QString error;
+        QVERIFY(agent::PlanService::parse(json,{project.rootPath,s.revision,s.sourceFingerprint,{}},&plan,&error));
+        QVERIFY2(agent::PlanService::validate(plan,project,s,{},&error),qPrintable(error));
+        json["operations"]=QJsonArray{QJsonObject{{"entityId","ending"},{"fieldId","x"},{"value","50"}}};
+        QVERIFY(agent::PlanService::parse(json,{project.rootPath,s.revision,s.sourceFingerprint,{}},&plan,&error));
+        QVERIFY(!agent::PlanService::validate(plan,project,s,{},&error));
     }
     void threeScenesHaveRealBounds() {
         QJsonArray scenes;for(int i=0;i<3;i++)scenes.append(QJsonObject{{"sceneId",QString("scene-%1").arg(i+1)},{"assetId","local-image"},{"title","校园"},{"subtitle","活动"},{"color","#35bca8"},{"durationFrames",i==0?90:i==1?240:120},{"fontSize",54}});

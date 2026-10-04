@@ -1,0 +1,45 @@
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  0%] Built target qvw_infra_autogen_timestamp_deps
+[  5%] Built target qvw_domain_autogen
+[ 10%] Built target qvw_infra_autogen
+[ 20%] Built target qvw_domain
+[ 30%] Built target qvw_infra
+[ 30%] Built target qvw_backend_autogen_timestamp_deps
+[ 30%] Built target qvw_services_autogen_timestamp_deps
+[ 30%] Built target qvw_backend_autogen
+[ 30%] Built target qvw_services_autogen
+[ 40%] Built target qvw_backend
+[ 60%] Built target qvw_services
+[ 60%] Built target qvw_controllers_autogen_timestamp_deps
+[ 60%] Built target qvw_controllers_autogen
+[ 75%] Built target qvw_controllers
+[ 75%] Built target qvw_agent_autogen_timestamp_deps
+[ 80%] Built target qvw_agent_autogen
+[ 95%] Built target qvw_agent
+[ 95%] Built target story_template_test_autogen_timestamp_deps
+[ 95%] Automatic MOC for target story_template_test
+[ 95%] Built target story_template_test_autogen
+[ 95%] Building CXX object tests/CMakeFiles/story_template_test.dir/unit/StoryTemplateTest.cpp.o
+[100%] Linking CXX executable story_template_test
+[100%] Built target story_template_test
+[  0%] Built target qvw_infra_autogen_timestamp_deps
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  5%] Built target qvw_domain_autogen
+[ 10%] Built target qvw_infra_autogen
+[ 20%] Built target qvw_domain
+[ 30%] Built target qvw_infra
+[ 30%] Built target qvw_backend_autogen_timestamp_deps
+[ 30%] Built target qvw_services_autogen_timestamp_deps
+[ 30%] Built target qvw_backend_autogen
+[ 30%] Built target qvw_services_autogen
+[ 40%] Built target qvw_backend
+[ 60%] Built target qvw_services
+[ 60%] Built target qvw_controllers_autogen_timestamp_deps
+[ 60%] Built target qvw_controllers_autogen
+[ 75%] Built target qvw_controllers
+[ 75%] Built target qvw_agent_autogen_timestamp_deps
+[ 80%] Built target qvw_agent_autogen
+[ 95%] Built target qvw_agent
+[ 95%] Built target agent_controller_test_autogen_timestamp_deps
+[ 95%] Built target agent_controller_test_autogen
+[100%] Built target agent_controller_test

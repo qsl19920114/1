@@ -1,0 +1,31 @@
+{
+  "verdict": "PASS",
+  "artifactsUnchangedAfterRejection": true,
+  "framesDiffer": true,
+  "artifacts": [
+    {
+      "path": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m15/20261004-164748/01-铺满裁切.mp4",
+      "sha256": "50ef41920eb58c308c6c338d64fe532bc856e74f0cfc2ba6e912f1be4c1be639",
+      "frame": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m15/20261004-164748/01-铺满裁切.png",
+      "frameSha256": "0bfacc5d47481a02545d9d6e50410da54998a4d9d01599984c0ef602e5391601",
+      "width": 1280,
+      "height": 720,
+      "duration": 8.0
+    },
+    {
+      "path": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m15/20261004-164748/02-完整显示.mp4",
+      "sha256": "78a7b073cda496362e22eb1047c7eae50ac18d44bb5073c0d7ada7a5527a0450",
+      "frame": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m15/20261004-164748/02-完整显示.png",
+      "frameSha256": "d7423178af1d2ea9f55794dc4da34bfc5b8c293d55edabf2450aa9359948d7a8",
+      "width": 1280,
+      "height": 720,
+      "duration": 8.0
+    }
+  ],
+  "visualInspection": {
+    "method": "Viewed actual ffmpeg extracted frames at 3 seconds",
+    "cover": "image fills fixed 484x520 frame, cropped portrait",
+    "contain": "entire tall portrait visible with side space",
+    "textLayoutAnimationDurationPreserved": true
+  }
+}

@@ -11,9 +11,9 @@
   <time:Timeline id="timeline" clock={clock} end="450f"/>
   <spatial:Canvas id="canvas" width="720" height="1280"/>
   <fonts:Stack id="font" family="noto-sans-sc" weight="600" style="normal"/>
-  <card:Card id="scene-1" timeline={timeline.timeline} canvas={canvas} font={font} start="program.start+0f" end="program.start+90f" title="开启故事" subtitle="选择图片，写下属于你的故事" color="#35bca8" image="./assets/default.png" font-size="54"/>
-  <card:Card id="scene-2" timeline={timeline.timeline} canvas={canvas} font={font} start="program.start+90f" end="program.start+330f" title="每一刻都值得记录" subtitle="选择图片，写下属于你的故事" color="#35bca8" image="./assets/default.png" font-size="54"/>
-  <card:Card id="scene-3" timeline={timeline.timeline} canvas={canvas} font={font} start="program.start+330f" end="program.start+450f" title="一起创造" subtitle="选择图片，写下属于你的故事" color="#35bca8" image="./assets/default.png" font-size="54"/>
+  <card:Card id="scene-1" timeline={timeline.timeline} canvas={canvas} font={font} start="program.start+0f" end="program.start+90f" title="开启故事" subtitle="选择图片，写下属于你的故事" color="#35bca8" image="./assets/default.png" image-fit="cover" image-position-x="50" image-position-y="50" font-size="54"/>
+  <card:Card id="scene-2" timeline={timeline.timeline} canvas={canvas} font={font} start="program.start+90f" end="program.start+330f" title="每一刻都值得记录" subtitle="选择图片，写下属于你的故事" color="#35bca8" image="./assets/default.png" image-fit="cover" image-position-x="50" image-position-y="50" font-size="54"/>
+  <card:Card id="scene-3" timeline={timeline.timeline} canvas={canvas} font={font} start="program.start+330f" end="program.start+450f" title="一起创造" subtitle="选择图片，写下属于你的故事" color="#35bca8" image="./assets/default.png" image-fit="cover" image-position-x="50" image-position-y="50" font-size="54"/>
   <film:Film id="main" canvas={canvas} timeline={timeline.timeline} appearance={style.film.main}>
     <film:Track source={scene-1.track}/>
     <film:Track source={scene-2.track}/>

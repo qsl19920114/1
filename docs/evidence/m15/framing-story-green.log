@@ -1,0 +1,9 @@
+Test project /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build
+    Start 28: story_template
+1/2 Test #28: story_template ...................   Passed    0.68 sec
+    Start 30: agent_controller
+2/2 Test #30: agent_controller .................   Passed   26.52 sec
+
+100% tests passed out of 2
+
+Total Test time (real) =  27.22 sec

@@ -1,0 +1,62 @@
+{
+    "artifacts": [
+        {
+            "buildId": "bld_20261004T084757184Z_A699182DA7",
+            "fullDecode": true,
+            "path": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m15/20261004-164748/01-铺满裁切.mp4",
+            "sha256": "50ef41920eb58c308c6c338d64fe532bc856e74f0cfc2ba6e912f1be4c1be639",
+            "sourceFingerprint": "91642a33aa939f46356d71a015afcf365ec8b847e23e57f8e224846db6e9a8e4"
+        },
+        {
+            "buildId": "bld_20261004T084836028Z_717E23375D",
+            "fullDecode": true,
+            "path": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m15/20261004-164748/02-完整显示.mp4",
+            "sha256": "78a7b073cda496362e22eb1047c7eae50ac18d44bb5073c0d7ada7a5527a0450",
+            "sourceFingerprint": "4be9611e17813f95e29632f4109613f12459613ce69a68fbcd04fa1d73e293bb"
+        }
+    ],
+    "artifactsUnchangedAfterRejection": true,
+    "driver": "production Qt controls and signals; actual current Codex and local Hypit",
+    "explicitDriverApprovals": 1,
+    "invalidParameterRejected": true,
+    "invalidPositionRollback": true,
+    "keyboardActivation": true,
+    "nativePositionEdits": 2,
+    "nonFramingPropertiesPreserved": true,
+    "ownedStudioStopped": true,
+    "pixelsUploaded": false,
+    "plan": {
+        "format": "qvw.agent-plan@1",
+        "kind": "edit",
+        "operations": [
+            {
+                "entityId": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m15/20261004-164748/构图工程/main.svml::output::cover.track:cover",
+                "fieldId": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m15/20261004-164748/构图工程/main.svml::output::cover.track:cover:inspector:image-fit",
+                "value": "contain"
+            },
+            {
+                "entityId": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m15/20261004-164748/构图工程/main.svml::output::cover.track:cover",
+                "fieldId": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m15/20261004-164748/构图工程/main.svml::output::cover.track:cover:inspector:image-position-x",
+                "value": 50
+            },
+            {
+                "entityId": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m15/20261004-164748/构图工程/main.svml::output::cover.track:cover",
+                "fieldId": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m15/20261004-164748/构图工程/main.svml::output::cover.track:cover:inspector:image-position-y",
+                "value": 50
+            }
+        ],
+        "projectName": "",
+        "question": "",
+        "scenes": [
+        ],
+        "summary": "拟仅修改当前图片组件，依次将 image-fit 设为 contain、image-position-x 设为数值 50、image-position-y 设为数值 50。其他文案、图片绑定、颜色、动画和时长保持不变，待用户审阅批准后执行。"
+    },
+    "previewFingerprint": "4be9611e17813f95e29632f4109613f12459613ce69a68fbcd04fa1d73e293bb",
+    "project": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m15/20261004-164748/构图工程/workbench.qvw.json",
+    "rangeMessage": "垂直焦点 must be at most 100.",
+    "realModelRequests": 1,
+    "rollbackMessage": "源码提交后的编译或回读失败：读取 Studio 会话失败（HTTP 500）：image-position-y 需为0–100的有限数值。。 已恢复原文件并确认有效会话，本次编辑未应用。",
+    "searchClearsHiddenSelection": true,
+    "unchangedBeforeApproval": true,
+    "verdict": "PASS"
+}

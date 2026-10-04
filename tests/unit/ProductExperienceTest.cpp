@@ -34,6 +34,19 @@ private slots:
   domain::Track track;track.clips={{"real/a","开场",0,150,{},"a"},{"real/b","结尾",150,300,{},"b"}};snapshot.tracks={track};window.showSnapshot(snapshot);
   auto *list=window.findChild<QListWidget*>("scenes");auto *tree=window.findChild<QTreeWidget*>("components");QVERIFY(list);list->itemClicked(list->item(1));QCOMPARE(tree->currentItem()->toolTip(0),QString("real/b"));
  }
+ void filteredComponentsRevealSceneWithoutWrites() {
+  ui::MainWindow window;domain::Project project;project.rootPath="/tmp/component-navigation";window.showDocument(project);
+  domain::Snapshot snapshot;snapshot.revision=1;snapshot.space.frameRate=30;snapshot.space.frameCount=300;
+  domain::Track track;track.id="track/main";track.label="主轨道";track.clips={{"real/a","开场",0,150,{},"a"},{"real/b","结尾",150,300,{},"b"}};snapshot.tracks={track};window.showSnapshot(snapshot);
+  auto *search=window.findChild<QLineEdit*>("componentSearch");QVERIFY(search);
+  auto *tree=window.findChild<QTreeWidget*>("components");auto *list=window.findChild<QListWidget*>("scenes");
+  QSignalSpy writes(&window,&ui::MainWindow::editRequested);
+  search->setText("no-match");QVERIFY(!tree->currentItem());QVERIFY(tree->selectedItems().isEmpty());
+  list->itemClicked(list->item(1));QCOMPARE(search->text(),QString());QVERIFY(tree->currentItem());QCOMPARE(tree->currentItem()->toolTip(0),QString("real/b"));
+  search->setText("real/b");window.showSnapshot(snapshot);QCOMPARE(search->text(),QString("real/b"));QCOMPARE(tree->currentItem()->toolTip(0),QString("real/b"));
+  auto next=project;next.rootPath="/tmp/component-navigation-next";window.showDocument(next);QCOMPARE(search->text(),QString());
+  QCoreApplication::processEvents();QCOMPARE(writes.count(),0);
+ }
  void fileDropUsesBatchSignalAndRejectsNetworkUrls(){
   QTemporaryDir dir;const auto path=dir.filePath("asset.png");QFile file(path);QVERIFY(file.open(QIODevice::WriteOnly));file.write("bytes are checked by service");file.close();ui::AssetTree tree;tree.show();QSignalSpy dropped(&tree,&ui::AssetTree::filesDropped);QMimeData mime;mime.setUrls({QUrl::fromLocalFile(path)});QDragEnterEvent enter(QPoint(5,5),Qt::CopyAction,&mime,Qt::LeftButton,Qt::NoModifier);QApplication::sendEvent(tree.viewport(),&enter);QVERIFY(enter.isAccepted());QDropEvent drop(QPointF(5,5),Qt::CopyAction,&mime,Qt::LeftButton,Qt::NoModifier);QApplication::sendEvent(tree.viewport(),&drop);QCOMPARE(dropped.count(),1);QCOMPARE(dropped[0][0].toStringList(),QStringList{path});
   QMimeData remote;remote.setUrls({QUrl("https://example.invalid/video.mp4")});QDragEnterEvent rejected(QPoint(5,5),Qt::CopyAction,&remote,Qt::LeftButton,Qt::NoModifier);QApplication::sendEvent(tree.viewport(),&rejected);QVERIFY(!rejected.isAccepted());

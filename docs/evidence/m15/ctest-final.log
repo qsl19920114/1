@@ -1,0 +1,81 @@
+Test project /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build
+      Start  1: infrastructure
+ 1/38 Test  #1: infrastructure ...................   Passed    0.04 sec
+      Start  2: studio_process
+ 2/38 Test  #2: studio_process ...................   Passed   33.20 sec
+      Start  3: studio_client
+ 3/38 Test  #3: studio_client ....................   Passed    0.98 sec
+      Start  4: hypit_probe
+ 4/38 Test  #4: hypit_probe ......................   Passed    4.27 sec
+      Start  5: inspector_controls
+ 5/38 Test  #5: inspector_controls ...............   Passed    0.47 sec
+      Start  6: project_store
+ 6/38 Test  #6: project_store ....................   Passed    0.18 sec
+      Start  7: document_controller
+ 7/38 Test  #7: document_controller ..............   Passed    0.13 sec
+      Start  8: asset_service
+ 8/38 Test  #8: asset_service ....................   Passed    0.90 sec
+      Start  9: source_edit_guard
+ 9/38 Test  #9: source_edit_guard ................   Passed    0.05 sec
+      Start 10: studio_writer
+10/38 Test #10: studio_writer ....................   Passed    1.79 sec
+      Start 11: editor_controller
+11/38 Test #11: editor_controller ................   Passed    4.00 sec
+      Start 12: json_process
+12/38 Test #12: json_process .....................   Passed    0.74 sec
+      Start 13: export_workspace
+13/38 Test #13: export_workspace .................   Passed    0.22 sec
+      Start 14: media_validation
+14/38 Test #14: media_validation .................   Passed    4.36 sec
+      Start 15: export_controller
+15/38 Test #15: export_controller ................   Passed   53.94 sec
+      Start 16: proposal_service
+16/38 Test #16: proposal_service .................   Passed    0.06 sec
+      Start 17: proposal_controller
+17/38 Test #17: proposal_controller ..............   Passed    0.64 sec
+      Start 18: runtime_paths
+18/38 Test #18: runtime_paths ....................   Passed    7.91 sec
+      Start 19: log_rotation
+19/38 Test #19: log_rotation .....................   Passed    4.41 sec
+      Start 20: export_cache
+20/38 Test #20: export_cache .....................   Passed    8.31 sec
+      Start 21: startup_early_close
+21/38 Test #21: startup_early_close ..............   Passed    1.09 sec
+      Start 22: product_window
+22/38 Test #22: product_window ...................   Passed    0.55 sec
+      Start 23: video_asset_importer
+23/38 Test #23: video_asset_importer .............   Passed   19.59 sec
+      Start 24: sample_catalog
+24/38 Test #24: sample_catalog ...................   Passed    0.13 sec
+      Start 25: agent_plan
+25/38 Test #25: agent_plan .......................   Passed    0.60 sec
+      Start 26: model_client
+26/38 Test #26: model_client .....................   Passed    6.80 sec
+      Start 27: agent_panel
+27/38 Test #27: agent_panel ......................   Passed    0.32 sec
+      Start 28: story_template
+28/38 Test #28: story_template ...................   Passed    0.11 sec
+      Start 29: agent_task_store
+29/38 Test #29: agent_task_store .................   Passed    0.77 sec
+      Start 30: agent_controller
+30/38 Test #30: agent_controller .................   Passed   26.67 sec
+      Start 31: preview_version
+31/38 Test #31: preview_version ..................   Passed    7.59 sec
+      Start 32: product_experience
+32/38 Test #32: product_experience ...............   Passed    0.59 sec
+      Start 33: workspace_store
+33/38 Test #33: workspace_store ..................   Passed    0.41 sec
+      Start 34: asset_library
+34/38 Test #34: asset_library ....................   Passed    4.63 sec
+      Start 35: history_panel
+35/38 Test #35: history_panel ....................   Passed    0.27 sec
+      Start 36: import_results_panel
+36/38 Test #36: import_results_panel .............   Passed    0.32 sec
+      Start 37: media_player
+37/38 Test #37: media_player .....................   Passed   10.87 sec
+      Start 38: component_browser
+38/38 Test #38: component_browser ................   Passed    0.47 sec
+
+100% tests passed out of 38
+
+Total Test time (real) = 208.57 sec

@@ -1,0 +1,53 @@
+[  0%] Built target qvw_infra_autogen_timestamp_deps
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  4%] Built target qvw_domain_autogen
+[  9%] Built target qvw_infra_autogen
+[ 19%] Built target qvw_domain
+[ 28%] Built target qvw_infra
+[ 28%] Built target qvw_services_autogen_timestamp_deps
+[ 28%] Built target qvw_backend_autogen_timestamp_deps
+[ 28%] Built target qvw_backend_autogen
+[ 28%] Built target qvw_services_autogen
+[ 38%] Built target qvw_backend
+[ 57%] Built target qvw_services
+[ 57%] Built target qvw_controllers_autogen_timestamp_deps
+[ 57%] Built target qvw_controllers_autogen
+[ 71%] Built target qvw_controllers
+[ 71%] Built target qvw_agent_autogen_timestamp_deps
+[ 76%] Automatic MOC for target qvw_agent
+[ 76%] Built target qvw_agent_autogen
+[ 76%] Building CXX object app/CMakeFiles/qvw_agent.dir/agent/ContextBuilder.cpp.o
+[ 76%] Linking CXX static library libqvw_agent.a
+[ 90%] Built target qvw_agent
+[ 90%] Built target agent_plan_test_autogen_timestamp_deps
+[ 95%] Built target agent_plan_test_autogen
+[ 95%] Linking CXX executable agent_plan_test
+[100%] Built target agent_plan_test
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  0%] Built target qvw_infra_autogen_timestamp_deps
+[  3%] Built target qvw_domain_autogen
+[  7%] Built target qvw_infra_autogen
+[ 14%] Built target qvw_domain
+[ 21%] Built target qvw_infra
+[ 21%] Built target qvw_ui_autogen_timestamp_deps
+[ 21%] Built target qvw_backend_autogen_timestamp_deps
+[ 21%] Built target qvw_services_autogen_timestamp_deps
+[ 21%] Built target qvw_ui_autogen
+[ 21%] Built target qvw_services_autogen
+[ 21%] Built target qvw_backend_autogen
+[ 28%] Built target qvw_backend
+[ 42%] Built target qvw_services
+[ 60%] Built target qvw_ui
+[ 60%] Built target qvw_controllers_autogen_timestamp_deps
+[ 60%] Built target qvw_controllers_autogen
+[ 71%] Built target qvw_controllers
+[ 71%] Built target qvw_agent_autogen_timestamp_deps
+[ 75%] Built target qvw_agent_autogen
+[ 85%] Built target qvw_agent
+[ 85%] Built target qvw_workflow_autogen_timestamp_deps
+[ 89%] Built target qvw_workflow_autogen
+[ 92%] Built target qvw_workflow
+[ 92%] Built target component_framing_e2e_test_autogen_timestamp_deps
+[ 96%] Built target component_framing_e2e_test_autogen
+[ 96%] Linking CXX executable component_framing_e2e_test
+[100%] Built target component_framing_e2e_test

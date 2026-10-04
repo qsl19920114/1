@@ -13,7 +13,8 @@ bool StoryTemplate::prepare(const QString &installed,const QJsonArray &scenes,co
     QFile metadata(QDir(installed).filePath("template.json"));
     if(!metadata.open(QIODevice::ReadOnly)||metadata.size()>16384)return fail("可信故事模板不可读。");
     auto info=QJsonDocument::fromJson(metadata.readAll()).object();
-    if(info["id"]!="story-reel"||info["version"]!="1.0.0")return fail("仅允许安装的story-reel@1模板。");
+    const auto version=info["version"].toString();
+    if(info["id"]!="story-reel"||(version!="1.0.0"&&version!="1.1.0"))return fail("仅允许安装的story-reel 1.0.0或1.1.0模板。");
     if(QFileInfo(destination).exists()||QFileInfo(destination).isSymLink())return fail("模板暂存目录已存在，拒绝覆盖。");
     QStringList files,dirs;QDirIterator it(installed,QDir::AllEntries|QDir::Hidden|QDir::System|QDir::NoDotAndDotDot,QDirIterator::Subdirectories);
     while(it.hasNext()){it.next();const auto f=it.fileInfo();if(f.isSymLink()||(!f.isDir()&&!f.isFile()))return fail("模板不能包含符号链接或特殊文件。");const auto relative=QDir(installed).relativeFilePath(f.filePath());if(f.isDir())dirs.append(relative);else files.append(relative);}
@@ -28,9 +29,11 @@ bool StoryTemplate::prepare(const QString &installed,const QJsonArray &scenes,co
       "  <import as=\"style\" source=\"./main.svs\"/>\n  <time:Clock id=\"clock\" frame-rate=\"30\"/>\n"
       "  <time:Timeline id=\"timeline\" clock={clock} end=\"%1f\"/>\n  <spatial:Canvas id=\"canvas\" width=\"720\" height=\"1280\"/>\n"
       "  <fonts:Stack id=\"font\" family=\"noto-sans-sc\" weight=\"600\" style=\"normal\"/>\n").arg(total);
+    // Version 1.0 packages reject unknown attributes; only 1.1 exposes framing bindings.
+    const QString framing=version=="1.1.0"?QStringLiteral(" image-fit=\"cover\" image-position-x=\"50\" image-position-y=\"50\""):QString{};
     int start=0;
     for(const auto &v:scenes){const auto s=v.toObject();const int end=start+s["durationFrames"].toInt();
-        source+=QStringLiteral("  <card:Card id=\"%1\" timeline={timeline.timeline} canvas={canvas} font={font} start=\"program.start+%2f\" end=\"program.start+%3f\" title=\"故事场景\" subtitle=\"等待应用已审阅方案\" color=\"#35bca8\" image=\"./assets/default.png\" font-size=\"54\"/>\n").arg(s["sceneId"].toString()).arg(start).arg(end);start=end;}
+        source+=QStringLiteral("  <card:Card id=\"%1\" timeline={timeline.timeline} canvas={canvas} font={font} start=\"program.start+%2f\" end=\"program.start+%3f\" title=\"故事场景\" subtitle=\"等待应用已审阅方案\" color=\"#35bca8\" image=\"./assets/default.png\" font-size=\"54\"%4/>\n").arg(s["sceneId"].toString()).arg(start).arg(end).arg(framing);start=end;}
     source+="  <film:Film id=\"main\" canvas={canvas} timeline={timeline.timeline} appearance={style.film.main}>\n";
     for(const auto &v:scenes)source+=QStringLiteral("    <film:Track source={%1.track}/>\n").arg(v.toObject()["sceneId"].toString());
     source+="  </film:Film>\n  <render:Video id=\"final\" composition={main.composition} timeline={timeline.timeline}/>\n</svml>\n";

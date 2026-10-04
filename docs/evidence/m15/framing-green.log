@@ -1,0 +1,24 @@
+✔ portrait scene fits actual canvas and leaves all text as text nodes (0.783417ms)
+✔ invalid typography and color do not compile (0.28725ms)
+✔ legacy options retain centered cover framing (0.261042ms)
+✔ cover and contain honor independent decimal focal positions including bounds (0.188959ms)
+✔ invalid fit and nonfinite or nonnumeric positions cannot reach CSS (0.372708ms)
+✔ source framing literals use backward defaults and strict decimal parsing (0.948541ms)
+✔ fresh sources and package companions expose actual writable framing controls (0.631417ms)
+✔ generated framing styles pass the pinned Hypit Visual IR validator (0.675208ms)
+✔ authored text, color and exact image artifact reach visual elements (1.2275ms)
+✔ invalid colors and animation duration fail instead of injecting CSS (0.290834ms)
+✔ legacy options retain centered cover framing (0.259458ms)
+✔ cover and contain honor independent decimal focal positions including bounds (0.185334ms)
+✔ invalid fit and nonfinite or nonnumeric positions cannot reach CSS (0.358083ms)
+✔ source framing literals use backward defaults and strict decimal parsing (0.500791ms)
+✔ fresh sources and package companions expose actual writable framing controls (0.664834ms)
+✔ generated framing styles pass the pinned Hypit Visual IR validator (0.710958ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 276.459708

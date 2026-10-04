@@ -1,0 +1,246 @@
+✔ portrait scene fits actual canvas and leaves all text as text nodes (0.774042ms)
+✔ invalid typography and color do not compile (0.358542ms)
+✖ legacy options retain centered cover framing (1.074625ms)
+✖ cover and contain honor independent decimal focal positions including bounds (0.169ms)
+✖ invalid fit and nonfinite or nonnumeric positions cannot reach CSS (0.101583ms)
+✖ source framing literals use backward defaults and strict decimal parsing (0.097958ms)
+✖ fresh sources and package companions expose actual writable framing controls (0.115166ms)
+✔ authored text, color and exact image artifact reach visual elements (1.496083ms)
+✔ invalid colors and animation duration fail instead of injecting CSS (0.312917ms)
+✖ legacy options retain centered cover framing (1.028791ms)
+✖ cover and contain honor independent decimal focal positions including bounds (0.1565ms)
+✖ invalid fit and nonfinite or nonnumeric positions cannot reach CSS (0.105542ms)
+✖ source framing literals use backward defaults and strict decimal parsing (0.098084ms)
+✖ fresh sources and package companions expose actual writable framing controls (0.120208ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 4
+ℹ fail 10
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 478.928792
+
+✖ failing tests:
+
+test at tests/template/story-reel.test.mjs:34:1
+✖ legacy options retain centered cover framing (1.074625ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - '50% 50%'
+  
+      at TestContext.<anonymous> (file:///Users/bytedance/Downloads/%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A/qt-video-workbench/tests/template/story-reel.test.mjs:36:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.start (node:internal/test_runner/test:1096:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17)
+      at run (node:internal/test_runner/harness:396:12)
+      at test (node:internal/test_runner/harness:405:12)
+      at file:///Users/bytedance/Downloads/%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A/qt-video-workbench/tests/template/story-reel.test.mjs:34:1 {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: '50% 50%',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/template/story-reel.test.mjs:38:1
+✖ cover and contain honor independent decimal focal positions including bounds (0.169ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - '0% 100%'
+  
+      at TestContext.<anonymous> (file:///Users/bytedance/Downloads/%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A/qt-video-workbench/tests/template/story-reel.test.mjs:43:14)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: '0% 100%',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/template/story-reel.test.mjs:47:1
+✖ invalid fit and nonfinite or nonnumeric positions cannot reach CSS (0.101583ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///Users/bytedance/Downloads/%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A/qt-video-workbench/tests/template/story-reel.test.mjs:49:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /image-fit/,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/template/story-reel.test.mjs:57:1
+✖ source framing literals use backward defaults and strict decimal parsing (0.097958ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at TestContext.<anonymous> (file:///Users/bytedance/Downloads/%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A/qt-video-workbench/tests/template/story-reel.test.mjs:58:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/template/story-reel.test.mjs:73:1
+✖ fresh sources and package companions expose actual writable framing controls (0.115166ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - 'select'
+  
+      at TestContext.<anonymous> (file:///Users/bytedance/Downloads/%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A/qt-video-workbench/tests/template/story-reel.test.mjs:77:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 'select',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/template/title-card.test.mjs:36:1
+✖ legacy options retain centered cover framing (1.028791ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - '50% 50%'
+  
+      at TestContext.<anonymous> (file:///Users/bytedance/Downloads/%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A/qt-video-workbench/tests/template/title-card.test.mjs:38:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.start (node:internal/test_runner/test:1096:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17)
+      at run (node:internal/test_runner/harness:396:12)
+      at test (node:internal/test_runner/harness:405:12)
+      at file:///Users/bytedance/Downloads/%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A/qt-video-workbench/tests/template/title-card.test.mjs:36:1 {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: '50% 50%',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/template/title-card.test.mjs:40:1
+✖ cover and contain honor independent decimal focal positions including bounds (0.1565ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - '0% 100%'
+  
+      at TestContext.<anonymous> (file:///Users/bytedance/Downloads/%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A/qt-video-workbench/tests/template/title-card.test.mjs:45:14)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: '0% 100%',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/template/title-card.test.mjs:49:1
+✖ invalid fit and nonfinite or nonnumeric positions cannot reach CSS (0.105542ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (file:///Users/bytedance/Downloads/%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A/qt-video-workbench/tests/template/title-card.test.mjs:51:12)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /image-fit/,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests/template/title-card.test.mjs:59:1
+✖ source framing literals use backward defaults and strict decimal parsing (0.098084ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at TestContext.<anonymous> (file:///Users/bytedance/Downloads/%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A/qt-video-workbench/tests/template/title-card.test.mjs:60:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/template/title-card.test.mjs:75:1
+✖ fresh sources and package companions expose actual writable framing controls (0.120208ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - 'select'
+  
+      at TestContext.<anonymous> (file:///Users/bytedance/Downloads/%E5%9B%BD%E4%BA%A7%E8%B5%84%E4%BA%A7%E4%BD%9C%E4%B8%9A/qt-video-workbench/tests/template/title-card.test.mjs:79:10)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1201:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:831:18)
+      at Test.postRun (node:internal/test_runner/test:1330:19)
+      at Test.run (node:internal/test_runner/test:1258:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:831:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: 'select',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

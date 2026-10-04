@@ -1,0 +1,30 @@
+[  0%] Built target qvw_infra_autogen_timestamp_deps
+[  0%] Built target qvw_domain_autogen_timestamp_deps
+[  3%] Built target qvw_domain_autogen
+[  7%] Built target qvw_infra_autogen
+[ 14%] Built target qvw_domain
+[ 21%] Built target qvw_infra
+[ 21%] Built target qvw_ui_autogen_timestamp_deps
+[ 21%] Built target qvw_services_autogen_timestamp_deps
+[ 21%] Built target qvw_backend_autogen_timestamp_deps
+[ 21%] Built target qvw_ui_autogen
+[ 21%] Built target qvw_services_autogen
+[ 21%] Built target qvw_backend_autogen
+[ 28%] Built target qvw_backend
+[ 57%] Built target qvw_ui
+[ 60%] Built target qvw_services
+[ 60%] Built target qvw_controllers_autogen_timestamp_deps
+[ 60%] Built target qvw_controllers_autogen
+[ 71%] Built target qvw_controllers
+[ 71%] Built target qvw_agent_autogen_timestamp_deps
+[ 75%] Built target qvw_agent_autogen
+[ 85%] Built target qvw_agent
+[ 85%] Built target qvw_workflow_autogen_timestamp_deps
+[ 89%] Built target qvw_workflow_autogen
+[ 92%] Built target qvw_workflow
+[ 92%] Built target component_framing_e2e_test_autogen_timestamp_deps
+[ 96%] Automatic MOC for target component_framing_e2e_test
+[ 96%] Built target component_framing_e2e_test_autogen
+[ 96%] Building CXX object tests/CMakeFiles/component_framing_e2e_test.dir/integration/ComponentFramingE2ETest.cpp.o
+[ 96%] Linking CXX executable component_framing_e2e_test
+[100%] Built target component_framing_e2e_test

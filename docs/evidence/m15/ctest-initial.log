@@ -1,0 +1,167 @@
+Test project /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build
+      Start  1: infrastructure
+ 1/38 Test  #1: infrastructure ...................   Passed    0.06 sec
+      Start  2: studio_process
+ 2/38 Test  #2: studio_process ...................   Passed   33.88 sec
+      Start  3: studio_client
+ 3/38 Test  #3: studio_client ....................   Passed    0.98 sec
+      Start  4: hypit_probe
+ 4/38 Test  #4: hypit_probe ......................   Passed    3.93 sec
+      Start  5: inspector_controls
+ 5/38 Test  #5: inspector_controls ...............   Passed    1.36 sec
+      Start  6: project_store
+ 6/38 Test  #6: project_store ....................   Passed    0.23 sec
+      Start  7: document_controller
+ 7/38 Test  #7: document_controller ..............   Passed    0.14 sec
+      Start  8: asset_service
+ 8/38 Test  #8: asset_service ....................   Passed    0.90 sec
+      Start  9: source_edit_guard
+ 9/38 Test  #9: source_edit_guard ................   Passed    0.06 sec
+      Start 10: studio_writer
+10/38 Test #10: studio_writer ....................   Passed    1.81 sec
+      Start 11: editor_controller
+11/38 Test #11: editor_controller ................   Passed    3.97 sec
+      Start 12: json_process
+12/38 Test #12: json_process .....................   Passed    0.77 sec
+      Start 13: export_workspace
+13/38 Test #13: export_workspace .................   Passed    0.27 sec
+      Start 14: media_validation
+14/38 Test #14: media_validation .................   Passed    4.42 sec
+      Start 15: export_controller
+15/38 Test #15: export_controller ................***Failed   55.99 sec
+********* Start testing of ExportControllerTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : ExportControllerTest::initTestCase()
+PASS   : ExportControllerTest::successRequiresAllLayers()
+PASS   : ExportControllerTest::rejectsPlan(paid)
+PASS   : ExportControllerTest::rejectsPlan(malformed)
+PASS   : ExportControllerTest::rejectsPlan(preflight)
+PASS   : ExportControllerTest::rejectsPlan(providers)
+PASS   : ExportControllerTest::failedOrMalformedBuild(badid)
+PASS   : ExportControllerTest::failedOrMalformedBuild(buildfailure)
+PASS   : ExportControllerTest::failedOrMalformedBuild(terminalfailure)
+PASS   : ExportControllerTest::failedOrMalformedBuild(wrongid)
+PASS   : ExportControllerTest::failedOrMalformedBuild(shape)
+PASS   : ExportControllerTest::failedOrMalformedBuild(missingresult)
+PASS   : ExportControllerTest::resourceAndDecodeFailure(nooutput)
+PASS   : ExportControllerTest::resourceAndDecodeFailure(staleid)
+PASS   : ExportControllerTest::resourceAndDecodeFailure(decode)
+PASS   : ExportControllerTest::cancelWaitsForTerminal()
+PASS   : ExportControllerTest::resumeUsesSameBuildAndFrozenSource()
+PASS   : ExportControllerTest::completedWorkWaitsForFinishedResult()
+PASS   : ExportControllerTest::reentrantCloseCannotSubmit()
+FAIL!  : ExportControllerTest::failedTaskPersistenceCannotReportCompletion() QTestLib: This test case check ("(fail.size()) == (1)") failed because the requested timeout (5000 ms) was too short, 5200 ms would have been sufficient this time.
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/ExportControllerTest.cpp(115)]
+PASS   : ExportControllerTest::closeBeforeBuildAcknowledgementRecoversWithoutResubmit()
+PASS   : ExportControllerTest::stopPlanningRecordsThatNoBuildWasSubmitted()
+PASS   : ExportControllerTest::diagnosticsAreVisible()
+PASS   : ExportControllerTest::pinnedCliErrorMessageIsVisible()
+PASS   : ExportControllerTest::reentrantCancellationDoesNotStartParallelStatus()
+PASS   : ExportControllerTest::unknownIdRecoveryReentrantCancellationKeepsCancelCommand()
+PASS   : ExportControllerTest::unconfirmedCancelMessageCannotPublishIntoAnotherProject()
+PASS   : ExportControllerTest::stageDoesNotOverwriteCopiedUserFileAndStillRecovers()
+PASS   : ExportControllerTest::sourceAndUnsafeDestinationRejected()
+PASS   : ExportControllerTest::cleanupTestCase()
+Totals: 29 passed, 1 failed, 0 skipped, 0 blacklisted, 55922ms
+********* Finished testing of ExportControllerTest *********
+
+      Start 16: proposal_service
+16/38 Test #16: proposal_service .................   Passed    0.05 sec
+      Start 17: proposal_controller
+17/38 Test #17: proposal_controller ..............   Passed    0.62 sec
+      Start 18: runtime_paths
+18/38 Test #18: runtime_paths ....................   Passed    6.68 sec
+      Start 19: log_rotation
+19/38 Test #19: log_rotation .....................   Passed    4.46 sec
+      Start 20: export_cache
+20/38 Test #20: export_cache .....................   Passed    7.38 sec
+      Start 21: startup_early_close
+21/38 Test #21: startup_early_close ..............   Passed    1.01 sec
+      Start 22: product_window
+22/38 Test #22: product_window ...................   Passed    1.48 sec
+      Start 23: video_asset_importer
+23/38 Test #23: video_asset_importer .............   Passed   18.39 sec
+      Start 24: sample_catalog
+24/38 Test #24: sample_catalog ...................   Passed    0.08 sec
+      Start 25: agent_plan
+25/38 Test #25: agent_plan .......................   Passed    0.04 sec
+      Start 26: model_client
+26/38 Test #26: model_client .....................   Passed    6.41 sec
+      Start 27: agent_panel
+27/38 Test #27: agent_panel ......................   Passed    0.82 sec
+      Start 28: story_template
+28/38 Test #28: story_template ...................***Failed    0.54 sec
+********* Start testing of StoryTemplateTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : StoryTemplateTest::initTestCase()
+FAIL!  : StoryTemplateTest::sceneOrderAndDurationAreAuthoredBeforeStudio() 'qvw::agent::StoryTemplate::prepare(QStringLiteral(QVW_SOURCE_DIR)+"/templates/story-reel",scenes,temp.filePath("trusted"),&error)' returned FALSE. (仅允许安装的story-reel@1模板。)
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StoryTemplateTest.cpp(12)]
+PASS   : StoryTemplateTest::cleanupTestCase()
+Totals: 2 passed, 1 failed, 0 skipped, 0 blacklisted, 3ms
+********* Finished testing of StoryTemplateTest *********
+
+      Start 29: agent_task_store
+29/38 Test #29: agent_task_store .................   Passed    0.70 sec
+      Start 30: agent_controller
+30/38 Test #30: agent_controller .................***Failed   25.24 sec
+********* Start testing of AgentControllerTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+QINFO  : AgentControllerTest::initTestCase() AgentController tests use a fake model executable and local HTTP protocol simulation; they do not claim real Codex or Hypit verification.
+PASS   : AgentControllerTest::initTestCase()
+PASS   : AgentControllerTest::publicOutputNeverAuthorizesAnIncompleteOrInvalidProposal()
+PASS   : AgentControllerTest::stoppingReviewRevokesApprovalAndAllowsAnotherGoal()
+PASS   : AgentControllerTest::cancellationDiscardsFurtherPublicMessagesAndApproval()
+PASS   : AgentControllerTest::navigationDuringApplyPreservesApprovedScopeForEveryStep()
+PASS   : AgentControllerTest::scopeChangedWhileThinkingDoesNotWidenTheReturnedProposal()
+FAIL!  : AgentControllerTest::creatingFromExistingScopedProjectRecordsNewRootBeforeCompilation() Compared values are not the same
+   Actual   (f.agent->status().phase): "failed"
+   Expected (QString("creating"))    : "creating"
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentControllerTest.cpp(79)]
+PASS   : AgentControllerTest::actualSelectionIsContextEvenWhenApprovalScopeIsWholeProject()
+PASS   : AgentControllerTest::failedStepFactsSurviveRestoreAndReachRepairModel()
+PASS   : AgentControllerTest::restoredScopeRequiresNewApprovalAndRejectsOtherComponent()
+PASS   : AgentControllerTest::staleRestoreNeverRebasesSavedFingerprintAcrossRepeatedRestore()
+PASS   : AgentControllerTest::damagedTaskJsonReportsFailureAndIsNotOverwritten()
+PASS   : AgentControllerTest::secondStep422RetainsPrefixAndRetryOnlyWritesFailedStep()
+PASS   : AgentControllerTest::retriesStopAfterTwoFailuresWithoutReplayingSuccessfulPrefix()
+PASS   : AgentControllerTest::stopWhileWriteIsAcceptedConfirmsPrefixAndPreventsNextStep()
+PASS   : AgentControllerTest::stopStillSettlesAcceptedWriteBeforeRetryingOnlyRemainingStep()
+PASS   : AgentControllerTest::manualChangeWhileModelIsThinkingInvalidatesItsFutureAnswer()
+PASS   : AgentControllerTest::manualChangeAfterReviewPreventsApproval()
+PASS   : AgentControllerTest::lateRevisionOnlyRepublishContinuesAndPreservesSharedUndo()
+PASS   : AgentControllerTest::externalSourceDuringCompileSettleStopsRemainingWrites()
+PASS   : AgentControllerTest::undoSettleRejectsAnotherAgentActionUntilSourceVersionIsConfirmed()
+PASS   : AgentControllerTest::undoConfirmsLateRevisionBeforeSharedRedoSucceeds()
+PASS   : AgentControllerTest::newTaskUsesCurrentBaselineRatherThanPreviousReviewBaseline()
+PASS   : AgentControllerTest::switchingProjectsDoesNotPersistPreviousTaskInNewDocument()
+PASS   : AgentControllerTest::modelProposalLeavesDocumentUntouchedUntilApproval()
+PASS   : AgentControllerTest::cleanupTestCase()
+Totals: 25 passed, 1 failed, 0 skipped, 0 blacklisted, 24673ms
+********* Finished testing of AgentControllerTest *********
+
+      Start 31: preview_version
+31/38 Test #31: preview_version ..................   Passed    7.82 sec
+      Start 32: product_experience
+32/38 Test #32: product_experience ...............   Passed    1.05 sec
+      Start 33: workspace_store
+33/38 Test #33: workspace_store ..................   Passed    0.43 sec
+      Start 34: asset_library
+34/38 Test #34: asset_library ....................   Passed    4.08 sec
+      Start 35: history_panel
+35/38 Test #35: history_panel ....................   Passed    0.72 sec
+      Start 36: import_results_panel
+36/38 Test #36: import_results_panel .............   Passed    0.79 sec
+      Start 37: media_player
+37/38 Test #37: media_player .....................   Passed   11.90 sec
+      Start 38: component_browser
+38/38 Test #38: component_browser ................   Passed    0.87 sec
+
+92% tests passed, 3 tests failed out of 38
+
+Total Test time (real) = 211.17 sec
+
+The following tests FAILED:
+	 15 - export_controller (Failed)
+	 28 - story_template (Failed)
+	 30 - agent_controller (Failed)
+Errors while running CTest

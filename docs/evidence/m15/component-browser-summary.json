@@ -1,0 +1,35 @@
+{
+  "task": "T060",
+  "status": "PASS",
+  "scope": "Native reusable ComponentBrowser and MainWindow integration, focused unit/regression tests only",
+  "red": {
+    "command": "QT_QPA_PLATFORM=offscreen build/tests/product_experience_test filteredComponentsRevealSceneWithoutWrites",
+    "exitCode": 1,
+    "expectedFailure": "componentSearch missing",
+    "log": "component-red.txt"
+  },
+  "green": {
+    "buildCommand": "cmake --build build --target component_browser_test product_experience_test product_window_test agent_panel_test -j 4",
+    "buildExitCode": 0,
+    "testCommand": "ctest --test-dir build --output-on-failure -R '^(component_browser|product_experience|product_window|agent_panel)$'",
+    "exitCode": 0,
+    "suitesPassed": 4,
+    "log": "component-targeted-ctest.log"
+  },
+  "coverage": [
+    "case-insensitive trimmed search of component label, compiled ID, track label and track ID",
+    "all/editable filter, actual supported writable fields only",
+    "visible/total count, empty hint, clear-filter action and accessible controls",
+    "exact compiled selection preserved through reordered snapshot; missing/hidden selection cleared",
+    "refresh/filter/reveal do not emit activation",
+    "Enter and click emit exact compiled ID/start frame once; arrows skip filtered rows",
+    "scene selection reveals hidden target and preserves existing MainWindow seek path",
+    "ordinary refresh preserves search and project change clears search",
+    "passive navigation emits zero editRequested signals",
+    "existing selected asset, Agent handoff, SceneStrip, MainWindow and AgentPanel tests pass"
+  ],
+  "limits": [
+    "Real Studio/model/rendering validation delegated to root T062; this evidence does not claim real integration",
+    "Offscreen Qt emits existing font alias and propagateSizeHints warnings"
+  ]
+}

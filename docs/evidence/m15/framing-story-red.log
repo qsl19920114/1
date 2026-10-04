@@ -1,0 +1,66 @@
+Test project /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build
+    Start 28: story_template
+1/2 Test #28: story_template ...................***Failed    0.55 sec
+********* Start testing of StoryTemplateTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+PASS   : StoryTemplateTest::initTestCase()
+FAIL!  : StoryTemplateTest::sceneOrderAndDurationAreAuthoredBeforeStudio() 'qvw::agent::StoryTemplate::prepare(QStringLiteral(QVW_SOURCE_DIR)+"/templates/story-reel",scenes,temp.filePath("trusted"),&error)' returned FALSE. (仅允许安装的story-reel@1模板。)
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StoryTemplateTest.cpp(13)]
+PASS   : StoryTemplateTest::knownTemplateVersions(legacy-1.0)
+FAIL!  : StoryTemplateTest::knownTemplateVersions(framing-1.1) Compared values are not the same
+   Actual   (qvw::agent::StoryTemplate::prepare(installed.path(),scenes,destination.filePath("trusted"),&error)): 0
+   Expected (accepted)                                                                                          : 1
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/StoryTemplateTest.cpp(50)]
+PASS   : StoryTemplateTest::knownTemplateVersions(unknown-minor)
+PASS   : StoryTemplateTest::knownTemplateVersions(unknown-major)
+PASS   : StoryTemplateTest::knownTemplateVersions(missing-version)
+PASS   : StoryTemplateTest::cleanupTestCase()
+Totals: 6 passed, 2 failed, 0 skipped, 0 blacklisted, 22ms
+********* Finished testing of StoryTemplateTest *********
+
+    Start 30: agent_controller
+2/2 Test #30: agent_controller .................***Failed   24.65 sec
+********* Start testing of AgentControllerTest *********
+Config: Using QtTest library 6.11.2, Qt 6.11.2 (arm64-little_endian-lp64 shared (dynamic) release build; by Apple LLVM 17.0.0 (clang-1700.6.4.2)), macos 15.7.7
+QINFO  : AgentControllerTest::initTestCase() AgentController tests use a fake model executable and local HTTP protocol simulation; they do not claim real Codex or Hypit verification.
+PASS   : AgentControllerTest::initTestCase()
+PASS   : AgentControllerTest::publicOutputNeverAuthorizesAnIncompleteOrInvalidProposal()
+PASS   : AgentControllerTest::stoppingReviewRevokesApprovalAndAllowsAnotherGoal()
+PASS   : AgentControllerTest::cancellationDiscardsFurtherPublicMessagesAndApproval()
+PASS   : AgentControllerTest::navigationDuringApplyPreservesApprovedScopeForEveryStep()
+PASS   : AgentControllerTest::scopeChangedWhileThinkingDoesNotWidenTheReturnedProposal()
+FAIL!  : AgentControllerTest::creatingFromExistingScopedProjectRecordsNewRootBeforeCompilation() Compared values are not the same
+   Actual   (f.agent->status().phase): "failed"
+   Expected (QString("creating"))    : "creating"
+   Loc: [/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/tests/unit/AgentControllerTest.cpp(79)]
+PASS   : AgentControllerTest::actualSelectionIsContextEvenWhenApprovalScopeIsWholeProject()
+PASS   : AgentControllerTest::failedStepFactsSurviveRestoreAndReachRepairModel()
+PASS   : AgentControllerTest::restoredScopeRequiresNewApprovalAndRejectsOtherComponent()
+PASS   : AgentControllerTest::staleRestoreNeverRebasesSavedFingerprintAcrossRepeatedRestore()
+PASS   : AgentControllerTest::damagedTaskJsonReportsFailureAndIsNotOverwritten()
+PASS   : AgentControllerTest::secondStep422RetainsPrefixAndRetryOnlyWritesFailedStep()
+PASS   : AgentControllerTest::retriesStopAfterTwoFailuresWithoutReplayingSuccessfulPrefix()
+PASS   : AgentControllerTest::stopWhileWriteIsAcceptedConfirmsPrefixAndPreventsNextStep()
+PASS   : AgentControllerTest::stopStillSettlesAcceptedWriteBeforeRetryingOnlyRemainingStep()
+PASS   : AgentControllerTest::manualChangeWhileModelIsThinkingInvalidatesItsFutureAnswer()
+PASS   : AgentControllerTest::manualChangeAfterReviewPreventsApproval()
+PASS   : AgentControllerTest::lateRevisionOnlyRepublishContinuesAndPreservesSharedUndo()
+PASS   : AgentControllerTest::externalSourceDuringCompileSettleStopsRemainingWrites()
+PASS   : AgentControllerTest::undoSettleRejectsAnotherAgentActionUntilSourceVersionIsConfirmed()
+PASS   : AgentControllerTest::undoConfirmsLateRevisionBeforeSharedRedoSucceeds()
+PASS   : AgentControllerTest::newTaskUsesCurrentBaselineRatherThanPreviousReviewBaseline()
+PASS   : AgentControllerTest::switchingProjectsDoesNotPersistPreviousTaskInNewDocument()
+PASS   : AgentControllerTest::modelProposalLeavesDocumentUntouchedUntilApproval()
+PASS   : AgentControllerTest::cleanupTestCase()
+Totals: 25 passed, 1 failed, 0 skipped, 0 blacklisted, 24622ms
+********* Finished testing of AgentControllerTest *********
+
+
+0% tests passed, 2 tests failed out of 2
+
+Total Test time (real) =  25.22 sec
+
+The following tests FAILED:
+	 28 - story_template (Failed)
+	 30 - agent_controller (Failed)
+Errors while running CTest

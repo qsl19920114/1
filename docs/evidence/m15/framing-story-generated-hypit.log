@@ -1,0 +1,39 @@
+ephemeral C++ driver link exit=0
+
+production prepare exit=0
+StoryTemplate::prepare PASS
+
+<card:Card id="scene-3" timeline={timeline.timeline} canvas={canvas} font={font} start="program.start+0f" end="program.start+150f" title="故事场景" subtitle="等待应用已审阅方案" color="#35bca8" image="./assets/default.png" font-size="54" image-fit="cover" image-position-x="50" image-position-y="50"/>
+<card:Card id="scene-1" timeline={timeline.timeline} canvas={canvas} font={font} start="program.start+150f" end="program.start+300f" title="故事场景" subtitle="等待应用已审阅方案" color="#35bca8" image="./assets/default.png" font-size="54" image-fit="cover" image-position-x="50" image-position-y="50"/>
+<card:Card id="scene-2" timeline={timeline.timeline} canvas={canvas} font={font} start="program.start+300f" end="program.start+450f" title="故事场景" subtitle="等待应用已审阅方案" color="#35bca8" image="./assets/default.png" font-size="54" image-fit="cover" image-position-x="50" image-position-y="50"/>
+actual generated source Hypit check exit=0
+{
+  "format": "hypit.cli-check@1",
+  "sourceKind": "author",
+  "ok": true,
+  "source": "main.svml",
+  "frontend": "@hypit/markup@1",
+  "units": 2,
+  "assets": 102,
+  "modules": 18,
+  "outputCount": 6
+}
+
+  Project            /private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-generated-story-framing-k8oralj_/project
+  Run                /var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-generated-story-framing-k8oralj_/project/main.svrun
+  Runtime Profile    /var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-generated-story-framing-k8oralj_/project/hypit.runtime.json
+  Runtime selection  command argument (this session only)
+
+  ➜  Local:   http://localhost:5749/
+GET /__studio/session HTTP200
+actual generated scene writable: {"id": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-generated-story-framing-k8oralj_/project/main.svml::output::scene-3.track:scene-3:inspector:image-fit", "binding": "image-fit", "value": "cover", "control": "select", "edit": {"language": "svml", "source": {"endpoint": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-generated-story-framing-k8oralj_/project/main.svml::endpoint::623:image-fit", "path": "main.svml", "range": {"start": 859, "end": 864}, "preimage": "cover"}}}
+actual generated scene writable: {"id": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-generated-story-framing-k8oralj_/project/main.svml::output::scene-3.track:scene-3:inspector:image-position-x", "binding": "image-position-x", "value": "50", "control": "number", "edit": {"language": "svml", "source": {"endpoint": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-generated-story-framing-k8oralj_/project/main.svml::endpoint::623:image-position-x", "path": "main.svml", "range": {"start": 884, "end": 886}, "preimage": "50"}}}
+actual generated scene writable: {"id": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-generated-story-framing-k8oralj_/project/main.svml::output::scene-3.track:scene-3:inspector:image-position-y", "binding": "image-position-y", "value": "50", "control": "number", "edit": {"language": "svml", "source": {"endpoint": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-generated-story-framing-k8oralj_/project/main.svml::endpoint::623:image-position-y", "path": "main.svml", "range": {"start": 906, "end": 908}, "preimage": "50"}}}
+actual generated scene writable: {"id": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-generated-story-framing-k8oralj_/project/main.svml::output::scene-1.track:scene-1:inspector:image-fit", "binding": "image-fit", "value": "cover", "control": "select", "edit": {"language": "svml", "source": {"endpoint": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-generated-story-framing-k8oralj_/project/main.svml::endpoint::914:image-fit", "path": "main.svml", "range": {"start": 1152, "end": 1157}, "preimage": "cover"}}}
+actual generated scene writable: {"id": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-generated-story-framing-k8oralj_/project/main.svml::output::scene-1.track:scene-1:inspector:image-position-x", "binding": "image-position-x", "value": "50", "control": "number", "edit": {"language": "svml", "source": {"endpoint": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-generated-story-framing-k8oralj_/project/main.svml::endpoint::914:image-position-x", "path": "main.svml", "range": {"start": 1177, "end": 1179}, "preimage": "50"}}}
+actual generated scene writable: {"id": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-generated-story-framing-k8oralj_/project/main.svml::output::scene-1.track:scene-1:inspector:image-position-y", "binding": "image-position-y", "value": "50", "control": "number", "edit": {"language": "svml", "source": {"endpoint": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-generated-story-framing-k8oralj_/project/main.svml::endpoint::914:image-position-y", "path": "main.svml", "range": {"start": 1199, "end": 1201}, "preimage": "50"}}}
+actual generated scene writable: {"id": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-generated-story-framing-k8oralj_/project/main.svml::output::scene-2.track:scene-2:inspector:image-fit", "binding": "image-fit", "value": "cover", "control": "select", "edit": {"language": "svml", "source": {"endpoint": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-generated-story-framing-k8oralj_/project/main.svml::endpoint::1207:image-fit", "path": "main.svml", "range": {"start": 1445, "end": 1450}, "preimage": "cover"}}}
+actual generated scene writable: {"id": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-generated-story-framing-k8oralj_/project/main.svml::output::scene-2.track:scene-2:inspector:image-position-x", "binding": "image-position-x", "value": "50", "control": "number", "edit": {"language": "svml", "source": {"endpoint": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-generated-story-framing-k8oralj_/project/main.svml::endpoint::1207:image-position-x", "path": "main.svml", "range": {"start": 1470, "end": 1472}, "preimage": "50"}}}
+actual generated scene writable: {"id": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-generated-story-framing-k8oralj_/project/main.svml::output::scene-2.track:scene-2:inspector:image-position-y", "binding": "image-position-y", "value": "50", "control": "number", "edit": {"language": "svml", "source": {"endpoint": "/private/var/folders/ky/c16r42fn0fbdjphdyyg2g8140000gn/T/qvw-generated-story-framing-k8oralj_/project/main.svml::endpoint::1207:image-position-y", "path": "main.svml", "range": {"start": 1492, "end": 1494}, "preimage": "50"}}}
+PASS production StoryTemplate generated all3 scenes; real Hypit check and actual Studio verified9 writable framing fields; no model or export required.
+owned Studio stopped exit=143

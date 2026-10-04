@@ -1,0 +1,13 @@
+Test project /Users/bytedance/Downloads/国产资产作业/qt-video-workbench/build
+    Start 22: product_window
+1/4 Test #22: product_window ...................   Passed    1.25 sec
+    Start 27: agent_panel
+2/4 Test #27: agent_panel ......................   Passed    0.94 sec
+    Start 32: product_experience
+3/4 Test #32: product_experience ...............   Passed    0.42 sec
+    Start 38: component_browser
+4/4 Test #38: component_browser ................   Passed    0.26 sec
+
+100% tests passed out of 4
+
+Total Test time (real) =   2.95 sec
