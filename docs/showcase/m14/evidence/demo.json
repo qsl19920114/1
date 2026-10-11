@@ -1,0 +1,135 @@
+{
+    "artifacts": [
+        {
+            "binding": "./assets/b1aa6b53ab48b719246087b74a717253e4073ddca5a0f425e6545c9a4d06c7d1.png",
+            "buildId": "bld_20261003T145832169Z_06506E9514",
+            "fullDecode": true,
+            "path": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m14/runs/20261003-225819/01-原始人物.mp4",
+            "portrait": "portrait-baseline.png",
+            "sha256": "2931806932ed593bb2bb671d8fe16f15210cccce0bd5d8ce9bd9bfba9b860a81",
+            "sourceFingerprint": "7fe7872fe6d03fa0cbbd90a6ff5a2b7e3e8f876691cacb1682c942389b7ebbcd"
+        },
+        {
+            "binding": "./assets/20cda1b21e6a7d819f0d136db4fbdb5088d0c4efc123c8ee76056dbdf87efed9.png",
+            "buildId": "bld_20261003T145916660Z_E3FBE65FA8",
+            "fullDecode": true,
+            "path": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m14/runs/20261003-225819/02-替换人物.mp4",
+            "portrait": "portrait-variant-1.png",
+            "sha256": "1356204a20cea600e4a5ec002fdad7a16ba06897375bd4145a6074edfda9e9db",
+            "sourceFingerprint": "0dc512a6ff60b8b9f8eefc719cf039a4da3a86eff9597eab4b2f47dfef1f71d7"
+        },
+        {
+            "binding": "./assets/863b674f742db1d1cf8fd5a8bfce02e0f95678a0b51833f07d74a852de0cb6d0.png",
+            "buildId": "bld_20261003T145955366Z_DD0FE7B39C",
+            "fullDecode": true,
+            "path": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m14/runs/20261003-225819/03-插画人物.mp4",
+            "portrait": "portrait-variant-2.png",
+            "sha256": "eafed21e2d268b273f92e3c35ba3282122ce7eec63814cdc0896d288036a3188",
+            "sourceFingerprint": "9c35f8887851065c1046e31915f6e7a3b683d3ed0ea4107e20910cd67234e33e"
+        }
+    ],
+    "driver": "scripted production Qt widgets/signals; actual Codex/Hypit; real own-window recording",
+    "explicitDriverApprovals": 2,
+    "nonImagePropertiesPreserved": true,
+    "ownedStudioStopped": true,
+    "pixelsUploaded": false,
+    "plans": [
+        {
+            "format": "qvw.agent-plan@1",
+            "kind": "edit",
+            "operations": [
+                {
+                    "entityId": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m14/runs/20261003-225819/人物素材工程/main.svml::output::cover.track:cover",
+                    "fieldId": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m14/runs/20261003-225819/人物素材工程/main.svml::output::cover.track:cover:inspector:image",
+                    "value": "./assets/20cda1b21e6a7d819f0d136db4fbdb5088d0c4efc123c8ee76056dbdf87efed9.png"
+                }
+            ],
+            "projectName": "",
+            "question": "",
+            "scenes": [
+            ],
+            "summary": "拟仅将当前组件的图片绑定替换为 portrait-variant-1.png，保留版式、文案、颜色、时长、入场动画及所有其他组件；待用户批准后执行。"
+        },
+        {
+            "format": "qvw.agent-plan@1",
+            "kind": "edit",
+            "operations": [
+                {
+                    "entityId": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m14/runs/20261003-225819/人物素材工程/main.svml::output::cover.track:cover",
+                    "fieldId": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m14/runs/20261003-225819/人物素材工程/main.svml::output::cover.track:cover:inspector:image",
+                    "value": "./assets/863b674f742db1d1cf8fd5a8bfce02e0f95678a0b51833f07d74a852de0cb6d0.png"
+                }
+            ],
+            "projectName": "",
+            "question": "",
+            "scenes": [
+            ],
+            "summary": "拟仅将当前组件的图片绑定替换为工程素材 portrait-variant-2.png；保留版式、文案、颜色、时长、入场动画及所有其他组件，待批准后执行，不重新生成或导出。"
+        }
+    ],
+    "playerControlsVerified": [
+        "play",
+        "pause",
+        "seek",
+        "rate",
+        "volume",
+        "mute",
+        "loop",
+        "fullscreen",
+        "escape",
+        "stop"
+    ],
+    "previewFingerprint": "9c35f8887851065c1046e31915f6e7a3b683d3ed0ea4107e20910cd67234e33e",
+    "project": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m14/runs/20261003-225819/人物素材工程/workbench.qvw.json",
+    "realModelRequests": 2,
+    "recording": "/Users/bytedance/Downloads/国产资产作业/qt-video-workbench/.workbench/deliverables-m14/runs/20261003-225819/Qt人物素材替换与播放器演示.mp4",
+    "recordingElapsedMs": 118385,
+    "recordingFrames": 591,
+    "recordingFullDecode": true,
+    "recordingSha256": "24b057763d57e9f76c0c5d43c8e29ceaf8ee74306fbbd26fe39fecb2e6975573",
+    "scope": "Replace registered character image material; no generative video identity transformation",
+    "stages": [
+        {
+            "atMs": 59,
+            "title": "1 / Qt 内嵌 AI · 人物素材替换演示，保留版式与动画"
+        },
+        {
+            "atMs": 7984,
+            "title": "2 / 导出基准人物：真实本地渲染与成片校验"
+        },
+        {
+            "atMs": 23517,
+            "title": "3 / 选择第 2 个角色素材，交给内嵌 Agent"
+        },
+        {
+            "atMs": 49174,
+            "title": "4 / 审阅人物素材修改，确认后才写入工程"
+        },
+        {
+            "atMs": 53211,
+            "title": "5 / 导出替换人物：真实本地渲染与成片校验"
+        },
+        {
+            "atMs": 68282,
+            "title": "6 / 选择第 3 个角色素材，交给内嵌 Agent"
+        },
+        {
+            "atMs": 88269,
+            "title": "7 / 审阅人物素材修改，确认后才写入工程"
+        },
+        {
+            "atMs": 92218,
+            "title": "8 / 导出插画人物：真实本地渲染与成片校验"
+        },
+        {
+            "atMs": 107160,
+            "title": "9 / Qt 原生播放器：播放、定位、倍速、音量、循环与全屏"
+        },
+        {
+            "atMs": 117169,
+            "title": "10 / 完成：三份人物成片与可继续编辑的 Qt 工程"
+        }
+    ],
+    "unchangedBeforeApproval": true,
+    "verdict": "PASS"
+}

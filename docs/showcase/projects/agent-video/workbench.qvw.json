@@ -1,0 +1,32 @@
+{
+    "assets": [
+        {
+            "hash": "e63183cb8638c6df7776a1e2993ef605c0d11363d42e5a3ecc658e861d043ece",
+            "height": 960,
+            "mime": "video/mp4",
+            "originalName": "chat-demo.mp4",
+            "path": "assets/e63183cb8638c6df7776a1e2993ef605c0d11363d42e5a3ecc658e861d043ece.mp4",
+            "size": 77622,
+            "width": 540
+        },
+        {
+            "hash": "7356166e9ac71e69367cac8927ee3818d47c3a04077523efb94310cb9ac9cb1c",
+            "height": 1280,
+            "mime": "video/mp4",
+            "originalName": "ranking-hypit-final.mp4",
+            "path": "assets/7356166e9ac71e69367cac8927ee3818d47c3a04077523efb94310cb9ac9cb1c.mp4",
+            "size": 4963242,
+            "width": 720
+        }
+    ],
+    "format": "qt-video-workbench.project@1",
+    "name": "Qt × Agent · 从素材到成片",
+    "run": "main.svrun",
+    "runtime": "hypit.runtime.json",
+    "settings": {
+        "maxAssetBytes": 67108864
+    },
+    "source": "main.svml",
+    "templateId": "video-story",
+    "templateVersion": "1.0.0"
+}

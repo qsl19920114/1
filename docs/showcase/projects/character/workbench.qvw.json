@@ -1,0 +1,41 @@
+{
+    "assets": [
+        {
+            "hash": "b1aa6b53ab48b719246087b74a717253e4073ddca5a0f425e6545c9a4d06c7d1",
+            "height": 2048,
+            "mime": "image/png",
+            "originalName": "portrait-baseline.png",
+            "path": "assets/b1aa6b53ab48b719246087b74a717253e4073ddca5a0f425e6545c9a4d06c7d1.png",
+            "size": 2766192,
+            "width": 1152
+        },
+        {
+            "hash": "20cda1b21e6a7d819f0d136db4fbdb5088d0c4efc123c8ee76056dbdf87efed9",
+            "height": 2048,
+            "mime": "image/png",
+            "originalName": "portrait-variant-1.png",
+            "path": "assets/20cda1b21e6a7d819f0d136db4fbdb5088d0c4efc123c8ee76056dbdf87efed9.png",
+            "size": 2257519,
+            "width": 1152
+        },
+        {
+            "hash": "863b674f742db1d1cf8fd5a8bfce02e0f95678a0b51833f07d74a852de0cb6d0",
+            "height": 1536,
+            "mime": "image/png",
+            "originalName": "portrait-variant-2.png",
+            "path": "assets/863b674f742db1d1cf8fd5a8bfce02e0f95678a0b51833f07d74a852de0cb6d0.png",
+            "size": 1289202,
+            "width": 1024
+        }
+    ],
+    "format": "qt-video-workbench.project@1",
+    "name": "FrameLab · 人物表达实验",
+    "run": "main.svrun",
+    "runtime": "hypit.runtime.json",
+    "settings": {
+        "maxAssetBytes": 67108864
+    },
+    "source": "main.svml",
+    "templateId": "title-card",
+    "templateVersion": "1.0.0"
+}

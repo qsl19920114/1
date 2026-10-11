@@ -1,0 +1,23 @@
+{
+    "assets": [
+        {
+            "hash": "20cda1b21e6a7d819f0d136db4fbdb5088d0c4efc123c8ee76056dbdf87efed9",
+            "height": 2048,
+            "mime": "image/png",
+            "originalName": "portrait-variant-1.png",
+            "path": "assets/20cda1b21e6a7d819f0d136db4fbdb5088d0c4efc123c8ee76056dbdf87efed9.png",
+            "size": 2257519,
+            "width": 1152
+        }
+    ],
+    "format": "qt-video-workbench.project@1",
+    "name": "FrameLab · 人物构图",
+    "run": "main.svrun",
+    "runtime": "hypit.runtime.json",
+    "settings": {
+        "maxAssetBytes": 67108864
+    },
+    "source": "main.svml",
+    "templateId": "title-card",
+    "templateVersion": "1.1.0"
+}

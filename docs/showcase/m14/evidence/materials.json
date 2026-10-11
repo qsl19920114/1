@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "samples": [
+    {
+      "path": "portrait-baseline.png",
+      "name": "白帽主持人",
+      "sha256": "b1aa6b53ab48b719246087b74a717253e4073ddca5a0f425e6545c9a4d06c7d1",
+      "attribution": "Hypit official complex-explainer host; upstream owner confirms the host image is AI-generated and supplied or commissioned for this project.",
+      "attributionEvidence": "examples/complex-explainer/productions/explainer/ASSET-PROVENANCE.md:6",
+      "visualInspection": "Single long-haired presenter in white sailor cap and outfit, holding microphone; face clearly visible.",
+      "sourceUrl": "https://storage.googleapis.com/hypit-public-assets/assets/examples/complex-explainer/v1/20260914/media.tar.gz",
+      "archiveMember": "./productions/explainer/assets/presenter-a464d354ce0d.png",
+      "sizeBytes": 2766192,
+      "width": 1152,
+      "height": 2048,
+      "mimeType": "image/png",
+      "transformation": "none; exact original bytes",
+      "validation": {
+        "fullDecodeExitCode": 0,
+        "fullDecodeStderr": ""
+      }
+    },
+    {
+      "path": "portrait-variant-1.png",
+      "name": "黑帽主持人",
+      "sha256": "20cda1b21e6a7d819f0d136db4fbdb5088d0c4efc123c8ee76056dbdf87efed9",
+      "attribution": "Host image supplied in Hypit official complex-explainer archive and bound as ranking-host. The upstream provenance says the production host image is AI-generated; it does not separately certify this ranking-host file, so its exact generation history is unverified.",
+      "attributionEvidence": "examples/complex-explainer/productions/explainer/ASSET-PROVENANCE.md:6; examples/complex-explainer/productions/explainer/authors/assets.svml:63",
+      "visualInspection": "Single presenter with blunt bangs, black spiked cap and black outfit holding microphone; distinct face and wardrobe from baseline.",
+      "sourceUrl": "https://storage.googleapis.com/hypit-public-assets/assets/examples/complex-explainer/v1/20260914/media.tar.gz",
+      "archiveMember": "./productions/explainer/assets/final-half/host.png",
+      "sizeBytes": 2257519,
+      "width": 1152,
+      "height": 2048,
+      "mimeType": "image/png",
+      "transformation": "none; exact original bytes",
+      "validation": {
+        "fullDecodeExitCode": 0,
+        "fullDecodeStderr": ""
+      }
+    },
+    {
+      "path": "portrait-variant-2.png",
+      "name": "像素风虚构人物",
+      "sha256": "863b674f742db1d1cf8fd5a8bfce02e0f95678a0b51833f07d74a852de0cb6d0",
+      "attribution": "Hypit owner-supplied fictional drinking illustration; upstream provenance states it was generated with the built-in image tool on 2026-09-14. Reused unchanged here.",
+      "attributionEvidence": "examples/complex-explainer/productions/explainer/ASSET-PROVENANCE.md:7-15",
+      "visualInspection": "Single short-haired pixel-art character in coral shirt drinking water against pink background; clearly distinct illustrated character.",
+      "sourceUrl": "https://storage.googleapis.com/hypit-public-assets/assets/examples/complex-explainer/v1/20260914/media.tar.gz",
+      "archiveMember": "./productions/explainer/assets/final-half/drinking-illustration.png",
+      "sizeBytes": 1289202,
+      "width": 1024,
+      "height": 1536,
+      "mimeType": "image/png",
+      "transformation": "none; exact original bytes",
+      "validation": {
+        "fullDecodeExitCode": 0,
+        "fullDecodeStderr": ""
+      }
+    }
+  ]
+}

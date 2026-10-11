@@ -1,0 +1,114 @@
+{
+  "format": "qt-video-workbench.version-lock@1",
+  "note": "M0 实测固定的版本组合。每个条目都来自本机真实命令输出，取值命令记录在 verifiedBy。修改此文件必须同时更新 docs/ENVIRONMENT_REPORT.md。",
+  "lockedAt": "2026-09-23",
+  "platform": {
+    "os": "macOS",
+    "osVersion": "15.7.7",
+    "osBuild": "24G720",
+    "arch": "arm64",
+    "verifiedBy": "sw_vers; uname -m"
+  },
+  "toolchain": {
+    "compiler": "Apple clang 17.0.0 (clang-1700.0.13.5)",
+    "compilerTarget": "arm64-apple-darwin24.6.0",
+    "cxxStandard": 17,
+    "cmake": "4.4.3",
+    "cmakeMinimumRequired": "3.21",
+    "verifiedBy": "clang++ --version; cmake --version"
+  },
+  "qt": {
+    "version": "6.11.2",
+    "prefix": "/opt/homebrew/opt/qt",
+    "installedVia": "homebrew",
+    "requiredComponents": [
+      "Core",
+      "Gui",
+      "Widgets",
+      "Network",
+      "Test",
+      "WebEngineWidgets"
+    ],
+    "componentsVerified": true,
+    "webEngineProcessPresent": true,
+    "planMinimumTarget": "6.8",
+    "note": "计划设定的最低目标 6.8 由本机 6.11.2 满足。未验证 6.8-6.10 与同一 Studio 的行为一致性。",
+    "verifiedBy": "qmake6 -query QT_VERSION; ls /opt/homebrew/opt/qt/lib/cmake"
+  },
+  "hypit": {
+    "package": "@hypit/hypit",
+    "version": "0.2.10",
+    "gitCommit": "1af179d3f58284c2d6d3c1f63052172a4fe1b5a6",
+    "upstreamRemote": "https://github.com/hypit-ai/hypit.git",
+    "distributionPath": "../hypit",
+    "launcher": "bin/hypit.mjs",
+    "declaredNodeRequirement": ">=22.15.0",
+    "declaredPackageManager": "pnpm@10.33.0",
+    "note": "CODEX_START.md 提到的 0.2.12 与实际不符，实际固定为 0.2.10。",
+    "verifiedBy": "./hypit version --json; git rev-parse HEAD"
+  },
+  "node": {
+    "version": "25.8.2",
+    "satisfiesHypitRequirement": true,
+    "verifiedBy": "node --version; docs/evidence/m2/e2e.log",
+    "previousVerifiedVersion": "22.22.1",
+    "note": "M2 当前会话实测 Node 25.8.2，原 M0/M1 的22.22.1保留为历史；本轮未安装或修改全局环境。"
+  },
+  "pnpm": {
+    "requiredVersion": "10.33.0",
+    "installedVersion": "10.33.0",
+    "installed": true,
+    "installedVia": "npm install -g pnpm@10.33.0",
+    "blocks": [],
+    "canBuildAuthorPackages": true,
+    "note": "T006 验证：build:public-types 与 @example/chat-scene build 均退出码 0。corepack 在本机 node 中不可用，故走 npm 全局安装。",
+    "verifiedBy": "pnpm -v; pnpm build:public-types; pnpm --filter @example/chat-scene build"
+  },
+  "media": {
+    "ffmpeg": "9.0.2",
+    "ffprobe": "9.0.2",
+    "ffmpegPath": "/opt/homebrew/bin/ffmpeg",
+    "verifiedBy": "ffmpeg -version; ffprobe -version"
+  },
+  "verifiedExport": {
+    "buildId": "bld_20260923T100423557Z_A07A70298A",
+    "sourceExample": "examples/semantic-composition",
+    "runFile": "chat.svrun",
+    "container": "mov,mp4,m4a,3gp,3g2,mj2",
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "width": 540,
+    "height": 960,
+    "frameRate": "30/1",
+    "sampleRate": 48000,
+    "channels": 2,
+    "durationSec": 8.0,
+    "bytes": 77622,
+    "fullDecodeClean": true,
+    "playsInQtWebEngine": true,
+    "note": "540x960 是该示例模板自身声明的竖屏画幅，不是 Hypit 默认值。本项目 title-card 模板需自行声明画幅。",
+    "verifiedBy": "ffprobe; ffmpeg -v error -f null -; probes/qt-webengine media_probe"
+  },
+  "studioInvocation": {
+    "requiresWorkspaceFlag": true,
+    "requiresRuntimeFlag": true,
+    "portDiscovery": "parse the URL line on stdout; --port is a request, not a guarantee",
+    "portFallsBackWhenBusy": true,
+    "requiresRestartAfterPackageChange": true,
+    "note": "省略 --workspace 会因无法解析已安装包而失败。端口被占用时 Studio 自动递增并在 stdout 打印（实测 5610→5611），故不能假定 --port 生效。改动包代码或 activation 后必须重启 Studio，它不热加载包模块。"
+  },
+  "verifiedWrite": {
+    "task": "T007",
+    "endpoint": "POST /__studio/mutation",
+    "mutationType": "parameter.adjust",
+    "client": "Qt QNetworkAccessManager",
+    "httpStatus": 200,
+    "revisionBefore": 7,
+    "revisionAfter": 8,
+    "sourceRewritten": true,
+    "rebuildAfterWrite": "bld_20260924T023239809Z_59D03451EF",
+    "frameContentConfirmed": true,
+    "note": "完整成功语义分层已贯通：HTTP 200 → 源文件改写 → 重编译快照生效 → 重新 build → 导出 MP4 全片解码 → 抽帧人工确认画面标题真的改变。仅 HTTP 200 不足以声称写入成功。",
+    "verifiedBy": "probes/qt-webengine/build/http_probe <url> --write; docs/evidence/m1/"
+  }
+}

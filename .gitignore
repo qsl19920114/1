@@ -29,3 +29,6 @@ config/local.json
 /shot.png
 /*.png
 !docs/evidence/**/*.png
+
+# Verified public demo videos and portable example projects
+!docs/showcase/**/*.mp4

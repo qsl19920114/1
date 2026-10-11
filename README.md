@@ -4,6 +4,10 @@
 
 Qt 6 Widgets 视频工程应用。版本 **1.3.0**：阶段式创作任务、场景定位、修改对照、批量素材与缺失文件修复，以及工作区和统一历史。保留真实模型、本地批准、多步骤执行与经过媒体校验的 MP4 导出。进度见 [STATUS.md](STATUS.md)。
 
+## 报告、视频与换电脑备份
+
+[在线查看全部演示](https://qsl19920114.github.io/1/showcase/) · [报告及13个视频目录](docs/showcase/README.md) · [运行包/完整备份下载](https://github.com/qsl19920114/1/releases/tag/framelab-v1.7.0-backup) · [换电脑恢复说明](docs/showcase/RESTORE.md)
+
 ## 构建与启动
 
 验证平台：macOS 15.7.7 arm64、Qt 6.11.2（含 WebEngineWidgets/Test）、CMake 4.4.3、Hypit 0.2.10。M2 实测 Node 25.8.2；M0/M1 历史环境为22.22.1。本轮未安装或修改全局环境。
