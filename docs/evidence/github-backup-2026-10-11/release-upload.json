@@ -1,0 +1,32 @@
+{
+  "verdict": "PASS",
+  "commit": "fb509006fb5d4442762422e4fed586779990a914",
+  "release": "https://github.com/qsl19920114/1/releases/tag/framelab-v1.7.0-backup",
+  "pages": "https://qsl19920114.github.io/1/",
+  "assets": [
+    {
+      "name": "FrameLab-1.7.0-showcase-backup.zip",
+      "url": "https://github.com/qsl19920114/1/releases/download/framelab-v1.7.0-backup/FrameLab-1.7.0-showcase-backup.zip",
+      "size": 86024501,
+      "sha256": "20ba59e3ff432f9809603279179ed7802682e049da195e8adfae8ae5a04e352f",
+      "serverDigest": "sha256:20ba59e3ff432f9809603279179ed7802682e049da195e8adfae8ae5a04e352f",
+      "state": "uploaded"
+    },
+    {
+      "name": "FrameLab-1.7.0-macOS-arm64.zip",
+      "url": "https://github.com/qsl19920114/1/releases/download/framelab-v1.7.0-backup/FrameLab-1.7.0-macOS-arm64.zip",
+      "size": 123459744,
+      "sha256": "6609df5d20f4c3a0a190f14dda6a1277c26cad54e69a8e2b527d05919918a4d1",
+      "serverDigest": "sha256:6609df5d20f4c3a0a190f14dda6a1277c26cad54e69a8e2b527d05919918a4d1",
+      "state": "uploaded"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "url": "https://github.com/qsl19920114/1/releases/download/framelab-v1.7.0-backup/SHA256SUMS.txt",
+      "size": 198,
+      "sha256": "a2a8e6f27e34ea1ba5dbd3b89684e1ca0916e2fd3d20359661298e907e3bb48a",
+      "serverDigest": "sha256:a2a8e6f27e34ea1ba5dbd3b89684e1ca0916e2fd3d20359661298e907e3bb48a",
+      "state": "uploaded"
+    }
+  ]
+}

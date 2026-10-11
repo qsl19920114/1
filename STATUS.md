@@ -1,8 +1,12 @@
 # 当前状态
 
-更新：2026-10-04，以 tasks.json、源码及真实证据为准。
+更新：2026-10-11，以 tasks.json、源码及真实证据为准。
 
 **历史版本1.0.0；开发计划M0–M6及门禁G0–G6全部完成，T001–T032均为done。最终规格和质量复审PASS。**
+
+## GitHub 展示与换机备份（2026-10-11）
+
+13个原始展示视频、Word/HTML实验报告、截图、三个完整可编辑工程已保存至`docs/showcase/`及GitHub分支qt-video-workbench。在线入口：https://qsl19920114.github.io/1/showcase/ 。完整展示ZIP和1.7 macOS arm64运行包位于[下载附件](https://github.com/qsl19920114/1/releases/tag/framelab-v1.7.0-backup)，两份ZIP及校验文件的GitHub服务端SHA与本地一致。换机说明见[RESTORE.md](docs/showcase/RESTORE.md)，备份证据见[证据索引](docs/evidence/github-backup-2026-10-11/README.md)。
 
 ## 当前完成版本：FrameLab 1.7.0（M15）
 

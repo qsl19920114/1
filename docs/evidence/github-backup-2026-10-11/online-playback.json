@@ -1,0 +1,109 @@
+{
+  "verdict": "PASS",
+  "url": "https://qsl19920114.github.io/1/showcase/",
+  "mediaRangeSupport": true,
+  "links": [
+    {
+      "path": "m13/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "range": null
+    },
+    {
+      "path": "m14/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "range": null
+    },
+    {
+      "path": "m15/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "range": null
+    },
+    {
+      "path": "m13/experiment-report.docx",
+      "status": 200,
+      "contentType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "range": null
+    },
+    {
+      "path": "m13/videos/local-chat.mp4",
+      "status": 206,
+      "contentType": "video/mp4",
+      "range": "bytes 0-0/77622"
+    },
+    {
+      "path": "m13/videos/official-01.mp4",
+      "status": 206,
+      "contentType": "video/mp4",
+      "range": "bytes 0-0/43912844"
+    },
+    {
+      "path": "m13/videos/official-02.mp4",
+      "status": 206,
+      "contentType": "video/mp4",
+      "range": "bytes 0-0/7610499"
+    },
+    {
+      "path": "m13/videos/official-03.mp4",
+      "status": 206,
+      "contentType": "video/mp4",
+      "range": "bytes 0-0/4963242"
+    },
+    {
+      "path": "m13/videos/official-04.mp4",
+      "status": 206,
+      "contentType": "video/mp4",
+      "range": "bytes 0-0/7729281"
+    },
+    {
+      "path": "m13/videos/qt-agent-film.mp4",
+      "status": 206,
+      "contentType": "video/mp4",
+      "range": "bytes 0-0/449780"
+    },
+    {
+      "path": "m13/videos/qt-agent-walkthrough.mp4",
+      "status": 206,
+      "contentType": "video/mp4",
+      "range": "bytes 0-0/1782894"
+    },
+    {
+      "path": "m14/videos/character-1.mp4",
+      "status": 206,
+      "contentType": "video/mp4",
+      "range": "bytes 0-0/125068"
+    },
+    {
+      "path": "m14/videos/character-2.mp4",
+      "status": 206,
+      "contentType": "video/mp4",
+      "range": "bytes 0-0/108598"
+    },
+    {
+      "path": "m14/videos/character-3.mp4",
+      "status": 206,
+      "contentType": "video/mp4",
+      "range": "bytes 0-0/102386"
+    },
+    {
+      "path": "m14/videos/walkthrough.mp4",
+      "status": 206,
+      "contentType": "video/mp4",
+      "range": "bytes 0-0/2559667"
+    },
+    {
+      "path": "m15/videos/contain.mp4",
+      "status": 206,
+      "contentType": "video/mp4",
+      "range": "bytes 0-0/80760"
+    },
+    {
+      "path": "m15/videos/cover.mp4",
+      "status": 206,
+      "contentType": "video/mp4",
+      "range": "bytes 0-0/100344"
+    }
+  ]
+}
